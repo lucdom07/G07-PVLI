@@ -1,0 +1,125 @@
+
+.body{
+  /*background-color: #aedfff;*/
+  background-image: url(images/web\ background.png);
+  background-position: center;
+}
+
+#titleContainer{
+  /*background-color: #e99e68;*/
+  background-image: url(images/title\ texture.png);
+  background-size: cover;
+  height: 120px;
+  width: auto;
+  padding-top: 12px;
+}
+
+#title{
+  height: 60px;
+  width: auto;
+  display: block;
+  margin: auto;
+  margin-bottom: 5px;
+}
+
+#madeBy{
+  height: 40px;
+  width: auto;
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+#mainContainer{
+  /*background-color: #ffe6bf;*/
+  background-image: url(images/info\ texture.png);
+  background-size: cover;
+  width: 1200px;
+  height: auto;
+  margin: auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+/*
+#jueguito{
+  background-color: black;
+  width: 900px;
+  height: 500px;
+  margin: auto;
+  margin-bottom: 60px;
+}
+*/
+
+#info{
+  width: 900px;
+  height: auto;
+  margin: auto;
+}
+
+.header{
+  color: #872701;
+  font-size: 50px;
+  font-family: "Darumadrop One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 0px;
+  margin-top: 40px;
+}
+
+.subHeader{
+  color: #872701;
+  font-size: 35px;
+  font-family: "Darumadrop One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.parrafaco{
+  color: #7d3d24;
+  font-size: 30px;
+  font-family: "Caveat Brush", cursive;
+  font-weight: 400;
+  font-style: normal;
+  text-align: justify;
+  margin-top: 10px;
+}
+
+#teamCanibalTitle{
+  display: flex;
+  align-items: center;
+}
+
+#logo{
+  height: 40px;
+  width: auto;
+  margin-left: 10px;
+}
+
+.dev{
+  display: inline-block;
+  text-align: center;
+  margin-right: 30px;
+}
+
+.devProfIcon{
+  height: 150px;
+  width: auto;
+}
+
+.devName{
+  color: #7d3d24;
+  font-size: 25px;
+  font-family: "Caveat Brush", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#socialContainer{
+  display: flex;
+}
+
+.socialIcon{
+  height: 100px;
+  width: auto;
+  margin-left: 10px;
+}
