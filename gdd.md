@@ -1,135 +1,151 @@
-** The Furrytastic Invasion **
+# **The Furrytastic Invasion** 
 
-Equipo de desarrollo:
+
+
+## Equipo de desarrollo:
+
 Lucía Mei Domínguez López
+
 Isabel Serrano Martín
+
 Sergio López Gómez
+
 Liling Chen
 
-Resumen
-Descripción
-The Furrytastic Invasion es un roguelite autobattler en el que ayudamos a un gato antropomórfico en el que se encuentra planeando un golpe contra la humanidad, empezando con Australia. En sus planes, nosotros, como jugador y ayudante, nos encargaremos de reclutar, gestionar y organizar estrategias para la batalla contra el bando enemigo, los humanos, ya que harán cualquier idiotez para mantener sus tierras.
+## 1. **Resumen**
 
-Género
-Juego del género de estrategia con subgénero roguelike autobattler inspirado en otros juegos como Teamfight Tactics o Super Auto Pets.
+### 1.1. **Descripción**
 
-Público objetivo
+The Furrytastic Invasion es un **roguelite autobattler** en el que ayudamos a un gato antropomórfico en el que se encuentra planeando un golpe contra la humanidad, empezando con Australia. En sus planes, nosotros, como jugador y ayudante, nos encargaremos de reclutar, gestionar y organizar estrategias para la batalla contra el bando enemigo, los humanos, ya que harán cualquier idiotez para mantener sus tierras.
+
+### 1.2. **Género**
+
+Juego del género de estrategia con subgénero **roguelike autobattler** inspirado en otros juegos como **Teamfight Tactics** o **Super Auto Pets**.
+
+### 1.3. **Público objetivo**
 Jóvenes universitarios aficionados a los juegos de estrategia y autobattler que estén familiarizados con la cultura de internet y las noticias actuales.
 
-Setting
+### 1.4. **Setting**
 Nuestro protagonista, Michi-Michi, que, cansado de la estupidez y codicia humana, decidió iniciar una guerra contra la humanidad empezando por invadir Australia. Le pide ayuda al jugador para la guerra, rompiendo las fronteras entre la realidad y el juego. Para ello, debe reclutar a otros animales antropomórficos que estén dispuestos a luchar por su causa: crear un mundo justo y pacífico para los animales antropomórficos.
 Después de invadir Australia y convertirla en el primer país invadido y conquistado por los animales antropomórficos, sus siguientes planes pondrán ojo en: España, Estados Unidos y China.
 
-Características principales
-Combate autobattler. El jugador podrá elegir qué animales formarán parte de su ejército y qué objetos usar para mejorarlos.
-El jugador podrá comprar animales para su ejército con distintas estadísticas en la tienda y objetos que mejoren las estadísticas de su ejército actual. Se desbloquean nuevos animales y objetos a medida que conquista cada país.
-El mapa del mundo se generará de manera aleatoria al inicio de la partida, a partir de distintas salas con diferentes conjuntos de enemigos prefabricados..
-Estas salas tienen diferentes iconos según la recompensa (dinero u objeto).
-Las tiendas se generan y se reparten por el mapa, pero evitando que el jugador tenga para elegir dos salas de tienda o que después de haber elegido tienda vuelva a tener la posibilidad de repetir dicha sala.
-Cada vez que el jugador consigue superar un combate, se le recompensará con monedas que luego podrá usar en la tienda para mejorar su ejército.
-Arte: Estilo de libro infantil hecho con ceras, acuarelas y recortables de papel y una paleta de colores de tonos diversos y vivos.
-Música: Música nostálgica infantil con tonalidad alegre.
+### 1.5. **Características principales**
+- Combate **autobattler**. El jugador podrá elegir qué animales formarán parte de su ejército y qué objetos usar para mejorarlos.
 
-Gameplay
-Objetivo del juego
+- El jugador podrá comprar animales para su ejército con distintas estadísticas en la tienda y objetos que mejoren las estadísticas de su ejército actual. Se desbloquean nuevos animales y objetos a medida que conquista cada país.
+
+- El mapa del mundo se generará de manera aleatoria al inicio de la partida, a partir de distintas salas con diferentes conjuntos de enemigos prefabricados.
+
+    - Estas salas tienen diferentes iconos según la recompensa (dinero u objeto).
+    - Las tiendas se generan y se reparten por el mapa, pero evitando que el jugador tenga para elegir dos salas de tienda o que después de haber elegido tienda vuelva a tener la posibilidad de repetir dicha sala.
+- Cada vez que el jugador consigue superar un combate, se le recompensará con monedas que luego podrá usar en la tienda para mejorar su ejército.
+- **Arte**: Estilo de libro infantil hecho con ceras, acuarelas y recortables de papel y una paleta de colores de tonos diversos y vivos.
+- **Música**: Música nostálgica infantil con tonalidad alegre.
+
+## 2. **Gameplay**
+### 2.1. **Objetivo del juego**
 El objetivo del juego es superar todos los combates de cada país  y así conseguir que los animales antropomórficos ganen la guerra, que implica organizar y crear un ejército mediante sus propias decisiones antes del combate.
-Se gana eliminando todo el ejército enemigo en todos los combates y también al jefe de cada país, el jugador no puede ser derrotado en ningún momento. Las tiendas serán de gran ayuda para el progreso de la invasión. Además, en algunos combates puedes obtener objetos que te ayudarán en el proceso.
-Se pierde cuando el ejército del jugador es eliminado por el del enemigo, pero al iniciar una nueva partida guardas los animales que has desbloqueado y no los tienes que volver a desbloquear.
 
-Core loops
+**Se gana** eliminando todo el ejército enemigo en todos los combates y también al jefe de cada país, el jugador no puede ser derrotado en ningún momento. Las tiendas serán de gran ayuda para el progreso de la invasión. Además, en algunos combates puedes obtener objetos que te ayudarán en el proceso.
+
+**Se pierde** cuando el ejército del jugador es eliminado por el del enemigo, pero al iniciar una nueva partida guardas los animales que has desbloqueado y no los tienes que volver a desbloquear.
+
+### 2.2. **Core loops**
 El core loop del juego es el siguiente:
-El jugador elige la sala en la que moverse (parecido al Slay the spire).
-Si la sala es la tienda, compra o pasa a la siguiente.
-Si la sala es de combate, prepara su ejército.
-Los dos bandos luchan entre sí.
-Si gana, pasa al mapa para elegir la siguiente sala.
-Si pierde, debe comenzar el juego de nuevo desde cero pero no tiene que volver a desbloquear los animales que ya desbloqueó en la tienda.
 
-Slay the Spire
-Elementos del escenario
-Elementos interactuables:
-Organización de los animales antropomórficos antes de la batalla.
-Compras de objetos y animales  en las tiendas.
-Los botones del DOM de la página web que usas para quitar y añadir animales al ejército.
-Selección de la sala a avanzar.
-Menú principal y menú de pausa.
-Elementos no interactuables:
-Enemigos.
-Escenario.
+    (1) El jugador elige la sala en la que moverse (parecido al Slay the spire).
+    (2) Si la sala es la tienda, compra o pasa a la siguiente.
+    (3) Si la sala es de combate, prepara su ejército.
+    (4) Los dos bandos luchan entre sí.
+    (5) Si gana, pasa al mapa para elegir la siguiente sala.
+    (6) Si pierde, debe comenzar el juego de nuevo desde cero pero no tiene que volver a desbloquear los animales que ya desbloqueó en la tienda.
 
-Mecánicas
-Compra
+
+
+*Slay the Spire*
+
+- **Elementos del escenario**
+
+    - **Elementos interactuables:**
+        - Organización de los animales antropomórficos antes de la batalla.
+        - Compras de objetos y animales  en las tiendas.
+        - Los botones del DOM de la página web que usas para quitar y añadir animales al ejército.
+        - Selección de la sala a avanzar.
+        - Menú principal y menú de pausa.
+
+    - **Elementos no interactuables:**
+        - Enemigos.
+        - Escenario.
+
+## 3. **Mecánicas**
+### 3.1. **Compra**
 En las salas de tienda, un pájaro antropomórfico mercader le dará la opción al jugador de utilizar sus monedas, cuya cantidad se muestra arriba a la derecha de la pantalla, para comprar un animal para su ejército. El jugador podrá elegir entre 3 animales distintos y/o entre 2 objetos distintos y pasar a la siguiente pantalla, donde elegirá la siguiente sala. También puede salir de la tienda sin comprar.
+
 Cada animal antropomórfico tendrá distintas estadísticas, vida, ataque y rango de ataque. La vida y el ataque se muestran debajo del animal y cuando se cliquea al animal o se pasa el cursor por encima se muestra el rango de ataque.
+
 También se va a ofrecer la compra de objetos para la mejora de las estadísticas de los integrantes, sea aumento de vida o de ataque o ambas.
+
 El precio de cada animal dependerá del país, en el primer país los costes serán más baratos y a medida que va progresando el jugador, se va desbloqueando nuevos objetos y aliados, pero los precios de estos serán más caros que los del país inicial, por ende no se puede comprar ni desbloquear animales de otros países si el jugador no avanza.
-Precios
-Países
-Aliados
-Objetos
-Australia
-10 monedas
-5 monedas
-España
-20 monedas
-10 monedas
-Estados Unidos
-30 monedas
-15 monedas
-China
-40 monedas
-20 monedas
 
-//parámetros provisionales
+**Precios**
 
-Parámetros
+| **Países** | **Aliados** | **Objetos** |
+|:-----------|:-----------:|------------:|
+|Australia|10 monedas|5 monedas|
+|España|20 monedas|10 monedas|
+|Estados Unidos|30 monedas|15 monedas|
+|China|40 monedas|20 monedas|
+
+*//parámetros provisionales*
+
+***Parámetros***
 Cantidad de animales y/u objetos a comprar.
 Coste de cada objeto y/o animal.
 Cantidad de dinero del jugador.
 Cantidad de objeto y/o animal comprado, será una unidad con cada compra
 
-Super Auto Pets
+*Super Auto Pets*
 
-Combate
+**Combate**
 El combate será un autobattler visualmente parecido al Super Autopets, donde el jugador podrá colocar y organizar a su ejército antes de ver las del enemigo, y dependiendo de su vida y ataque ganarán o perderán.
 Si un animal (tanto aliado como enemigo) es eliminado, entendiéndose por eliminado que su vida se reduce a cero o menos, el siguiente será el que continúe luchando contra el que queda en pie, y así sucesivamente hasta que uno de los dos bandos se quede sin ejército. Si el jugador se queda sin ejército en combate, perderá automáticamente; pero si se trata del otro bando, el jugador elegirá una sala del mapa para continuar con el juego.
 En caso de que el combate termine en empate, no se pierde y ni se ganan monedas, pero se debe de repetir la sala hasta ganar y avanzar a la siguiente.
 
-Sistema de estadísticas de los animales y enemigo:
-Vida: Cantidad de vida que tiene el personaje. Cuando llega a cero o menos, este es derrotado y el siguiente será el que continúe luchando contra el que queda en pie.
-Ataque: Daño que puede hacer el personaje.
-Rango de ataque: Posición que puede alcanzar el aliado para atacar al enemigo, ya sea la primera, segunda o la última posición del ejército enemigo.
+**Sistema de estadísticas de los animales y enemigo:**
+**Vida**: Cantidad de vida que tiene el personaje. Cuando llega a cero o menos, este es derrotado y el siguiente será el que continúe luchando contra el que queda en pie.
+**Ataque**: Daño que puede hacer el personaje.
+**Rango de ataque**: Posición que puede alcanzar el aliado para atacar al enemigo, ya sea la primera, segunda o la última posición del ejército enemigo.
 
 
-Parámetros: 
-Cantidad de guerreros del enemigo.
-Cantidad de guerreros aliados.
-Daño de cada guerrero.
-Vida de cada guerrero.
+***Parámetros***: 
+- Cantidad de guerreros del enemigo.
+- Cantidad de guerreros aliados.
+- Daño de cada guerrero.
+- Vida de cada guerrero.
 
 Super Auto Pets
-Vida
+**Vida**
 Cantidad finita expresada en número entero que poseen tanto aliados como enemigos y si se reduce a cero o menos quedan eliminados y los reemplaza el siguiente en caso de que haya.
 Este parámetro se muestra en un icono debajo del animal/enemigo junto con el icono de la cantidad de ataque que realiza.
 La vida de cada aliado se reinicia hasta su máximo cuando se gana el combate o cuando se empata en el combate. Este parámetro también puede ser mejorado con objetos o cuando se fusiona/une con otro aliado del mismo tipo.
 
-Parámetros 
+***Parámetros***
 Cantidad de vida, números enteros
 
 
 
 
 
-Ataque
+**Ataque**
 Daño que causan los aliados y enemigos para restar vida.
 Este parámetro se muestra en un icono debajo del animal/enemigo junto con el icono de la cantidad de vida que tiene.
 Cuando el ataque es mayor que la vida actual del personaje, el personaje será derrotado y pasará a la siguiente hasta que uno de los ejércitos se queden sin personajes o cuando se empata.
 Este parámetro puede ser mejorado mediante el uso de los objetos o cuando se fusiona/une con otro aliado del mismo tipo.
 
-Parámetros 
+***Parámetros ***
 Cantidad de ataque, números enteros
 
-Rango de ataque
+**Rango de ataque**
 Distancia que los personajes pueden alcanzar para infligir daño al otro personaje del ejército contrario. 
 El rango se diferencia desde 1 al 6 relacionándose con las posiciones de cada animal/enemigo:
 6 5 4 3 2 1
@@ -145,7 +161,7 @@ Si el personaje tiene rango 1 atacará al otro personaje en esa posición, en es
 En caso de que no haya personajes en esa posición, se atacará al último que queda. Por ejemplo: Si tenemos un aliado con rango 5 y tenemos solo 3 enemigos, quiere decir que ataca a la quinta posición del bando enemigo, pero como no hay recurre al enemigo de la última posición, que será la tercera. 
 Este parámetro es constante, no es posible de mejorar con objetos ni con la fusión/unión de los aliados.
 
-Parámetros 
+***Parámetros*** 
 Rango de ataque, números enteros
 
 Objetos
@@ -165,9 +181,9 @@ Agua
 +2
 +2
 
-//parámetros provisionales
+*//parámetros provisionales*
 
-Parámetros 
+***Parámetros*** 
 Cantidad de vida que es añadida a la vida del aliado
 Cantidad de ataque que es añadida al ataque del aliado
 
@@ -181,14 +197,14 @@ Los aliados obtenidos en la compra de la tienda se mostrará en un panel lateral
 Se podrá gestionar dos elementos claves del juego: los animales y los objetos. Los dos se pueden adquirir en las tiendas, usando monedas para comprarlos y por recompensa en combates para los objetos.
 Se podrá interactuar para seleccionar los animales y añadirlos al ejército o también objetos, para aplicarlo a los animales y mejorar sus estadísticas de vida y/o ataque. 
 
-Parámetros 
+***Parámetros*** 
 Slots del inventario para los animales y objetos
 
 Gestión del dinero
 Al comienzo de la partida, el jugador comienza sin dinero, pero se conseguirá al final de cada combate si el jugador la ha superado. La cantidad de dinero obtenida en cada combate aumentará dependiendo de cuantos combates haya superado el jugador. El dinero ganado podrá ser gastado en las tiendas para comprar más aliados y objetos para la mejora de este.
 La cantidad de dinero también será afectada por el tipo de sala: si la sala de combate implica una  recompensa de objeto, se obtendrá menos monedas y si es de jefe se obtendrá más monedas.
 
-Parámetros 
+***Parámetros*** 
 Cantidad de monedas.
 
 Aliados
@@ -239,8 +255,8 @@ Gato-Pulpo de Github
 8
 3
 
-//parámetros provisionales
-Parámetros 
+*//parámetros provisionales*
+***Parámetros*** 
 Cantidad de vida
 Cantidad de ataque
 Rango de ataque
@@ -271,11 +287,11 @@ Karen
 66
 1
 
-//parámetros provisionales
+*//parámetros provisionales*
 
 
 
-Parámetros 
+***Parámetros*** 
 Cantidad de vida
 Cantidad de ataque
 Rango de ataque
@@ -310,9 +326,9 @@ Melon Moska
 23
 1
 
-//parámetros provisionales
+*//parámetros provisionales*
 
-Parámetros 
+***Parámetros*** 
 Cantidad de vida
 Cantidad de ataque
 Rango de ataque
