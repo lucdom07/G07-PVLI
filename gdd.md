@@ -1,6 +1,6 @@
 # **The Furrytastic Invasion** 
 
-> imagen
+![Portada](./imagenes/michimichi.png "Michi-Michi")
 
 ## Equipo de desarrollo:
 
@@ -66,7 +66,7 @@ El core loop del juego es el siguiente:
 
     (6) Si pierde, debe comenzar el juego de nuevo desde cero, pero no tiene que volver a desbloquear los animales que ya desbloqueó en la tienda.
 
->imagen
+![Core Loop](./imagenes/coreloop.png "Slay the spire")
 
 *Slay the Spire*
 
@@ -104,7 +104,7 @@ El precio de cada animal dependerá del país, en el primer país los costes ser
 
 *//parámetros provisionales*
 
->imagen
+![Tienda](./imagenes/mercancer.png)
 
 ***Parámetros***
 - Cantidad de animales y/u objetos a comprar.
@@ -112,7 +112,7 @@ El precio de cada animal dependerá del país, en el primer país los costes ser
 - Cantidad de dinero del jugador.
 - Cantidad de objeto y/o animal comprado, será una unidad con cada compra
 
->imagen
+![Tienda](./imagenes/animals.png)
 
 *Super Auto Pets*
 
@@ -138,7 +138,9 @@ En caso de que el combate termine en empate, no se pierde y ni se ganan monedas,
 - Daño de cada guerrero.
 - Vida de cada guerrero.
 
-Super Auto Pets
+![Tienda](./imagenes/combate.png)
+
+*Super Auto Pets*
 #### 3.2.1. **Vida**
 Cantidad finita expresada en número entero que poseen tanto aliados como enemigos y si se reduce a cero o menos quedan eliminados y los reemplaza el siguiente en caso de que haya.
 
@@ -290,8 +292,8 @@ El jefe aparece en cada tercer combate de cada país. Si el jugador gana el comb
 | Güini de Pu |20|10|1|
 | Mister Cheeto | 35 | 14 |1|
 | Melon Moska | 26 | 20 |1|
-| //Potato Rey |22|21   |1|
-| //Curry Alam |31|23   |1|
+| Melon Moska montado en su Mierdesta |22|21   |1|
+| Pedry el ornitorrinco |31|23   |1|
 
 *//parámetros provisionales*
 
@@ -315,7 +317,7 @@ El jugador podrá interactuar con las interfaces del juego mediante clicks tanto
 Se tratará de una cámara estática que se centra en el escenario del juego de forma  lateral, mostrando la escena completa (sea escenario de tienda, batalla, mapa o donde se organiza el ejército del jugador). Se puede apreciar todos los componentes de cada sala como los elementos de la interfaz sin tapar detalles imprescindibles. La resolución de la pantalla es de 1920*1080. 
 
 ### 4.3. **HUD**
->imagen
+![HUB](./imagenes/bocetohub.png)
 
 ### 4.4. **Menús**
 **hay que diseñar un par de menús y meterlos aquí**
@@ -323,14 +325,22 @@ Se tratará de una cámara estática que se centra en el escenario del juego de 
 ## 5. **Mundo del juego**
 ### 5.1. **Personajes**
 #### 5.1.1. Protagonista
->imagen
+![Michi-Michi](./imagenes/michimichi.png)
 
 #### 5.1.2. **Aliados**
 Gato-Pulpo de Github
 
->img
+![Gato-Pulpo](./imagenes/gatopulpo.png)
 
 #### 5.1.3. **Enemigos**
+
+![Gato-Pulpo](./imagenes/cheetos.png)
+![Gato-Pulpo](./imagenes/thepoo.png)
+![Gato-Pulpo](./imagenes/pimiento.png)
+![Gato-Pulpo](./imagenes/dog.png)
+![Gato-Pulpo](./imagenes/enemigo1.png)
+![Gato-Pulpo](./imagenes/enemigo2.png)
+
 
 #### 5.1.4. **NPC’s**
 Mercader
@@ -353,15 +363,15 @@ https://github.com/lucdom07/G07-PVLI.git
 
 ## 9. **Cartas**
 Australia (A13)
-
+![Gato-Pulpo](./imagenes/australia.png)
 Super autopets (M33)
-
+![Gato-Pulpo](./imagenes/superanimals.png)
 DOM (M39)
-
+![Gato-Pulpo](./imagenes/dom.png)
 Hades (M07)
-
+![Gato-Pulpo](./imagenes/hades.png)
 Gato en una caja (P13)
-
+![Gato-Pulpo](./imagenes/gato.png)
 
 
 
