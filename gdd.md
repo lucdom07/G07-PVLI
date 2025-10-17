@@ -157,7 +157,7 @@ Cantidad finita expresada en número entero que poseen tanto aliados como enemig
 
 Este parámetro se muestra en un icono debajo del animal/enemigo junto con el icono de la cantidad de ataque que realiza.
 
-La vida de cada aliado se reinicia hasta su máximo cuando se gana el combate o cuando se empata en el combate. Este parámetro también puede ser mejorado con objetos o cuando se fusiona/une con otro aliado del mismo tipo.
+La vida de cada aliado se reinicia hasta su máximo cuando se gana el combate o cuando se empata en el combate. 
 
 ***Parámetros***
 - Cantidad de vida, números enteros
@@ -173,7 +173,6 @@ Este parámetro se muestra en un icono debajo del animal/enemigo junto con el ic
 
 Cuando el ataque es mayor que la vida actual del personaje, el personaje será derrotado y pasará a la siguiente hasta que uno de los ejércitos se queden sin personajes o cuando se empata.
 
-Este parámetro puede ser mejorado mediante el uso de los objetos o cuando se fusiona/une con otro aliado del mismo tipo.
 
 ***Parámetros***
 - Cantidad de ataque, números enteros
