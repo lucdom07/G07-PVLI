@@ -117,11 +117,21 @@ El precio de cada animal dependerá del país, en el primer país los costes ser
 *Super Auto Pets*
 
 ### 3.2. **Combate**
+
+Por clarificar el combate, el core loop sería el siguiente:
+1. El jugador entra en la sala de preparación de combate.
+2. El jugador elige los guerreros a utilizar. Los guerreros disponibles estarán en la propia página web y fuera del canvas, y al seleccionarlos cambiará su saturación a 0.
+3. Si el jugador deselecciona uno de sus guerreros, este se borrará de la lista y los siguientes bajarán un puesto, dejando un hueco al final para añadir otro.
+4. Al elegir los guerreros, podrá pulsar un botón que le llevará a la siguiente fase.
+5. En la siguiente fase, podrá utilizar objetos clicando sobre ellos y eligiendo el guerrero.
+6. Al terminar la selección de objetos, se pasará al combate.
+
 El combate será un autobattler visualmente parecido al Super Autopets, donde el jugador podrá colocar y organizar a su ejército antes de ver las del enemigo, y dependiendo de su vida y ataque ganarán o perderán.
 
 Si un animal (tanto aliado como enemigo) es eliminado, entendiéndose por eliminado que su vida se reduce a cero o menos, el siguiente será el que continúe luchando contra el que queda en pie, y así sucesivamente hasta que uno de los dos bandos se quede sin ejército. Si el jugador se queda sin ejército en combate, perderá automáticamente; pero si se trata del otro bando, el jugador elegirá una sala del mapa para continuar con el juego.
 
 En caso de que el combate termine en empate, no se pierde y ni se ganan monedas, pero se debe de repetir la sala hasta ganar y avanzar a la siguiente.
+
 
 **Sistema de estadísticas de los animales y enemigo:**
 
