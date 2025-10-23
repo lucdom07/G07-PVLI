@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>The Furrytastic Invasion</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="estilo.css"> <!-- Esto cargaria un archivo de estilo, pero no es necesario en Fiddle porque lo hace automáticamente -->
+  <link rel="stylesheet" href="./css/game.css"> 
   <!--Fuentes encabezados-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,19 +14,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Jersey+10&family=Lacquer&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-  <script src="script.js"></script> <!--Aquí podriamos cargar los scripts, también se puede en el <body>, y pasa lo mismo que con el css de antes, en verdad aquí no estamos cargando nada-->
-</head>
+  <script src="./src/game.js" type="module"></script>
 
 <body class="body">
   <div id="titleContainer">
-    <img id="title" src="images/title placeholder.png" alt="The Furrytastic Invasion">
-    <img id="madeBy" src="images/made by placeholder.png" alt="Made by Canibalismo Galletil">
+    <img id="title" src="images/title_placeholder.png" alt="The Furrytastic Invasion">
+    <img id="madeBy" src="images/made_by_placeholder.png" alt="Made by Canibalismo Galletil">
   </div>
   <div id="mainContainer">
-    <div id="phaser-example">
-      <canvas id="juego">  </canvas>   
+    <div id="game">
     </div>
-    <script src="script.js" type="module"></script>
     <div id="info">
       <div>
         <h1 class="header">DESCRIPCIÓN</h1>
@@ -39,19 +36,19 @@
           <img id="logo" src="images/logoConFondo.png" alt="Logo Canibalismo Galletil">
         </div>
         <div class="dev">
-          <img class="devProfIcon" src="images/liling owl.png" alt="icono">
+          <img class="devProfIcon" src="images/liling_owl.png" alt="icono">
           <p class="devName">Liling Chen</p>
         </div>
         <div class="dev">
-          <img class="devProfIcon" src="images/lumei cat.png" alt="icono">
+          <img class="devProfIcon" src="images/lumei_cat.png" alt="icono">
           <p class="devName">Lucía Mei Domínguez López</p>
         </div>
         <div class="dev">
-          <img class="devProfIcon" src="images/sergio fox.png" alt="icono">
+          <img class="devProfIcon" src="images/sergio_fox.png" alt="icono">
           <p class="devName">Sergio López Gómez</p>
         </div>
         <div class="dev">
-          <img class="devProfIcon" src="images/zack rabbit.png" alt="icono">
+          <img class="devProfIcon" src="images/zack_rabbit.png" alt="icono">
           <p class="devName">Isabel Serrano Martín</p>
         </div>
       </div>
@@ -60,12 +57,12 @@
         <div id="socialContainer">
           <p>
           <a href="https://x.com/galletaCanibal_" target="_blank">
-            <img class="socialIcon" src="images/twitter icon.png" alt="">
+            <img class="socialIcon" src="images/twitter_icon.png" alt="">
           </a>
           </p>
           <p>
             <a href="https://github.com/lucdom07/G07-PVLI.git" target="_blank">
-              <img class="socialIcon" src="images/github icon.png" alt="github">
+              <img class="socialIcon" src="images/github_icon.png" alt="github">
             </a>
           </p>
         </div>
