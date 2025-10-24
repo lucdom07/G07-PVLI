@@ -1,12 +1,12 @@
 .body{
   /*background-color: #aedfff;*/
-  background-image: url(./images/web_background.png);
+  background-image: url(../images/web_background.png);
   background-position: center;
 }
 
 #titleContainer{
   /*background-color: #e99e68;*/
-  background-image: url(./images/title_texture.png);
+  background-image: url(../images/title_texture.png);
   background-size: cover;
   height: 120px;
   width: auto;
@@ -31,7 +31,7 @@
 
 #mainContainer{
   /*background-color: #ffe6bf;*/
-  background-image: url(./images/info_texture.png);
+  background-image: url(../images/info_texture.png);
   background-size: cover;
   width: 1200px;
   height: auto;
