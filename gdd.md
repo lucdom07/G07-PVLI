@@ -94,6 +94,8 @@ También se va a ofrecer la compra de objetos para la mejora de las estadística
 El precio de cada animal dependerá del país, en el primer país los costes serán más baratos y a medida que va progresando el jugador, se va desbloqueando nuevos objetos y aliados, pero los precios de estos serán más caros que los del país inicial, por ende no se puede comprar ni desbloquear animales de otros países si el jugador no avanza.
 Por tanto, el nivel del animal debe ser igual o menor al número de sala.
 
+Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un mensaje diciendo: "¡Tienes demasiados guerreros!". Y cuando el jugador intente comprar los elementos de la tienda teniendo insuficientes modenas aparecerá el mensaje de : "¡No tienes difero suficiente!".
+
 **Precios**
 
 | **Países** | **Aliados** | **Objetos** |
@@ -106,6 +108,9 @@ Por tanto, el nivel del animal debe ser igual o menor al número de sala.
 *//parámetros provisionales*
 
 ![Tienda](./imagenes/mercancer.png)
+
+Además de la compra de los animales y objetos también se podrá vender sus aliados por el precio de la mitad del que ha comprado, pero no podrás vender cuando solo tengas un aliado en el ejercito.
+Para poder vender, el jugador tendrá que seleccionar al aliado a vender desde el DOM y se mostrará en la pantalla del juego el precio que obtendrá si se vende al aliado y dos botones donde se podrá aceptar la venta ("Vender") o cancelar la venta ("Cancelar"). No se puede vender varios animales a la vez y al vender se elimina el aliado del DOM del jugador.
 
 ***Parámetros***
 - Cantidad de animales y/u objetos a comprar.
@@ -164,8 +169,6 @@ La vida de cada aliado se reinicia hasta su máximo cuando se gana el combate o 
 
 
 
-
-
 #### 3.2.2. **Ataque**
 Daño que causan los aliados y enemigos para restar vida.
 
@@ -218,6 +221,10 @@ Cada objeto mejora la estadística de vida y/o ataque de los aliados por una can
 
 ### 3.4. **Gestión de los preparativos de combates (en el juego)**
 Escenario en el que se muestra visualmente la organización del ejército. En él se podrá cambiar las posiciones de los animales y ver cada estadística de los animales (vida, ataque y rango de ataque) y sus niveles. Si hay dos animales del mismo tipo, se dará la opción de juntarlos, quedando un solo animal con mejores estadísticas.
+
+Se podrá elegir el slot en el que se coloque el aliado por el juagor y cuando se dé a comenzar el combate, los aliados se desplazarán a la derecha cuando haya huecos vacíos.
+
+Si el jugador intenta añadir más aliados a su ejercito lleno, saltrá un mensaje de: "Error".
 
 Cuando los preparativos estén completados, el jugador tendrá que pulsar un botón para iniciar la batalla contra el ejército enemigo.
 
@@ -345,10 +352,15 @@ Gato-Pulpo de Github
 #### 5.1.3. **Enemigos**
 
 ![Gato-Pulpo](./imagenes/cheetos.png)
+
 ![Gato-Pulpo](./imagenes/thepoo.png)
+
 ![Gato-Pulpo](./imagenes/pimiento.png)
+
 ![Gato-Pulpo](./imagenes/dog.png)
+
 ![Gato-Pulpo](./imagenes/enemigo1.png)
+
 ![Gato-Pulpo](./imagenes/enemigo2.png)
 
 
@@ -373,15 +385,24 @@ https://github.com/lucdom07/G07-PVLI.git
 
 ## 9. **Cartas**
 Australia (A13)
-![Gato-Pulpo](./imagenes/australia.png)
+
+![australia](./imagenes/australia.png)
+
 Super autopets (M33)
-![Gato-Pulpo](./imagenes/superanimals.png)
+
+![animals](./imagenes/superanimals.png)
+
 DOM (M39)
-![Gato-Pulpo](./imagenes/dom.png)
+
+![dom](./imagenes/dom.png)
+
 Hades (M07)
-![Gato-Pulpo](./imagenes/hades.png)
+
+![hades](./imagenes/hades.png)
+
 Gato en una caja (P13)
-![Gato-Pulpo](./imagenes/gato.png)
+
+![Gato](./imagenes/gato.png)
 
 
 
