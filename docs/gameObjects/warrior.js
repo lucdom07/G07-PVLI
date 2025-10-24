@@ -9,9 +9,6 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
     preUpdate(t, dt){
         super.preUpdate(t, dt);
     }
-    die(){
-        
-    }
     hit(damage){
         this.life -= (damage);
         console.log(this.life);
