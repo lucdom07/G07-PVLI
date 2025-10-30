@@ -1,6 +1,7 @@
 export default class Warrior extends Phaser.GameObjects.Sprite{
-    constructor(scene, x, y,life, attack, range, texture, frame){
+    constructor(scene, x, y, name, life, attack, range, texture, frame){
         super(scene, x, y, texture, frame);
+        this.name = name;
         this.life = life;
         this.attack = attack;
         this.range = range;
@@ -8,6 +9,9 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
     }
     preUpdate(t, dt){
         super.preUpdate(t, dt);
+    }
+    getName() {
+        return this.name;
     }
     hit(damage){
         this.life -= (damage);
