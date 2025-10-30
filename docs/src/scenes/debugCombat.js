@@ -10,8 +10,8 @@ export default class Animation extends Phaser.Scene{
         this.combatSystem = new Combat(this);
     }
     preload(){
-        this.load.image('pimiento', '../../assets/pimiento.png');
-        this.load.image('pimiento', '../../assets/pimiento.png');
+        this.load.image('pimiento', 'assets/pimiento.png');
+        this.load.image('pimiento', 'assets/pimiento.png');
     }
     create(){
         const playerTeam = [

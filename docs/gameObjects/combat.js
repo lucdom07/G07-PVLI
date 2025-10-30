@@ -1,5 +1,5 @@
-import Ally from "./ally";
-import Enemy from "./enemy";
+import Ally from "./ally.js";
+import Enemy from "./enemy.js";
 
 export default class Combat{
     constructor(scene){
@@ -11,10 +11,10 @@ export default class Combat{
     //tendrá la misma longitud que del jugador
     generateEnemy(ally, enemyList) {
         const enemyTeam = [];
-        const enemyCount = ally.lenght;
+        const enemyCount = ally.length;
 
         for (let i =0; i<enemyCount; i++){
-            const index = Phaser.Math.Between(0, enemyList.lenght-1);
+            const index = Phaser.Math.Between(0, enemyList.length-1);
             const enemyTemplate = enemyList[index];
 
             const enemy = new Enemy(
@@ -49,7 +49,7 @@ export default class Combat{
             await this.delay(500);
         }
 
-        if(ally.lenght == enemyTeam.length){ //cuando son en empate
+        if(ally.length == enemyTeam.length){ //cuando son en empate
 
         }
         const playerWins = ally.length > 0;
@@ -113,7 +113,7 @@ export default class Combat{
             
             const targetIndex = attacker.range;
             if(targetIndex>defendingTeam.length){
-                targetIndex= defendingTeam.lenght-1;
+                targetIndex= defendingTeam.length-1;
             }
             const target = defendingTeam[targetIndex];
             
@@ -171,7 +171,7 @@ export default class Combat{
     }
 
     endCombat(playerWins, playerTeam, enemyTeam) {
-        this.isCombatActive = false;
+        this.isCombatActived = false;
         
         if (playerWins) {
             console.log("¡VICTORIA!");

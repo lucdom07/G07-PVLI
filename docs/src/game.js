@@ -22,7 +22,7 @@ let config = {
 	physics: { 
 		default: 'arcade', 
 		arcade: { 
-			gravity: { y: 200 }, 
+			gravity: { y: 0}, 
 			debug: true 
 		}, 
 	checkCollision:{
@@ -31,7 +31,8 @@ let config = {
         left: true,
         right: true
     },
-    }
+    },
+	backgroundColor:'#2d2d2d'
 };
 
 new Phaser.Game(config);
