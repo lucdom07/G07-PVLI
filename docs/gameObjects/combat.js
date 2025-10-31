@@ -9,27 +9,21 @@ export default class Combat{
 
     //genera los enemigos dependiendo de la lista que se le mete, la lista metida depende del nivel en el que va el jugador y
     //tendrá la misma longitud que del jugador
-    generateEnemy(ally, enemyList) {
-        const enemyTeam = [];
-        const enemyCount = ally.length;
+    generateEnemy(ally, enemyList) { //genera los enemigos de la escena
+        const enemyTeam = []; //crea lista vacia de los enemigos
+        const enemyCount = ally.length; //coje el tam de los ally
 
-        for (let i =0; i<enemyCount; i++){
-            const index = Phaser.Math.Between(0, enemyList.length-1);
-            const enemyTemplate = enemyList[index];
+        for (let i =0; i < enemyCount; i++){
+            const index = Phaser.Math.Between(0, enemyList.length-1); //se coge los indices del 0 asta el tam del ally
+            const enemyTemplate = enemyList[index]; //coje el enemigo aleatorio
 
-            const enemy = new Enemy(
-                this.scene,
-                enemyTemplate.x,
-                enemyTemplate.y,
-                enemyTemplate.life,
-                enemyTemplate.attack,
-                enemyTemplate.range, // Rango de ataque
-                enemyTemplate.texture,
-                enemyTemplate.frame || 0
-            );
-            enemyTeam.push(enemy);
+            const enemy = enemyTemplate.clone(); //se clona
+
+            console.log(enemy);
+
+            enemyTeam.push(enemy); //se añade al equipo
         }
-        return enemyTeam;
+        return enemyTeam; //retorna el enemy
     }
 
     //tengo que tener 2 arrays, uno de ally y otro de enemy, mientras que los dos tengan cosas, se sigue
@@ -58,44 +52,54 @@ export default class Combat{
         return playerWins;
     }
 
-    positionTeams(playerTeam, enemyTeam) {
+    positionTeams(ally, enemyTeam) {
         // Posicionar aliados
-        playerTeam.forEach((ally, index) => {
-            ally.x = 200 + (index * 80);
+        ally.forEach((ally, index) => {
+            ally.x = 300 + (index * -80);
             ally.y = 300;
+             if (!ally.scene) {
+            this.scene.add.existing(ally);
+        }
         });
         
         // Posicionar enemigos
         enemyTeam.forEach((enemy, index) => {
-            enemy.x = 600 + (index * 80);
-            enemy.y = 300;
-        });
+        enemy.x = 600 + (index * 80);
+        enemy.y = 300;
+        // Añadir esto:
+        if (!enemy.scene) {
+            this.scene.add.existing(enemy);
+        }
+    });
     }
 
-    async executeCombatRound(playerTeam, enemyTeam) {
-        const maxActions = Math.max(playerTeam.length,enemyTeam.length);
+    async executeCombatRound(ally, enemyTeam) {
+        const maxActions = Math.max(ally.length,enemyTeam.length);
         for(let i=0; i<maxActions; i++){
-            if (i < playerTeam.length && enemyTeam.length > 0) {
-                await this.executeSingleAttack(playerTeam[i], enemyTeam, 'player');
-                await this.delay(1000); // Pausa entre ataques individuales
+            if (i < ally.length && enemyTeam.length > 0) {
+            await this.executeSingleAttack(ally[i], enemyTeam, 'player');
+            await this.delay(1000); // Pausa entre ataques individuales
             }
             
             // Enemigo ataca si existe en esta posición
-            if (i < enemyTeam.length && playerTeam.length > 0) {
-                await this.executeSingleAttack(enemyTeam[i], playerTeam, 'enemy');
-                await this.delay(1000); // Pausa entre ataques individuales
+            if (i < enemyTeam.length && ally.length > 0) {
+            await this.executeSingleAttack(enemyTeam[i], ally, 'enemy');
+            await this.delay(1000); // Pausa entre ataques individuales
             }
-            
+
             // Eliminar unidades muertas después de cada par de ataques
-            this.removeDeadUnits(playerTeam);
+            this.removeDeadUnits(ally);
             this.removeDeadUnits(enemyTeam);
             
+            console.log("Ronda completada - Aliados:", ally.length, "Enemigos:", enemyTeam.length);
             // Si algún equipo se queda sin unidades, salir del bucle
-            if (playerTeam.length === 0 || enemyTeam.length === 0) {
+            if (ally.length === 0 || enemyTeam.length === 0) {
                 break;
             }
+
+            console.log("Ronda completada - Aliados:", ally.length, "Enemigos:", enemyTeam.length);
         }
-        console.log("Ronda completada - Aliados:", playerTeam.length, "Enemigos:", enemyTeam.length);
+        
     }
 
     async executeSingleAttack(attacker, defendingTeam, teamType) {
@@ -225,12 +229,12 @@ export default class Combat{
         }
     }
 
-    endCombat(playerWins, playerTeam, enemyTeam) {
+    endCombat(playerWins, ally, enemyTeam) {
         this.isCombatActived = false;
         
         if (playerWins) {
             console.log("¡VICTORIA!");
-            this.victoria(playerTeam);
+            this.victoria(ally);
         } else {
             console.log("Derrota...");
             this.derrota(enemyTeam);

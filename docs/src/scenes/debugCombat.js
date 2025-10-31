@@ -11,21 +11,19 @@ export default class Animation extends Phaser.Scene{
     }
     preload(){
         
-        let imagen = this.load.image('pimiento', 'assets/pimiento.png');
-        imagen.width = 20;
-        imagen.height = 20;
+        this.load.image('pimiento', 'assets/pimiento.png');
     }
     create(){
         const playerTeam = [
-            new Ally(this, 0, 0,'Michi-Michi', 30, 10, 0, imagen, 0, 1, true, 1),
-            new Ally(this, 0, 0,'trump', 25, 12, 1, imagen, 0, 1, true, 1)
+            new Ally(this, -150, -150,'Michi-Michi', 30, 5, 0, 'pimiento', 0, 1, true, 1),
+            new Ally(this, -150, -150,'trump', 25, 10, 0, 'pimiento', 0, 1, true, 1)
         ];
         
-        // Enemigos disponibles simples
-         const availableEnemies = [
-            { x: 0, y: 0, life: 28, attack: 8, range: 0, texture: imagen, frame: 0 },
-            { x: 0, y: 0, life: 22, attack: 15, range: 0, texture: imagen, frame: 0 },
-            { x: 0, y: 0, life: 35, attack: 7, range: 0, texture: imagen, frame: 0 }
+        // Enemigos disponibles
+        const availableEnemies = [
+            new Enemy(this, -150, -150,'pimiento', 28, 5, 0, 'pimiento', 0, 1),
+            new Enemy(this, -150, -150,'pimiento', 22, 10, 0, 'pimiento', 0, 1),
+            new Enemy(this, -150, -150,'pimiento', 35, 7, 0, 'pimiento', 0, 1)
         ];
         
         // Iniciar combate inmediatamente
