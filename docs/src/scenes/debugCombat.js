@@ -1,6 +1,6 @@
-import Combat from "../../gameObjects/combat";
-import Ally from "../../gameObjects/ally";
-import Enemy from "../../gameObjects/enemy";
+import Combat from "../../gameObjects/combat.js";
+import Ally from "../../gameObjects/ally.js";
+import Enemy from "../../gameObjects/enemy.js";
 
 export default class Animation extends Phaser.Scene{
     constructor(){
@@ -10,29 +10,26 @@ export default class Animation extends Phaser.Scene{
         this.combatSystem = new Combat(this);
     }
     preload(){
-        this.load.image('pimiento', 'assets/pimiento.png');
-        this.load.image('pimiento', 'assets/pimiento.png');
+        
+        let imagen = this.load.image('pimiento', 'assets/pimiento.png');
+        imagen.width = 20;
+        imagen.height = 20;
     }
     create(){
         const playerTeam = [
-            new Ally(this, 0, 0, 30, 10, 0, 'ally', 0, 1, true, 1),
-            new Ally(this, 0, 0, 25, 12, 1, 'ally', 0, 1, true, 1)
+            new Ally(this, 0, 0,'Michi-Michi', 30, 10, 0, imagen, 0, 1, true, 1),
+            new Ally(this, 0, 0,'trump', 25, 12, 1, imagen, 0, 1, true, 1)
         ];
         
         // Enemigos disponibles simples
-        const availableEnemies = [
-            new Enemy(this, 0, 0, 28, 8, 0, 'enemy', 0),
-            new Enemy(this, 0, 0, 22, 15, 0, 'enemy', 0)
+         const availableEnemies = [
+            { x: 0, y: 0, life: 28, attack: 8, range: 0, texture: imagen, frame: 0 },
+            { x: 0, y: 0, life: 22, attack: 15, range: 0, texture: imagen, frame: 0 },
+            { x: 0, y: 0, life: 35, attack: 7, range: 0, texture: imagen, frame: 0 }
         ];
         
         // Iniciar combate inmediatamente
-        this.combatSystem.startCombat(playerTeam, availableEnemies)
-            .then(playerWon => {
-                this.add.text(400, 300, playerWon ? '¡VICTORIA!' : 'DERROTA', {
-                    fontSize: '48px',
-                    fill: playerWon ? '#00ff00' : '#ff0000'
-                }).setOrigin(0.5);
-            });
+        this.combatSystem.combat(playerTeam, availableEnemies)
     }
     update(time, dt){
 

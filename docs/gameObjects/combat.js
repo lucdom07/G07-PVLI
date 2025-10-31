@@ -19,8 +19,8 @@ export default class Combat{
 
             const enemy = new Enemy(
                 this.scene,
-                600 + (i * 80), // Posición X
-                enemyTemplate.y, // Posición Y con variación
+                enemyTemplate.x,
+                enemyTemplate.y,
                 enemyTemplate.life,
                 enemyTemplate.attack,
                 enemyTemplate.range, // Rango de ataque
@@ -46,11 +46,11 @@ export default class Combat{
             await this.executeCombatRound(ally, enemyTeam);
             
             // Pequeña pausa entre rondas para mejor visualización
-            await this.delay(500);
+            await this.delay(1000);
         }
 
         if(ally.length == enemyTeam.length){ //cuando son en empate
-
+            console.log("EMPATE");
         }
         const playerWins = ally.length > 0;
         this.endCombat(playerWins, ally, enemyTeam);
@@ -62,69 +62,97 @@ export default class Combat{
         // Posicionar aliados
         playerTeam.forEach((ally, index) => {
             ally.x = 200 + (index * 80);
-            ally.y = 300 + (index * 10);
+            ally.y = 300;
         });
         
         // Posicionar enemigos
         enemyTeam.forEach((enemy, index) => {
             enemy.x = 600 + (index * 80);
-            enemy.y = 300 + (index * 10);
+            enemy.y = 300;
         });
     }
 
     async executeCombatRound(playerTeam, enemyTeam) {
-        // Los equipos atacan simultáneamente
-        const playerAttacks = this.calculateAttacks(playerTeam, enemyTeam);
-        const enemyAttacks = this.calculateAttacks(enemyTeam, playerTeam);
-        
-        // Aplicar daño
-        this.applyDamage(playerAttacks, enemyTeam);
-        this.applyDamage(enemyAttacks, playerTeam);
-        
-        // Eliminar unidades muertas
-        this.removeDeadUnits(playerTeam);
-        this.removeDeadUnits(enemyTeam);
-        
+        const maxActions = Math.max(playerTeam.length,enemyTeam.length);
+        for(let i=0; i<maxActions; i++){
+            if (i < playerTeam.length && enemyTeam.length > 0) {
+                await this.executeSingleAttack(playerTeam[i], enemyTeam, 'player');
+                await this.delay(1000); // Pausa entre ataques individuales
+            }
+            
+            // Enemigo ataca si existe en esta posición
+            if (i < enemyTeam.length && playerTeam.length > 0) {
+                await this.executeSingleAttack(enemyTeam[i], playerTeam, 'enemy');
+                await this.delay(1000); // Pausa entre ataques individuales
+            }
+            
+            // Eliminar unidades muertas después de cada par de ataques
+            this.removeDeadUnits(playerTeam);
+            this.removeDeadUnits(enemyTeam);
+            
+            // Si algún equipo se queda sin unidades, salir del bucle
+            if (playerTeam.length === 0 || enemyTeam.length === 0) {
+                break;
+            }
+        }
         console.log("Ronda completada - Aliados:", playerTeam.length, "Enemigos:", enemyTeam.length);
     }
 
-    createHealText(x, y, amount) {
-        const text = this.scene.add.text(x, y - 30, `+${amount}`, {
-            fontSize: '16px',
-            fill: '#00ff00',
-            stroke: '#000000',
-            strokeThickness: 3
-        });
+    async executeSingleAttack(attacker, defendingTeam, teamType) {
+        if (defendingTeam.length === 0) return;
         
-        this.scene.tweens.add({
-            targets: text,
-            y: y - 50,
-            alpha: 0,
-            duration: 1000,
-            onComplete: () => text.destroy()
-        });
+        const targetIndex = Math.min(attacker.range, defendingTeam.length - 1);
+        const target = defendingTeam[targetIndex];
+        
+        if (target && defendingTeam.includes(target)) {
+            // Animación de ataque
+            await this.attackAnimation(attacker, target);
+            
+            // Aplicar daño
+            target.hit(attacker.attack);
+            this.createDamageText(target.x, target.y, attacker.attack);
+            
+            // Pequeña pausa para ver el daño
+            await this.delay(800);
+        }
     }
 
-    calculateAttacks(attackingTeam, defendingTeam) {
-        const attacks = [];
+  async attackAnimation(attacker, target) {
+        const originalX = attacker.x;
+        const originalY = attacker.y;
         
-        for (const attacker of attackingTeam) {
-            if (defendingTeam.length === 0) break;
-            
-            const targetIndex = attacker.range;
-            if(targetIndex>defendingTeam.length){
-                targetIndex= defendingTeam.length-1;
-            }
-            const target = defendingTeam[targetIndex];
-            
-            attacks.push({
-                attacker: attacker,
-                target: target,
-                damage: attacker.attack
+        // Mover hacia el objetivo
+        await new Promise(resolve => {
+            this.scene.tweens.add({
+                targets: attacker,
+                x: attacker.x + (target.x - attacker.x) * 0.3,
+                y: attacker.y + (target.y - attacker.y) * 0.3,
+                duration: 300,
+                ease: 'Power2',
+                onComplete: resolve
             });
-        }
+        });
         
-        return attacks;
+        // Efecto visual en el objetivo
+        this.scene.tweens.add({
+            targets: target,
+            scaleX: 1.1,
+            scaleY: 1.1,
+            duration: 100,
+            yoyo: true
+        });
+        
+        // Volver a la posición original
+        await new Promise(resolve => {
+            this.scene.tweens.add({
+                targets: attacker,
+                x: originalX,
+                y: originalY,
+                duration: 300,
+                ease: 'Power2',
+                onComplete: resolve
+            });
+        });
     }
 
     applyDamage(attacks, defendingTeam) {
@@ -137,16 +165,44 @@ export default class Combat{
     }
 
     createDamageText(x, y, damage, color = '#ff0000'){
+          console.log(`Creando texto de daño: -${damage} en (${x}, ${y})`); // Debug
+
         const text = this.scene.add.text(x, y - 30, `-${damage}`, {
-            fontSize: '20px',
+            fontSize: '24px',
             fill: color,
             stroke: '#000000',
-            strokeThickness: 3
-        });
+            strokeThickness: 4,
+            fontFamily: 'Arial',
+            fontWeight: 'bold'
+        }).setOrigin(0.5);
         
         this.scene.tweens.add({
             targets: text,
-            y: y - 60,
+            y: y - 100,
+            alpha: 0,
+            duration: 1500,
+            ease: 'Power2',
+            onComplete: () => {
+                if (text && text.destroy) {
+                    text.destroy();
+                }
+            }
+        });
+    }
+
+    createHealText(x, y, amount) {
+        const text = this.scene.add.text(x, y - 30, `+${amount}`, {
+            fontSize: '20px',
+            fill: '#00ff00',
+            stroke: '#000000',
+            strokeThickness: 3,
+            fontFamily: 'Arial',
+            fontWeight: 'bold'
+        }).setOrigin(0.5);
+        
+        this.scene.tweens.add({
+            targets: text,
+            y: y - 80,
             alpha: 0,
             duration: 1000,
             onComplete: () => text.destroy()
@@ -164,7 +220,6 @@ export default class Combat{
                         team[i].destroy();
                     }
                 });
-                
                 team.splice(i, 1);
             }
         }
@@ -209,8 +264,4 @@ export default class Combat{
     delay(ms) {
         return new Promise(resolve => this.scene.time.delayedCall(ms, resolve));
     }
-
-
 }
-
-//genero los enemigos
