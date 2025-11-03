@@ -57,6 +57,7 @@ export default class Combat{
         ally.forEach((ally, index) => {
             ally.x = 300 + (index * -80);
             ally.y = 300;
+            
              if (!ally.scene) {
             this.scene.add.existing(ally);
         }
@@ -66,7 +67,6 @@ export default class Combat{
         enemyTeam.forEach((enemy, index) => {
         enemy.x = 600 + (index * 80);
         enemy.y = 300;
-        // Añadir esto:
         if (!enemy.scene) {
             this.scene.add.existing(enemy);
         }
@@ -76,28 +76,24 @@ export default class Combat{
     async executeCombatRound(ally, enemyTeam) {
         const maxActions = Math.max(ally.length,enemyTeam.length);
         for(let i=0; i<maxActions; i++){
-            if (i < ally.length && enemyTeam.length > 0) {
+            if (i < ally.length && enemyTeam.length > 0 && ally[i] && ally[i].life > 0) {
             await this.executeSingleAttack(ally[i], enemyTeam, 'player');
-            await this.delay(1000); // Pausa entre ataques individuales
+            await this.delay(1000); // Pausa entre ataques individuales´
+                this.removeDeadUnits(enemyTeam);
             }
             
             // Enemigo ataca si existe en esta posición
-            if (i < enemyTeam.length && ally.length > 0) {
+            if (i < enemyTeam.length && ally.length > 0 && enemyTeam[i] && enemyTeam[i].life > 0) {
             await this.executeSingleAttack(enemyTeam[i], ally, 'enemy');
             await this.delay(1000); // Pausa entre ataques individuales
+                this.removeDeadUnits(ally);
             }
 
-            // Eliminar unidades muertas después de cada par de ataques
-            this.removeDeadUnits(ally);
-            this.removeDeadUnits(enemyTeam);
-            
-            console.log("Ronda completada - Aliados:", ally.length, "Enemigos:", enemyTeam.length);
             // Si algún equipo se queda sin unidades, salir del bucle
+            console.log("Ronda completada - Aliados:", ally.length, "Enemigos:", enemyTeam.length);
             if (ally.length === 0 || enemyTeam.length === 0) {
                 break;
             }
-
-            console.log("Ronda completada - Aliados:", ally.length, "Enemigos:", enemyTeam.length);
         }
         
     }
@@ -108,7 +104,7 @@ export default class Combat{
         const targetIndex = Math.min(attacker.range, defendingTeam.length - 1);
         const target = defendingTeam[targetIndex];
         
-        if (target && defendingTeam.includes(target)) {
+        if (target && defendingTeam.includes(target) && target.life>0) {
             // Animación de ataque
             await this.attackAnimation(attacker, target);
             
@@ -214,20 +210,54 @@ export default class Combat{
     }
 
     removeDeadUnits(team) {
+        let elimina = false;
         for (let i = team.length - 1; i >= 0; i--) {
             if (team[i].life <= 0) {
-                team[i].setAlpha(0.3);
-                team[i].setTint(0xff0000);
+
+                const deadUnit = team[i];
+
+                deadUnit.setAlpha(0.3);
+                deadUnit.setTint(0xff0000);
                 
                 this.scene.time.delayedCall(500, () => {
-                    if (team[i] && team[i].scene) {
-                        team[i].destroy();
+                    if (deadUnit && deadUnit.scene) {
+                        deadUnit.destroy();
                     }
                 });
+
                 team.splice(i, 1);
+                elimina = true;
             }
         }
+
+        if(elimina) this.reponer(team);
     }
+
+    reponer(team){
+    if(team.length === 0) return;
+
+    const isAlly = team[0].x < 500;
+
+    team.forEach((unit, index) => {
+        let targetX, targetY;
+        if (isAlly) {
+            targetX = 300 + (index * -80);
+            targetY = 300;
+        } else {
+            targetX = 600 + (index * 80);
+            targetY = 300;
+        }
+        
+        // Animación suave hacia la nueva posición
+        this.scene.tweens.add({
+            targets: unit,
+            x: targetX,
+            y: targetY,
+            duration: 500,
+            ease: 'Power2'
+        });
+    });
+}
 
     endCombat(playerWins, ally, enemyTeam) {
         this.isCombatActived = false;

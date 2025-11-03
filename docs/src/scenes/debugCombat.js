@@ -15,14 +15,14 @@ export default class Animation extends Phaser.Scene{
     }
     create(){
         const playerTeam = [
-            new Ally(this, -150, -150,'Michi-Michi', 30, 5, 0, 'pimiento', 0, 1, true, 1),
-            new Ally(this, -150, -150,'trump', 25, 10, 0, 'pimiento', 0, 1, true, 1)
+            new Ally(this, -150, -150,'Michi-Michi', 1, 1, 0, 'pimiento', 0, 1, true, 1),
+            new Ally(this, -150, -150,'trump', 1, 1, 0, 'pimiento', 0, 1, true, 1)
         ];
         
         // Enemigos disponibles
         const availableEnemies = [
-            new Enemy(this, -150, -150,'pimiento', 28, 5, 0, 'pimiento', 0, 1),
-            new Enemy(this, -150, -150,'pimiento', 22, 10, 0, 'pimiento', 0, 1),
+            new Enemy(this, -150, -150,'pimiento', 20, 5, 0, 'pimiento', 0, 1),
+            new Enemy(this, -150, -150,'pimiento', 21, 10, 0, 'pimiento', 0, 1),
             new Enemy(this, -150, -150,'pimiento', 35, 7, 0, 'pimiento', 0, 1)
         ];
         
