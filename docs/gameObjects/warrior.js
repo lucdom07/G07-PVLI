@@ -1,11 +1,14 @@
 export default class Warrior extends Phaser.GameObjects.Sprite{
-    constructor(scene, x, y, name, life, attack, range, texture, frame){
+    constructor(scene, x, y, name, life, attack, range, texture, frame, level){
         super(scene, x, y, texture, frame);
         this.name = name;
         this.life = life;
         this.attack = attack;
         this.range = range;
+        this.level = level;
+        this.DISPLAY_SIZE = 100;
         this.scene.add.existing(this);
+        this.setDisplaySize(this.DISPLAY_SIZE, this.DISPLAY_SIZE); 
     }
     preUpdate(t, dt){
         super.preUpdate(t, dt);

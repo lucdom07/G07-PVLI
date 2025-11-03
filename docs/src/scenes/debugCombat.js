@@ -1,4 +1,4 @@
-import Combat from "../../gameObjects/combat.js";
+import CombatManager from "../../gameObjects/managers/combatManager.js";
 import Ally from "../../gameObjects/ally.js";
 import Enemy from "../../gameObjects/enemy.js";
 
@@ -7,7 +7,7 @@ export default class Animation extends Phaser.Scene{
         super({key: 'debugCombat'});
     }
     init(){
-        this.combatSystem = new Combat(this);
+        this.combatManager = new CombatManager(this);
     }
     preload(){
         
@@ -26,14 +26,14 @@ export default class Animation extends Phaser.Scene{
         ];
         
         // Enemigos disponibles
-        const availableEnemies = [
+        const enemyTeam = [
             new Enemy(this, -150, -150,'pimiento', 20, 5, 0, 'tortuga', 0, 1),
             new Enemy(this, -150, -150,'pimiento', 21, 10, 0, 'chupacabra', 0, 1),
             new Enemy(this, -150, -150,'pimiento', 35, 7, 0, 'warf', 0, 1)
         ];
         
         // Iniciar combate inmediatamente
-        this.combatSystem.combat(playerTeam, availableEnemies)
+        this.combatManager.combat(playerTeam, enemyTeam)
     }
     update(time, dt){
 
