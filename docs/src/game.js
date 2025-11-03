@@ -1,4 +1,5 @@
 import DebugCombat from './scenes/debugCombat.js'
+import mainMenu from './scenes/mainMenu.js'
 
 let config = {
 	type: Phaser.AUTO,
@@ -18,7 +19,9 @@ let config = {
         },
         zoom: 1
 	},
-	scene: [DebugCombat],
+	scene: [mainMenu,
+			DebugCombat
+	],
 	physics: { 
 		default: 'arcade', 
 		arcade: { 
