@@ -4,6 +4,8 @@ export default class Enemy extends Warrior{
         constructor(scene, x, y, name, life, attack, range, texture, frame, level){
         super(scene, x, y, name, life, attack, range, texture, frame);
         this.level = level;
+
+        this.setDisplaySize(120,120); 
     }
     preUpdate(t, dt){
         super.preUpdate(t, dt);

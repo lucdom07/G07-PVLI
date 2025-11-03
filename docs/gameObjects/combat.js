@@ -234,30 +234,31 @@ export default class Combat{
     }
 
     reponer(team){
-    if(team.length === 0) return;
+        if(team.length === 0) return;
 
-    const isAlly = team[0].x < 500;
+        const isAlly = team[0].x <500;
 
-    team.forEach((unit, index) => {
-        let targetX, targetY;
-        if (isAlly) {
-            targetX = 300 + (index * -80);
-            targetY = 300;
-        } else {
-            targetX = 600 + (index * 80);
-            targetY = 300;
-        }
-        
-        // Animación suave hacia la nueva posición
-        this.scene.tweens.add({
-            targets: unit,
-            x: targetX,
-            y: targetY,
-            duration: 500,
-            ease: 'Power2'
+        team.forEach((unit, index) => {
+            if (isAlly) {
+                // Reposicionar aliados
+                unit.x = 300 + (index * -80);
+                unit.y = 300;
+            } else {
+                // Reposicionar enemigos
+                unit.x = 600 + (index * 80);
+                unit.y = 300;
+            }
+            
+            // Animación suave para el movimiento
+            this.scene.tweens.add({
+                targets: unit,
+                x: unit.x,
+                y: unit.y,
+                duration: 500,
+                ease: 'Power2'
+            });
         });
-    });
-}
+    }
 
     endCombat(playerWins, ally, enemyTeam) {
         this.isCombatActived = false;

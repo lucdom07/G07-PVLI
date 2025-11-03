@@ -6,6 +6,8 @@ export default class Ally extends Warrior{
             this.cost = cost;
             this.available = available;
             this.level = level;
+
+            this.setDisplaySize(120,120); 
     }
     preUpdate(t, dt){
         super.preUpdate(t, dt);
