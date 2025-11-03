@@ -55,7 +55,7 @@ export default class Combat{
     positionTeams(ally, enemyTeam) {
         // Posicionar aliados
         ally.forEach((ally, index) => {
-            ally.x = 300 + (index * -80);
+            ally.x = 390 + (index * -130);
             ally.y = 300;
             
              if (!ally.scene) {
@@ -65,7 +65,7 @@ export default class Combat{
         
         // Posicionar enemigos
         enemyTeam.forEach((enemy, index) => {
-        enemy.x = 600 + (index * 80);
+        enemy.x =  510 + (index * 130);
         enemy.y = 300;
         if (!enemy.scene) {
             this.scene.add.existing(enemy);
@@ -136,8 +136,8 @@ export default class Combat{
         // Efecto visual en el objetivo
         this.scene.tweens.add({
             targets: target,
-            scaleX: 1.1,
-            scaleY: 1.1,
+            scaleX: 0.6,
+            scaleY: 0.6,
             duration: 100,
             yoyo: true
         });
@@ -211,6 +211,10 @@ export default class Combat{
 
     removeDeadUnits(team) {
         let elimina = false;
+
+        const isAlly = team.length > 0 ? team[0] instanceof Ally : false;
+
+
         for (let i = team.length - 1; i >= 0; i--) {
             if (team[i].life <= 0) {
 
@@ -230,62 +234,113 @@ export default class Combat{
             }
         }
 
-        if(elimina) this.reponer(team);
+        if(elimina) this.reponer(team, isAlly);
     }
 
-    reponer(team){
-        if(team.length === 0) return;
+    reponer(team, isAlly){
+    if(team.length === 0) return;
 
-        const isAlly = team[0].x <500;
-
-        team.forEach((unit, index) => {
-            if (isAlly) {
-                // Reposicionar aliados
-                unit.x = 300 + (index * -80);
-                unit.y = 300;
-            } else {
-                // Reposicionar enemigos
-                unit.x = 600 + (index * 80);
-                unit.y = 300;
-            }
-            
-            // Animación suave para el movimiento
-            this.scene.tweens.add({
-                targets: unit,
-                x: unit.x,
-                y: unit.y,
-                duration: 500,
-                ease: 'Power2'
-            });
+    for(let i = 0; i < team.length; i++){
+        let targetX, targetY;
+        const unit = team[i];
+        
+        if (isAlly) {
+            // Calcular nueva posición para aliados
+            targetX = 390 + (i * -130);
+            targetY = 300;
+        } else {
+            // Calcular nueva posición para enemigos
+            targetX = 510 + (i * 130);
+            targetY = 300;
+        }
+        
+        // Animación suave hacia la nueva posición
+        this.scene.tweens.add({
+            targets: unit, // Ahora unit está definido
+            x: targetX,
+            y: targetY,
+            duration: 500,
+            ease: 'Power2'
         });
     }
+}
 
     endCombat(playerWins, ally, enemyTeam) {
-        this.isCombatActived = false;
-        
-        if (playerWins) {
-            console.log("¡VICTORIA!");
-            this.victoria(ally);
-        } else {
-            console.log("Derrota...");
-            this.derrota(enemyTeam);
-        }
+            this.isCombatActived = false;
+            
+            if (playerWins) {
+                console.log("¡VICTORIA!");
+                this.victoria(ally);
+            } else {
+                console.log("Derrota...");
+                this.derrota(enemyTeam);
+            }
     }
 
     victoria(team) {
+        // Texto de VICTORIA
+        const victoryText = this.scene.add.text(
+            this.scene.cameras.main.centerX, 
+            150, 
+            '¡VICTORIA!', 
+            {
+                fontSize: '48px',
+                fill: '#FFD700',
+                stroke: '#000000',
+                strokeThickness: 6,
+                fontFamily: 'Arial',
+                fontWeight: 'bold'
+            }
+        ).setOrigin(0.5);
+        
+        // Animación del texto
+        victoryText.setAlpha(0);
+        this.scene.tweens.add({
+            targets: victoryText,
+            alpha: 1,
+            duration: 500,
+            ease: 'Power2'
+        });
+        
+        // Animación de los personajes
         team.forEach(unit => {
             this.scene.tweens.add({
                 targets: unit,
-                scaleX: 1.2,
-                scaleY: 1.2,
+                scaleX: 0.6,
+                scaleY: 0.6,
                 duration: 300,
                 yoyo: true,
                 repeat: 2
             });
         });
     }
-    
+
     derrota(team) {
+        // Texto de DERROTA
+        const defeatText = this.scene.add.text(
+            this.scene.cameras.main.centerX, 
+            150, 
+            'DERROTA', 
+            {
+                fontSize: '48px',
+                fill: '#FF0000',
+                stroke: '#000000',
+                strokeThickness: 6,
+                fontFamily: 'Arial',
+                fontWeight: 'bold'
+            }
+        ).setOrigin(0.5);
+        
+        // Animación del texto
+        defeatText.setAlpha(0);
+        this.scene.tweens.add({
+            targets: defeatText,
+            alpha: 1,
+            duration: 500,
+            ease: 'Power2'
+        });
+        
+        // Animación de los personajes
         team.forEach(unit => {
             this.scene.tweens.add({
                 targets: unit,
