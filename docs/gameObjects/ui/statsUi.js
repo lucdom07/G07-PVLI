@@ -37,4 +37,8 @@ export default class StatsUI extends Phaser.GameObjects.Sprite{
             this.stats[i].setPosition(newX, startingY + this.STATS_DISTANCE * (i +1));
         }
     }
+
+    updateLivesNumber(lives){
+        this.stats[0].setText(`Vida: ${lives}`); //stats[0] -> texto de vidas
+    }
 }

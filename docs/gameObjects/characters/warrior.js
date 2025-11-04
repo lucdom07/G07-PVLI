@@ -29,6 +29,7 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
 
     hit(damage){
         this.life -= (damage);
+        this.statsUI.updateLivesNumber(this.life);
         console.log(this.life);
         //poner tinte rojo al personaje cuando recibe daño
         this.setTint(0xffff0000);
