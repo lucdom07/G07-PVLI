@@ -1,5 +1,5 @@
-import Market from "../../gameObjects/market.js";
-import Ally from "../../gameObjects/ally.js";
+import MarketManager from "../managers/combatManager.js";
+import Ally from "../../gameObjects/characters/ally.js";
 
 export default class debugMarket extends Phaser.Scene{
     constructor(level){
@@ -8,7 +8,7 @@ export default class debugMarket extends Phaser.Scene{
     }
 
     init(){
-        this.marketSystem = new Market(this);
+        this.marketSystem = new MarketManager(this);
 
         this.allyList = [
             new Ally(this, -150, -150,'Michi-Michi', 36, 20, 0, 'perro', 0, 1, false, 0),
@@ -28,7 +28,7 @@ export default class debugMarket extends Phaser.Scene{
 
         this.money = 50;
     }
-    }
+    
 
     preload(){
         //se cargan el fondo, las imagenes y la ui
@@ -42,8 +42,7 @@ export default class debugMarket extends Phaser.Scene{
         this.load.image('perro','assets/Dog.png');
         this.load.image('foca','assets/Seal.png');
         this.load.image('warf','assets/Warf.png');
-
-        
+    }
 
     create(){
         //añadir el fondo del mercado
