@@ -1,6 +1,6 @@
-import CombatManager from "../../gameObjects/managers/combatManager.js";
-import Ally from "../../gameObjects/ally.js";
-import Enemy from "../../gameObjects/enemy.js";
+import CombatManager from "../managers/combatManager.js";
+import Ally from "../../gameObjects/characters/ally.js";
+import Enemy from "../../gameObjects/characters/enemy.js";
 
 export default class Animation extends Phaser.Scene{
     constructor(){
