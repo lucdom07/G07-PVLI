@@ -1,10 +1,16 @@
-import Ally from "./ally.js";
-import Enemy from "./enemy.js";
+import Ally from "../../gameObjects/characters/ally.js";
+import Enemy from "../../gameObjects/characters/enemy.js";
 
 export default class Combat{
+
     constructor(scene){
         this.scene = scene;
         this.isCombatActived = false;
+        this.WARRIOR_Y = 300;
+        this.FIRST_ALLY_POS = 350;
+        this.WARRIORS_SEPARATION = 120;
+        this.TEAM_DISTANCE = 190
+        this.FIRST_ENEMY_POS = this.FIRST_ALLY_POS + this.TEAM_DISTANCE;
     }
 
     //genera los enemigos dependiendo de la lista que se le mete, la lista metida depende del nivel en el que va el jugador y
@@ -53,11 +59,10 @@ export default class Combat{
     }
 
     positionTeams(ally, enemyTeam) {
+
         // Posicionar aliados
         ally.forEach((ally, index) => {
-            ally.x = 390 + (index * -130);
-            ally.y = 300;
-            
+            ally.setWarriorPosition(this.FIRST_ALLY_POS - index * this.WARRIORS_SEPARATION, this.WARRIOR_Y);
              if (!ally.scene) {
             this.scene.add.existing(ally);
         }
@@ -65,12 +70,11 @@ export default class Combat{
         
         // Posicionar enemigos
         enemyTeam.forEach((enemy, index) => {
-        enemy.x =  510 + (index * 130);
-        enemy.y = 300;
-        if (!enemy.scene) {
-            this.scene.add.existing(enemy);
-        }
-    });
+            enemy.setWarriorPosition(this.FIRST_ENEMY_POS + index * this.WARRIORS_SEPARATION, this.WARRIOR_Y);
+            if (!enemy.scene) {
+                this.scene.add.existing(enemy);
+            }
+        });
     }
 
     async executeCombatRound(ally, enemyTeam) {
@@ -246,12 +250,12 @@ export default class Combat{
         
         if (isAlly) {
             // Calcular nueva posición para aliados
-            targetX = 390 + (i * -130);
-            targetY = 300;
+            targetX = this.FIRST_ALLY_POS + (i * -this.WARRIORS_SEPARATION);
+            targetY = this.WARRIOR_Y;
         } else {
             // Calcular nueva posición para enemigos
-            targetX = 510 + (i * 130);
-            targetY = 300;
+            targetX = this.FIRST_ENEMY_POS + (i * this.WARRIORS_SEPARATION);
+            targetY = this.WARRIOR_Y;
         }
         
         // Animación suave hacia la nueva posición

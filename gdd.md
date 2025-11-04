@@ -334,7 +334,7 @@ El jugador podrá interactuar con las interfaces del juego mediante clicks tanto
 Se tratará de una cámara estática que se centra en el escenario del juego de forma  lateral, mostrando la escena completa (sea escenario de tienda, batalla, mapa o donde se organiza el ejército del jugador). Se puede apreciar todos los componentes de cada sala como los elementos de la interfaz sin tapar detalles imprescindibles. La resolución de la pantalla es de 1920*1080. 
 
 ### 4.3. **HUD**
-![HUB](./imagenes/bocetohub.png)
+![HUB](./imagenes/hud.png)
 
 ### 4.4. **Menús**
 **hay que diseñar un par de menús y meterlos aquí**
