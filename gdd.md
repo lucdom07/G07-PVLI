@@ -16,22 +16,23 @@ Liling Chen
 
 ### 1.1. **Descripción**
 
-The Furrytastic Invasion es un **roguelite autobattler** en el que ayudamos a un gato antropomórfico en el que se encuentra planeando un golpe contra la humanidad, empezando con Australia. En sus planes, nosotros, como jugador y ayudante, nos encargaremos de reclutar, gestionar y organizar estrategias para la batalla contra el bando enemigo, los humanos, ya que harán cualquier idiotez para mantener sus tierras.
+The Furrytastic Invasion es un **roguelite autobattler** en el que ayudamos a un gato antropomórfico que se encuentra planeando una revolución contra la humanidad, empezando con Australia. En sus planes, nosotros nos encargaremos de reclutar, gestionar y organizar estrategias para la batalla contra el bando enemigo, los humanos, ya que harán cualquier barbaridad para mantener sus tierras.
 
 ### 1.2. **Género**
 
-Juego del género de estrategia con subgénero **roguelike autobattler** inspirado en otros juegos como **Teamfight Tactics** o **Super Auto Pets**.
+Estrategia con subgénero **roguelike autobattler** inspirado en otros juegos como **Teamfight Tactics** o **Super Auto Pets**.
 
 ### 1.3. **Público objetivo**
-Jóvenes universitarios aficionados a los juegos de estrategia y autobattler que estén familiarizados con la cultura de internet y las noticias actuales.
+
+Jóvenes universitarios aficionados a los juegos de estrategia y autobattler que estén familiarizados con la cultura de internet y la coyuntura política actual.
 
 ### 1.4. **Setting**
-Nuestro protagonista, Michi-Michi, que, cansado de la estupidez y codicia humana, decidió iniciar una guerra contra la humanidad empezando por invadir Australia. Le pide ayuda al jugador para la guerra, rompiendo las fronteras entre la realidad y el juego. Para ello, debe reclutar a otros animales antropomórficos que estén dispuestos a luchar por su causa: crear un mundo justo y pacífico para los animales antropomórficos.
+Nuestro protagonista, Michi-Michi, cansado de la estupidez y codicia humana, decidió iniciar una guerra contra la humanidad empezando por invadir Australia, le pide ayuda al jugador para iniciar una guerra, rompiendo las fronteras entre la realidad y el juego. Para ello debe reclutar a otros animales antropomórficos que estén dispuestos a luchar por su causa: crear un mundo justo y pacífico para los animales antropomórficos.
 
-Después de invadir Australia y convertirla en el primer país invadido y conquistado por los animales antropomórficos, sus siguientes planes pondrán ojo en: España, Estados Unidos y China.
+Después de invadir Australia y convertirla en el primer país invadido y conquistado por los animales antropomórficos, sus siguientes planes pondrán el ojo en: España, Estados Unidos y China.
 
 ### 1.5. **Características principales**
-- Combate **autobattler**. El jugador podrá elegir qué animales formarán parte de su ejército y qué objetos usar para mejorarlos.
+- Combate **autobattler**. El jugador podrá elegir qué animales formarán parte de su ejército y qué objetos usar para mejorar sus stats.
 
 - El jugador podrá comprar animales para su ejército con distintas estadísticas en la tienda y objetos que mejoren las estadísticas de su ejército actual. Se desbloquean nuevos animales y objetos a medida que conquista cada país.
 
@@ -45,7 +46,7 @@ Después de invadir Australia y convertirla en el primer país invadido y conqui
 
 ## 2. **Gameplay**
 ### 2.1. **Objetivo del juego**
-El objetivo del juego es superar todos los combates de cada país  y así conseguir que los animales antropomórficos ganen la guerra, que implica organizar y crear un ejército mediante sus propias decisiones antes del combate.
+El objetivo del juego es superar todos los combates de cada país y así conseguir que los animales antropomórficos ganen la guerra, que implica organizar y crear un ejército mediante sus propias decisiones antes del combate.
 
 **Se gana** eliminando todo el ejército enemigo en todos los combates y también al jefe de cada país, el jugador no puede ser derrotado en ningún momento. Las tiendas serán de gran ayuda para el progreso de la invasión. Además, en algunos combates puedes obtener objetos que te ayudarán en el proceso.
 
@@ -74,7 +75,7 @@ El core loop del juego es el siguiente:
 
     - **Elementos interactuables:**
         - Organización de los animales antropomórficos antes de la batalla.
-        - Compras de objetos y animales  en las tiendas.
+        - Compras de objetos y animales en las tiendas.
         - Los botones del DOM de la página web que usas para quitar y añadir animales al ejército.
         - Selección de la sala a avanzar.
         - Menú principal y menú de pausa.
@@ -85,25 +86,15 @@ El core loop del juego es el siguiente:
 
 ## 3. **Mecánicas**
 ### 3.1. **Compra**
-En las salas de tienda, un pájaro antropomórfico mercader le dará la opción al jugador de utilizar sus monedas, cuya cantidad se muestra en el dom, al lado izquierdo del canvas, para comprar un animal para su ejército. El jugador podrá elegir entre 3 animales distintos y/o entre 2 objetos distintos y pasar a la siguiente pantalla, donde elegirá la siguiente sala. También puede salir de la tienda sin comprar.
+En las salas de tienda, un pájaro antropomórfico mercader (Tueto) le dará la opción al jugador de utilizar sus monedas, cuya cantidad se muestra en el dom, al lado izquierdo del canvas, para comprar un animal para su ejército. El jugador podrá elegir entre 3 animales distintos y pasar a la siguiente pantalla, donde elegirá la siguiente sala. También puede salir de la tienda sin comprar.
 
 Cada animal antropomórfico tendrá distintas estadísticas, vida, ataque y rango de ataque. La vida y el ataque se muestran debajo del animal cuando se cliquea al animal. Cuando se pasa el cursor por encima se muestra el precio del guerrero.
-
-
-![Tienda](./imagenes/tienda_2.png)
-*Representación visual de cómo se muestran los guerreros en la tienda al pasar el cursor por encima del último.*
-
-![Tienda](./imagenes/tienda_3.png)
-*Representación visual de cómo se muestran los guerreros en la tienda al cliquear el último.*
-
-
-
 También se va a ofrecer la compra de objetos para la mejora de las estadísticas de los integrantes, sea aumento de vida o de ataque o ambas.
 
 El precio de cada animal dependerá del país, en el primer país los costes serán más baratos y a medida que va progresando el jugador, se va desbloqueando nuevos objetos y aliados, pero los precios de estos serán más caros que los del país inicial, por ende no se puede comprar ni desbloquear animales de otros países si el jugador no avanza.
 Por tanto, el nivel del animal debe ser igual o menor al número de sala.
 
-Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un mensaje diciendo: "¡Tienes demasiados guerreros!". Y cuando el jugador intente comprar los elementos de la tienda teniendo insuficientes modenas aparecerá el mensaje de : "¡No tienes difero suficiente!".
+Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un mensaje diciendo: "¡Tienes demasiados guerreros!". Y cuando el jugador intente comprar los elementos de la tienda teniendo insuficientes modenas aparecerá el mensaje de : "¡No tienes dinero suficiente!".
 
 **Precios**
 
@@ -116,8 +107,8 @@ Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un me
 
 *//parámetros provisionales*
 
-![Tienda](./imagenes/tienda_1.png)
-*Representación simbólica de la tienda.*
+![Tienda](./imagenes/tienda.png)
+*Representación simbólica de la tienda con el último animal cliqueado*
 
 Además de la compra de los animales y objetos también se podrá vender sus aliados por el precio de la mitad del que ha comprado, pero no podrás vender cuando solo tengas un aliado en el ejercito.
 Para poder vender, el jugador tendrá que seleccionar al aliado a vender desde el DOM y se mostrará en la pantalla del juego el precio que obtendrá si se vende al aliado y dos botones donde se podrá aceptar la venta ("Vender") o cancelar la venta ("Cancelar"). No se puede vender varios animales a la vez y al vender se elimina el aliado del DOM del jugador.
@@ -142,12 +133,11 @@ Por clarificar el combate, el core loop sería el siguiente:
 5. En la siguiente fase, podrá utilizar objetos clicando sobre ellos y eligiendo el guerrero.
 6. Al terminar la selección de objetos, se pasará al combate.
 
-El combate será un autobattler visualmente parecido al Super Autopets, donde el jugador podrá colocar y organizar a su ejército antes de ver las del enemigo, y dependiendo de su vida y ataque ganarán o perderán.
+El combate será un autobattler visualmente similar al Super Autopets, donde el jugador podrá colocar y organizar a su ejército antes de ver las del enemigo, y dependiendo de su vida y ataque ganarán o perderán.
 
 Si un animal (tanto aliado como enemigo) es eliminado, entendiéndose por eliminado que su vida se reduce a cero o menos, el siguiente será el que continúe luchando contra el que queda en pie, y así sucesivamente hasta que uno de los dos bandos se quede sin ejército. Si el jugador se queda sin ejército en combate, perderá automáticamente; pero si se trata del otro bando, el jugador elegirá una sala del mapa para continuar con el juego.
 
 En caso de que el combate termine en empate, no se pierde y ni se ganan monedas, pero se debe de repetir la sala hasta ganar y avanzar a la siguiente.
-
 
 **Sistema de estadísticas de los animales y enemigo:**
 
