@@ -113,3 +113,22 @@
   width: auto;
   margin-left: 10px;
 }
+
+#alliesArray {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 11%; 
+}
+
+.allyButton {
+  height: 50px;
+  width: 50px;
+  padding: 20px;
+}
+
+.domAlly {
+  height: 100%;
+  width: 100%; 
+}
