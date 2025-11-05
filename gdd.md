@@ -339,6 +339,9 @@ Se tratará de una cámara estática que se centra en el escenario del juego de 
 ### 4.4. **Menús**
 **hay que diseñar un par de menús y meterlos aquí**
 
+**Menú de pausa**
+![pausa](./imagenes/medupausa.jpg)
+
 ## 5. **Mundo del juego**
 ### 5.1. **Personajes**
 #### 5.1.1. Protagonista
