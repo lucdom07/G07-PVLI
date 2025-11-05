@@ -87,7 +87,16 @@ El core loop del juego es el siguiente:
 ### 3.1. **Compra**
 En las salas de tienda, un pájaro antropomórfico mercader le dará la opción al jugador de utilizar sus monedas, cuya cantidad se muestra en el dom, al lado izquierdo del canvas, para comprar un animal para su ejército. El jugador podrá elegir entre 3 animales distintos y/o entre 2 objetos distintos y pasar a la siguiente pantalla, donde elegirá la siguiente sala. También puede salir de la tienda sin comprar.
 
-Cada animal antropomórfico tendrá distintas estadísticas, vida, ataque y rango de ataque. La vida y el ataque se muestran debajo del animal y cuando se cliquea al animal o se pasa el cursor por encima se muestra el rango de ataque.
+Cada animal antropomórfico tendrá distintas estadísticas, vida, ataque y rango de ataque. La vida y el ataque se muestran debajo del animal cuando se cliquea al animal. Cuando se pasa el cursor por encima se muestra el precio del guerrero.
+
+
+![Tienda](./imagenes/tienda_2.png)
+*Representación visual de cómo se muestran los guerreros en la tienda al pasar el cursor por encima del último.*
+
+![Tienda](./imagenes/tienda_3.png)
+*Representación visual de cómo se muestran los guerreros en la tienda al cliquear el último.*
+
+
 
 También se va a ofrecer la compra de objetos para la mejora de las estadísticas de los integrantes, sea aumento de vida o de ataque o ambas.
 
@@ -107,7 +116,8 @@ Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un me
 
 *//parámetros provisionales*
 
-![Tienda](./imagenes/mercancer.png)
+![Tienda](./imagenes/tienda_1.png)
+*Representación simbólica de la tienda.*
 
 Además de la compra de los animales y objetos también se podrá vender sus aliados por el precio de la mitad del que ha comprado, pero no podrás vender cuando solo tengas un aliado en el ejercito.
 Para poder vender, el jugador tendrá que seleccionar al aliado a vender desde el DOM y se mostrará en la pantalla del juego el precio que obtendrá si se vende al aliado y dos botones donde se podrá aceptar la venta ("Vender") o cancelar la venta ("Cancelar"). No se puede vender varios animales a la vez y al vender se elimina el aliado del DOM del jugador.
@@ -338,6 +348,9 @@ Se tratará de una cámara estática que se centra en el escenario del juego de 
 
 ### 4.4. **Menús**
 **hay que diseñar un par de menús y meterlos aquí**
+
+**Menú de pausa**
+![pausa](./imagenes/menupausa.jpg)
 
 ## 5. **Mundo del juego**
 ### 5.1. **Personajes**
