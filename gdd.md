@@ -164,7 +164,7 @@ En caso de que el combate termine en empate, no se pierde y ni se ganan monedas,
 - Daño de cada guerrero.
 - Vida de cada guerrero.
 
-![Tienda](./imagenes/combate.png)
+![CombateBoceto](./imagenes/combate.jpg)
 
 *Super Auto Pets*
 #### 3.2.1. **Vida**
