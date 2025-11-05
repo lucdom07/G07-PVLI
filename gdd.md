@@ -166,7 +166,7 @@ En caso de que el combate termine en empate, no se pierde y ni se ganan monedas,
 
 ![CombateBoceto](./imagenes/combate.jpg)
 
-*Super Auto Pets*
+*Inspirado en Super Auto Pets*
 #### 3.2.1. **Vida**
 Cantidad finita expresada en número entero que poseen tanto aliados como enemigos y si se reduce a cero o menos quedan eliminados y los reemplaza el siguiente en caso de que haya.
 
