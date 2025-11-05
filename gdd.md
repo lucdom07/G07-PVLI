@@ -87,7 +87,9 @@ El core loop del juego es el siguiente:
 ### 3.1. **Compra**
 En las salas de tienda, un pájaro antropomórfico mercader le dará la opción al jugador de utilizar sus monedas, cuya cantidad se muestra en el dom, al lado izquierdo del canvas, para comprar un animal para su ejército. El jugador podrá elegir entre 3 animales distintos y/o entre 2 objetos distintos y pasar a la siguiente pantalla, donde elegirá la siguiente sala. También puede salir de la tienda sin comprar.
 
-Cada animal antropomórfico tendrá distintas estadísticas, vida, ataque y rango de ataque. La vida y el ataque se muestran debajo del animal y cuando se cliquea al animal o se pasa el cursor por encima se muestra el rango de ataque.
+Cada animal antropomórfico tendrá distintas estadísticas, vida, ataque y rango de ataque. La vida y el ataque se muestran debajo del animal cuando se cliquea al animal. Cuando se pasa el cursor por encima se muestra el precio del guerrero.
+
+![Tienda](./imagenes/tienda_2.png)
 
 También se va a ofrecer la compra de objetos para la mejora de las estadísticas de los integrantes, sea aumento de vida o de ataque o ambas.
 
