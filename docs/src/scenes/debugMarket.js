@@ -1,10 +1,9 @@
-import MarketManager from "../managers/combatManager.js";
+import MarketManager from "../managers/marketManager.js";
 import Ally from "../../gameObjects/characters/ally.js";
 
 export default class debugMarket extends Phaser.Scene{
-    constructor(level){
-        super({key: 'debugMarket'}, level);
-        this.level = level;
+    constructor(){
+        super({key: 'debugMarket'});
     }
 
     init(){
