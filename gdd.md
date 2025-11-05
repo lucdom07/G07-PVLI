@@ -107,7 +107,7 @@ Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un me
 
 *//parámetros provisionales*
 
-![Tienda](./imagenes/mercancer.png)
+![Tienda](./imagenes/tienda_1.png)
 
 Además de la compra de los animales y objetos también se podrá vender sus aliados por el precio de la mitad del que ha comprado, pero no podrás vender cuando solo tengas un aliado en el ejercito.
 Para poder vender, el jugador tendrá que seleccionar al aliado a vender desde el DOM y se mostrará en la pantalla del juego el precio que obtendrá si se vende al aliado y dos botones donde se podrá aceptar la venta ("Vender") o cancelar la venta ("Cancelar"). No se puede vender varios animales a la vez y al vender se elimina el aliado del DOM del jugador.
