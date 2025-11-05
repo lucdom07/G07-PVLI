@@ -15,4 +15,22 @@ export default class Ally extends Warrior{
         return this.available;
     }
 
+    clone(){
+        const clone = new Ally(
+            this.scene,
+            this.x,
+            this.y,
+            this.name,
+            this.life,
+            this.attack,
+            this.range,
+            this.texture,
+            this.frame,
+            this.cost,
+            this.available,
+            this.level
+        );
+        return clone;
+    }
+
 }

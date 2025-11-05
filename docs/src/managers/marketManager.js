@@ -1,9 +1,9 @@
 import Ally from "../../gameObjects/characters/ally.js";
 
-export default class MarketManager{
-    constructor(scene){
+export default class marketManager{
+    constructor(scene, button){
         this.scene= scene;
-        this.textureButtom = 'button';
+        this.textureButtom = button;
         this.marketAlly = [];
         this.marketObj = [];
         this.money = 0;

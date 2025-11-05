@@ -1,5 +1,6 @@
 import DebugCombat from './scenes/debugCombat.js'
 import MainMenu from './scenes/mainMenu.js'
+import debugMarket from './scenes/debugMarket.js';
 //import CombatSetup from './scenes/combatSetup.js'
 
 let config = {
@@ -22,6 +23,7 @@ let config = {
 	},
 	scene: [MainMenu,
 		DebugCombat,
+		debugMarket,
 		//CombatSetup
 	],
 	physics: { 

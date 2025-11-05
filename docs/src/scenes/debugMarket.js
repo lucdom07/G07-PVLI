@@ -7,7 +7,8 @@ export default class debugMarket extends Phaser.Scene{
     }
 
     init(){
-        this.marketSystem = new MarketManager(this);
+         
+        this.marketSystem = new MarketManager(this, this.load.image('button','assets/button.jpg'));
 
         this.allyList = [
             new Ally(this, -150, -150,'Michi-Michi', 36, 20, 0, 'perro', 0, 1, false, 0),
