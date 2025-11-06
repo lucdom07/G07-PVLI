@@ -3,7 +3,7 @@ import DomAlly from "./domAlly.js";
 /*
     Esta clase está destinada a controlar el DOM en tiempo de ejecución
 */
-export default class DOMManager {
+export default class DOMmanager {
 
     constructor() {
         //Array con todos los aliados del juego (los aliados serán instancias de DomAlly)
