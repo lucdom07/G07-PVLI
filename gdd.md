@@ -40,6 +40,7 @@ Después de invadir Australia y convertirla en el primer país invadido y conqui
 
     - Estas salas tienen diferentes iconos según la recompensa (dinero u objeto).
     - Las tiendas se generan y se reparten por el mapa, pero evitando que el jugador tenga para elegir dos salas de tienda o que después de haber elegido tienda vuelva a tener la posibilidad de repetir dicha sala.
+    
 - Cada vez que el jugador consigue superar un combate, se le recompensará con monedas que luego podrá usar en la tienda para mejorar su ejército.
 - **Arte**: Estilo de libro infantil hecho con ceras, acuarelas y recortables de papel y una paleta de colores de tonos diversos y vivos.
 - **Música**: Música nostálgica infantil con tonalidad alegre.
@@ -191,7 +192,7 @@ El rango se diferencia desde 1 al 6 relacionándose con las posiciones de cada a
 | Aliado | – – – – – – – - | Enemigo |
 |  |  |  |
 
-Este parámetro será mostrado cuando el jugador clica o pasa el cursor por encima del personaje para saber cuál es su rango de ataque.
+Este parámetro será mostrado cuando el jugador cliquea o pasa el cursor por encima del personaje para saber cuál es su rango de ataque.
 
 Si el personaje tiene rango 1 atacará al otro personaje en esa posición, en este caso, se corresponde al primer personaje, lo mismo será con el 2,3,4,5 y 6, siendo esta la última. Por defecto todos los personajes tienen rango 1 a no ser que se indique lo contrario.
 
@@ -337,7 +338,6 @@ Se tratará de una cámara estática que se centra en el escenario del juego de 
 ![HUB](./imagenes/hud.png)
 
 ### 4.4. **Menús**
-**hay que diseñar un par de menús y meterlos aquí**
 
 **Menú de pausa**
 ![pausa](./imagenes/menupausa.jpg)
@@ -371,6 +371,8 @@ Gato-Pulpo de Github
 Mercader
 
 ### 5.2. **Niveles/Salas**
+
+![Ejemplo-Sala](.imagenes/combate.jpg)
 
 ## 6. **Estética y contenido**
 El estilo de dibujo para el juego estará inspirado en recortes de papel o dibujos sin gran detalle para darle un toque menos serio.
