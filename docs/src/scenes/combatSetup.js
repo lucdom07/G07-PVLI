@@ -1,4 +1,4 @@
-import Ally from "../../gameObjects/ally";
+import Ally from "../../gameObjects/characters/ally.js";
 
 export default class CombatSetup extends Phaser.Scene {
 

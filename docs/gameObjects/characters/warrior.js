@@ -20,6 +20,10 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
     getName() {
         return this.name;
     }
+
+    getImageURL() {
+        return this.texture;
+    }
     
     setWarriorPosition(newX, newY){
         this.x = newX;

@@ -2,6 +2,7 @@ import DebugCombat from './scenes/debugCombat.js'
 import MainMenu from './scenes/mainMenu.js'
 import debugMarket from './scenes/debugMarket.js';
 //import CombatSetup from './scenes/combatSetup.js'
+import DOMManager from "./managers/DOMManager.js"
 
 let config = {
 	type: Phaser.AUTO,
@@ -41,5 +42,9 @@ let config = {
     },
 	backgroundColor:'#2d2d2d'
 };
+
+window.addEventListener('DOMContentLoaded', () => {
+	new DOMManager();
+});
 
 new Phaser.Game(config);
