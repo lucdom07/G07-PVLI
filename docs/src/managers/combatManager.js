@@ -37,8 +37,6 @@ export default class Combat{
     async combat(ally,enemyList){ 
         if(this.isCombatActived) return;
 
-         console.log(ally);
-
         this.isCombatActived = true;
         const enemyTeam = this.generateEnemy(ally, enemyList);
 

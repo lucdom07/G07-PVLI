@@ -58,21 +58,19 @@ export default class CombatSetup extends Phaser.Scene {
 
         playButton.on('pointerdown',()=>{
             if(this.selectedAllies.length > 0 && this.selectedAllies.length === 3) {
-                this.scene.start('debugCombat',{
-                    selectedAllies: this.selectedAllies
-                });
+                this.scene.start('debugCombat');
             }
         });
 
       //Código provisional hasta tener el resto de componentes del juego
 
         this.ownedAllies = [
-            new GlobalAlly("pimiento", 'pimiento',36,0,20,0,0,true),
-            new GlobalAlly("tortuga",'tortuga' ,20,0,5,0,0,true),
-            new GlobalAlly("chupacabra",'chupacabra',21,0,10,0,0,true),
-            new GlobalAlly("perro",'perro',36,0,20,0,0,true),
-            new GlobalAlly("foca",'foca',36,0,20,0,0,true),
-            new GlobalAlly("warf",'warf',35,0,7,0,0,true)
+                        new GlobalAlly('pimiento', 'assets/pimiento.png',36,0,20,0,1,true),
+                        new GlobalAlly('tortuga','assets/tortuga.png',20,0,5,0,1,true),
+                        new GlobalAlly('chupacabra','assets/Chupacabra.png',21,0,10,0,1,true),
+                        new GlobalAlly('perro','assets/Dog.png',36,0,20,0,1,true),
+                        new GlobalAlly('foca','assets/Seal.png',36,0,20,0,1,true),
+                        new GlobalAlly('warf','assets/Warf.png',35,0,7,0,1,true)
         ];
     }
 
