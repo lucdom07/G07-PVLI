@@ -1,4 +1,4 @@
-import StatsUI from "../ui/statsUi.js"
+import WarriorUI from "../ui/warriorUi.js"
 
 export default class Warrior extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, name, life, attack, range, texture, frame, level){
@@ -11,7 +11,7 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         this.DISPLAY_SIZE = 100;
         this.setDisplaySize(this.DISPLAY_SIZE, this.DISPLAY_SIZE); 
         this.scene.add.existing(this);
-        this.statsUI = new StatsUI(scene, x, y, life, attack, range, this.DISPLAY_SIZE);
+        this.warriorUI = new WarriorUI(scene, x, y, life, attack, range, this.DISPLAY_SIZE);
     }
     preUpdate(t, dt){
         super.preUpdate(t, dt);
@@ -28,12 +28,12 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
     setWarriorPosition(newX, newY){
         this.x = newX;
         this.y = newY;
-        this.statsUI.setStatsPosition(newX, newY);
+        this.warriorUI.setStatsPosition(newX, newY);
     }
 
     hit(damage){
         this.life -= (damage);
-        this.statsUI.updateLivesNumber(this.life);
+        this.warriorUI.updateLivesNumber(this.life);
         console.log(this.life);
         //poner tinte rojo al personaje cuando recibe daño
         this.setTint(0xffff0000);
@@ -44,8 +44,8 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
     }
 
     destroy(fromScene) {
-    if (this.statsUI) {
-        this.statsUI.destroy();
+    if (this.warriorUI) {
+        this.warriorUI.destroy();
     }
     super.destroy(fromScene);
 }
