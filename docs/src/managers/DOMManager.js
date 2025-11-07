@@ -40,6 +40,7 @@ export default class DOMmanager{
         }
     }
 
+    //inicializa los allies disponibles para la preparación de las tropas aliadas
     inicializa(){
         this.allies = [
             new GlobalAlly("pimiento", 'assets/pimiento.png',36,0,20,0,0,true),

@@ -56,7 +56,7 @@ export default class CombatSetup extends Phaser.Scene {
 
         playButton.setPosition(450, 500);
   
-
+        //pasa los aliados al debugCombat
         playButton.on('pointerdown',()=>{
             if(this.selectedAllies.length > 0 && this.selectedAllies.length === 3) {
                 this.scene.start('debugCombat',{
@@ -76,7 +76,7 @@ export default class CombatSetup extends Phaser.Scene {
             new GlobalAlly("warf",'warf',35,0,7,0,0,true)
         ];
     }
-
+    //Determina si la ally esta en la tropa para removerlo o añadirlo
     toggleAlly(ally) {
         if(ally.isOnTeam()) {
             this.removeAlly(ally);
@@ -146,24 +146,24 @@ export default class CombatSetup extends Phaser.Scene {
     }
 
     repositionSelectedAllies() {
-         const startX = 100;
-    const y = 300;
-    const separation = 125;
+        const startX = 100;
+        const y = 300;
+        const separation = 125;
 
-    this.selectedAllies.forEach((ally, index) => {
-        // usa setPosition si es un GameObject de Phaser
-        if (typeof ally.setPosition === "function") {
-            // animación opcional: tween en lugar de salto directo
-              const newX = startX + index * separation;
+        this.selectedAllies.forEach((ally, index) => {
+            // usa setPosition si es un GameObject de Phaser
+            if (typeof ally.setPosition === "function") {
+                // animación opcional: tween en lugar de salto directo
+                const newX = startX + index * separation;
 
-        // mover el aliado
-        ally.setWarriorPosition(newX, y);
+            // mover el aliado
+            ally.setWarriorPosition(newX, y);
 
-        } else {
-            // fallback si no tiene setPosition
-            ally.x = startX + index * separation;
-            ally.y = y;
-        }
-    });
+            } else {
+                // fallback si no tiene setPosition
+                ally.x = startX + index * separation;
+                ally.y = y;
+            }
+        });
     }
 }

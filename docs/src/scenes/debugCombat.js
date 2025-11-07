@@ -7,15 +7,14 @@ export default class Animation extends Phaser.Scene{
     constructor(){
         super({key: 'debugCombat'});
     }
-    init(data){
+    init(data){// se crea un CombatManager y se añaden las tropas aliadas pasadas desde combatSetup
         this.combatManager = new CombatManager(this);
 
-        this.playerTeam = data.selectedAllies || [];
+        this.playerTeam = data.selectedAllies;
 
         console.log("recividos: " + this.playerTeam);
     }
     preload(){
-        
         this.load.image('pimiento', 'assets/pimiento.png');
         this.load.image('tortuga','assets/tortuga.png');
         this.load.image('chupacabra','assets/Chupacabra.png');
@@ -32,13 +31,11 @@ export default class Animation extends Phaser.Scene{
             new Ally(this, -150, -150,"Michi-Michi", 36, 20, 0, 'perro', 0, 1, true, 1),
             new Ally(this, -150, -150,"foca", 36, 20, 0, 'foca', 0, 1, true, 1),
             new Ally(this, -150, -150,"pimiento", 36, 20, 0, 'pimiento', 0, 1, true, 1)
-        ]; //scene, x, y, name, life, attack, range, texture, frame, cost, available, level
+            ]; //scene, x, y, name, life, attack, range, texture, frame, cost, available, level
         }
         else {
             this.recreate();
         }
-        
-        
         
         // Enemigos disponibles
         const enemyTeam = [
@@ -50,12 +47,11 @@ export default class Animation extends Phaser.Scene{
         // Iniciar combate inmediatamente
         this.combatManager.combat(this.playerTeam, enemyTeam)
     }
-
-     recreate() {
+//recrea los aliados en esta escena con las mismas propiedades
+     recreate() { 
         const recreatedAllies = [];
         
         this.playerTeam.forEach((allyData, index) => {
-            // Crear nuevo aliado en esta escena con las mismas propiedades
             const newAlly = new Ally(
                 this, 
                 100 + index * 125, 
