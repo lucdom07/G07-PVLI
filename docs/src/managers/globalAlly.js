@@ -19,12 +19,12 @@ export default class GlobalAlly {
         this.onTeam = false;
 
         this.textureURLs = {
-            'pimiento': '/assets/pimiento.png',
-            'tortuga': '/assets/tortuga.png',
-            'chupacabra': '/assets/Chupacabra.png',
-            'perro': '/assets/Dog.png',
-            'foca': '/assets/Seal.png',
-            'warf': '/assets/Warf.png'
+            'pimiento': '../assets/pimiento.png',
+            'tortuga': '../assets/tortuga.png',
+            'chupacabra': '../assets/Chupacabra.png',
+            'perro': '../assets/Dog.png',
+            'foca': '../assets/Seal.png',
+            'warf': '../assets/Warf.png'
         };
     }
 
