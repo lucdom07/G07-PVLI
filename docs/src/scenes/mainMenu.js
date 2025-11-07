@@ -22,7 +22,7 @@ export default class mainMenu extends Phaser.Scene{
   
 
         playButton.on('pointerdown',()=>{
-            this.scene.start('debugCombat');
+            this.scene.start('combatSetup');
         });
     }
 

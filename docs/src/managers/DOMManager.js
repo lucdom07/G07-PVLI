@@ -1,4 +1,4 @@
-import DomAlly from "./domAlly.js";
+import GlobalAlly from "../managers/GlobalAlly.js";
 
 /*
     Esta clase está destinada a controlar el DOM en tiempo de ejecución
@@ -13,24 +13,27 @@ export default class DOMmanager {
         //Array que contiene objetos de tipo DomAlly, para trackear los allies que se muestran en el DOM
         this.DOMAlliesArray = [];
 
+
         //Esta parte es provisional hasta que se tengan el resto de componentes del juego
 
         this.allies = [
-            new DomAlly('pimiento', 'assets/pimiento.png'),
-            new DomAlly('tortuga','assets/tortuga.png'),
-            new DomAlly('chupacabra','assets/Chupacabra.png'),
-            new DomAlly('perro','assets/Dog.png'),
-            new DomAlly('foca','assets/Seal.png'),
-            new DomAlly('warf','assets/Warf.png')
+            new GlobalAlly('pimiento', 'assets/pimiento.png'),
+            new GlobalAlly('tortuga','assets/tortuga.png'),
+            new GlobalAlly('chupacabra','assets/Chupacabra.png'),
+            new GlobalAlly('perro','assets/Dog.png'),
+            new GlobalAlly('foca','assets/Seal.png'),
+            new GlobalAlly('warf','assets/Warf.png')
         ];
         
-        //Cuando esté la tienda hecha habrá que cambiar esto por un click event
+        //Cuando esté la tienda hecha habrá que cambiar esto
 
         this.allies.forEach(x => {
             this.addAlly(x);
         });
+    }
 
-        console.log(this.DOMAllies);
+    getArray() {
+        return this.DOMAlliesArray;
     }
 
     /*
