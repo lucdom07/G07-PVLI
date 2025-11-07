@@ -42,12 +42,12 @@ export default class DOMmanager{
 
     inicializa(){
         this.allies = [
-            new GlobalAlly("pimiento", 'pimiento',36,0,20,0,0,true),
-            new GlobalAlly("tortuga",'tortuga' ,20,0,5,0,0,true),
-            new GlobalAlly("chupacabra",'chupacabra',21,0,10,0,0,true),
-            new GlobalAlly("perro",'perro',36,0,20,0,0,true),
-            new GlobalAlly("foca",'foca',36,0,20,0,0,true),
-            new GlobalAlly("warf",'warf',35,0,7,0,0,true)
+            new GlobalAlly("pimiento", 'assets/pimiento.png',36,0,20,0,0,true),
+            new GlobalAlly("tortuga",'assets/tortuga.png' ,20,0,5,0,0,true),
+            new GlobalAlly("chupacabra",'assets/Chupacabra.png',21,0,10,0,0,true),
+            new GlobalAlly("perro",'assets/Dog.png',36,0,20,0,0,true),
+            new GlobalAlly("foca",'assets/Seal.png',36,0,20,0,0,true),
+            new GlobalAlly("warf",'assets/Warf.png',35,0,7,0,0,true)
         ];//nombre, textura,vida,rango, ataque,nivel, coste, avaible,
         
         //Cuando esté la tienda hecha habrá que cambiar esto
