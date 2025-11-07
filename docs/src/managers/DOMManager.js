@@ -40,15 +40,6 @@ export default class DOMmanager{
         }
     }
 
-    preload(){
-        this.load.image('pimiento', 'assets/pimiento.png');
-        this.load.image('tortuga','assets/tortuga.png');
-        this.load.image('chupacabra','assets/Chupacabra.png');
-        this.load.image('perro','assets/Dog.png');
-        this.load.image('foca','assets/Seal.png');
-        this.load.image('warf','assets/Warf.png');
-    }
-
     inicializa(){
         this.allies = [
             new GlobalAlly("pimiento", 'pimiento',36,0,20,0,0,true),
