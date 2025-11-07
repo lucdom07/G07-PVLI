@@ -151,13 +151,11 @@ export default class CombatSetup extends Phaser.Scene {
         // usa setPosition si es un GameObject de Phaser
         if (typeof ally.setPosition === "function") {
             // animación opcional: tween en lugar de salto directo
-            this.tweens.add({
-                targets: ally,
-                x: startX + index * separation,
-                y: y,
-                duration: 0,
-                ease: 'Power2'
-            });
+              const newX = startX + index * separation;
+
+        // mover el aliado
+        ally.setWarriorPosition(newX, y);
+
         } else {
             // fallback si no tiene setPosition
             ally.x = startX + index * separation;
