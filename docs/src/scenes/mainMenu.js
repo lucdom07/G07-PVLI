@@ -5,13 +5,15 @@ export default class mainMenu extends Phaser.Scene{
 
     preload(){
         this.load.image('button','assets/button.jpg')
-        this.load.image('background','assets/background.jpg')
+        this.load.image('background','assets/background.png')
+        this.load.image('cat','assets/cat_maintitle.png')
     }
 
     create(){
 
         //fondo con título
         this.add.image(450,340,'background');
+        this.add.image(450,340,'cat');
    
         //botón de juego
 

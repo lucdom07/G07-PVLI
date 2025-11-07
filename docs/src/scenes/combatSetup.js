@@ -32,9 +32,12 @@ export default class CombatSetup extends Phaser.Scene {
         this.load.image('perro','assets/Dog.png');
         this.load.image('foca','assets/Seal.png');
         this.load.image('warf','assets/Warf.png');
+        this.load.image('background','assets/background.png')
     }
 
     create() {
+
+        this.add.image(450,340,'background');
 
         //Subscribir eventos de click a los aliados del DOM
         for(let i = 0; i < this.DOMallies.length; i++) {
