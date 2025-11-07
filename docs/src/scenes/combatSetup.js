@@ -92,6 +92,11 @@ export default class CombatSetup extends Phaser.Scene {
         //if(this.ownedAllies.find(x => x.getName() === ally.getName()) && 
             //  !this.selectedAllies.some(x => x.getName() === ally.getName())) {
 
+
+        if (this.selectedAllies.length >= 3) {
+            return;
+        }
+
         if(!this.selectedAllies.some(x => x.getName() === ally.getName())) {
 
             let i = 0;
