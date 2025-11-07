@@ -71,10 +71,6 @@ export default class CombatSetup extends Phaser.Scene {
         ];
     }
 
-    renderAllies() {
-        
-    }
-
     toggleAlly(ally) {
         if(ally.isOnTeam()) {
             this.removeAlly(ally);
