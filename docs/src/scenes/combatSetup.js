@@ -33,6 +33,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.load.image('foca','assets/Seal.png');
         this.load.image('warf','assets/Warf.png');
         this.load.image('background','assets/background.png')
+        this.load.image('batalla', 'assets/button.jpg')
     }
 
     create() {
@@ -50,7 +51,7 @@ export default class CombatSetup extends Phaser.Scene {
             });
         }
 
-        const playButton = this.add.image(200 ,50,'button').setInteractive();
+        const playButton = this.add.image(200 ,50,'batalla').setInteractive();
 
 
         playButton.setPosition(450, 500);
