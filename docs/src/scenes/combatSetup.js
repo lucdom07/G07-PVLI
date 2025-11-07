@@ -146,7 +146,7 @@ export default class CombatSetup extends Phaser.Scene {
     }
 
     repositionSelectedAllies() {
-        const startX = 100;
+        const startX = 350;
         const y = 300;
         const separation = 125;
 
@@ -154,14 +154,14 @@ export default class CombatSetup extends Phaser.Scene {
             // usa setPosition si es un GameObject de Phaser
             if (typeof ally.setPosition === "function") {
                 // animación opcional: tween en lugar de salto directo
-                const newX = startX + index * separation;
+                const newX = startX - index * separation;
 
             // mover el aliado
             ally.setWarriorPosition(newX, y);
 
             } else {
                 // fallback si no tiene setPosition
-                ally.x = startX + index * separation;
+                ally.x = startX - index * separation;
                 ally.y = y;
             }
         });
