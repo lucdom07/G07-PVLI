@@ -25,14 +25,14 @@ export default class Animation extends Phaser.Scene{
         const playerTeam = [
             new Ally(this, -150, -150,'Michi-Michi', 36, 20, 0, 'perro', 0, 1, true, 1),
             new Ally(this, -150, -150,'foca', 36, 20, 0, 'foca', 0, 1, true, 1),
-            new Ally(this, -150, -150,'foca', 36, 20, 0, 'pimiento', 0, 1, true, 1)
-        ];
+            new Ally(this, -150, -150,'pimiento', 36, 20, 0, 'pimiento', 0, 1, true, 1)
+        ]; //scene, x, y, name, life, attack, range, texture, frame, cost, available, level
         
         // Enemigos disponibles
         const enemyTeam = [
-            new Enemy(this, -150, -150,'pimiento', 20, 5, 0, 'tortuga', 0, 1),
-            new Enemy(this, -150, -150,'pimiento', 21, 10, 0, 'chupacabra', 0, 1),
-            new Enemy(this, -150, -150,'pimiento', 35, 7, 0, 'warf', 0, 1)
+            new Enemy(this, -150, -150,'tortuga', 20, 5, 0, 'tortuga', 0, 1),
+            new Enemy(this, -150, -150,'chupacabra', 21, 10, 0, 'chupacabra', 0, 1),
+            new Enemy(this, -150, -150,'warf', 35, 7, 0, 'warf', 0, 1)
         ];
         
         // Iniciar combate inmediatamente
