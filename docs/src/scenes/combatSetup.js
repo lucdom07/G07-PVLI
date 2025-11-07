@@ -1,5 +1,5 @@
 import Ally from "../../gameObjects/characters/ally.js";
-import GlobalAlly from "../managers/GlobalAlly.js";
+import GlobalAlly from "../managers/globalAlly.js";
 import DOMmanager from "../managers/DOMManager.js";
 
 export default class CombatSetup extends Phaser.Scene {

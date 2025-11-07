@@ -1,4 +1,4 @@
-import GlobalAlly from "./managers/globalAlly.js";
+import globalAlly from "../managers/globalAlly.js";
 
 /*
     Esta clase está destinada a controlar el DOM en tiempo de ejecución
