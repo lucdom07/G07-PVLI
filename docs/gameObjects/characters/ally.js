@@ -32,5 +32,4 @@ export default class Ally extends Warrior{
         );
         return clone;
     }
-
 }

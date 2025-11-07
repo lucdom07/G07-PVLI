@@ -17,6 +17,15 @@ export default class GlobalAlly {
         this.cost = cost;
         this.available = available;
         this.onTeam = false;
+
+        this.textureURLs = {
+            'pimiento': '/assets/pimiento.png',
+            'tortuga': '/assets/tortuga.png',
+            'chupacabra': '/assets/Chupacabra.png',
+            'perro': '/assets/Dog.png',
+            'foca': '/assets/Seal.png',
+            'warf': '/assets/Warf.png'
+        };
     }
 
     getName() {
@@ -24,7 +33,7 @@ export default class GlobalAlly {
     }
 
     getTextureURL() {
-        return this.texture;
+        return this.textureURLs[this.texture] || this.texture;
     }
 
     isOnTeam() {
@@ -46,6 +55,6 @@ export default class GlobalAlly {
     HACER CON KEY DE TEXTURA
     */
     AllyFromGlobalAlly(scene, x, y) {
-        return new Ally(scene, x, y, this.name, this.life, this.attack, this.range, this.name, this.frame, this.cost, this.available, this.level);
+        return new Ally(scene, x, y, this.name, this.life, this.attack, this.range, this.texture, this.frame, this.cost, this.available, this.level);
     }
 }
