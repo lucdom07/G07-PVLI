@@ -108,6 +108,7 @@ export default class CombatSetup extends Phaser.Scene {
                     ally.toggleOnTeam();
                     let newAlly = ally.AllyFromGlobalAlly(this, 100 + i * 125, 300);
                     this.selectedAllies.push(newAlly); 
+                    this.repositionSelectedAllies();
                     break;
                 }
                 i++;
@@ -134,10 +135,34 @@ export default class CombatSetup extends Phaser.Scene {
 
         if(found) {
             ally.toggleOnTeam();
-            this.selectedAllies[i].destroy();
+            const removed = this.selectedAllies[i];
+            if (removed && removed.destroy) removed.destroy();
             this.selectedAllies.splice(i, 1);
-            
+            this.repositionSelectedAllies();
         }
     }
 
+    repositionSelectedAllies() {
+         const startX = 100;
+    const y = 300;
+    const separation = 125;
+
+    this.selectedAllies.forEach((ally, index) => {
+        // usa setPosition si es un GameObject de Phaser
+        if (typeof ally.setPosition === "function") {
+            // animación opcional: tween en lugar de salto directo
+            this.tweens.add({
+                targets: ally,
+                x: startX + index * separation,
+                y: y,
+                duration: 0,
+                ease: 'Power2'
+            });
+        } else {
+            // fallback si no tiene setPosition
+            ally.x = startX + index * separation;
+            ally.y = y;
+        }
+    });
+    }
 }

@@ -42,4 +42,11 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
             callback: ()=>{this.setTint(0xffffffff)}
         });
     }
+
+    destroy(fromScene) {
+    if (this.statsUI) {
+        this.statsUI.destroy();
+    }
+    super.destroy(fromScene);
+}
 }

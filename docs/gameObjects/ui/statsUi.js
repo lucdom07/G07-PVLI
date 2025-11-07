@@ -41,4 +41,16 @@ export default class StatsUI extends Phaser.GameObjects.Sprite{
     updateLivesNumber(lives){
         this.stats[0].setText(`Vida: ${lives}`); //stats[0] -> texto de vidas
     }
+
+    destroy(fromScene) {
+    // Destruir los textos
+    if (this.stats) {
+        this.stats.forEach(s => {
+            if (s && s.destroy) s.destroy();
+        });
+    }
+
+    // Destruir el propio sprite StatsUI
+    super.destroy(fromScene);
+}
 }
