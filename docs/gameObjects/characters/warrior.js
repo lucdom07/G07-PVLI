@@ -31,6 +31,12 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         this.warriorUI.setStatsPosition(newX, newY);
     }
 
+    //Ejecuta animación de ataque y le hace daño al objetivo
+    attackWarrior(target){
+        this.attackAnimation(target);
+        target.hit(this.attack);
+    }
+
     hit(damage){
         this.life -= (damage);
         this.warriorUI.updateLivesNumber(this.life);
@@ -43,10 +49,48 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         });
     }
 
-    destroy(fromScene) {
-    if (this.warriorUI) {
-        this.warriorUI.destroy();
+    // Animación de ataque
+    attackAnimation(target) {
+        const originalX = this.x;
+        const originalY = this.y;
+        
+        // Mover hacia el objetivo
+        this.scene.tweens.add({
+            targets: this,
+            x: this.x + (target.x - this.x) * 0.3,
+            y: this.y + (target.y - this.y) * 0.3,
+            duration: 300,
+            ease: 'Power2',
+        });
+        
+        // Efecto visual en el objetivo
+        this.scene.tweens.add({
+            targets: target,
+            scaleX: 0.6,
+            scaleY: 0.6,
+            duration: 100,
+            yoyo: true
+        });
+        
+        // Volver a la posición original
+        this.scene.tweens.add({
+            targets: this,
+            x: originalX,
+            y: originalY,
+            duration: 300,
+            ease: 'Power2',
+        });
     }
-    super.destroy(fromScene);
-}
+
+    dieAnimation(){
+        this.setAlpha(0.3);
+        this.setTint(0xff0000);
+    }
+
+    destroy(fromScene) {
+        if (this.warriorUI) {
+            this.warriorUI.destroy();
+        }
+        super.destroy(fromScene);
+    }
 }

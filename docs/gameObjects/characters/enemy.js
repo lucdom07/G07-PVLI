@@ -8,6 +8,11 @@ export default class Enemy extends Warrior{
         super.preUpdate(t, dt);
     }
 
+    calculateNewXInCombat(previousUnitX, index, WARRIORS_SEPARATION){
+        return previousUnitX - index * WARRIORS_SEPARATION;
+    }
+    
+    /*
     clone(){
         const clone = new Enemy(
             this.scene,
@@ -23,4 +28,5 @@ export default class Enemy extends Warrior{
         );
         return clone;
     }
+    */
 }

@@ -15,6 +15,10 @@ export default class Ally extends Warrior{
         return this.available;
     }
 
+    calculateNewXInCombat(previousUnitX, index, WARRIORS_SEPARATION){
+        return previousUnitX + index * WARRIORS_SEPARATION;
+    }
+
     clone(){
         const clone = new Ally(
             this.scene,

@@ -24,7 +24,14 @@ export default class Animation extends Phaser.Scene{
         this.load.image('background','assets/background.png')
     }
     create(){
-            this.add.image(450,340,'background');
+        this.add.image(450,340,'background');
+
+        //Eventos personalizados
+        this.events.on('warriorAttack', (attacker, target)=>{
+            attacker.attackWarrior(target)
+        });
+        this.events.on('moveTeam', this.combatManager.moveTeam);
+        this.events.on('endCombat', this.combatManager.endCombat);
 
         if(this.playerTeam.length === 0){
             this.playerTeam = [
@@ -44,8 +51,8 @@ export default class Animation extends Phaser.Scene{
             new Enemy(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1)
         ];
         
-        // Iniciar combate inmediatamente
-        this.combatManager.combat(this.playerTeam, enemyTeam)
+        //Inicia el combate
+        this.combatManager.startCombat(playerTeam, enemyTeam)
     }
 //recrea los aliados en esta escena con las mismas propiedades
      recreate() { 
