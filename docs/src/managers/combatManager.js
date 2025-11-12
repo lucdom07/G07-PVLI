@@ -107,6 +107,9 @@ export default class CombatManager{
         for(let i = 0; deadUnitIndex + i < team.length; i++){
             const unit = team[deadUnitIndex + i];            
             const targetX = unit.calculateNewXInCombat(deadUnitX, deadUnitIndex + i, this.WARRIORS_SEPARATION);
+
+            console.log("array: " + team + " Indice del muerto: " + deadUnitIndex + " PosX: " + deadUnitX);
+
             this.scene.tweens.add({
                 targets: unit, // Ahora unit está definido
                 x: targetX,

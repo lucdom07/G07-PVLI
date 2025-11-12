@@ -2,7 +2,6 @@ import CombatManager from "../managers/combatManager.js";
 import Ally from "../../gameObjects/characters/ally.js";
 import Enemy from "../../gameObjects/characters/enemy.js";
 
-
 export default class Animation extends Phaser.Scene{
     constructor(){
         super({key: 'debugCombat'});
@@ -11,8 +10,6 @@ export default class Animation extends Phaser.Scene{
         this.combatManager = new CombatManager(this);
 
         this.playerTeam = data.selectedAllies;
-
-        console.log("recividos: " + this.playerTeam);
     }
     preload(){
         this.load.image('pimiento', 'assets/pimiento.png');
@@ -52,7 +49,7 @@ export default class Animation extends Phaser.Scene{
         ];
         
         //Inicia el combate
-        this.combatManager.startCombat(playerTeam, enemyTeam)
+        this.combatManager.startCombat(this.playerTeam, enemyTeam);
     }
 //recrea los aliados en esta escena con las mismas propiedades
      recreate() { 
