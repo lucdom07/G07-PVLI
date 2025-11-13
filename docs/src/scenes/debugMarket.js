@@ -10,21 +10,7 @@ export default class debugMarket extends Phaser.Scene{
          
         this.marketSystem = new MarketManager(this, this.load.image('button','assets/button.jpg'));
 
-        this.allyList = [
-            new Ally(this, -150, -150,'Michi-Michi', 36, 20, 0, 'perro', 0, 1, false, 0),
-            new Ally(this, -150, -150,'foca', 36, 20, 0, 'foca', 0, 1, false, 0),
-            new Ally(this, -150, -150,'pimiento', 36, 20, 0, 'pimiento', 0, 1, false, 0),
-            new Ally(this, -150, -150,'tortuga', 20, 5, 0, 'tortuga', 0, 1, false, 0),
-            new Ally(this, -150, -150,'chupacabra', 21, 10, 0, 'chupacabra', 0, 1, false, 0),
-            new Ally(this, -150, -150,'warf', 35, 7, 0, 'warf', 0, 1, false, 0)
-        ];
-
-        this.bag = [
-            new Ally(this, -150, -150,"chupacabra", 21, 10, 0, 'chupacabra', 0, 1, true, 0),
-            new Ally(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1, true, 0)
-        ];
-
-        this.objList =[];
+        
 
         this.money = 50;
     }
@@ -52,7 +38,21 @@ export default class debugMarket extends Phaser.Scene{
         //mostrar el precio de las cosas
         //al comprar el personaje se añade al inventario
         //cuando no tengas suficiente dinero no te deja
+        this.allyList = [
+            new Ally(this, -150, -150,'Michi-Michi', 36, 20, 0, 'perro', 0, 1, false, 0),
+            new Ally(this, -150, -150,'foca', 36, 20, 0, 'foca', 0, 1, false, 0),
+            new Ally(this, -150, -150,'pimiento', 36, 20, 0, 'pimiento', 0, 1, false, 0),
+            new Ally(this, -150, -150,'tortuga', 20, 5, 0, 'tortuga', 0, 1, false, 0),
+            new Ally(this, -150, -150,'chupacabra', 21, 10, 0, 'chupacabra', 0, 1, false, 0),
+            new Ally(this, -150, -150,'warf', 35, 7, 0, 'warf', 0, 1, false, 0)
+        ];
 
+        this.bag = [
+            new Ally(this, -150, -150,"chupacabra", 21, 10, 0, 'chupacabra', 0, 1, true, 0),
+            new Ally(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1, true, 0)
+        ];
+
+        this.objList =[];
         this.add.image(450,340,'background');
         const exitButton = this.add.image(300,100,'button').setInteractive();
 
