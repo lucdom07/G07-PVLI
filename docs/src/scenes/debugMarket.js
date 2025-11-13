@@ -61,7 +61,7 @@ export default class debugMarket extends Phaser.Scene{
             this.scene.start('mainMenu');
         });
 
-        this.marketSystem.textureButtom = 'button'; 
+        this.marketSystem.textureButton = 'button'; 
         this.marketSystem.market(this.bag, this.allyList, this.objList, this.money);
 
 

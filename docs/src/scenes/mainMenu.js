@@ -5,6 +5,7 @@ export default class mainMenu extends Phaser.Scene{
 
     preload(){
         this.load.image('button','assets/button2.png')
+        this.load.image('marketButton','assets/button.png')
         this.load.image('background','assets/background.png')
         this.load.image('cat','assets/cat_maintitle.png')
     }
@@ -18,11 +19,16 @@ export default class mainMenu extends Phaser.Scene{
         //botón de juego
 
         const playButton = this.add.image(300,100,'button').setInteractive();
+        const marketButton = this.add.image(600,100,'marketButton').setInteractive();
 
-
-        playButton.setPosition(450, 500);
+        playButton.setPosition(450, 600);
+        marketButton.setPosition(450, 450);
   
-
+        
+        marketButton.on('pointerdown',()=>{
+            this.scene.start('debugMarket');
+        });
+        
         playButton.on('pointerdown',()=>{
             this.scene.start('combatSetup');
         });
