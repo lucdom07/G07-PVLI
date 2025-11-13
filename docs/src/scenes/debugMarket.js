@@ -8,17 +8,15 @@ export default class debugMarket extends Phaser.Scene{
 
     init(){
          
-        this.marketSystem = new MarketManager(this, this.load.image('button','assets/button.jpg'));
-
-        
-
+        this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/market_button.png'));
         this.money = 50;
     }
     
 
     preload(){
         //se cargan el fondo, las imagenes y la ui
-        this.load.image('button','assets/button.jpg');
+        this.load.image('buyButton','assets/market_button.png');
+        this.load.image('exitButton','assets/button2.png');
         this.load.image('background','assets/background.jpg');
 
         //strites de los personajes
@@ -54,15 +52,16 @@ export default class debugMarket extends Phaser.Scene{
 
         this.objList =[];
         this.add.image(450,340,'background');
-        const exitButton = this.add.image(300,100,'button').setInteractive();
+        const exitButton = this.add.image(300,100,'exitButton').setInteractive();
 
         exitButton.setPosition(600,500);
 
-        exitButton.on('pointerdown', () =>{
+        exitButton.on('pointerdown', () =>{        
             this.scene.start('mainMenu');
+            console.log("Saliendo del mercado");
         });
 
-        this.marketSystem.textureButton = 'button'; 
+        this.marketSystem.textureButton = 'buyButton'; 
         this.marketSystem.market(this.bag, this.allyList, this.objList, this.money);
 
 
