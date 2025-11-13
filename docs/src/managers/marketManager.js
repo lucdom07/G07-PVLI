@@ -19,7 +19,8 @@ export default class MarketManager {
 
     makeStruct(item) {
         return {
-            item: item, // el objeto Ally u objeto
+            item: item, 
+            texture: null,
             button: null,
             buttonText: null,
             priceText: null,
@@ -29,18 +30,26 @@ export default class MarketManager {
     }
 
     generateAlly(allyList, slots){
+        
         const marketAllies = [];
         const available = allyList.filter(a => !a.available);
 
-        for(let i=0; i<slots; i++){
-            if(available.length === 0) break;
-            const index = Phaser.Math.Between(0, available.length-1);
+        for (let i = 0; i < slots; i++) {
+            if (available.length === 0) break;
+            const index = Phaser.Math.Between(0, available.length - 1);
             const clone = available[index].clone();
+     
+            if (clone.scene !== this.scene) {
+                clone.scene = this.scene;
+                this.scene.add.existing(clone);
+            }
+
             marketAllies.push(this.makeStruct(clone));
         }
+    
 
-        return marketAllies;
-    }
+    return marketAllies;
+}
 
     showMarket(money) {
         this.clearMarket();
@@ -59,33 +68,28 @@ export default class MarketManager {
         const y = 200;
         const item = marketItem.item;
 
-        item.setPosition(x, y).setScale(0.5).setInteractive();
-        if(!item.scene) this.scene.add.existing(item);
+        
+        if (!item.scene) {
+        this.scene.add.existing(item);
+        }
+        item.setPosition(x, y).setScale(0.5).setInteractive().setVisible(true);
 
         // Botón de compra
         marketItem.button = this.scene.add.image(x, y + 60, this.textureButton)
             .setInteractive()
-            .setScale(0.5);
-
-        // Texto del botón
-        marketItem.buttonText = this.scene.add.text(x, y + 60, "Comprar", {
-            fontSize: '12px', fill: '#000', fontFamily: 'Arial', fontWeight: 'bold'
-        }).setOrigin(0.5);
-
+            .setScale(0.3);
+      
         // Texto del precio
-        marketItem.priceText = this.scene.add.text(x, y + 85, `${item.cost}$`, {
-            fontSize: '14px', fill: '#000'
+        marketItem.priceText = this.scene.add.text(x, y - 30, `${item.cost}$`, {
+            fontSize: '14px', fill: '#fff', backgroundColor: '#000'
         }).setOrigin(0.5);
 
-        // Texto del nivel
-        marketItem.levelText = this.scene.add.text(x, y - 30, `Nvl ${item.level}`, {
-            fontSize: '12px', fill: '#fff', backgroundColor: '#000'
-        }).setOrigin(0.5);
+        
 
         // Mostrar stats al pasar el ratón
         item.on('pointerover', () => {
             marketItem.infoText = this.scene.add.text(x, y - 80,
-                `${item.name}\nHP:${item.life}\nATK:${item.attack}`, {
+                `${item.name}\nHP:${item.life}\nATK:${item.attack},\nLVL:${item.level}`, {
                     fontSize: '12px',
                     fill: '#FFFFFF',
                     backgroundColor: '#000000',
@@ -167,25 +171,38 @@ export default class MarketManager {
 
     buyItem(marketItem){
         const item = marketItem.item;
+
         if(this.money < item.cost){ this.showMessage("No tienes dinero"); return; }
         if(this.bag.length >= 6){ this.showMessage("Inventario lleno"); return; }
 
         this.money -= item.cost;
+
+        // Clonar y agregar a la escena
         const newAlly = item.clone();
         newAlly.available = true;
+
+        if(!newAlly.scene) this.scene.add.existing(newAlly);
+
+        // Ocultar temporalmente todo
+        newAlly.setVisible(false);
+        if(newAlly.warriorUI) 
+        newAlly.warriorUI.destroy();
+        
+        
         this.bag.push(newAlly);
 
         // Remover del mercado
         item.setVisible(false).disableInteractive();
         if(marketItem.button) marketItem.button.destroy();
-        if(marketItem.buttonText) marketItem.buttonText.destroy();
         if(marketItem.priceText) marketItem.priceText.destroy();
         if(marketItem.levelText) marketItem.levelText.destroy();
+        if(marketItem.infoText) marketItem.infoText.destroy();
 
         this.showMoney();
         this.displayPlayerAllies();
         this.showMessage(`¡Has comprado a ${newAlly.name}!`);
     }
+
 
     sellAlly(index, sellPrice){
         const ally = this.bag[index];
