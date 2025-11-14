@@ -5,8 +5,8 @@ export default class CombatManager{
     constructor(scene){
         this.scene = scene;
         this.isCombatActived = false;
-        //cola de eventos, como mínimo hay una ronda de ataque de dos guerreros
-        this.eventsQueue = ['allyAttack', 'enemyAttack']; 
+        //cola de eventos, como mínimo hay una ronda de ataque de dos guerreros y se comprueba si hay algún equipo con 0 guerreros
+        this.eventsQueue = ['allyAttack', 'enemyAttack', 'checkState']; 
         //guardamos el equipo aliado y enemigo en propiedades de esta clase para usarlos en toda la clase sin estar pasándolos como parámetros
         this.allyTeam = [];
         this.enemyTeam = [];
@@ -41,7 +41,7 @@ export default class CombatManager{
         const playerWins = allyTeam.length > 0;
         this.scene.events.emit('endCombat', playerWins, allyTeam, enemyTeam);
         */
-        //this.endCombat(playerWins, allyTeam, enemyTeam);s
+        //this.endCombat(playerWins, allyTeam, enemyTeam);
     }
 
     //Llamar al siguiente evento de la cola
@@ -55,22 +55,25 @@ export default class CombatManager{
     checkEvent(event){
         switch(event){
             case 'allyAttack':
-                const targetEnemyIndex = Math.min(attacker.range, targetTeam.length - 1);
+                const targetEnemyIndex = Math.min(this.allyTeam[0].range, this.enemyTeam.length - 1);
                 this.targetWarriorsIndex[1] = targetEnemyIndex;
                 const enemyTarget = this.enemyTeam[targetEnemyIndex];
                 this.scene.events.emit('warriorAttack', this.allyTeam[0], enemyTarget);
                 break;
             case 'enemyAttack':
-                const targetAllyIndex = Math.min(attacker.range, targetTeam.length - 1);
+                const targetAllyIndex = Math.min(this.enemyTeam[0].range, this.allyTeam.length - 1);
                 this.targetWarriorsIndex[0] = targetAllyIndex;
                 const allyTarget = this.allyTeam[targetAllyIndex];
-                this.scene.events.emit('warriorAttack', this.allyTeam[0], allyTarget);
+                this.scene.events.emit('warriorAttack', this.enemyTeam[0], allyTarget);
                 break;
             case 'removeDeadAlly':
                 this.scene.events.emit('removeDeadUnit', this.allyTeam, this.targetWarriorsIndex[0]);
                 break;
             case 'removeDeadEnemy':
                 this.scene.events.emit('removeDeadUnit', this.enemyTeam, this.targetWarriorsIndex[1]);
+                break;
+            case 'checkState':
+                this.scene.events.emit('checkCombatState');
                 break;
             case 'endCombat':
                 const playerWins = allyTeam.length > 0;
@@ -81,9 +84,19 @@ export default class CombatManager{
         }
     }
 
-    //Añade un nuevo evento a la cola
+    //Añade un nuevo evento a la cola antes de que revise el estado del combate
     addNewEvent(event){
-        this.eventsQueue.push(event);
+        this.eventsQueue.splice(this.eventsQueue.length - 2, 0, event);
+    }
+
+    checkCombatState(){
+        if (this.allyTeam.length == 0 || this.enemyTeam.length == 0){
+            this.eventsQueue.push('endCombat');
+        }
+        else{
+            this.eventsQueue.push('allyAttack', 'enemyAttack', 'checkState');
+        }
+        this.scene.events.emit('nextEvent');
     }
 
     //colocar a los guerreros en pantalla
@@ -131,8 +144,8 @@ export default class CombatManager{
 
         team.splice(deadUnitIndex, 1);
         if (team.length != 0 && deadUnitIndex != team.length-1){
-            this.scene.events.emit('moveTeam', team, deadUnitIndex, deadUnit.x);
-            //this.moveTeam(team, deadUnitIndex, deadUnit.x);
+            //this.scene.events.emit('moveTeam', team, deadUnitIndex, deadUnit.x);
+            this.moveTeam(team, deadUnitIndex, deadUnit.x);
         }
     }
 
@@ -151,6 +164,7 @@ export default class CombatManager{
                 ease: 'Power2'
             });      
         }
+        this.scene.events.emit('nextEvent');
     }
 
     endCombat(playerWins) {            

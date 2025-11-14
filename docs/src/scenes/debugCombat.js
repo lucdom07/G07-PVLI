@@ -35,9 +35,14 @@ export default class Animation extends Phaser.Scene{
         this.events.on('nextEvent', ()=>{
             this.combatManager.callNextEvent();
         });
-        //Añade un evento nuevo a la cola
+        //Añade un evento nuevo a la cola antes de checkCombatState 
+        //(necesario para quitar guerreros muertos y mover a los guerreros antes de que compruebe el estado del combate)
         this.events.on('addNewEvent', (event)=>{
             this.combatManager.addNewEvent(event)
+        });
+        //Revisa si algún equipo tiene length = 0 (0 guerreros)
+        this.events.on('checkCombatState', ()=>{
+            this.combatManager.checkCombatState()
         });
         //ataque de guerrero
         this.events.on('warriorAttack', (attacker, target)=>{
@@ -51,15 +56,6 @@ export default class Animation extends Phaser.Scene{
         this.events.on('endCombat', (playerWins) => {
             this.combatManager.endCombat(playerWins)
         });
-
-        /*
-        this.events.on('roundStarts', (allyTeam, enemyTeam)=>{
-            this.combatManager.executeCombatRound(allyTeam, enemyTeam)
-        });
-        this.events.on('moveTeam', (team, deadUnitIndex, deadUnitX) => {
-            this.combatManager.moveTeam(team, deadUnitIndex, deadUnitX)
-        });
-        */
 
         this.recreate();
         
