@@ -21,28 +21,19 @@ export default class Animation extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('pimiento', 'assets/pimiento.png');
-        this.load.image('tortuga','assets/tortuga.png');
-        this.load.image('chupacabra','assets/Chupacabra.png');
-        this.load.image('perro','assets/Dog.png');
-        this.load.image('foca','assets/Seal.png');
-        this.load.image('warf','assets/Warf.png');
+        this.load.image('pimiento', 'assets/pepper_miku_placeholder.png');
+        this.load.image('tortuga','assets/green_miku_placeholder.png');
+        this.load.image('chupacabra','assets/dark_blue_miku_placeholder.png');
+        this.load.image('perro','assets/orange_miku_placeholder.png');
+        this.load.image('foca','assets/light_blue_miku_placeholder.png');
+        this.load.image('warf','assets/garnet_miku_placeholder.png');
         this.load.image('background','assets/background.png')
     }
 
     create(){
-            this.add.image(450,340,'background');
+        this.add.image(450,340,'background');
 
-        if(this.playerTeam.length === 0){
-            this.playerTeam = [
-            new Ally(this, -150, -150,"Michi-Michi", 36, 20, 0, 'perro', 0, 1, true, 1),
-            new Ally(this, -150, -150,"foca", 36, 20, 0, 'foca', 0, 1, true, 1),
-            new Ally(this, -150, -150,"pimiento", 36, 20, 0, 'pimiento', 0, 1, true, 1)
-            ]; //scene, x, y, name, life, attack, range, texture, frame, cost, available, level
-        }
-        else {
-            this.recreate();
-        }
+        this.recreate();
         
         // Enemigos disponibles
         const enemyTeam = [
