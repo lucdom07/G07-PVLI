@@ -30,23 +30,38 @@ export default class Animation extends Phaser.Scene{
     create(){
         this.add.image(450,340,'background');
 
-        //Eventos personalizados
+        //EVENTOS PERSONALIZADOS
+        //Llama al siguiente evento de la cola
+        this.events.on('nextEvent', ()=>{
+            this.combatManager.callNextEvent();
+        });
+        //Añade un evento nuevo a la cola
+        this.events.on('addNewEvent', (event)=>{
+            this.combatManager.addNewEvent(event)
+        });
+        //ataque de guerrero
         this.events.on('warriorAttack', (attacker, target)=>{
             attacker.attackWarrior(target)
         });
-        this.events.on('moveTeam', this.combatManager.moveTeam);
-        this.events.on('endCombat', this.combatManager.endCombat);
+        //Quitar guerreros muertos
+        this.events.on('removeDeadUnit', (team, deadUnitIndex) => {
+            this.combatManager.removeDeadUnit(team, deadUnitIndex)
+        });
+        //Finalizar combate
+        this.events.on('endCombat', (playerWins) => {
+            this.combatManager.endCombat(playerWins)
+        });
 
-        if(this.playerTeam.length === 0){
-            this.playerTeam = [
-            new Ally(this, -150, -150,"Michi-Michi", 36, 20, 0, 'perro', 0, 1, true, 1),
-            new Ally(this, -150, -150,"foca", 36, 20, 0, 'foca', 0, 1, true, 1),
-            new Ally(this, -150, -150,"pimiento", 36, 20, 0, 'pimiento', 0, 1, true, 1)
-            ]; //scene, x, y, name, life, attack, range, texture, frame, cost, available, level
-        }
-        else {
-            this.recreate();
-        }
+        /*
+        this.events.on('roundStarts', (allyTeam, enemyTeam)=>{
+            this.combatManager.executeCombatRound(allyTeam, enemyTeam)
+        });
+        this.events.on('moveTeam', (team, deadUnitIndex, deadUnitX) => {
+            this.combatManager.moveTeam(team, deadUnitIndex, deadUnitX)
+        });
+        */
+
+        this.recreate();
         
         // Enemigos disponibles
         const enemyTeam = [
@@ -59,7 +74,7 @@ export default class Animation extends Phaser.Scene{
         this.combatManager.startCombat(this.playerTeam, enemyTeam);
     }
 //recrea los aliados en esta escena con las mismas propiedades
-     recreate() { 
+    recreate() { 
         const recreatedAllies = [];
         
         this.playerTeam.forEach((allyData, index) => {

@@ -8,6 +8,14 @@ export default class Enemy extends Warrior{
         super.preUpdate(t, dt);
     }
 
+    hit(damage){
+        super.hit(damage);
+        if (this.life <= 0){
+            this.scene.events.emit('addNewEvent', 'removeDeadEnemy');
+        }
+        this.scene.events.emit('nextEvent');
+    }
+
     calculateNewXInCombat(previousUnitX, index, WARRIORS_SEPARATION){
         return previousUnitX - index * WARRIORS_SEPARATION;
     }
