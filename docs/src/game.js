@@ -13,8 +13,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	let config = {
 		type: Phaser.AUTO,
 		parent:'game',
-		width:  900,
-		height: 680,
+		width:  1100,
+		height: 620,
 		scale: {
 			autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
 			mode: Phaser.Scale.FIT,
@@ -23,8 +23,8 @@ window.addEventListener('DOMContentLoaded', () => {
 				height: 188
 			},
 			max: {
-				width: 900,
-				height: 680
+				width: 1100,
+				height: 620
 			},
 			zoom: 1
 		},
