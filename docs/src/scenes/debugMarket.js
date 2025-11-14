@@ -24,12 +24,12 @@ export default class debugMarket extends Phaser.Scene{
         this.load.image('background','assets/background.jpg');
 
         //sprites de los personajes
-        this.load.image('pimiento', 'assets/pimiento.png');
-        this.load.image('tortuga','assets/tortuga.png');
-        this.load.image('chupacabra','assets/Chupacabra.png');
-        this.load.image('perro','assets/Dog.png');
-        this.load.image('foca','assets/Seal.png');
-        this.load.image('warf','assets/Warf.png');
+        this.load.image('pimiento', 'assets/pepper_miku_placeholder.png');
+        this.load.image('tortuga','assets/green_miku_placeholder.png');
+        this.load.image('chupacabra','assets/dark_blue_miku_placeholder.png');
+        this.load.image('perro','assets/orange_miku_placeholder.png');
+        this.load.image('foca','assets/light_blue_miku_placeholder.png');
+        this.load.image('warf','assets/garnet_miku_placeholder.png');
     }
 
     create(){

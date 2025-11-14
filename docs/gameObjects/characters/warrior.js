@@ -8,7 +8,7 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         this.attack = attack;
         this.range = range;
         this.level = level;
-        this.DISPLAY_SIZE = 100;
+        this.DISPLAY_SIZE = 200;
         this.setDisplaySize(this.DISPLAY_SIZE, this.DISPLAY_SIZE); 
         this.scene.add.existing(this);
         this.warriorUI = new WarriorUI(scene, x, y, life, attack, range, this.DISPLAY_SIZE);
