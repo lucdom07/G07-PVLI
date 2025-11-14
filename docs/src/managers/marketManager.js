@@ -4,17 +4,24 @@ export default class MarketManager {
     constructor(scene, buttonTexture){
         this.scene = scene;
         this.textureButton = buttonTexture;
-
+        
         this.bag = [];
         this.marketAllies = [];
         this.marketObjects = [];
         this.money = 0;
-
+        
         this.moneyText = null;
         this.messageText = null;
         this.selectedForSale = null;
         this.sellPanel = null;
         this.sellButtons = [];
+    }
+    
+    market(bag, allyList, objList, money){
+        this.bag = bag;
+        this.marketAllies = this.generateAlly(allyList, 3);
+        this.marketObjects = []; // objetos no implementados aún
+        this.showMarket(money);
     }
 
     makeStruct(item) {
@@ -46,10 +53,9 @@ export default class MarketManager {
 
             marketAllies.push(this.makeStruct(clone));
         }
-    
-
-    return marketAllies;
-}
+        
+        return marketAllies;
+    }
 
     showMarket(money) {
         this.clearMarket();
@@ -189,7 +195,9 @@ export default class MarketManager {
         newAlly.warriorUI.destroy();
         
         
-        this.bag.push(newAlly);
+        //this.bag.push(newAlly);
+        //Al comprar el aliado, se actualiza el array de aliados disponibles del jugador y el dinero en la escena de market
+        this.scene.events.emit('buyingAlly', newAlly, item.cost);
 
         // Remover del mercado
         item.setVisible(false).disableInteractive();
@@ -205,11 +213,14 @@ export default class MarketManager {
 
 
     sellAlly(index, sellPrice){
-        const ally = this.bag[index];
+        //const ally = this.bag[index];
         if(!ally) return;
 
-        ally.available = false;
+        //ally.available = false;
+        this.bag.splice(index, 1);
         this.money += sellPrice;
+
+        this.scene.events.emit('sellingAlly', index, sellPrice);
 
         this.cancelSale();
         this.showMoney();
@@ -244,10 +255,4 @@ export default class MarketManager {
         this.cancelSale();
     }
 
-    market(bag, allyList, objList, money){
-        this.bag = bag;
-        this.marketAllies = this.generateAlly(allyList, 3);
-        this.marketObjects = []; // objetos no implementados aún
-        this.showMarket(money);
-    }
 }

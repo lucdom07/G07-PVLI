@@ -1,8 +1,9 @@
-import DebugCombat from './scenes/debugCombat.js'
-import MainMenu from './scenes/mainMenu.js'
+import DebugMap from './scenes/debugMap.js';
+import DebugCombat from './scenes/debugCombat.js';
+import MainMenu from './scenes/mainMenu.js';
 import debugMarket from './scenes/debugMarket.js';
-import CombatSetup from './scenes/combatSetup.js'
-import DOMmanager from "./managers/DOMManager.js"
+import CombatSetup from './scenes/combatSetup.js';
+import DOMmanager from "./managers/DOMManager.js";
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -29,6 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		},
 		scene: [
 			MainMenu,
+			DebugMap,
 			DebugCombat,
 			debugMarket,
 			new CombatSetup(DOManager)

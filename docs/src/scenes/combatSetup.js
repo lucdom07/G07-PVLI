@@ -10,6 +10,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.DOMmanager = DOMmanager;
         //Array con los aliados obtenidos
         this.ownedAllies = [];
+        this.money = 0;
         //Array con los aliados seleccionados
         this.selectedAllies = [];
         //División del DOM que muestra los aliados desbloqueados (también de clase DomAlly)
@@ -21,7 +22,8 @@ export default class CombatSetup extends Phaser.Scene {
     init(data) {
         //Array global con todos los aliados (desbloqueados o no)
         //this.globalAllies = data.allies;
-
+        this.ownedAllies = data.ownedAllies;
+        this.money = data.money;
         //Aún no está bien conectado al resto del juego
     }
 
@@ -33,7 +35,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.load.image('foca','assets/Seal.png');
         this.load.image('warf','assets/Warf.png');
         this.load.image('background','assets/background.png')
-        this.load.image('batalla', 'assets/button.jpg')
+        this.load.image('combatButton', 'assets/combat_button.jpg')
     }
 
     create() {
@@ -42,7 +44,6 @@ export default class CombatSetup extends Phaser.Scene {
 
         //Subscribir eventos de click a los aliados del DOM
         for(let i = 0; i < this.DOMallies.length; i++) {
-            
             let index = i;
             let ally = this.DOMmanager.getArray()[i];
             this.DOMallies.item(i).addEventListener('click', () => {
@@ -51,8 +52,7 @@ export default class CombatSetup extends Phaser.Scene {
             });
         }
 
-        const playButton = this.add.image(200 ,50,'batalla').setInteractive();
-
+        const playButton = this.add.image(200 ,50,'combatButton').setInteractive();
 
         playButton.setPosition(450, 500);
   
@@ -60,6 +60,8 @@ export default class CombatSetup extends Phaser.Scene {
         playButton.on('pointerdown',()=>{
             if(this.selectedAllies.length > 0 && this.selectedAllies.length === 3) {
                 this.scene.start('debugCombat',{
+                    ownedAllies: this.ownedAllies,
+                    money: this.money,
                     selectedAllies: this.selectedAllies
                 });
             }
