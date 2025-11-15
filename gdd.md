@@ -286,12 +286,12 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 |España|
 || Paloma con 6 ojos |9|5|5|
 || Rana arborícola con cuernos |10|6|0|
-|| Pimiento Gatomórfico |11|7|1|
-|| --- |10|6|2|
+|| Gatoñete |11|7|1|
+|| *Pablo* |10|6|2|
 |Estados Unidos|
 || Nutria con vestido blanco |13|9|2|
 || Oso hormiguero con bastón, sombrero y monóculo |12|7|0|
-|| --- |10|9|1|
+|| Pimiento Gatomórfico |10|9|1|
 || --- |12|8|4|
 |China|
 || QiLing |14|10|0|
@@ -309,14 +309,28 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 ### 3.8. **Enemigos**
 Personajes humanoides que se enfrenta con los aliados, cada uno con distintas estadísticas y a medida que va avanzando el jugador en los países, se desbloqueará nuevos enemigos a enfrentar, tendrán la misma mecánica que las del aliado (vida, ataque y rango de ataque). En combate, la máxima cantidad de enemigos que puede haber será hasta 6 y mínima 1, excepto cuando está el jefe, en ese caso, habrá 3 enemigos y un jefe.
 
-| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
-|:-----------:|:-----------:|:-----------:|:-----------:|
-| Karen |1|1|1|
-| //Emo | 3 | 2 |5|
-| //Otaku | 9 | 7 |2|
-| //Pimiento humanoide |66|66   |1|
-
-*//parámetros provisionales*
+|**País**| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
+|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+|Australia|
+|| Cazador Furtivo |8|4|0|
+|| --- | 5 | 5 |1|
+|| --- | 7 | 4 |2|
+|| Pimiento humanoide |5|5|3|
+|España|
+|| Franc |10|7|1|
+|| Emo |8|6|4|
+|| --- |9|7|0|
+|| --- |10|7|3|
+|Estados Unidos|
+|| Tump |9|8|2|
+|| Karen |12|8|1|
+|| --- |11|9|0|
+|| --- |10|8|5|
+|China|
+|| QinHui |14|10|0|
+|| Otaku |12|11|3|
+|| --- |13|10|1|
+|| --- |11|10|4|
 
 ***Parámetros*** 
 - Cantidad de vida
@@ -329,15 +343,15 @@ Los jefes son enemigos más importantes de cada país, siendo estos más grandes
 
 El jefe aparece en cada tercer combate de cada país. Si el jugador gana el combate con el jefe, obtendrá más monedas y desbloqueará el siguiente país.
 
-| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
-|:-----------:|:-----------:|:-----------:|:-----------:|
-| Güini de Pu |20|10|1|
-| Mister Cheeto | 35 | 14 |1|
-| Melon Moska | 26 | 20 |1|
-| Melon Moska montado en su Mierdesta |22|21   |1|
-| Pedry el ornitorrinco |31|23   |1|
+|**País**| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
+|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+|Australia| Melon Moska montado en su Mierdesta |10|6|0|
+|España| Pedry el ornitorrinco |12|9|0|
+|Estados Unidos| Mister Cheeto | 14 | 12 |0|
+|China| Güini de Pu |16|15|0|
 
-*//parámetros provisionales*
+
+
 
 ***Parámetros*** 
 - Cantidad de vida
