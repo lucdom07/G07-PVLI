@@ -101,12 +101,11 @@ Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un me
 
 | **Países** | **Aliados** | **Objetos** |
 |:-----------:|:-----------:|:------------:|
-|Australia|10 monedas|5 monedas|
-|España|20 monedas|10 monedas|
-|Estados Unidos|30 monedas|15 monedas|
-|China|40 monedas|20 monedas|
+|Australia|7 monedas|5 monedas|
+|España|12 monedas|10 monedas|
+|Estados Unidos|17 monedas|15 monedas|
+|China|22 monedas|20 monedas|
 
-*//parámetros provisionales*
 
 ![Tienda](./imagenes/tienda.png)
 *Representación simbólica de la tienda con el último animal cliqueado*
@@ -139,6 +138,11 @@ El combate será un autobattler visualmente similar al Super Autopets, donde el 
 Si un animal (tanto aliado como enemigo) es eliminado, entendiéndose por eliminado que su vida se reduce a cero o menos, el siguiente será el que continúe luchando contra el que queda en pie, y así sucesivamente hasta que uno de los dos bandos se quede sin ejército. Si el jugador se queda sin ejército en combate, perderá automáticamente; pero si se trata del otro bando, el jugador elegirá una sala del mapa para continuar con el juego.
 
 En caso de que el combate termine en empate, no se pierde y ni se ganan monedas, pero se debe de repetir la sala hasta ganar y avanzar a la siguiente.
+
+Al ganar el combate se ganará monedas entre:
+|Australia|España|Estados Unidos|China|
+|:-----------:|:-----------:|:-----------:|:-----------:|
+| 7 a 10 | 12 a 15 | 17 a 20 | 22 a 25 |
 
 **Sistema de estadísticas de los animales y enemigo:**
 
@@ -188,13 +192,13 @@ El rango se diferencia desde 1 al 6 relacionándose con las posiciones de cada a
 
 |  |  |  |
 |:-----------:|:-----------:|:-----------:|
-| 6 5 4 3 2 1 | — – – – – – – | 1 2 3 4 5 6 |
+| 5 4 3 2 1 0 | — – – – – – – | 1 2 3 4 5 6 |
 | Aliado | – – – – – – – - | Enemigo |
 |  |  |  |
 
 Este parámetro será mostrado cuando el jugador cliquea o pasa el cursor por encima del personaje para saber cuál es su rango de ataque.
 
-Si el personaje tiene rango 1 atacará al otro personaje en esa posición, en este caso, se corresponde al primer personaje, lo mismo será con el 2,3,4,5 y 6, siendo esta la última. Por defecto todos los personajes tienen rango 1 a no ser que se indique lo contrario.
+Si el personaje tiene rango 1 atacará al otro personaje en esa posición, en este caso, se corresponde al primer personaje, lo mismo será con el 2, 3, 4, 5 y 6, siendo esta la última. Por defecto todos los personajes tienen rango 1 a no ser que se indique lo contrario.
 
 En caso de que no haya personajes en esa posición, se atacará al último que queda. Por ejemplo: Si tenemos un aliado con rango 5 y tenemos solo 3 enemigos, quiere decir que ataca a la quinta posición del bando enemigo, pero como no hay, recurre al enemigo de la última posición, que será la tercera. 
 
@@ -208,13 +212,26 @@ Elemento  que el jugador puede obtener comprando en tiendas o ganando en los com
 
 Cada objeto mejora la estadística de vida y/o ataque de los aliados por una cantidad constante. Después de su uso, el objeto se descarta del inventario, ya que es un elemento finito.
 
-| **Nombre del objeto** | **Vida** | **Ataque** |
-|:-----------:|:-----------:|:-----------:|
-| Viejo calcetín    | -   | +3    |
-| Las llaves perdidas | +5    | -  |
-| Agua | +2    | +2    |
-
-*//parámetros provisionales*
+|**País**| **Nombre del objeto** | **Vida** | **Ataque** |
+|:-----------:|:-----------:|:-----------:|:-----------:|
+|Australia|
+|| Viejo calcetín | - | +3 |
+|| Las llaves perdidas | +4 | - |
+|| Agua | +2 | +2 |
+|España|
+|| Bocata de calamares | +6 | - |
+||Vestido flamenca| +5 | - |
+|| Ñ | -1 | +4 |
+|| Tortilla de patatas CON CEBOLLA | +4 | +1 |
+|Estados Unidos|
+|| Pistola | -3 | +5 |
+|| Partes de las torres gemelas | +2 | +4 |
+|| Cheese Burger | +5 | - |
+|China|
+|| Chancla | -7 | +10 |
+|| Bambu | +8 | - |
+|| Emocional Damage | - | +7 |
+|| Timo | +6 | +6 |
 
 ***Parámetros*** 
 - Cantidad de vida que es añadida a la vida del aliado
@@ -256,24 +273,31 @@ Al comienzo de la partida el jugador empieza con un solo aliado, que será nuest
 
 El jugador podrá tener como máximo 6 aliados en combate y como mínimo 1 para poder empezar a combatir. 
 
-Será posible mejorar las estadísticas de los aliados con los objetos, obtenidos de los combates o comprados en las tiendas y también mediante la unión/fusión de dos aliados iguales para su mejora, quedando un animal, pero con mejores estadísticas, el máximo nivel a la que puede mejorar es hasta 4.
+Será posible mejorar las estadísticas de los aliados con los objetos, obtenidos de los combates o comprados en las tiendas.
 
-| **Nivel** | **Vida** | **Ataque** |
-|:-----------:|:-----------:|:-----------:|
-| 1 |Original|Original|
-| 2 | +1 | +1 |
-| 3 | +2    | +2    |
-| 4 | +3    | +3    |
-
-| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
-|:-----------:|:-----------:|:-----------:|:-----------:|
-| Michi-Michi |99|99|1|
-| Gata alien | 3 | 6 |2|
-| Mapache que lava el algodón de azúcar | 15 | 0 |1|
-| Pez chancla |8|5   |4|
-| Gato-Pulpo de Github | 8 | 8 |3|
-
-*//parámetros provisionales*
+| **País** | **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
+|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+|Australia|
+|| Michi-Michi |9|5|0|
+|| Gata alien | 8 | 4 |2|
+|| Mapache que lava el algodón de azúcar | 7 | 4 |1|
+|| Colibri twitter |9| 5 |4|
+|| Gato-Pulpo de Github | 6 | 3 |3|
+|España|
+|| Paloma con 6 ojos |9|5|5|
+|| Rana arborícola con cuernos |10|6|0|
+|| Pimiento Gatomórfico |11|7|1|
+|| --- |10|6|2|
+|Estados Unidos|
+|| Nutria con vestido blanco |13|9|2|
+|| Oso hormiguero con bastón, sombrero y monóculo |12|7|0|
+|| --- |10|9|1|
+|| --- |12|8|4|
+|China|
+|| QiLing |14|10|0|
+|| Gato Kunfu |12|9|1|
+|| Orca Deep Seek |13|11|3|
+|| Pez chancla |12|10|5|
 
 ***Parámetros*** 
 - Cantidad de vida
@@ -290,7 +314,7 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 | Karen |1|1|1|
 | //Emo | 3 | 2 |5|
 | //Otaku | 9 | 7 |2|
-| //Pimiento |66|66   |1|
+| //Pimiento humanoide |66|66   |1|
 
 *//parámetros provisionales*
 
