@@ -317,10 +317,10 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 || --- | 7 | 4 |2|
 || Pimiento humanoide |5|5|3|
 |España|
-|| Franc |10|7|1|
-|| Emo |8|6|4|
-|| --- |9|7|0|
-|| --- |10|7|3|
+|| Manolo |10|7|1|
+|| Mariloli |8|6|4|
+|| Jesé Luis |9|7|0|
+|| MAricarmen |10|7|3|
 |Estados Unidos|
 || Tump |9|8|2|
 || Karen |12|8|1|
