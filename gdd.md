@@ -102,9 +102,9 @@ Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un me
 | **Países** | **Aliados** | **Objetos** |
 |:-----------:|:-----------:|:------------:|
 |Australia|7 monedas|5 monedas|
-|España|12 monedas|10 monedas|
-|Estados Unidos|17 monedas|15 monedas|
-|China|22 monedas|20 monedas|
+|España|12 monedas|8 monedas|
+|Estados Unidos|17 monedas|11 monedas|
+|China|22 monedas|14 monedas|
 
 
 ![Tienda](./imagenes/tienda.png)
@@ -193,7 +193,7 @@ El rango se diferencia desde 1 al 6 relacionándose con las posiciones de cada a
 |  |  |  |
 |:-----------:|:-----------:|:-----------:|
 | 5 4 3 2 1 0 | — – – – – – – | 1 2 3 4 5 6 |
-| Aliado | – – – – – – – - | Enemigo |
+| Aliado | – – – – – – – – | Enemigo |
 |  |  |  |
 
 Este parámetro será mostrado cuando el jugador cliquea o pasa el cursor por encima del personaje para saber cuál es su rango de ataque.
@@ -292,7 +292,7 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 || Nutria con vestido blanco |13|9|2|
 || Oso hormiguero con bastón, sombrero y monóculo |12|7|0|
 || Pimiento Gatomórfico |10|9|1|
-|| --- |12|8|4|
+|| Miku |12|8|4|
 |China|
 || QiLing |14|10|0|
 || Gato Kunfu |12|9|1|
@@ -313,30 +313,48 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 |:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 |Australia|
 || Cazador Furtivo |8|4|0|
-|| --- | 5 | 5 |1|
-|| --- | 7 | 4 |2|
-|| Pimiento humanoide |5|5|3|
+|| Buceador |5|5|1|
+|| Aborígenes |7|4|2|
+|| Sharon |5|5|3|
 |España|
 || Manolo |10|7|1|
 || Mariloli |8|6|4|
-|| Jesé Luis |9|7|0|
-|| MAricarmen |10|7|3|
+|| José Luis |9|7|0|
+|| Maricarmen |10|7|3|
 |Estados Unidos|
 || Tump |9|8|2|
 || Karen |12|8|1|
-|| --- |11|9|0|
-|| --- |10|8|5|
+|| Anabelle |11|9|0|
+|| Guardaespaldas |10|8|5|
 |China|
-|| QinHui |14|10|0|
+|| Pimiento humanoide |14|10|0|
 || Otaku |12|11|3|
-|| --- |13|10|1|
-|| --- |11|10|4|
+|| Profesores |13|10|1|
+|| Sacerdote Taoísta |11|10|4|
 
 ***Parámetros*** 
 - Cantidad de vida
 - Cantidad de ataque
 - Rango de ataque
 - Cantidad de enemigos en cada combate
+
+Lista de enemigos por País
+|Número de enemigos| Australia | España | Esdados Unidos | China |
+|:-:|:-:|:-:|:-:|:-:|
+|1|Uno aleatorio del País|Uno aleatorio del País|Uno aleatorio del País|Uno aleatorio del País|
+|2| Aborígenes, Cazador Furtivo| Manolo, José Luis   |||
+|2| Buceador , Sharon          | Mariloli, Maricarmen|||
+|2| Cazador Furtivo, Buceador  | Maricarmen, Manolo  |||
+|3| Aborígenes, Cazador Furtivo, Buceador| José Luis, Mariloli, Manolo    |||
+|3| Aborígenes, Buceador, Sharon         | Manolo, Mariloli, Maricarmen   |||
+|3| Buceador, Cazador Furtivo , Sharon   | Mariloli, Maricarmen, José Luis|||
+|4| los 4 pero en diferente orden | los 4 pero en diferente orden| los 4 pero en diferente orden| los 4 pero en diferente orden|
+|5| Aborígenes, Buceador, Cazador Furtivo , Sharon, Aborígenes| José Luis*2, Manolo, Mariloli, Maricarmen|||
+|5| Cazador Furtivo*5                                         | Manolo, Mariloli, Maricarmen, Mariloli   |||
+|5| Sharon, Buceador, Sharon, Aborígenes, Sharon              | Maricarmen*3, Manolo *2                  |||
+|6| Aborígenes, Buceador, Cazador Furtivo, Sharon, Aborígenes, Sharon         ||||
+|6| Buceador, Sharon, Cazador Furtivo, Aborígenes, Aborígenes, Cazador Furtivo||||
+|6| Cazador Furtivo, Sharon, Aborígenes, Sharon, Aborígenes, Sharon           ||||
 
 #### 3.8.1. **Jefes**
 Los jefes son enemigos más importantes de cada país, siendo estos más grandes y con las mejores estadísticas de sus originales pero un poco mejores. En combate, cuando aparece un jefe, siempre estará acompañado de otros 3 enemigos normales. Siendo así que el jugador se enfrentará a 4 enemigos. 
