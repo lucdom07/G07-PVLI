@@ -432,7 +432,7 @@ Mercader
 
 ### 5.2. **Niveles/Salas**
 
-![Ejemplo-Sala](.imagenes/combate.jpg)
+![Ejemplo-Sala](.imagenes/combate.png)
 
 ## 6. **Estética y contenido**
 El estilo de dibujo para el juego estará inspirado en recortes de papel o dibujos sin gran detalle para darle un toque menos serio.
