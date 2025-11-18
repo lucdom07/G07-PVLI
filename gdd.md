@@ -159,7 +159,7 @@ Al ganar el combate se ganará monedas entre:
 - Daño de cada guerrero.
 - Vida de cada guerrero.
 
-![CombateBoceto](./imagenes/combate.jpg)
+![CombateBoceto](./imagenes/combate.png)
 
 *Inspirado en Super Auto Pets*
 #### 3.2.1. **Vida**
