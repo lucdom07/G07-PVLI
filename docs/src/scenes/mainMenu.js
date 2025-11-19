@@ -16,14 +16,14 @@ export default class mainMenu extends Phaser.Scene{
 
     create(){
         //fondo con título
-        this.add.image(450,340,'background');
-        this.add.image(450,340,'cat');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'cat');
    
         //botón de juego
         const playButton = this.add.image(300, 100, 'startButton').setInteractive();
         //const marketButton = this.add.image(600,100,'marketButton').setInteractive();
 
-        playButton.setPosition(450, 600);
+        playButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
         //marketButton.setPosition(450, 450);
         
         playButton.on('pointerdown',()=>{
@@ -32,17 +32,6 @@ export default class mainMenu extends Phaser.Scene{
                 money: this.money
             });
         });
-
-        /*
-        //Botones debug
-        marketButton.on('pointerdown',()=>{
-            this.scene.start('debugMarket');
-        });
-        
-        playButton.on('pointerdown',()=>{
-            this.scene.start('combatSetup');
-        });
-        */
     }
 }
 

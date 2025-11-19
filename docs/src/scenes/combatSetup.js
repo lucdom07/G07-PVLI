@@ -40,7 +40,7 @@ export default class CombatSetup extends Phaser.Scene {
 
     create() {
 
-        this.add.image(450,340,'background');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
 
         //Subscribir eventos de click a los aliados del DOM
         for(let i = 0; i < this.DOMallies.length; i++) {
@@ -54,7 +54,7 @@ export default class CombatSetup extends Phaser.Scene {
 
         const playButton = this.add.image(200 ,50,'combatButton').setInteractive();
 
-        playButton.setPosition(450, 500);
+        playButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
   
         //pasa los aliados al debugCombat
         playButton.on('pointerdown',()=>{

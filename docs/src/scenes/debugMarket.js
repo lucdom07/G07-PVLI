@@ -67,10 +67,10 @@ export default class debugMarket extends Phaser.Scene{
         ];
         */
         this.objList =[];
-        this.add.image(450,340,'background');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
         const exitButton = this.add.image(300,100,'exitButton').setInteractive();
 
-        exitButton.setPosition(600,500);
+        exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
         exitButton.on('pointerdown', () =>{        
             this.scene.start('debugMap', {
