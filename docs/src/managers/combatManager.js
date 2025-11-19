@@ -4,7 +4,6 @@ import Enemy from "../../gameObjects/characters/enemy.js";
 export default class CombatManager{
     constructor(scene){
         this.scene = scene;
-        this.isCombatActived = false;
         //cola de eventos, como mínimo hay una ronda de ataque de dos guerreros y se comprueba si hay algún equipo con 0 guerreros
         this.eventsQueue = ['allyAttack', 'enemyAttack', 'checkState']; 
         //guardamos el equipo aliado y enemigo en propiedades de esta clase para usarlos en toda la clase sin estar pasándolos como parámetros
@@ -14,11 +13,11 @@ export default class CombatManager{
         //deadWarriorsIndex[0] = índice aliado
         //deadWarriorsIndex[1] = índice enemigo
         this.targetWarriorsIndex = [-1, -1]; 
+        this.TEAM_DIST_FROM_CANVAS_HALF = 95
         this.WARRIOR_Y = 300;
-        this.FIRST_ALLY_POS = 350;
-        this.WARRIORS_SEPARATION = 120;
-        this.TEAM_DISTANCE = 190
-        this.FIRST_ENEMY_POS = this.FIRST_ALLY_POS + this.TEAM_DISTANCE;
+        this.WARRIORS_SEPARATION = 120; 
+        this.FIRST_ALLY_POS_X = this.scene.sys.game.canvas.width*0.5 - this.TEAM_DIST_FROM_CANVAS_HALF;
+        this.FIRST_ENEMY_POS_X = this.scene.sys.game.canvas.width*0.5 + this.TEAM_DIST_FROM_CANVAS_HALF;
     }
 
     //Inicia el combate
@@ -168,6 +167,7 @@ export default class CombatManager{
     }
 
     endCombat(playerWins) {            
+
             if (playerWins) {
                 //console.log("¡VICTORIA!");
                 this.victoria();

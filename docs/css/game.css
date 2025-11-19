@@ -8,13 +8,12 @@
   /*background-color: #e99e68;*/
   background-image: url(../images/title_texture.png);
   background-size: cover;
-  height: 120px;
+  height: 100px;
   width: auto;
-  padding-top: 12px;
 }
 
 #title{
-  height: 60px;
+  height: 50px;
   width: auto;
   display: block;
   margin: auto;

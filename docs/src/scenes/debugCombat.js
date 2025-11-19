@@ -28,7 +28,7 @@ export default class Animation extends Phaser.Scene{
     }
 
     create(){
-        this.add.image(450,340,'background');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
 
         //EVENTOS PERSONALIZADOS
         //Llama al siguiente evento de la cola
