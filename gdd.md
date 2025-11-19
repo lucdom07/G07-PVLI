@@ -101,12 +101,11 @@ Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un me
 
 | **Países** | **Aliados** | **Objetos** |
 |:-----------:|:-----------:|:------------:|
-|Australia|10 monedas|5 monedas|
-|España|20 monedas|10 monedas|
-|Estados Unidos|30 monedas|15 monedas|
-|China|40 monedas|20 monedas|
+|Australia|7 monedas|5 monedas|
+|España|12 monedas|8 monedas|
+|Estados Unidos|17 monedas|11 monedas|
+|China|22 monedas|14 monedas|
 
-*//parámetros provisionales*
 
 ![Tienda](./imagenes/tienda.png)
 *Representación simbólica de la tienda con el último animal cliqueado*
@@ -140,6 +139,11 @@ Si un animal (tanto aliado como enemigo) es eliminado, entendiéndose por elimin
 
 En caso de que el combate termine en empate, no se pierde y ni se ganan monedas, pero se debe de repetir la sala hasta ganar y avanzar a la siguiente.
 
+Al ganar el combate se ganará monedas entre:
+|Australia|España|Estados Unidos|China|
+|:-----------:|:-----------:|:-----------:|:-----------:|
+| 7 a 10 | 12 a 15 | 17 a 20 | 22 a 25 |
+
 **Sistema de estadísticas de los animales y enemigo:**
 
 **Vida**: Cantidad de vida que tiene el personaje. Cuando llega a cero o menos, este es derrotado y el siguiente será el que continúe luchando contra el que queda en pie.
@@ -155,7 +159,7 @@ En caso de que el combate termine en empate, no se pierde y ni se ganan monedas,
 - Daño de cada guerrero.
 - Vida de cada guerrero.
 
-![CombateBoceto](./imagenes/combate.jpg)
+![CombateBoceto](./imagenes/combate.png)
 
 *Inspirado en Super Auto Pets*
 #### 3.2.1. **Vida**
@@ -188,13 +192,13 @@ El rango se diferencia desde 1 al 6 relacionándose con las posiciones de cada a
 
 |  |  |  |
 |:-----------:|:-----------:|:-----------:|
-| 6 5 4 3 2 1 | — – – – – – – | 1 2 3 4 5 6 |
-| Aliado | – – – – – – – - | Enemigo |
+| 5 4 3 2 1 0 | — – – – – – – | 1 2 3 4 5 6 |
+| Aliado | – – – – – – – – | Enemigo |
 |  |  |  |
 
 Este parámetro será mostrado cuando el jugador cliquea o pasa el cursor por encima del personaje para saber cuál es su rango de ataque.
 
-Si el personaje tiene rango 1 atacará al otro personaje en esa posición, en este caso, se corresponde al primer personaje, lo mismo será con el 2,3,4,5 y 6, siendo esta la última. Por defecto todos los personajes tienen rango 1 a no ser que se indique lo contrario.
+Si el personaje tiene rango 1 atacará al otro personaje en esa posición, en este caso, se corresponde al primer personaje, lo mismo será con el 2, 3, 4, 5 y 6, siendo esta la última. Por defecto todos los personajes tienen rango 1 a no ser que se indique lo contrario.
 
 En caso de que no haya personajes en esa posición, se atacará al último que queda. Por ejemplo: Si tenemos un aliado con rango 5 y tenemos solo 3 enemigos, quiere decir que ataca a la quinta posición del bando enemigo, pero como no hay, recurre al enemigo de la última posición, que será la tercera. 
 
@@ -208,13 +212,26 @@ Elemento  que el jugador puede obtener comprando en tiendas o ganando en los com
 
 Cada objeto mejora la estadística de vida y/o ataque de los aliados por una cantidad constante. Después de su uso, el objeto se descarta del inventario, ya que es un elemento finito.
 
-| **Nombre del objeto** | **Vida** | **Ataque** |
-|:-----------:|:-----------:|:-----------:|
-| Viejo calcetín    | -   | +3    |
-| Las llaves perdidas | +5    | -  |
-| Agua | +2    | +2    |
-
-*//parámetros provisionales*
+|**País**| **Nombre del objeto** | **Vida** | **Ataque** |
+|:-----------:|:-----------:|:-----------:|:-----------:|
+|Australia|
+|| Viejo calcetín | - | +3 |
+|| Las llaves perdidas | +4 | - |
+|| Agua | +2 | +2 |
+|España|
+|| Bocata de calamares | +6 | - |
+||Vestido flamenca| +5 | - |
+|| Ñ | -1 | +4 |
+|| Tortilla de patatas CON CEBOLLA | +4 | +1 |
+|Estados Unidos|
+|| Pistola | -3 | +5 |
+|| Partes de las torres gemelas | +2 | +4 |
+|| Cheese Burger | +5 | - |
+|China|
+|| Chancla | -7 | +10 |
+|| Bambu | +8 | - |
+|| Emocional Damage | - | +7 |
+|| Timo | +6 | +6 |
 
 ***Parámetros*** 
 - Cantidad de vida que es añadida a la vida del aliado
@@ -256,24 +273,31 @@ Al comienzo de la partida el jugador empieza con un solo aliado, que será nuest
 
 El jugador podrá tener como máximo 6 aliados en combate y como mínimo 1 para poder empezar a combatir. 
 
-Será posible mejorar las estadísticas de los aliados con los objetos, obtenidos de los combates o comprados en las tiendas y también mediante la unión/fusión de dos aliados iguales para su mejora, quedando un animal, pero con mejores estadísticas, el máximo nivel a la que puede mejorar es hasta 4.
+Será posible mejorar las estadísticas de los aliados con los objetos, obtenidos de los combates o comprados en las tiendas.
 
-| **Nivel** | **Vida** | **Ataque** |
-|:-----------:|:-----------:|:-----------:|
-| 1 |Original|Original|
-| 2 | +1 | +1 |
-| 3 | +2    | +2    |
-| 4 | +3    | +3    |
-
-| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
-|:-----------:|:-----------:|:-----------:|:-----------:|
-| Michi-Michi |99|99|1|
-| Gata alien | 3 | 6 |2|
-| Mapache que lava el algodón de azúcar | 15 | 0 |1|
-| Pez chancla |8|5   |4|
-| Gato-Pulpo de Github | 8 | 8 |3|
-
-*//parámetros provisionales*
+| **País** | **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
+|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+|Australia|
+|| Michi-Michi |9|5|0|
+|| Gata alien | 8 | 4 |2|
+|| Mapache que lava el algodón de azúcar | 7 | 4 |1|
+|| Colibri twitter |9| 5 |4|
+|| Gato-Pulpo de Github | 6 | 3 |3|
+|España|
+|| Paloma con 6 ojos |9|5|5|
+|| Rana arborícola con cuernos |10|6|0|
+|| Gatoñete |11|7|1|
+|| Pablotter  |10|6|2|
+|Estados Unidos|
+|| Nutria con vestido blanco |13|9|2|
+|| Oso hormiguero con bastón, sombrero y monóculo |12|7|0|
+|| Pimiento Gatomórfico |10|9|1|
+|| Miku |12|8|4|
+|China|
+|| QiLing |14|10|0|
+|| Gato Kunfu |12|9|1|
+|| Orca Deep Seek |13|11|3|
+|| Pez chancla |12|10|5|
 
 ***Parámetros*** 
 - Cantidad de vida
@@ -285,14 +309,28 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 ### 3.8. **Enemigos**
 Personajes humanoides que se enfrenta con los aliados, cada uno con distintas estadísticas y a medida que va avanzando el jugador en los países, se desbloqueará nuevos enemigos a enfrentar, tendrán la misma mecánica que las del aliado (vida, ataque y rango de ataque). En combate, la máxima cantidad de enemigos que puede haber será hasta 6 y mínima 1, excepto cuando está el jefe, en ese caso, habrá 3 enemigos y un jefe.
 
-| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
-|:-----------:|:-----------:|:-----------:|:-----------:|
-| Karen |1|1|1|
-| //Emo | 3 | 2 |5|
-| //Otaku | 9 | 7 |2|
-| //Pimiento |66|66   |1|
-
-*//parámetros provisionales*
+|**País**| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
+|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+|Australia|
+|| Cazador Furtivo |8|4|0|
+|| Buceador |5|5|1|
+|| Aborígenes |7|4|2|
+|| Sharon |5|5|3|
+|España|
+|| Manolo |10|7|1|
+|| Mariloli |8|6|4|
+|| José Luis |9|7|0|
+|| Maricarmen |10|7|3|
+|Estados Unidos|
+|| Tump |9|8|2|
+|| Karen |12|8|1|
+|| Anabella |11|9|0|
+|| Guardaespaldas |10|8|5|
+|China|
+|| Pimiento humanoide |14|10|0|
+|| Otaku |12|11|3|
+|| Profesores |13|10|1|
+|| Taoísta |11|10|4|
 
 ***Parámetros*** 
 - Cantidad de vida
@@ -300,20 +338,42 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 - Rango de ataque
 - Cantidad de enemigos en cada combate
 
+Lista de enemigos por País
+|**Número de enemigos**| **Australia** | **España** | **Esdados Unidos** | **China** |
+|:-:|:-:|:-:|:-:|:-:|
+|1|Uno aleatorio del País|Uno aleatorio del País|Uno aleatorio del País|Uno aleatorio del País|
+|2|Aborígenes, Cazador Furtivo|Manolo, José Luis   |Tump, Guardaespaldas |Pimiento humanoide, Otaku  |
+|2|Buceador , Sharon          |Mariloli, Maricarmen|Karen, Anabella      |Profesores, Taoísta        |
+|2|Cazador Furtivo, Buceador  |Maricarmen, Manolo  |Guardaespaldas, Karen|Taoísta, Pimiento humanoide|
+|3|Aborígenes, Cazador Furtivo, Buceador|José Luis, Mariloli, Manolo    |Anabella, Karen, Guardaespaldas|Otaku*3                           |
+|3|Aborígenes, Buceador, Sharon         |Manolo, Mariloli, Maricarmen   |Tump, Guardaespaldas, Karen    |Taoísta, Otaku, Pimiento humanoide|
+|3|Buceador, Cazador Furtivo , Sharon   |Mariloli, Maricarmen, José Luis|Karen, Anabella, Tump          |Pimiento humanoide, Profesor*2    |
+|4|los 4 pero en diferente orden|los 4 pero en diferente orden|los 4 pero en diferente orden|los 4 pero en diferente orden|
+|5|Aborígenes, Buceador, Cazador Furtivo , Sharon, Aborígenes|José Luis*2, Manolo, Mariloli, Maricarmen|Guardaespaldas*4, Tump                     |Taoísta, Profesor, Otaku, Profesor, Taoísta|
+|5|Cazador Furtivo*5                                         |Manolo, Mariloli, Maricarmen, Mariloli   |Karen*2, Anabella, Guardaespaldas          |Profesor*3, Otaku *2, Pimiento humanoide|
+|5|Sharon, Buceador, Sharon, Aborígenes, Sharon              |Maricarmen*3, Manolo *2                  |Tump, Karen, Tump, Guardaespaldas, Anabella|Pimiento humanoide, Otaku, Profesor, Taoista, Pimiento humanoide|
+|6|Aborígenes, Buceador, Cazador Furtivo, Sharon, Aborígenes, Sharon         |Manolo, Mariloli, José Luis Maricarmen, Mariloli, Manolo  |Anabella*2, Karen *3, Tump                      |Profesor*2, Taoista, Otaku, Profesor *2|
+|6|Buceador, Sharon, Cazador Furtivo, Aborígenes, Aborígenes, Cazador Furtivo|Manolo, Mariloli, Maricarmen, Manolo, Mariloli, Maricarmen|Guardaespaldas*2, Tump, Guardaespaldas *2, Karen|Taoísta*3, Otaku, Pimiento humanoide, Otaku|
+|6|Cazador Furtivo, Sharon, Aborígenes, Sharon, Aborígenes, Sharon           |José Luis*2, Maricarmen *2, Mariloli *2                   |Anabella, Tump, Karen, Guardapespaldas, Karen*2 |Otaku*2, Profesor, Taoista, Pimiento humanoide *2|
+
 #### 3.8.1. **Jefes**
 Los jefes son enemigos más importantes de cada país, siendo estos más grandes y con las mejores estadísticas de sus originales pero un poco mejores. En combate, cuando aparece un jefe, siempre estará acompañado de otros 3 enemigos normales. Siendo así que el jugador se enfrentará a 4 enemigos. 
 
 El jefe aparece en cada tercer combate de cada país. Si el jugador gana el combate con el jefe, obtendrá más monedas y desbloqueará el siguiente país.
 
-| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
-|:-----------:|:-----------:|:-----------:|:-----------:|
-| Güini de Pu |20|10|1|
-| Mister Cheeto | 35 | 14 |1|
-| Melon Moska | 26 | 20 |1|
-| Melon Moska montado en su Mierdesta |22|21   |1|
-| Pedry el ornitorrinco |31|23   |1|
+|**País**| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
+|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+|Australia| Melon Moska montado en su Mierdesta |10|6|0|
+|España| Pedry el ornitorrinco |12|9|0|
+|Estados Unidos| Mister Cheeto | 14 | 12 |0|
+|China| Güini de Pu |16|15|0|
 
-*//parámetros provisionales*
+Lista de combinaciones con Jefe
+|**Australia**|**España**|**Estados Unidos**|**China**|
+|:-----------:|:-----------:|:-----------:|:-----------:|
+|Aborígenes, Sharon, Cazador Furtivo, Melon Moska|Pedry el ornitorrinco, José Luis, Maricarmen, Manolo|Mister Cheeto, Tump, Karen, Guardaespaldas   |Taoista, Otaku, Güini de Pu, Profesor|
+|Sharon, Melon Moska, Buceador, Aborígenes       |Manolo, Maricarmen, Pedry el ornitorrinco, Mariloli |Tump, Guardaespaldas, Mister Cheeto, Anabelle|Güini de Pu, Otaku, Taoista, Pimiento humanoide|
+|Melon Moska, Aborígenes, Sharon, Buceador       |José Luis, Manolo, Mariloli, Pedry el ornitorrinco  |Anabelle, Mister Cheeto, Karen, Tump         |Otaku, Profesor, Taoista, Güini de Pu|
 
 ***Parámetros*** 
 - Cantidad de vida
@@ -372,7 +432,7 @@ Mercader
 
 ### 5.2. **Niveles/Salas**
 
-![Ejemplo-Sala](.imagenes/combate.jpg)
+![Ejemplo-Sala](./imagenes/combate.png)
 
 ## 6. **Estética y contenido**
 El estilo de dibujo para el juego estará inspirado en recortes de papel o dibujos sin gran detalle para darle un toque menos serio.
@@ -408,8 +468,3 @@ Hades (M07)
 Gato en una caja (P13)
 
 ![Gato](./imagenes/gato.png)
-
-
-
-
-
