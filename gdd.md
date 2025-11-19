@@ -287,7 +287,7 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 || Paloma con 6 ojos |9|5|5|
 || Rana arborícola con cuernos |10|6|0|
 || Gatoñete |11|7|1|
-|| *Pablo* |10|6|2|
+|| Pablotter  |10|6|2|
 |Estados Unidos|
 || Nutria con vestido blanco |13|9|2|
 || Oso hormiguero con bastón, sombrero y monóculo |12|7|0|
