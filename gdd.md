@@ -309,12 +309,15 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 ### 3.8. **Enemigos**
 Personajes humanoides que se enfrenta con los aliados, cada uno con distintas estadísticas y a medida que va avanzando el jugador en los países, se desbloqueará nuevos enemigos a enfrentar, tendrán la misma mecánica que las del aliado (vida, ataque y rango de ataque). En combate, la máxima cantidad de enemigos que puede haber será hasta 6 y mínima 1, excepto cuando está el jefe, en ese caso, habrá 3 enemigos y un jefe.
 
+//a cambiar
+?inseguro
+
 |**País**| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
 |:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 |Australia|
 || Cazador Furtivo |8|4|0|
-|| Buceador |5|5|1|
-|| Aborígenes |7|4|2|
+|| //Buceador |5|5|1|
+|| //Aborígenes |7|4|2|
 || Sharon |5|5|3|
 |España|
 || Manolo |10|7|1|
@@ -324,13 +327,13 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 |Estados Unidos|
 || Tump |9|8|2|
 || Karen |12|8|1|
-|| Anabella |11|9|0|
-|| Guardaespaldas |10|8|5|
+|| //Anabella |11|9|0|
+|| //Guardaespaldas |10|8|5|
 |China|
-|| Pimiento humanoide |14|10|0|
-|| Otaku |12|11|3|
-|| Profesores |13|10|1|
-|| Taoísta |11|10|4|
+|| ?Pimiento humanoide |14|10|0|
+|| //Otaku |12|11|3|
+|| //Profesores |13|10|1|
+|| ?Taoísta |11|10|4|
 
 ***Parámetros*** 
 - Cantidad de vida
