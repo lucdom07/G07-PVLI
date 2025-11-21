@@ -1,0 +1,149 @@
+{
+    "enemy0":[
+        {
+            "name": "Michi-Michi",
+            "life": 9,
+            "attack": 5,
+            "range":0,
+            "cost":7,
+            "texture": ""
+        },
+        {
+            "name": "Gata alien",
+            "life": 8,
+            "attack": 4,
+            "range":2,
+            "cost":7,
+            "texture": ""
+        },
+        {
+            "name": "Mapache que lava el algodón de azúcar",
+            "life": 7,
+            "attack": 4,
+            "range":1,
+            "cost":7,
+            "texture": ""
+        },
+        {
+            "name": "Colibri twitter",
+            "life": 9,
+            "attack": 5,
+            "range":4,
+            "cost":7,
+            "texture": ""
+        },
+        {
+            "name": "Gato-Pulpo de Github",
+            "life": 6,
+            "attack": 3,
+            "range":3,
+            "cost":7,
+            "texture": ""
+        }
+    ],
+
+    "enemy1":[
+        {
+            "name": "Paloma con 6 ojos",
+            "life": 9,
+            "attack": 5,
+            "range":3,
+            "cost":12,
+            "texture": ""
+        },
+        {
+            "name": "Rana arborícola con cuernos",
+            "life": 10,
+            "attack": 6,
+            "range":0,
+            "cost":12,
+            "texture": ""
+        },
+        {
+            "name": "Gatoñete",
+            "life": 11,
+            "attack": 7,
+            "range":1,
+            "cost":12,
+            "texture": ""
+        },
+        {
+            "name": "Pablotter",
+            "life": 10,
+            "attack": 6,
+            "range":2,
+            "cost":12,
+            "texture": ""
+        }
+    ],
+
+    "enemy2":[
+        {
+            "name": "Nutria con vestido blanco",
+            "life": 13,
+            "attack": 9,
+            "range":2,
+            "cost":17,
+            "texture": ""
+        },
+        {
+            "name": "Oso hormiguero con bastón, sombrero y monóculo",
+            "life": 12,
+            "attack": 7,
+            "range":0,
+            "cost":17,
+            "texture": ""
+        },
+        {
+            "name": "Pimiento Gatomórfico",
+            "life": 10,
+            "attack": 9,
+            "range":1,
+            "cost":17,
+            "texture": ""
+        },
+        {
+            "name": "Miku",
+            "life": 12,
+            "attack": 8,
+            "range":4,
+            "cost":17,
+            "texture": ""
+        }
+    ],
+
+    "enemy3":[
+        {
+            "name": "QiLing",
+            "life": 14,
+            "attack": 10,
+            "range":0,
+            "cost":22,
+            "texture": ""
+        },
+        {
+            "name": "Gato Kunfu",
+            "life": 12,
+            "attack": 9,
+            "range":1,
+            "cost":22,
+            "texture": ""
+        },
+        {
+            "name": "Orca Deep Seek",
+            "life": 13,
+            "attack": 11,
+            "range":3,
+            "cost":22,
+            "texture": ""
+        },
+        {
+            "name": "Pez chancla",
+            "life": 12,
+            "attack": 10,
+            "range": 2,
+            "cost":22,
+            "texture": ""
+        }
+    ]
+}
