@@ -1,0 +1,111 @@
+{
+    "object0":[
+        {
+            "name": "Viejo calcetín",
+            "life": 0,
+            "attack": 3,
+            "cost":5,
+            "texture": ""
+        },
+        {
+            "name": "Las llaves perdidas",
+            "life": 4,
+            "attack": 0,
+            "cost":5,
+            "texture": ""
+        },
+        {
+            "name": "Agua",
+            "life": 2,
+            "attack": 2,
+            "cost":5,
+            "texture": ""
+        }
+    ],
+
+    "object1":[
+        {
+            "name": "Bocata de calamares",
+            "life": 6,
+            "attack": 0,
+            "cost":8,
+            "texture": ""
+        },
+        {
+            "name": "Vestido flamenca",
+            "life": 5,
+            "attack": 0,
+            "cost":8,
+            "texture": ""
+        },
+        {
+            "name": "Ñ",
+            "life": -1,
+            "attack": 4,
+            "cost":8,
+            "texture": ""
+        },
+        {
+            "name": "Tortilla de patatas CON CEBOLLA",
+            "life": 4,
+            "attack": 1,
+            "cost":8,
+            "texture": ""
+        }
+    ],
+
+    "object2":[
+        {
+            "name": "Pistola",
+            "life": -3,
+            "attack": 5,
+            "cost":11,
+            "texture": ""
+        },
+        {
+            "name": "Partes de las torres gemelas",
+            "life": 2,
+            "attack": 4,
+            "cost":11,
+            "texture": ""
+        },
+        {
+            "name": "Cheese Burger",
+            "life": 5,
+            "attack": 0,
+            "cost":11,
+            "texture": ""
+        }
+    ],
+
+    "object3":[
+        {
+            "name": "Chancla",
+            "life": -7,
+            "attack": 10,
+            "cost":14,
+            "texture": ""
+        },
+        {
+            "name": "Bambu",
+            "life": 8,
+            "attack": 0,
+            "cost":14,
+            "texture": ""
+        },
+        {
+            "name": "Emocional Damage",
+            "life": 0,
+            "attack": 7,
+            "cost":14,
+            "texture": ""
+        },
+        {
+            "name": "Timo",
+            "life": 6,
+            "attack": 6,
+            "cost":14,
+            "texture": ""
+        }
+    ]
+}
