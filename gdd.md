@@ -316,7 +316,7 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 |:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 |Australia|
 || Cazador Furtivo |8|4|0|
-|| //Buceador |5|5|1|
+|| Jonny me lavo |5|5|1|
 || //Aborígenes |7|4|2|
 || Sharon |5|5|3|
 |España|
@@ -346,17 +346,17 @@ Lista de enemigos por País
 |:-:|:-:|:-:|:-:|:-:|
 |1|Uno aleatorio del País|Uno aleatorio del País|Uno aleatorio del País|Uno aleatorio del País|
 |2|Aborígenes, Cazador Furtivo|Manolo, José Luis   |Tump, Guardaespaldas |Pimiento humanoide, Otaku  |
-|2|Buceador , Sharon          |Mariloli, Maricarmen|Karen, Anabella      |Profesores, Taoísta        |
-|2|Cazador Furtivo, Buceador  |Maricarmen, Manolo  |Guardaespaldas, Karen|Taoísta, Pimiento humanoide|
-|3|Aborígenes, Cazador Furtivo, Buceador|José Luis, Mariloli, Manolo    |Anabella, Karen, Guardaespaldas|Otaku*3                           |
-|3|Aborígenes, Buceador, Sharon         |Manolo, Mariloli, Maricarmen   |Tump, Guardaespaldas, Karen    |Taoísta, Otaku, Pimiento humanoide|
-|3|Buceador, Cazador Furtivo , Sharon   |Mariloli, Maricarmen, José Luis|Karen, Anabella, Tump          |Pimiento humanoide, Profesor*2    |
+|2|Jonny me lavo , Sharon          |Mariloli, Maricarmen|Karen, Anabella      |Profesores, Taoísta        |
+|2|Cazador Furtivo, Jonny me lavo  |Maricarmen, Manolo  |Guardaespaldas, Karen|Taoísta, Pimiento humanoide|
+|3|Aborígenes, Cazador Furtivo, Jonny me lavo|José Luis, Mariloli, Manolo    |Anabella, Karen, Guardaespaldas|Otaku*3                           |
+|3|Aborígenes, Jonny me lavo, Sharon         |Manolo, Mariloli, Maricarmen   |Tump, Guardaespaldas, Karen    |Taoísta, Otaku, Pimiento humanoide|
+|3|Jonny me lavo, Cazador Furtivo , Sharon   |Mariloli, Maricarmen, José Luis|Karen, Anabella, Tump          |Pimiento humanoide, Profesor*2    |
 |4|los 4 pero en diferente orden|los 4 pero en diferente orden|los 4 pero en diferente orden|los 4 pero en diferente orden|
-|5|Aborígenes, Buceador, Cazador Furtivo , Sharon, Aborígenes|José Luis*2, Manolo, Mariloli, Maricarmen|Guardaespaldas*4, Tump                     |Taoísta, Profesor, Otaku, Profesor, Taoísta|
+|5|Aborígenes, Jonny me lavo, Cazador Furtivo , Sharon, Aborígenes|José Luis*2, Manolo, Mariloli, Maricarmen|Guardaespaldas*4, Tump                     |Taoísta, Profesor, Otaku, Profesor, Taoísta|
 |5|Cazador Furtivo*5                                         |Manolo, Mariloli, Maricarmen, Mariloli   |Karen*2, Anabella, Guardaespaldas          |Profesor*3, Otaku *2, Pimiento humanoide|
-|5|Sharon, Buceador, Sharon, Aborígenes, Sharon              |Maricarmen*3, Manolo *2                  |Tump, Karen, Tump, Guardaespaldas, Anabella|Pimiento humanoide, Otaku, Profesor, Taoista, Pimiento humanoide|
-|6|Aborígenes, Buceador, Cazador Furtivo, Sharon, Aborígenes, Sharon         |Manolo, Mariloli, José Luis Maricarmen, Mariloli, Manolo  |Anabella*2, Karen *3, Tump                      |Profesor*2, Taoista, Otaku, Profesor *2|
-|6|Buceador, Sharon, Cazador Furtivo, Aborígenes, Aborígenes, Cazador Furtivo|Manolo, Mariloli, Maricarmen, Manolo, Mariloli, Maricarmen|Guardaespaldas*2, Tump, Guardaespaldas *2, Karen|Taoísta*3, Otaku, Pimiento humanoide, Otaku|
+|5|Sharon, Jonny me lavo, Sharon, Aborígenes, Sharon              |Maricarmen*3, Manolo *2                  |Tump, Karen, Tump, Guardaespaldas, Anabella|Pimiento humanoide, Otaku, Profesor, Taoista, Pimiento humanoide|
+|6|Aborígenes, Jonny me lavo, Cazador Furtivo, Sharon, Aborígenes, Sharon         |Manolo, Mariloli, José Luis Maricarmen, Mariloli, Manolo  |Anabella*2, Karen *3, Tump                      |Profesor*2, Taoista, Otaku, Profesor *2|
+|6|Jonny me lavo, Sharon, Cazador Furtivo, Aborígenes, Aborígenes, Cazador Furtivo|Manolo, Mariloli, Maricarmen, Manolo, Mariloli, Maricarmen|Guardaespaldas*2, Tump, Guardaespaldas *2, Karen|Taoísta*3, Otaku, Pimiento humanoide, Otaku|
 |6|Cazador Furtivo, Sharon, Aborígenes, Sharon, Aborígenes, Sharon           |José Luis*2, Maricarmen *2, Mariloli *2                   |Anabella, Tump, Karen, Guardapespaldas, Karen*2 |Otaku*2, Profesor, Taoista, Pimiento humanoide *2|
 
 #### 3.8.1. **Jefes**
@@ -375,8 +375,8 @@ Lista de combinaciones con Jefe
 |**Australia**|**España**|**Estados Unidos**|**China**|
 |:-----------:|:-----------:|:-----------:|:-----------:|
 |Aborígenes, Sharon, Cazador Furtivo, Melon Moska|Pedry el ornitorrinco, José Luis, Maricarmen, Manolo|Mister Cheeto, Tump, Karen, Guardaespaldas   |Taoista, Otaku, Güini de Pu, Profesor|
-|Sharon, Melon Moska, Buceador, Aborígenes       |Manolo, Maricarmen, Pedry el ornitorrinco, Mariloli |Tump, Guardaespaldas, Mister Cheeto, Anabelle|Güini de Pu, Otaku, Taoista, Pimiento humanoide|
-|Melon Moska, Aborígenes, Sharon, Buceador       |José Luis, Manolo, Mariloli, Pedry el ornitorrinco  |Anabelle, Mister Cheeto, Karen, Tump         |Otaku, Profesor, Taoista, Güini de Pu|
+|Sharon, Melon Moska, Jonny me lavo, Aborígenes       |Manolo, Maricarmen, Pedry el ornitorrinco, Mariloli |Tump, Guardaespaldas, Mister Cheeto, Anabelle|Güini de Pu, Otaku, Taoista, Pimiento humanoide|
+|Melon Moska, Aborígenes, Sharon, Jonny me lavo       |José Luis, Manolo, Mariloli, Pedry el ornitorrinco  |Anabelle, Mister Cheeto, Karen, Tump         |Otaku, Profesor, Taoista, Güini de Pu|
 
 ***Parámetros*** 
 - Cantidad de vida
