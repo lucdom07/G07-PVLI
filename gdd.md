@@ -284,7 +284,7 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 || Colibri twitter |9| 5 |4|
 || Gato-Pulpo de Github | 6 | 3 |3|
 |España|
-|| Paloma con 6 ojos |9|5|5|
+|| Paloma con 6 ojos |9|5|3|
 || Rana arborícola con cuernos |10|6|0|
 || Gatoñete |11|7|1|
 || Pablotter  |10|6|2|
@@ -297,7 +297,7 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 || QiLing |14|10|0|
 || Gato Kunfu |12|9|1|
 || Orca Deep Seek |13|11|3|
-|| Pez chancla |12|10|5|
+|| Pez chancla |12|10|2|
 
 ***Parámetros*** 
 - Cantidad de vida
