@@ -11,12 +11,8 @@ export default class Ally extends Warrior{
         super.preUpdate(t, dt);
     }
 
-    hit(damage){
-        super.hit(damage);
-        if (this.life <= 0){
-            this.scene.events.emit('addNewEvent', 'removeDeadAlly');
-        }
-        this.scene.events.emit('nextEvent');
+    takeHit(damage, callback){
+        super.takeHit(damage, callback);
     }
 
     isAvailable() {

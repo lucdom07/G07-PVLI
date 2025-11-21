@@ -5,15 +5,15 @@ export default class CombatManager{
     constructor(scene){
         this.scene = scene;
         //cola de eventos, como mínimo hay una ronda de ataque de dos guerreros y se comprueba si hay algún equipo con 0 guerreros
-        this.eventsQueue = ['allyAttack', 'enemyAttack', 'checkState']; 
+        //this.eventsQueue = ['allyAttack', 'enemyAttack', 'checkState']; 
+        this.nextEvent = ()=>{ this.callNextEvent() };
+        this.allyAttack = ()=>{this.warriorAttack(this.allyTeam[0], this.enemyTeam, this.nextEvent)};
+        this.enemyAttack = ()=>{this.warriorAttack(this.enemyTeam[0], this.allyTeam, this.nextEvent)};
+        this.eventsQueue = [ this.allyAttack, this.enemyAttack, ()=>{this.checkCombatState()} ];
         //guardamos el equipo aliado y enemigo en propiedades de esta clase para usarlos en toda la clase sin estar pasándolos como parámetros
         this.allyTeam = [];
         this.enemyTeam = [];
-        //guarda los índices los guerreros que son atacados en una ronda. Necesario para métodos removeDeadUnit y moveTeam en caso de que mueran
-        //deadWarriorsIndex[0] = índice aliado
-        //deadWarriorsIndex[1] = índice enemigo
-        this.targetWarriorsIndex = [-1, -1]; 
-        this.TEAM_DIST_FROM_CANVAS_HALF = 95
+        this.TEAM_DIST_FROM_CANVAS_HALF = 95;
         this.WARRIOR_Y = 300;
         this.WARRIORS_SEPARATION = 120; 
         this.FIRST_ALLY_POS_X = this.scene.sys.game.canvas.width*0.5 - this.TEAM_DIST_FROM_CANVAS_HALF;
@@ -26,31 +26,25 @@ export default class CombatManager{
         //copiamos los aliados en el array de combatManager para que no compartan referencia y no se destruyan los aliados que tiene el jugador en la partida
         this.allyTeam = allyTeam.slice(); 
         this.enemyTeam = enemyTeam;
+        console.log(this.allyTeam);
+        console.log(this.enemyTeam);
         this.initTeamPositions();
         //Empieza la llamada de eventos
         this.callNextEvent();
-        /*
-        while (allyTeam.length > 0 && enemyTeam.length > 0) {
-            this.scene.events.emit('roundStarts', allyTeam, enemyTeam);
-        }
-
-        if(allyTeam.length == enemyTeam.length){ //cuando son en empate
-            console.log("EMPATE");
-        }
-        const playerWins = allyTeam.length > 0;
-        this.scene.events.emit('endCombat', playerWins, allyTeam, enemyTeam);
-        */
-        //this.endCombat(playerWins, allyTeam, enemyTeam);
     }
 
     //Llamar al siguiente evento de la cola
     callNextEvent(){
-        const followingEvent = this.eventsQueue[0];
-        this.eventsQueue.shift();
-        this.checkEvent(followingEvent);
+        if (this.eventsQueue.length > 0){
+            const followingEvent = this.eventsQueue[0];
+            this.eventsQueue.shift();
+            console.log(followingEvent);
+            followingEvent();
+        }
     }
 
     //Mira a qué evento hay que llamar según el string que se le pase
+    /*
     checkEvent(event){
         switch(event){
             case 'allyAttack':
@@ -78,8 +72,23 @@ export default class CombatManager{
                 const playerWins = allyTeam.length > 0;
                 this.scene.events.emit('endCombat', playerWins);
                 break;
-            default:
-                break;
+                default:
+                    break;
+                    }
+        }
+    */
+
+    warriorAttack(attacker, targetTeam, callback){
+        if (attacker != undefined){
+                const targetIndex = Math.min(attacker.range, targetTeam.length - 1);
+                if (targetTeam[targetIndex].life - attacker.attack <= 0){
+                    this.addNewEvent(()=>{this.removeDeadUnit(targetTeam, targetIndex, this.nextEvent)});
+                }
+                const target = targetTeam[targetIndex];
+                this.scene.events.emit('warriorAttack', attacker, target, callback);
+        }
+        else{
+            this.nextEvent();
         }
     }
 
@@ -90,49 +99,28 @@ export default class CombatManager{
 
     checkCombatState(){
         if (this.allyTeam.length == 0 || this.enemyTeam.length == 0){
-            this.eventsQueue.push('endCombat');
+            this.eventsQueue.push(()=>{this.endCombat()});
         }
         else{
-            this.eventsQueue.push('allyAttack', 'enemyAttack', 'checkState');
+            this.eventsQueue.push(this.allyAttack, this.enemyAttack, ()=>{this.checkCombatState()});
         }
-        this.scene.events.emit('nextEvent');
+        this.nextEvent();
     }
 
     //colocar a los guerreros en pantalla
     initTeamPositions() {
         // Posicionar aliados
         this.allyTeam.forEach((ally, index) => {
-            ally.setWarriorPosition(this.FIRST_ALLY_POS - index * this.WARRIORS_SEPARATION, this.WARRIOR_Y);
+            ally.setWarriorPosition(this.FIRST_ALLY_POS_X - index * this.WARRIORS_SEPARATION, this.WARRIOR_Y);
         });
         
         // Posicionar enemigos
         this.enemyTeam.forEach((enemy, index) => {
-            enemy.setWarriorPosition(this.FIRST_ENEMY_POS + index * this.WARRIORS_SEPARATION, this.WARRIOR_Y);
+            enemy.setWarriorPosition(this.FIRST_ENEMY_POS_X + index * this.WARRIORS_SEPARATION, this.WARRIOR_Y);
         });
     }
 
-    /*
-    executeCombatRound(allyTeam, enemyTeam) {
-        const targetEnemyIndex = Math.min(allyTeam[0].range, enemyTeam.length - 1);
-        const targetEnemy = enemyTeam[targetEnemyIndex];
-        const targetAllyIndex = Math.min(enemyTeam[0].range, allyTeam.length - 1);
-        const targetAlly = allyTeam[targetAllyIndex];
-
-        allyTeam[0].attackWarrior(targetEnemy);
-        enemyTeam[0].attackWarrior(targetAlly);
-
-        if (targetEnemy.life <= 0){
-            this.scene.events.emit('removeDeadUnit', enemyTeam, targetEnemyIndex);
-            //this.removeDeadUnit(enemyTeam, targetEnemyIndex);
-        }
-        if (targetAlly.life <= 0){
-            this.scene.events.emit('removeDeadUnit', allyTeam, targetAllyIndex);
-            //this.removeDeadUnit(allyTeam, targetAllyIndex);
-        }
-    }
-        */
-
-    removeDeadUnit(team, deadUnitIndex) {
+    removeDeadUnit(team, deadUnitIndex, callback) {
         const deadUnit = team[deadUnitIndex];
 
         deadUnit.dieAnimation();
@@ -144,37 +132,44 @@ export default class CombatManager{
         team.splice(deadUnitIndex, 1);
         if (team.length != 0 && deadUnitIndex != team.length-1){
             //this.scene.events.emit('moveTeam', team, deadUnitIndex, deadUnit.x);
-            this.moveTeam(team, deadUnitIndex, deadUnit.x);
+            this.moveTeam(team, deadUnitIndex, deadUnit.x, callback);
         }
+        this.scene.time.addEvent({
+            delay: 500,
+            callback: ()=>{ callback() }
+        });
     }
 
-    moveTeam(team, deadUnitIndex, deadUnitX){
+    moveTeam(team, deadUnitIndex, deadUnitX, callback){
         for(let i = 0; deadUnitIndex + i < team.length; i++){
             const unit = team[deadUnitIndex + i];            
             const targetX = unit.calculateNewXInCombat(deadUnitX, deadUnitIndex + i, this.WARRIORS_SEPARATION);
 
             console.log("array: " + team + " Indice del muerto: " + deadUnitIndex + " PosX: " + deadUnitX);
-
             this.scene.tweens.add({
                 targets: unit, // Ahora unit está definido
                 x: targetX,
                 y: this.WARRIOR_Y,
                 duration: 500,
-                ease: 'Power2'
+                ease: 'Power2',
             });      
         }
-        this.scene.events.emit('nextEvent');
+        console.log("moveTeam callback:" + callback);
+        this.scene.time.addEvent({
+            delay: 500,
+            callback: ()=>{ callback() }
+        });
     }
 
-    endCombat(playerWins) {            
-
-            if (playerWins) {
-                //console.log("¡VICTORIA!");
-                this.victoria();
-            } else {
-                console.log("Derrota...");
-                this.derrota();
-            }
+    endCombat() {            
+        console.log("ªªªªªªª");
+        if (this.allyTeam.length > 0) {
+            console.log("¡VICTORIA!");
+            this.victoria();
+        } else {
+            console.log("Derrota...");
+            this.derrota();
+        }
     }
 
     victoria() {

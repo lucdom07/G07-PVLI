@@ -29,16 +29,16 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
     setWarriorPosition(newX, newY){
         this.x = newX;
         this.y = newY;
+        console.log("position:" + this.x + " "+ this.y);
         this.warriorUI.setStatsPosition(newX, newY);
     }
 
     //Ejecuta animación de ataque y le hace daño al objetivo
-    attackWarrior(target){
-        this.attackAnimation(target);
-        target.hit(this.attack);
+    attackWarrior(target, callback){
+        this.attackAnimation(target, callback);
     }
 
-    hit(damage){
+    takeHit(damage, callback){
         this.life -= (damage);
         this.warriorUI.updateLivesNumber(this.life);
         console.log(this.life);
@@ -48,10 +48,14 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
             delay: 500,
             callback: ()=>{this.setTint(0xffffffff)}
         });
+        this.scene.time.addEvent({
+            delay: 500,
+            callback: ()=>{ callback() }
+        });
     }
 
     // Animación de ataque
-    attackAnimation(target) {
+    attackAnimation(target, callback) {
         const originalX = this.x;
         const originalY = this.y;
         
@@ -80,6 +84,9 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
             y: originalY,
             duration: 300,
             ease: 'Power2',
+            callback: ()=>{     
+                target.takeHit(this.attack, callback);
+            }
         });
     }
 

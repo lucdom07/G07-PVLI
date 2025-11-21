@@ -45,8 +45,8 @@ export default class Animation extends Phaser.Scene{
             this.combatManager.checkCombatState()
         });
         //ataque de guerrero
-        this.events.on('warriorAttack', (attacker, target)=>{
-            attacker.attackWarrior(target)
+        this.events.on('warriorAttack', (attacker, target, callback)=>{
+            attacker.attackWarrior(target, callback)
         });
         //Quitar guerreros muertos
         this.events.on('removeDeadUnit', (team, deadUnitIndex) => {
