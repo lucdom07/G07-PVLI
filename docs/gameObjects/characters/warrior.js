@@ -29,7 +29,7 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
     setWarriorPosition(newX, newY){
         this.x = newX;
         this.y = newY;
-        console.log("position:" + this.x + " "+ this.y);
+        //console.log("position:" + this.x + " "+ this.y);
         this.warriorUI.setStatsPosition(newX, newY);
     }
 
@@ -38,56 +38,60 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         this.attackAnimation(target, callback);
     }
 
-    takeHit(damage, callback){
+    takeHit(damage){
         this.life -= (damage);
         this.warriorUI.updateLivesNumber(this.life);
-        console.log(this.life);
         //poner tinte rojo al personaje cuando recibe daño
+        // Efecto visual en el objetivo
+        this.scene.tweens.add({
+            targets: this,
+            scaleX: 0.6,
+            scaleY: 0.6,
+            duration: 300,
+            yoyo: true,
+        });
         this.setTint(0xffff0000);
         this.scene.time.addEvent({
             delay: 500,
-            callback: ()=>{this.setTint(0xffffffff)}
-        });
-        this.scene.time.addEvent({
-            delay: 500,
-            callback: ()=>{ callback() }
+            callback: ()=>{
+                this.setTint(0xffffffff);
+                this.scene.time.delayedCall(700, () => {
+                    this.scene.events.emit('canCallNext');
+                });
+            }
         });
     }
 
     // Animación de ataque
-    attackAnimation(target, callback) {
+    attackAnimation(target) {
         const originalX = this.x;
         const originalY = this.y;
         
         // Mover hacia el objetivo
         this.scene.tweens.add({
             targets: this,
-            x: this.x + (target.x - this.x) * 0.3,
-            y: this.y + (target.y - this.y) * 0.3,
-            duration: 300,
+            x: this.calculateAttackPos(target.x),
+            y: target.y,
+            duration: 600,
             ease: 'Power2',
-        });
-        
-        // Efecto visual en el objetivo
-        this.scene.tweens.add({
-            targets: target,
-            scaleX: 0.6,
-            scaleY: 0.6,
-            duration: 100,
-            yoyo: true
-        });
-        
-        // Volver a la posición original
-        this.scene.tweens.add({
-            targets: this,
-            x: originalX,
-            y: originalY,
-            duration: 300,
-            ease: 'Power2',
-            callback: ()=>{     
-                target.takeHit(this.attack, callback);
+            callback: () =>{
+                this.scene.time.delayedCall(500, () => {
+                    target.takeHit(this.attack);
+                    // Volver a la posición original
+                    this.scene.tweens.add({
+                        targets: this,
+                        x: originalX,
+                        y: originalY,
+                        duration: 600,
+                        ease: 'Power2',
+                    });
+                });
             }
         });
+    }
+
+    calculateAttackPos(targetX){
+        
     }
 
     dieAnimation(){

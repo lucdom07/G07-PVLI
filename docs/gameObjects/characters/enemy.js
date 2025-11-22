@@ -12,7 +12,11 @@ export default class Enemy extends Warrior{
         super.takeHit(damage, callback);
     }
 
+    calculateAttackPos(targetX){
+        return targetX * 1.1;
+    }
+
     calculateNewXInCombat(previousUnitX, index, WARRIORS_SEPARATION){
-        return previousUnitX - index * WARRIORS_SEPARATION;
+        return previousUnitX + index * WARRIORS_SEPARATION;
     }
 }

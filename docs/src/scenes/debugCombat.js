@@ -35,6 +35,10 @@ export default class Animation extends Phaser.Scene{
         this.events.on('nextEvent', ()=>{
             this.combatManager.callNextEvent();
         });
+        this.events.on('canCallNext',()=>{
+            console.log("You can execute the next event");
+            this.combatManager.canCallNext = true;
+        });
         //Añade un evento nuevo a la cola antes de checkCombatState 
         //(necesario para quitar guerreros muertos y mover a los guerreros antes de que compruebe el estado del combate)
         this.events.on('addNewEvent', (event)=>{
@@ -44,10 +48,12 @@ export default class Animation extends Phaser.Scene{
         this.events.on('checkCombatState', ()=>{
             this.combatManager.checkCombatState()
         });
+        /*
         //ataque de guerrero
         this.events.on('warriorAttack', (attacker, target, callback)=>{
             attacker.attackWarrior(target, callback)
         });
+        */
         //Quitar guerreros muertos
         this.events.on('removeDeadUnit', (team, deadUnitIndex) => {
             this.combatManager.removeDeadUnit(team, deadUnitIndex)
@@ -66,8 +72,8 @@ export default class Animation extends Phaser.Scene{
             new Enemy(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1)
         ];
         
-        //Inicia el combate
-        this.combatManager.startCombat(this.playerTeam, enemyTeam);
+        //Inicializa el combate
+        this.combatManager.initCombat(this.playerTeam, enemyTeam);
     }
 //recrea los aliados en esta escena con las mismas propiedades
     recreate() { 
@@ -92,5 +98,8 @@ export default class Animation extends Phaser.Scene{
         });
         
         this.playerTeam = recreatedAllies;
+    }
+    update(time, dt){
+        this.combatManager.update(time, dt);
     }
 }

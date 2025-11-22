@@ -19,8 +19,12 @@ export default class Ally extends Warrior{
         return this.available;
     }
 
+    calculateAttackPos(targetX){
+        return targetX * 0.9;
+    }
+
     calculateNewXInCombat(previousUnitX, index, WARRIORS_SEPARATION){
-        return previousUnitX + index * WARRIORS_SEPARATION;
+        return previousUnitX - index * WARRIORS_SEPARATION;
     }
 
     clone(){
