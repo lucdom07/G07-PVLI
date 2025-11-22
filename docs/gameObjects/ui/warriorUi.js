@@ -32,10 +32,24 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
         this.scene.add.existing(this);
     }
 
+    //coloca cada texto en una nueva posición
     setStatsPosition(newX, newY){
         for (let i = 0; i < this.stats.length; i++){
             const startingY = newY + this.DISTANCE_BELOW_WARRIOR;
             this.stats[i].setPosition(newX, startingY + this.STATS_DISTANCE * (i +1));
+        }
+    }
+
+    //animación de moverse
+    moveStatsAnimation(targetX){
+        for(let i = 0; i < this.stats.length; i++){
+            this.scene.tweens.add({
+                targets: this.stats[i],
+                x: targetX,
+                y: this.stats[i].y,
+                duration: 500,
+                ease: 'Power2',
+            });
         }
     }
 

@@ -26,44 +26,19 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         return this.texture;
     }
     
+    getWarriorUI(){
+        return this.warriorUI;
+    }
+
+    //mueve a los guerreros y sus UI a una nueva posición
     setWarriorPosition(newX, newY){
         this.x = newX;
         this.y = newY;
-        //console.log("position:" + this.x + " "+ this.y);
         this.warriorUI.setStatsPosition(newX, newY);
     }
 
-    //Ejecuta animación de ataque y le hace daño al objetivo
-    attackWarrior(target, callback){
-        this.attackAnimation(target, callback);
-    }
-
-    takeHit(damage){
-        this.life -= (damage);
-        this.warriorUI.updateLivesNumber(this.life);
-        //poner tinte rojo al personaje cuando recibe daño
-        // Efecto visual en el objetivo
-        this.scene.tweens.add({
-            targets: this,
-            scaleX: 0.6,
-            scaleY: 0.6,
-            duration: 300,
-            yoyo: true,
-        });
-        this.setTint(0xffff0000);
-        this.scene.time.addEvent({
-            delay: 500,
-            callback: ()=>{
-                this.setTint(0xffffffff);
-                this.scene.time.delayedCall(700, () => {
-                    this.scene.events.emit('canCallNext');
-                });
-            }
-        });
-    }
-
-    // Animación de ataque
-    attackAnimation(target) {
+    //Ejecuta animación de ataque, que luego llamará a la función de recibir daño del target
+    attackWarrior(target){
         const originalX = this.x;
         const originalY = this.y;
         
@@ -90,6 +65,33 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         });
     }
 
+    //funcion de recibir daño: quita vidas según el daño, lo actualiza en la UI y después de mostrar las animaciones
+    //emite canCallNext para avisar de que se puede ejecutar el siguiente evento
+    takeHit(damage){
+        this.life -= (damage);
+        this.warriorUI.updateLivesNumber(this.life);
+        //poner tinte rojo al personaje cuando recibe daño
+        // Efecto visual en el objetivo
+        this.scene.tweens.add({
+            targets: this,
+            scaleX: 0.6,
+            scaleY: 0.6,
+            duration: 300,
+            yoyo: true,
+        });
+        this.setTint(0xffff0000);
+        this.scene.time.addEvent({
+            delay: 500,
+            callback: ()=>{
+                this.setTint(0xffffffff);
+                this.scene.time.delayedCall(700, () => {
+                    this.scene.events.emit('canCallNext');
+                });
+            }
+        });
+    }
+
+    //NO BORRAR. Los aliados y enemigos heredan de esta función para que cada uno se calcule la posición a la que debe avanzar en la animación de ataque
     calculateAttackPos(targetX){
         
     }

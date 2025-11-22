@@ -30,37 +30,10 @@ export default class Animation extends Phaser.Scene{
     create(){
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
 
-        //EVENTOS PERSONALIZADOS
-        //Llama al siguiente evento de la cola
-        this.events.on('nextEvent', ()=>{
-            this.combatManager.callNextEvent();
-        });
+        //indica al combatManager que ya puede llamar al siguiente evento
         this.events.on('canCallNext',()=>{
             console.log("You can execute the next event");
             this.combatManager.canCallNext = true;
-        });
-        //Añade un evento nuevo a la cola antes de checkCombatState 
-        //(necesario para quitar guerreros muertos y mover a los guerreros antes de que compruebe el estado del combate)
-        this.events.on('addNewEvent', (event)=>{
-            this.combatManager.addNewEvent(event)
-        });
-        //Revisa si algún equipo tiene length = 0 (0 guerreros)
-        this.events.on('checkCombatState', ()=>{
-            this.combatManager.checkCombatState()
-        });
-        /*
-        //ataque de guerrero
-        this.events.on('warriorAttack', (attacker, target, callback)=>{
-            attacker.attackWarrior(target, callback)
-        });
-        */
-        //Quitar guerreros muertos
-        this.events.on('removeDeadUnit', (team, deadUnitIndex) => {
-            this.combatManager.removeDeadUnit(team, deadUnitIndex)
-        });
-        //Finalizar combate
-        this.events.on('endCombat', (playerWins) => {
-            this.combatManager.endCombat(playerWins)
         });
 
         this.recreate();

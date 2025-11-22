@@ -4,12 +4,11 @@ import Enemy from "../../gameObjects/characters/enemy.js";
 export default class CombatManager{
     constructor(scene){
         this.scene = scene;
-        //cola de eventos, como mínimo hay una ronda de ataque de dos guerreros y se comprueba si hay algún equipo con 0 guerreros
-        //this.eventsQueue = ['allyAttack', 'enemyAttack', 'checkState']; 
         this.canCallNext = true;
         this.nextEvent = ()=>{ this.callNextEvent() };
         this.allyAttack = ()=>{this.warriorAttack(this.allyTeam[0], this.enemyTeam)};
         this.enemyAttack = ()=>{this.warriorAttack(this.enemyTeam[0], this.allyTeam)};
+        //cola de eventos, como mínimo hay una ronda de ataque de dos guerreros y se comprueba si hay algún equipo con 0 guerreros
         this.eventsQueue = [ this.allyAttack, this.enemyAttack, ()=>{this.checkCombatState()} ];
         //guardamos el equipo aliado y enemigo en propiedades de esta clase para usarlos en toda la clase sin estar pasándolos como parámetros
         this.allyTeam = [];
@@ -22,31 +21,32 @@ export default class CombatManager{
     }
 
     //Inicializa el combate
-    //tengo que tener 2 arrays, uno de ally y otro de enemy, mientras que los dos tengan cosas, se sigue hasta que uno de los dos termine
     initCombat(allyTeam, enemyTeam){ 
         //copiamos los aliados en el array de combatManager para que no compartan referencia y no se destruyan los aliados que tiene el jugador en la partida
         this.allyTeam = allyTeam.slice(); 
         this.enemyTeam = enemyTeam;
         this.initTeamPositions();
-        //Empieza la llamada de eventos
-        //this.callNextEvent();
     }
 
+    //update que se llama en el update de debugCombat
     update(time, dt){
         this.callNextEvent();
     }
 
-    //Llamar al siguiente evento de la cola
+    //Llama al siguiente evento de la cola si canCallNext es igual a true, que sirve como señal para indicar que puede llamar al siguiente evento
     callNextEvent(){
         if (this.canCallNext && this.eventsQueue.length > 0){
             this.canCallNext = false;
             const followingEvent = this.eventsQueue[0];
+            //Quitamos el evento de la cola para que en la siguiente llamada se llame al siguiente evento
             this.eventsQueue.shift();
             console.log(followingEvent);
             followingEvent();
         }
     }
 
+    //llama a la función de ataque, determina el target del atacante según el rango y añade un evento antes de checkCombatState en caso de que 
+    //el atacante reduzca las vidas del target a 0 o menos
     warriorAttack(attacker, targetTeam){
         if (attacker != undefined){
                 const targetIndex = Math.min(attacker.range, targetTeam.length - 1);
@@ -55,7 +55,6 @@ export default class CombatManager{
                         this.addNewEvent(()=>{this.removeDeadUnit(targetTeam, targetIndex)});
                     }
                     const target = targetTeam[targetIndex];
-                    //this.scene.events.emit('warriorAttack', attacker, target, callback);
                     attacker.attackWarrior(target);
                 }
         }
@@ -64,11 +63,12 @@ export default class CombatManager{
         }
     }
 
-    //Añade un nuevo evento a la cola antes de que revise el estado del combate
+    //Añade un nuevo evento a la cola antes de que revise el estado del combate, por eso el this.eventsQueue.length - 2
     addNewEvent(event){
         this.eventsQueue.splice(this.eventsQueue.length - 2, 0, event);
     }
 
+    //Comprueba si algún equipo ha sido derrotado. En caso contrario se añade otra ronda de ataque
     checkCombatState(){
         if (this.allyTeam.length == 0 || this.enemyTeam.length == 0){
             this.eventsQueue.push(()=>{this.endCombat()});
@@ -94,20 +94,19 @@ export default class CombatManager{
         });
     }
 
+    //elimina al guerrero muerto del juego y en caso de que quede un espacio en blanco entre medias o en la primera posición
+    //se llama a moveTeam para que mueva a los guerreros de posición
     removeDeadUnit(team, deadUnitIndex) {
         const deadUnit = team[deadUnitIndex];
         const deadUnitX = deadUnit.x;
-        console.log("deadUnitX: " + deadUnitX);
         deadUnit.dieAnimation();
         
         this.scene.time.delayedCall(500, () => {
             deadUnit.destroy();
-            console.log("destroyed");
         });
 
         team.splice(deadUnitIndex, 1);
         if (team.length != 0 && ((deadUnitIndex == 0 && team.length == 1)|| deadUnitIndex != team.length-1)){
-            //this.scene.events.emit('moveTeam', team, deadUnitIndex, deadUnit.x);
             this.moveTeam(team, deadUnitIndex, deadUnitX);
         }
         this.scene.time.addEvent({
@@ -118,6 +117,7 @@ export default class CombatManager{
         });
     }
 
+    //mueve a los guerreros y sus stats para ocupar el espacio que ha dejado el guerrero muerto
     moveTeam(team, deadUnitIndex, deadUnitX){
 
         for(let i = 0; deadUnitIndex + i < team.length; i++){
@@ -130,21 +130,23 @@ export default class CombatManager{
                 duration: 500,
                 ease: 'Power2',
             });
-            console.log("old x: " + unit.x);
+            //animación de las stats para que se muevan junto con la unidad
+            unit.getWarriorUI().moveStatsAnimation(targetX);
         }
         this.scene.time.addEvent({
             delay: 500,
             callback: ()=>{ 
                 //actualizar el atributo x de cada guerrero porque el tweens solo lo cambia visualmente
                 for (let i = 0; deadUnitIndex + i < team.length; i++){
-                    team[deadUnitIndex + i].x = team[deadUnitIndex + i].calculateNewXInCombat(deadUnitX, i, this.WARRIORS_SEPARATION);
-                    console.log("new x: " + team[deadUnitIndex + i].x);
+                    const newX = team[deadUnitIndex + i].calculateNewXInCombat(deadUnitX, i, this.WARRIORS_SEPARATION);
+                    team[deadUnitIndex + i].setWarriorPosition(newX, this.WARRIOR_Y);
                 }
                 this.scene.events.emit('canCallNext');
             }
         });
     }
 
+    //comprueba quién ha ganado y se reproduce una animación diferente según el resultado
     endCombat() {            
         if (this.allyTeam.length > 0) {
             console.log("¡VICTORIA!");
