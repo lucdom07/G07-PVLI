@@ -38,12 +38,10 @@ export default class debugMap extends Phaser.Scene {
     }
 
     buttonsRec(node, x, y, left = null) {
+        const button = this.add.image(100, 50, 'combatButton').setInteractive();
+
         if(node.empty()) return;
-        //const button = this.add.image(100, 50, 'combatButton').setInteractive();
-
         if(node === this.tree.root) {
-            const button = this.add.image(100, 50, 'combatButton').setInteractive();
-
             x /= 2;
             y *= 0.8;
             button.setPosition(x, y);
