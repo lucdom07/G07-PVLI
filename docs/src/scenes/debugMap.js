@@ -8,9 +8,7 @@ export default class debugMap extends Phaser.Scene {
         //Array con los aliados obtenidos
         this.ownedAllies = [];
         this.money = 0;
-        this.buttons = [];
-        this.tree = new BinTree(5);
-        this.tree.debug();
+        this.tree = new BinTree(4);
     }
 
     //En init le pasamos los aliados y el dinero que tiene el jugador para que cuando entre en una sala se lo pueda pasar a la siguiente escena
@@ -47,29 +45,31 @@ export default class debugMap extends Phaser.Scene {
         let y = (this.sys.game.canvas.height / maxNodes) * it;
 
         button.setPosition(x, y);
-
-        if(node.value === 0) {
-            button.on('pointerdown', () =>{        
-                this.scene.start('combatSetup',{
-                    ownedAllies: this.ownedAllies,
-                    money: this.money
-                });
-                console.log("Saliendo del mapa");
-            });
-        }
-        else if (node.value === 1) {
-            button.on('pointerdown', () =>{        
-                this.scene.start('debugMarket',{
-                    ownedAllies: this.ownedAllies,
-                    money: this.money
-                });
-                console.log("Saliendo del mapa");
-            });
-        }
-        this.buttons.push(button);
-
+        node.button = button;
+        
         this.buttonsRec(node.left, maxNodes, this.nextIt(it, maxNodes, true));
         this.buttonsRec(node.right, maxNodes, this.nextIt(it, maxNodes, false));
+        
+        let key;
+
+        if(node.value === 0) {
+            key = 'combatSetup';
+        }
+        else {
+            key = 'debugMarket';
+        }
+        
+        button.on('pointerdown', () =>{     
+            if(node.active) {
+                this.scene.start(key, {
+                    ownedAllies: this.ownedAllies,
+                    money: this.money
+                });
+                console.log("Saliendo del mapa");
+                this.enableButtons(node);
+            }   
+        });
+
     }
 
     mirrorLevel(level) {
@@ -82,6 +82,21 @@ export default class debugMap extends Phaser.Scene {
         }
         else {
             return Math.floor((maxNodes - it) / 2);
+        }
+    }
+
+    enableButtons(node) {
+        node.active = false;
+        if(!node.left.empty()) node.left.active = true;
+        if(!node.right.empty()) node.right.active = true;
+                
+        if(node.father != null) {
+            if(node === node.father.left) {
+                node.father.right.active = false;
+            }
+            else if(node === node.father.right) {
+                node.father.left.active = false;
+            }
         }
     }
 }
