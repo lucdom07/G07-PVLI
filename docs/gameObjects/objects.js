@@ -18,16 +18,6 @@ export default class Object extends Phaser.GameObjects.Sprite{
         return this.name;
     }
 
-    choose(){
-        //Efecto visual del objeto al ser seleccionado
-        this.scene.tweens.add({
-            scaleX: 0.6,
-            scaleY: 0.6,
-            duration: 100,
-            yoyo:true
-        })
-    }
-
     clone(){
         const clone = new Object(
             this.scene,

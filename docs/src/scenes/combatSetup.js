@@ -17,6 +17,11 @@ export default class CombatSetup extends Phaser.Scene {
         this.DOMallies = document.getElementById('alliesArray').children;
         //Posiciones de la fila de selección, con un booleano para saber si estan ocupadas
         this.positions = [[0, false], [1, false], [2, false], [3, false], [4, false]];
+
+
+        this.ownedObjects =[];
+        this.selectedObject = null;
+        this.DOMobjects = document.getElementById('objectsArray').children;
     }
 
     init(data) {
@@ -24,6 +29,7 @@ export default class CombatSetup extends Phaser.Scene {
         //this.globalAllies = data.allies;
         this.ownedAllies = data.ownedAllies;
         this.money = data.money;
+        this.ownedObjects = data.ownedObjects || [];
         //Aún no está bien conectado al resto del juego
     }
 
@@ -49,6 +55,14 @@ export default class CombatSetup extends Phaser.Scene {
             this.DOMallies.item(i).addEventListener('click', () => {
                 this.toggleAlly(ally, index);
                 console.log(ally.getName());
+            });
+        }
+
+        //Subscribir eventos de click a los objetos del DOM
+        for(let i = 0; i < this.DOMobjects.length; i++) {
+            let object = this.DOMmanager.getObjectsArray()[i];
+            this.DOMobjects.item(i).addEventListener('click', () => {
+                this.selectObject(object, i);
             });
         }
 
@@ -80,11 +94,15 @@ export default class CombatSetup extends Phaser.Scene {
     }
     //Determina si la ally esta en la tropa para removerlo o añadirlo
     toggleAlly(ally) {
-        if(ally.isOnTeam()) {
+        if(this.selectedObject){
+            this.applyObjectToAlly(ally);
+        }else{
+            if(ally.isOnTeam()) {
             this.removeAlly(ally);
-        }
-        else {
+            }
+            else {
             this.addAlly(ally);
+            }
         }
     }
 
@@ -168,4 +186,121 @@ export default class CombatSetup extends Phaser.Scene {
             }
         });
     }
+
+    selectObject(object, index) {
+        if (this.selectedObject === object) {
+            // Deseleccionar si ya está seleccionado
+            this.deselectObject();
+        } else {
+            // Deseleccionar objeto anterior
+            this.deselectObject();
+            
+            // Seleccionar nuevo objeto
+            this.selectedObject = object;
+            this.highlightObject(index, true);
+            
+            // Cambiar cursor para indicar que se puede aplicar a un aliado
+            this.game.canvas.style.cursor = "crosshair";
+            
+            console.log(`Objeto seleccionado: ${object.getName()}`);
+        }
+    }
+
+    deselectObject() {
+        if (this.selectedObject) {
+            // Remover highlight de todos los objetos
+            for(let i = 0; i < this.DOMobjects.length; i++) {
+                this.highlightObject(i, false);
+            }
+            
+            this.selectedObject = null;
+            this.game.canvas.style.cursor = "default";
+        }
+    }
+
+    highlightObject(index, selected) {
+        const objectElement = this.DOMobjects.item(index);
+        if (objectElement) {
+            const img = objectElement.querySelector('img');
+            if (img) {
+                if (selected) {
+                    img.style.border = "3px solid yellow";
+                    img.style.transform = "scale(1.1)";
+                } else {
+                    img.style.border = "none";
+                    img.style.transform = "scale(1)";
+                }
+            }
+        }
+    }
+
+    applyObjectToAlly(ally) {
+        if (!this.selectedObject) return;
+
+        console.log(`Aplicando ${this.selectedObject.getName()} a ${ally.getName()}`);
+        
+        // Encontrar el aliado en selectedAllies
+        const sceneAlly = this.selectedAllies.find(a => a.getName() === ally.getName());
+        
+        if (sceneAlly) {
+            // Aplicar efectos del objeto
+            this.applyObjectEffects(sceneAlly, this.selectedObject);
+            
+            // Remover objeto del DOM y del inventario
+            this.removeUsedObject(this.selectedObject);
+            
+            // Deseleccionar objeto
+            this.deselectObject();
+        }
+    }
+
+    applyObjectEffects(ally, object) {
+        const originalLife = ally.getLife();
+        const originalAttack = ally.getAttack();
+        
+        // Aplicar modificaciones
+        const newLife = originalLife + object.getLife();
+        const newAttack = originalAttack + object.getAttack();
+        
+        // Actualizar stats del aliado
+        ally.setLife(Math.max(0, newLife)); // Vida mínima 0
+        ally.setAttack(Math.max(0, newAttack)); // Ataque mínimo 0
+        
+        // Mostrar feedback visual
+        this.showObjectEffect(ally, object);
+        
+        console.log(`Aliado ${ally.getName()} actualizado - Vida: ${ally.getLife()}, Ataque: ${ally.getAttack()}`);
+    }
+
+    showObjectEffect(ally, object) {
+        const effectText = this.add.text(ally.x, ally.y - 50, 
+            `+${object.getLife()}❤ +${object.getAttack()}⚔`, 
+            { fontSize: '16px', fill: '#00ff00', backgroundColor: '#000' }
+        ).setOrigin(0.5);
+        
+        // Animación del texto
+        this.tweens.add({
+            targets: effectText,
+            y: ally.y - 100,
+            alpha: 0,
+            duration: 1500,
+            onComplete: () => {
+                effectText.destroy();
+            }
+        });
+    }
+
+    removeUsedObject(object) {
+        // Remover del DOM manager
+        this.DOMmanager.removeObject(object.getName());
+        
+        // Remover del array local
+        const objectIndex = this.ownedObjects.findIndex(obj => obj.getName() === object.getName());
+        if (objectIndex !== -1) {
+            this.ownedObjects.splice(objectIndex, 1);
+        }
+        
+        console.log(`Objeto ${object.getName()} usado y eliminado`);
+    }
+
 }
