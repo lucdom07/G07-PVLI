@@ -9,7 +9,7 @@ export default class debugMap extends Phaser.Scene {
         this.ownedAllies = [];
         this.money = 0;
         this.buttons = [];
-        this.tree = new BinTree(4);
+        this.tree = new BinTree(5);
         this.tree.debug();
     }
 
@@ -39,10 +39,12 @@ export default class debugMap extends Phaser.Scene {
     buttonsRec(node, maxNodes, it) {
         if(node.empty()) return;
         const button = this.add.image(100, 50, 'combatButton').setInteractive();
-        button.setScale(0.25);
+        button.setScale(0.15);
 
-        let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
-        let x = (this.sys.game.canvas.width / maxNodes) * it;
+        //let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
+        //let x = (this.sys.game.canvas.width / maxNodes) * it;
+        let x = (this.sys.game.canvas.width /  this.tree.levels) * node.level * 0.8;
+        let y = (this.sys.game.canvas.height / maxNodes) * it;
 
         button.setPosition(x, y);
 

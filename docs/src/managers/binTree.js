@@ -1,6 +1,8 @@
 
 
 class Node {
+    // Nodo padre
+    father;
     // Valor del nodo
     value;
     // Nivel del nodo
@@ -10,9 +12,10 @@ class Node {
     // Hijo derecho
     right;
 
-    constructor(value, level) {
+    constructor(value = null, level = null, father = null) {
         this.value = value;
         this.level = level;
+        this.father = father;
         this.left = null;
         this.right = null;
     }
@@ -32,7 +35,8 @@ export default class BinTree {
 
     constructor(numLevels) {
         let i = 1;
-        this.root = new Node(-1, i);
+        // La raiz siempre es tienda
+        this.root = new Node(1, i);
         this.numNodes = 1;
         this.levels = numLevels;
         this.buildTree(this.root, numLevels, i);
@@ -41,19 +45,19 @@ export default class BinTree {
     buildTree(father, numLevels, it) {
         it++;
         if(it > numLevels) {
-            father.left = new Node(null, null);
-            father.right = new Node(null, null);
+            father.left = new Node();
+            father.right = new Node();
             return;
         }
         
         let val = 0
         
-        father.left = new Node(val, it);
+        father.left = new Node(val, it, father);
         this.buildTree(father.left, numLevels, it);
         
         //val = 0;
 
-        father.right = new Node(val, it);
+        father.right = new Node(val, it, father);
         this.buildTree(father.right, numLevels, it);
 
         this.numNodes += 2;
