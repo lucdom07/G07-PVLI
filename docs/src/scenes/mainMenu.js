@@ -8,10 +8,10 @@ export default class mainMenu extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('startButton','assets/start_button.png')
+        this.load.image('startButton','assets/placeholders/buttons/start_button.png')
         //this.load.image('marketButton','assets/button.png')
-        this.load.image('background','assets/background.png')
-        this.load.image('cat','assets/cat_maintitle.png')
+        this.load.image('background','assets/placeholders/background.png')
+        this.load.image('cat','assets/placeholders/cat_maintitle.png')
     }
 
     create(){
