@@ -12,24 +12,24 @@ export default class debugMarket extends Phaser.Scene{
 
     //En init le pasamos los aliados que tiene el jugador
     init(data){
-        this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/market_button.png'));
+        this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'));
         this.ownedAllies = data.ownedAllies;
         this.money = data.money;
     }
     
     preload(){
         //se cargan el fondo, las imagenes y la ui
-        this.load.image('buyButton','assets/market_button.png');
-        this.load.image('exitButton','assets/start_button.png');
-        this.load.image('background','assets/background.jpg');
+        this.load.image('buyButton','assets/placeholders/buttons/market_button.png');
+        this.load.image('exitButton','assets/placeholders/buttons/start_button.png');
+        this.load.image('background','assets/placeholders/background.jpg');
 
         //sprites de los personajes
-        this.load.image('pimiento', 'assets/pepper_miku_placeholder.png');
-        this.load.image('tortuga','assets/green_miku_placeholder.png');
-        this.load.image('chupacabra','assets/dark_blue_miku_placeholder.png');
-        this.load.image('perro','assets/orange_miku_placeholder.png');
-        this.load.image('foca','assets/light_blue_miku_placeholder.png');
-        this.load.image('warf','assets/garnet_miku_placeholder.png');
+        this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
+        this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
+        this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
+        this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
+        this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
+        this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
     }
 
     create(){

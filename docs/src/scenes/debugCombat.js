@@ -18,13 +18,13 @@ export default class Animation extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('pimiento', 'assets/pepper_miku_placeholder.png');
-        this.load.image('tortuga','assets/green_miku_placeholder.png');
-        this.load.image('chupacabra','assets/dark_blue_miku_placeholder.png');
-        this.load.image('perro','assets/orange_miku_placeholder.png');
-        this.load.image('foca','assets/light_blue_miku_placeholder.png');
-        this.load.image('warf','assets/garnet_miku_placeholder.png');
-        this.load.image('background','assets/background.png')
+        this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
+        this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
+        this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
+        this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
+        this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
+        this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
+        this.load.image('background','assets/placeholders/background.png')
     }
 
     create(){
