@@ -4,17 +4,13 @@ import Ally from "../../gameObjects/characters/ally.js";
 export default class debugMarket extends Phaser.Scene{
     constructor(){
         super({key: 'debugMarket'});
-        //Array con los aliados obtenidos
-        this.ownedAllies = [];
-        //Dinero del jugador
-        this.money = 0;
+        this.playerData = {}
     }
 
     //En init le pasamos los aliados que tiene el jugador
     init(data){
         this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'));
-        this.ownedAllies = data.ownedAllies;
-        this.money = data.money;
+        this.playerData = data;
     }
     
     preload(){
@@ -37,11 +33,9 @@ export default class debugMarket extends Phaser.Scene{
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
         this.events.on('buyingAlly', (ally, price)=>{
-            //this.ownedAllies.push(ally);
-            this.money -= price;
+            this.playerData.money -= price;
         });
         this.events.on('sellingAlly', (index, price)=>{
-            //this.ownedAllies.splice(index, 1);
             this.money += price;
         });
         
@@ -60,12 +54,14 @@ export default class debugMarket extends Phaser.Scene{
             new Ally(this, -150, -150,'warf', 35, 7, 0, 'warf', 0, 1, false, 0)
         ];
 
-        /*
+        
         this.bag = [
+            /*
             new Ally(this, -150, -150,"chupacabra", 21, 10, 0, 'chupacabra', 0, 1, true, 0),
             new Ally(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1, true, 0)
+            */
         ];
-        */
+        
         this.objList =[];
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
         const exitButton = this.add.image(300,100,'exitButton').setInteractive();
@@ -73,14 +69,11 @@ export default class debugMarket extends Phaser.Scene{
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
         exitButton.on('pointerdown', () =>{        
-            this.scene.start('debugMap', {
-                ownedAllies: this.ownedAllies,
-                money: this.money
-            });
+            this.scene.start('debugMap', this.playerData);
             console.log("Saliendo del mercado");
         });
 
         this.marketSystem.textureButton = 'buyButton'; 
-        this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money);
+        this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money);
     }
 }

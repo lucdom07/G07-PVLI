@@ -5,16 +5,13 @@ import BinTree from "../managers/binTree.js";
 export default class debugMap extends Phaser.Scene {
     constructor() {
         super({key: 'debugMap'});
-        //Array con los aliados obtenidos
-        this.ownedAllies = [];
-        this.money = 0;
+        this.playerData = {}
         this.tree = new BinTree(4);
     }
 
     //En init le pasamos los aliados y el dinero que tiene el jugador para que cuando entre en una sala se lo pueda pasar a la siguiente escena
     init(data) {
-        this.ownedAllies = data.ownedAllies;
-        this.money = data.money;
+        this.playerData = data;
     }
 
     preload() {

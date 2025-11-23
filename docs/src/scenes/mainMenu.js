@@ -1,10 +1,10 @@
 export default class mainMenu extends Phaser.Scene{
     constructor(){
         super({key: 'mainMenu'});
-        //Array con los aliados obtenidos. Empieza vacío porque no tiene ninguno
-        this.ownedAllies = [];
-        //Dinero del jugador. Empieza con 10
-        this.money = 10;
+        this.playerData = { 
+            ownedAllies: [],
+            money: 10
+        };
     }
 
     preload(){
@@ -27,10 +27,7 @@ export default class mainMenu extends Phaser.Scene{
         //marketButton.setPosition(450, 450);
         
         playButton.on('pointerdown',()=>{
-            this.scene.start('debugMarket', {
-                ownedAllies: this.ownedAllies,
-                money: this.money
-            });
+            this.scene.start('debugMarket', this.playerData);
         });
     }
 }

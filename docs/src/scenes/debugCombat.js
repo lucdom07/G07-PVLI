@@ -5,15 +5,13 @@ import Enemy from "../../gameObjects/characters/enemy.js";
 export default class Animation extends Phaser.Scene{
     constructor(){
         super({key: 'debugCombat'});
-        this.ownedAllies = [];
-        this.money = 0;
+        this.playerData = {};
         this.playerTeam = [];
     }
 
     init(data){// se crea un CombatManager y se añaden las tropas aliadas pasadas desde combatSetup
         this.combatManager = new CombatManager(this);
-        this.ownedAllies = data.ownedAllies;
-        this.money = data.money;
+        this.playerData = data.playerData;
         this.playerTeam = data.selectedAllies;
     }
 
@@ -24,7 +22,8 @@ export default class Animation extends Phaser.Scene{
         this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
-        this.load.image('background','assets/placeholders/background.png')
+        this.load.image('background','assets/placeholders/background.png');
+        this.load.image('exit','assets/placeholders/buttons/exit_button.png');
     }
 
     create(){
@@ -71,6 +70,20 @@ export default class Animation extends Phaser.Scene{
         });
         
         this.playerTeam = recreatedAllies;
+    }
+    showExitButton(){
+        console.log("you can exit combat");
+        const exitButton = this.add.image(200 ,50,'exit').setInteractive();
+
+        exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
+  
+        //pasa los aliados al debugCombat
+        exitButton.on('pointerdown',()=>{
+            this.scene.start('debugMap',{
+                ownedAllies: this.ownedAllies,
+                money: this.money,
+            });
+        });
     }
     update(time, dt){
         this.combatManager.update(time, dt);
