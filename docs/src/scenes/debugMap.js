@@ -37,7 +37,7 @@ export default class debugMap extends Phaser.Scene {
     buttonsRec(node, maxNodes, it) {
         if(node.empty()) return;
         const button = this.add.image(100, 50, 'combatButton').setInteractive();
-        button.setScale(0.15);
+        button.setScale(0.35);
 
         //let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
         //let x = (this.sys.game.canvas.width / maxNodes) * it;
