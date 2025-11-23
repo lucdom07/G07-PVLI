@@ -70,12 +70,12 @@ export default class DOMmanager{
     //inicializa los allies disponibles para la preparación de las tropas aliadas
     inicializa(){
         this.allies = [
-            new GlobalAlly("pimiento", 'assets/pimiento.png',36,0,20,0,0,true),
-            new GlobalAlly("tortuga",'assets/tortuga.png' ,20,0,5,0,0,true),
-            new GlobalAlly("chupacabra",'assets/Chupacabra.png',21,0,10,0,0,true),
-            new GlobalAlly("perro",'assets/Dog.png',36,0,20,0,0,true),
-            new GlobalAlly("foca",'assets/Seal.png',36,0,20,0,0,true),
-            new GlobalAlly("warf",'assets/Warf.png',35,0,7,0,0,true)
+            new GlobalAlly("pimiento", 'assets/placeholders/warriors/pimiento.png',36,0,20,0,0,true),
+            new GlobalAlly("tortuga",'assets/placeholders/warriors/tortuga.png' ,20,0,5,0,0,true),
+            new GlobalAlly("chupacabra",'assets/placeholders/warriors/Chupacabra.png',21,0,10,0,0,true),
+            new GlobalAlly("perro",'assets/placeholders/warriors/Dog.png',36,0,20,0,0,true),
+            new GlobalAlly("foca",'assets/placeholders/warriors/Seal.png',36,0,20,0,0,true),
+            new GlobalAlly("warf",'assets/placeholders/warriors/Warf.png',35,0,7,0,0,true)
         ];//nombre, textura,vida,rango, ataque,nivel, coste, avaible,
         
         this.objects =[

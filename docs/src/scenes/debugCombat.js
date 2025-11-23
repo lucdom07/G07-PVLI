@@ -2,7 +2,6 @@ import CombatManager from "../managers/combatManager.js";
 import Ally from "../../gameObjects/characters/ally.js";
 import Enemy from "../../gameObjects/characters/enemy.js";
 
-
 export default class Animation extends Phaser.Scene{
     constructor(){
         super({key: 'debugCombat'});
@@ -16,22 +15,26 @@ export default class Animation extends Phaser.Scene{
         this.ownedAllies = data.ownedAllies;
         this.money = data.money;
         this.playerTeam = data.selectedAllies;
-
-        console.log("recividos: " + this.playerTeam);
     }
 
     preload(){
-        this.load.image('pimiento', 'assets/pepper_miku_placeholder.png');
-        this.load.image('tortuga','assets/green_miku_placeholder.png');
-        this.load.image('chupacabra','assets/dark_blue_miku_placeholder.png');
-        this.load.image('perro','assets/orange_miku_placeholder.png');
-        this.load.image('foca','assets/light_blue_miku_placeholder.png');
-        this.load.image('warf','assets/garnet_miku_placeholder.png');
-        this.load.image('background','assets/background.png')
+        this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
+        this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
+        this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
+        this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
+        this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
+        this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
+        this.load.image('background','assets/placeholders/background.png')
     }
 
     create(){
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
+
+        //indica al combatManager que ya puede llamar al siguiente evento
+        this.events.on('canCallNext',()=>{
+            console.log("You can execute the next event");
+            this.combatManager.canCallNext = true;
+        });
 
         this.recreate();
         
@@ -42,11 +45,11 @@ export default class Animation extends Phaser.Scene{
             new Enemy(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1)
         ];
         
-        // Iniciar combate inmediatamente
-        this.combatManager.combat(this.playerTeam, enemyTeam)
+        //Inicializa el combate
+        this.combatManager.initCombat(this.playerTeam, enemyTeam);
     }
 //recrea los aliados en esta escena con las mismas propiedades
-     recreate() { 
+    recreate() { 
         const recreatedAllies = [];
         
         this.playerTeam.forEach((allyData, index) => {
@@ -68,5 +71,8 @@ export default class Animation extends Phaser.Scene{
         });
         
         this.playerTeam = recreatedAllies;
+    }
+    update(time, dt){
+        this.combatManager.update(time, dt);
     }
 }

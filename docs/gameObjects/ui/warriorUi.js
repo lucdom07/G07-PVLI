@@ -32,6 +32,7 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
         this.scene.add.existing(this);
     }
 
+    //coloca cada texto en una nueva posición
     setStatsPosition(newX, newY){
         for (let i = 0; i < this.stats.length; i++){
             const startingY = newY + this.DISTANCE_BELOW_WARRIOR;
@@ -39,19 +40,85 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
         }
     }
 
+    //animación de moverse
+    moveStatsAnimation(targetX){
+        for(let i = 0; i < this.stats.length; i++){
+            this.scene.tweens.add({
+                targets: this.stats[i],
+                x: targetX,
+                y: this.stats[i].y,
+                duration: 500,
+                ease: 'Power2',
+            });
+        }
+    }
+
+    //Muestra el feedback de daño de la UI del guerrero, tanto actualizar vidas como crear el texto de daño
+    showDamageFeedback(x, y, damage, lives){
+        this.updateLivesNumber(lives);
+        this.createDamageText(x, y, damage);
+    }
+
     updateLivesNumber(lives){
         this.stats[0].setText(`Vida: ${lives}`); //stats[0] -> texto de vidas
     }
 
     destroy(fromScene) {
-    // Destruir los textos
-    if (this.stats) {
-        this.stats.forEach(s => {
-            if (s && s.destroy) s.destroy();
-        });
+        // Destruir los textos
+        if (this.stats) {
+            this.stats.forEach(s => {
+                if (s && s.destroy) s.destroy();
+            });
+        }
+
+        // Destruir el propio sprite StatsUI
+        super.destroy(fromScene);
     }
 
-    // Destruir el propio sprite StatsUI
-    super.destroy(fromScene);
-}
+    //Crea texto de daño
+    createDamageText(x, y, damage, color = '#ff0000'){
+            //console.log(`Creando texto de daño: -${damage} en (${x}, ${y})`); // Debug
+            const text = this.scene.add.text(x, y - this.TEXT_FEEDBACK_DISTANCE, `-${damage}`, {
+                fontSize: '24px',
+                fill: color,
+                stroke: '#000000',
+                strokeThickness: 4,
+                fontFamily: 'Arial',
+                fontWeight: 'bold'
+            }).setOrigin(0.5);
+            
+            this.scene.tweens.add({
+                targets: text,
+                y: y - 100,
+                alpha: 0,
+                duration: 1500,
+                ease: 'Power2',
+                onComplete: () => {
+                    if (text && text.destroy) {
+                        text.destroy();
+                    }
+                }
+            });
+    }
+    
+    /* Por ahora no lo estamos usando, pero lo dejamos aquí para cuando lo necesitemos
+    createHealText(x, y, amount) {
+        const text = this.scene.add.text(x, y - this.TEXT_FEEDBACK_DISTANCE, `+${amount}`, {
+            fontSize: '20px',
+            fill: '#00ff00',
+            stroke: '#000000',
+            strokeThickness: 3,
+            fontFamily: 'Arial',
+            fontWeight: 'bold'
+        }).setOrigin(0.5);
+        
+        this.scene.tweens.add({
+            targets: text,
+            y: y - 80,
+            alpha: 0,
+            duration: 1000,
+            onComplete: () => text.destroy()
+        });
+    }
+        */
 }

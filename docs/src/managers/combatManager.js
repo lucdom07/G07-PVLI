@@ -1,287 +1,163 @@
 import Ally from "../../gameObjects/characters/ally.js";
 import Enemy from "../../gameObjects/characters/enemy.js";
 
-export default class Combat{
-
+export default class CombatManager{
     constructor(scene){
         this.scene = scene;
-        this.isCombatActived = false;
-        this.TEAM_DIST_FROM_CANVAS_HALF = 95
+        this.canCallNext = true;
+        this.nextEvent = ()=>{ this.callNextEvent() };
+        this.allyAttack = ()=>{this.warriorAttack(this.allyTeam[0], this.enemyTeam)};
+        this.enemyAttack = ()=>{this.warriorAttack(this.enemyTeam[0], this.allyTeam)};
+        //cola de eventos, como mínimo hay una ronda de ataque de dos guerreros y se comprueba si hay algún equipo con 0 guerreros
+        this.eventsQueue = [ this.allyAttack, this.enemyAttack, ()=>{this.checkCombatState()} ];
+        //guardamos el equipo aliado y enemigo en propiedades de esta clase para usarlos en toda la clase sin estar pasándolos como parámetros
+        this.allyTeam = [];
+        this.enemyTeam = [];
+        this.TEAM_DIST_FROM_CANVAS_HALF = 95;
         this.WARRIOR_Y = 300;
         this.WARRIORS_SEPARATION = 120; 
         this.FIRST_ALLY_POS_X = this.scene.sys.game.canvas.width*0.5 - this.TEAM_DIST_FROM_CANVAS_HALF;
         this.FIRST_ENEMY_POS_X = this.scene.sys.game.canvas.width*0.5 + this.TEAM_DIST_FROM_CANVAS_HALF;
     }
 
-    //genera los enemigos dependiendo de la lista que se le mete, la lista metida depende del nivel en el que va el jugador y
-    //tendrá la misma longitud que del jugador
-    generateEnemy(ally, enemyList) { //genera los enemigos de la escena
-        const enemyTeam = []; //crea lista vacia de los enemigos
-        const enemyCount = ally.length; //coje el tam de los ally
-
-        for (let i =0; i < enemyCount; i++){
-            const index = Phaser.Math.Between(0, enemyList.length-1); //se coge los indices del 0 asta el tam del ally
-            const enemyTemplate = enemyList[index]; //coje el enemigo aleatorio
-
-            const enemy = enemyTemplate.clone(); //se clona
-
-            console.log(enemy);
-
-            enemyTeam.push(enemy); //se añade al equipo
-        }
-        return enemyTeam; //retorna el enemy
+    //Inicializa el combate
+    initCombat(allyTeam, enemyTeam){ 
+        //copiamos los aliados en el array de combatManager para que no compartan referencia y no se destruyan los aliados que tiene el jugador en la partida
+        this.allyTeam = allyTeam.slice(); 
+        this.enemyTeam = enemyTeam;
+        this.initTeamPositions();
     }
 
-    //tengo que tener 2 arrays, uno de ally y otro de enemy, mientras que los dos tengan cosas, se sigue
-    //hasta que uno de los dos termine
-    async combat(ally,enemyList){ 
-        if(this.isCombatActived) return;
-
-        this.isCombatActived = true;
-        const enemyTeam = this.generateEnemy(ally, enemyList);
-
-        this.positionTeams(ally, enemyTeam);
-
-        while (ally.length > 0 && enemyTeam.length > 0) {
-            await this.executeCombatRound(ally, enemyTeam);
-            
-            // Pequeña pausa entre rondas para mejor visualización
-            await this.delay(1000);
-        }
-
-        if(ally.length == enemyTeam.length){ //cuando son en empate
-            console.log("EMPATE");
-        }
-        const playerWins = ally.length > 0;
-        this.endCombat(playerWins, ally, enemyTeam);
-        
-        return playerWins;
+    //update que se llama en el update de debugCombat
+    update(time, dt){
+        this.callNextEvent();
     }
 
-    positionTeams(ally, enemyTeam) {
+    //Llama al siguiente evento de la cola si canCallNext es igual a true, que sirve como señal para indicar que puede llamar al siguiente evento
+    callNextEvent(){
+        if (this.canCallNext && this.eventsQueue.length > 0){
+            this.canCallNext = false;
+            const followingEvent = this.eventsQueue[0];
+            //Quitamos el evento de la cola para que en la siguiente llamada se llame al siguiente evento
+            this.eventsQueue.shift();
+            console.log(followingEvent);
+            followingEvent();
+        }
+    }
 
+    //llama a la función de ataque, determina el target del atacante según el rango y añade un evento antes de checkCombatState en caso de que 
+    //el atacante reduzca las vidas del target a 0 o menos
+    warriorAttack(attacker, targetTeam){
+        if (attacker != undefined){
+                const targetIndex = Math.min(attacker.range, targetTeam.length - 1);
+                if (targetTeam[targetIndex] != undefined){
+                    if (targetTeam[targetIndex].life - attacker.attack <= 0){
+                        this.addNewEvent(()=>{this.removeDeadUnit(targetTeam, targetIndex)});
+                    }
+                    const target = targetTeam[targetIndex];
+                    attacker.attackWarrior(target);
+                }
+        }
+        else{
+            this.scene.events.emit('canCallNext');
+        }
+    }
+
+    //Añade un nuevo evento a la cola antes de que revise el estado del combate, por eso el this.eventsQueue.length - 2
+    addNewEvent(event){
+        this.eventsQueue.splice(this.eventsQueue.length - 2, 0, event);
+    }
+
+    //Comprueba si algún equipo ha sido derrotado. En caso contrario se añade otra ronda de ataque
+    checkCombatState(){
+        if (this.allyTeam.length == 0 || this.enemyTeam.length == 0){
+            this.eventsQueue.push(()=>{this.endCombat()});
+        }
+        else{
+            this.eventsQueue.push(this.allyAttack, this.enemyAttack, ()=>{this.checkCombatState()});
+        }
+        this.scene.time.delayedCall(300, () => {
+            this.scene.events.emit('canCallNext');
+        });
+    }
+
+    //colocar a los guerreros en pantalla
+    initTeamPositions() {
         // Posicionar aliados
-        ally.forEach((ally, index) => {
+        this.allyTeam.forEach((ally, index) => {
             ally.setWarriorPosition(this.FIRST_ALLY_POS_X - index * this.WARRIORS_SEPARATION, this.WARRIOR_Y);
-             if (!ally.scene) {
-            this.scene.add.existing(ally);
-        }
         });
         
         // Posicionar enemigos
-        enemyTeam.forEach((enemy, index) => {
+        this.enemyTeam.forEach((enemy, index) => {
             enemy.setWarriorPosition(this.FIRST_ENEMY_POS_X + index * this.WARRIORS_SEPARATION, this.WARRIOR_Y);
-            if (!enemy.scene) {
-                this.scene.add.existing(enemy);
-            }
         });
     }
 
-    async executeCombatRound(ally, enemyTeam) {
-        const maxActions = Math.max(ally.length,enemyTeam.length);
-        for(let i=0; i<maxActions; i++){
-            if (i < ally.length && enemyTeam.length > 0 && ally[i] && ally[i].life > 0) {
-            await this.executeSingleAttack(ally[i], enemyTeam, 'player');
-            await this.delay(1000); // Pausa entre ataques individuales´
-                this.removeDeadUnits(enemyTeam);
-            }
-            
-            // Enemigo ataca si existe en esta posición
-            if (i < enemyTeam.length && ally.length > 0 && enemyTeam[i] && enemyTeam[i].life > 0) {
-            await this.executeSingleAttack(enemyTeam[i], ally, 'enemy');
-            await this.delay(1000); // Pausa entre ataques individuales
-                this.removeDeadUnits(ally);
-            }
-
-            // Si algún equipo se queda sin unidades, salir del bucle
-            console.log("Ronda completada - Aliados:", ally.length, "Enemigos:", enemyTeam.length);
-            if (ally.length === 0 || enemyTeam.length === 0) {
-                break;
-            }
-        }
+    //elimina al guerrero muerto del juego y en caso de que quede un espacio en blanco entre medias o en la primera posición
+    //se llama a moveTeam para que mueva a los guerreros de posición
+    removeDeadUnit(team, deadUnitIndex) {
+        const deadUnit = team[deadUnitIndex];
+        const deadUnitX = deadUnit.x;
+        deadUnit.dieAnimation();
         
+        this.scene.time.delayedCall(500, () => {
+            deadUnit.destroy();
+        });
+
+        team.splice(deadUnitIndex, 1);
+        if (team.length != 0 && ((deadUnitIndex == 0 && team.length == 1)|| deadUnitIndex != team.length-1)){
+            this.moveTeam(team, deadUnitIndex, deadUnitX);
+        }
+        this.scene.time.addEvent({
+            delay: 500,
+            callback: ()=>{ 
+                this.scene.events.emit('canCallNext');
+             }
+        });
     }
 
-    async executeSingleAttack(attacker, defendingTeam, teamType) {
-        if (defendingTeam.length === 0) return;
-        
-        const targetIndex = Math.min(attacker.range, defendingTeam.length - 1);
-        const target = defendingTeam[targetIndex];
-        
-        if (target && defendingTeam.includes(target) && target.life>0) {
-            // Animación de ataque
-            await this.attackAnimation(attacker, target);
-            
-            // Aplicar daño
-            target.hit(attacker.attack);
-            this.createDamageText(target.x, target.y, attacker.attack);
-            
-            // Pequeña pausa para ver el daño
-            await this.delay(800);
-        }
-    }
+    //mueve a los guerreros y sus stats para ocupar el espacio que ha dejado el guerrero muerto
+    moveTeam(team, deadUnitIndex, deadUnitX){
 
-  async attackAnimation(attacker, target) {
-        const originalX = attacker.x;
-        const originalY = attacker.y;
-        
-        // Mover hacia el objetivo
-        await new Promise(resolve => {
+        for(let i = 0; deadUnitIndex + i < team.length; i++){
+            const unit = team[deadUnitIndex + i];  
+            const targetX = unit.calculateNewXInCombat(deadUnitX, i, this.WARRIORS_SEPARATION);
             this.scene.tweens.add({
-                targets: attacker,
-                x: attacker.x + (target.x - attacker.x) * 0.3,
-                y: attacker.y + (target.y - attacker.y) * 0.3,
-                duration: 300,
+                targets: unit, // Ahora unit está definido
+                x: targetX,
+                y: this.WARRIOR_Y,
+                duration: 500,
                 ease: 'Power2',
-                onComplete: resolve
             });
-        });
-        
-        // Efecto visual en el objetivo
-        this.scene.tweens.add({
-            targets: target,
-            scaleX: 0.6,
-            scaleY: 0.6,
-            duration: 100,
-            yoyo: true
-        });
-        
-        // Volver a la posición original
-        await new Promise(resolve => {
-            this.scene.tweens.add({
-                targets: attacker,
-                x: originalX,
-                y: originalY,
-                duration: 300,
-                ease: 'Power2',
-                onComplete: resolve
-            });
-        });
-    }
-
-    applyDamage(attacks, defendingTeam) {
-        for (const attack of attacks) {
-            if (defendingTeam.includes(attack.target)) {
-                attack.target.hit(attack.damage);
-                this.createDamageText(attack.target.x, attack.target.y, attack.damage);
-            }
+            //animación de las stats para que se muevan junto con la unidad
+            unit.getWarriorUI().moveStatsAnimation(targetX);
         }
-    }
-
-    createDamageText(x, y, damage, color = '#ff0000'){
-          console.log(`Creando texto de daño: -${damage} en (${x}, ${y})`); // Debug
-
-        const text = this.scene.add.text(x, y - 30, `-${damage}`, {
-            fontSize: '24px',
-            fill: color,
-            stroke: '#000000',
-            strokeThickness: 4,
-            fontFamily: 'Arial',
-            fontWeight: 'bold'
-        }).setOrigin(0.5);
-        
-        this.scene.tweens.add({
-            targets: text,
-            y: y - 100,
-            alpha: 0,
-            duration: 1500,
-            ease: 'Power2',
-            onComplete: () => {
-                if (text && text.destroy) {
-                    text.destroy();
+        this.scene.time.addEvent({
+            delay: 500,
+            callback: ()=>{ 
+                //actualizar el atributo x de cada guerrero porque el tweens solo lo cambia visualmente
+                for (let i = 0; deadUnitIndex + i < team.length; i++){
+                    const newX = team[deadUnitIndex + i].calculateNewXInCombat(deadUnitX, i, this.WARRIORS_SEPARATION);
+                    team[deadUnitIndex + i].setWarriorPosition(newX, this.WARRIOR_Y);
                 }
+                this.scene.events.emit('canCallNext');
             }
         });
     }
 
-    createHealText(x, y, amount) {
-        const text = this.scene.add.text(x, y - 30, `+${amount}`, {
-            fontSize: '20px',
-            fill: '#00ff00',
-            stroke: '#000000',
-            strokeThickness: 3,
-            fontFamily: 'Arial',
-            fontWeight: 'bold'
-        }).setOrigin(0.5);
-        
-        this.scene.tweens.add({
-            targets: text,
-            y: y - 80,
-            alpha: 0,
-            duration: 1000,
-            onComplete: () => text.destroy()
-        });
-    }
-
-    removeDeadUnits(team) {
-        let elimina = false;
-
-        const isAlly = team.length > 0 ? team[0] instanceof Ally : false;
-
-
-        for (let i = team.length - 1; i >= 0; i--) {
-            if (team[i].life <= 0) {
-
-                const deadUnit = team[i];
-
-                deadUnit.setAlpha(0.3);
-                deadUnit.setTint(0xff0000);
-                
-                this.scene.time.delayedCall(500, () => {
-                    if (deadUnit && deadUnit.scene) {
-                        deadUnit.destroy();
-                    }
-                });
-
-                team.splice(i, 1);
-                elimina = true;
-            }
-        }
-
-        if(elimina) this.reponer(team, isAlly);
-    }
-
-    reponer(team, isAlly){
-    if(team.length === 0) return;
-
-    for(let i = 0; i < team.length; i++){
-        let targetX, targetY;
-        const unit = team[i];
-        
-        if (isAlly) {
-            // Calcular nueva posición para aliados
-            targetX = this.FIRST_ALLY_POS_X + (i * -this.WARRIORS_SEPARATION);
-            targetY = this.WARRIOR_Y;
+    //comprueba quién ha ganado y se reproduce una animación diferente según el resultado
+    endCombat() {            
+        if (this.allyTeam.length > 0) {
+            console.log("¡VICTORIA!");
+            this.victoria();
         } else {
-            // Calcular nueva posición para enemigos
-            targetX = this.FIRST_ENEMY_POS_X + (i * this.WARRIORS_SEPARATION);
-            targetY = this.WARRIOR_Y;
+            console.log("Derrota...");
+            this.derrota();
         }
-        
-        // Animación suave hacia la nueva posición
-        this.scene.tweens.add({
-            targets: unit, // Ahora unit está definido
-            x: targetX,
-            y: targetY,
-            duration: 500,
-            ease: 'Power2'
-        });
-    }
-}
-
-    endCombat(playerWins, ally, enemyTeam) {
-            this.isCombatActived = false;
-            
-            if (playerWins) {
-                console.log("¡VICTORIA!");
-                this.victoria(ally);
-            } else {
-                console.log("Derrota...");
-                this.derrota(enemyTeam);
-            }
     }
 
-    victoria(team) {
+    victoria() {
         // Texto de VICTORIA
         const victoryText = this.scene.add.text(
             this.scene.cameras.main.centerX, 
@@ -307,7 +183,7 @@ export default class Combat{
         });
         
         // Animación de los personajes
-        team.forEach(unit => {
+        this.allyTeam.forEach(unit => {
             this.scene.tweens.add({
                 targets: unit,
                 scaleX: 0.6,
@@ -319,7 +195,7 @@ export default class Combat{
         });
     }
 
-    derrota(team) {
+    derrota() {
         // Texto de DERROTA
         const defeatText = this.scene.add.text(
             this.scene.cameras.main.centerX, 
@@ -345,7 +221,7 @@ export default class Combat{
         });
         
         // Animación de los personajes
-        team.forEach(unit => {
+        this.enemyTeam.forEach(unit => {
             this.scene.tweens.add({
                 targets: unit,
                 y: unit.y + 20,
@@ -353,9 +229,5 @@ export default class Combat{
                 duration: 1000
             });
         });
-    }
-    
-    delay(ms) {
-        return new Promise(resolve => this.scene.time.delayedCall(ms, resolve));
     }
 }

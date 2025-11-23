@@ -8,19 +8,15 @@ export default class Enemy extends Warrior{
         super.preUpdate(t, dt);
     }
 
-    clone(){
-        const clone = new Enemy(
-            this.scene,
-            this.x,
-            this.y,
-            this.name,
-            this.life,
-            this.attack,
-            this.range,
-            this.texture,
-            this.frame,
-            this.level
-        );
-        return clone;
+    takeHit(damage, callback){
+        super.takeHit(damage, callback);
+    }
+
+    calculateAttackPos(targetX){
+        return targetX * 1.1;
+    }
+
+    calculateNewXInCombat(previousUnitX, index, WARRIORS_SEPARATION){
+        return previousUnitX + index * WARRIORS_SEPARATION;
     }
 }

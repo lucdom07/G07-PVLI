@@ -188,19 +188,19 @@ Cuando el ataque es mayor que la vida actual del personaje, el personaje será d
 #### 3.2.3. **Rango de ataque**
 Distancia que los personajes pueden alcanzar para infligir daño al otro personaje del ejército contrario. 
 
-El rango se diferencia desde 1 al 6 relacionándose con las posiciones de cada animal/enemigo:
+El rango se diferencia desde 0 al 4 relacionándose con las posiciones de cada animal/enemigo:
 
 |  |  |  |
 |:-----------:|:-----------:|:-----------:|
-| 5 4 3 2 1 0 | — – – – – – – | 1 2 3 4 5 6 |
+| 4 3 2 1 0 | — – – – – – – | 0 1 2 3 4 |
 | Aliado | – – – – – – – – | Enemigo |
 |  |  |  |
 
 Este parámetro será mostrado cuando el jugador cliquea o pasa el cursor por encima del personaje para saber cuál es su rango de ataque.
 
-Si el personaje tiene rango 1 atacará al otro personaje en esa posición, en este caso, se corresponde al primer personaje, lo mismo será con el 2, 3, 4, 5 y 6, siendo esta la última. Por defecto todos los personajes tienen rango 1 a no ser que se indique lo contrario.
+Si el personaje tiene rango 0 atacará al otro personaje en esa posición, en este caso, se corresponde al primer personaje, lo mismo será con el 1, 2, 3 y 4, siendo esta la última. Por defecto todos los personajes tienen rango 0 a no ser que se indique lo contrario.
 
-En caso de que no haya personajes en esa posición, se atacará al último que queda. Por ejemplo: Si tenemos un aliado con rango 5 y tenemos solo 3 enemigos, quiere decir que ataca a la quinta posición del bando enemigo, pero como no hay, recurre al enemigo de la última posición, que será la tercera. 
+En caso de que no haya personajes en esa posición, se atacará al último que queda. Por ejemplo: Si tenemos un aliado con rango 4 y tenemos solo 2 enemigos, quiere decir que ataca a la quinta posición del bando enemigo, pero como no hay, recurre al enemigo de la última posición, que será la tercera. 
 
 Este parámetro es constante, no es posible de mejorar con objetos ni con la fusión/unión de los aliados.
 
@@ -271,7 +271,7 @@ Los aliados serán los animales antropomórficos que ayudarán al jugador a gana
 
 Al comienzo de la partida el jugador empieza con un solo aliado, que será nuestro protagonista Michi-Michi.
 
-El jugador podrá tener como máximo 6 aliados en combate y como mínimo 1 para poder empezar a combatir. 
+El jugador podrá tener como máximo 5 aliados en combate y como mínimo 1 para poder empezar a combatir. 
 
 Será posible mejorar las estadísticas de los aliados con los objetos, obtenidos de los combates o comprados en las tiendas.
 
@@ -284,7 +284,7 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 || Colibri twitter |9| 5 |4|
 || Gato-Pulpo de Github | 6 | 3 |3|
 |España|
-|| Paloma con 6 ojos |9|5|5|
+|| Paloma con 6 ojos |9|5|3|
 || Rana arborícola con cuernos |10|6|0|
 || Gatoñete |11|7|1|
 || Pablotter  |10|6|2|
@@ -297,7 +297,7 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 || QiLing |14|10|0|
 || Gato Kunfu |12|9|1|
 || Orca Deep Seek |13|11|3|
-|| Pez chancla |12|10|5|
+|| Pez chancla |12|10|2|
 
 ***Parámetros*** 
 - Cantidad de vida
@@ -328,7 +328,7 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 || Tump |9|8|2|
 || Karen |12|8|1|
 || //Anabella |11|9|0|
-|| //Guardaespaldas |10|8|5|
+|| //Guardaespaldas |10|8|3|
 |China|
 || ?Pimiento humanoide |14|10|0|
 || //Otaku |12|11|3|
@@ -355,9 +355,6 @@ Lista de enemigos por País
 |5|Aborígenes, Jonny me lavo, Cazador Furtivo , Sharon, Aborígenes|José Luis*2, Manolo, Mariloli, Maricarmen|Guardaespaldas*4, Tump                     |Taoísta, Profesor, Otaku, Profesor, Taoísta|
 |5|Cazador Furtivo*5                                         |Manolo, Mariloli, Maricarmen, Mariloli   |Karen*2, Anabella, Guardaespaldas          |Profesor*3, Otaku *2, Pimiento humanoide|
 |5|Sharon, Jonny me lavo, Sharon, Aborígenes, Sharon              |Maricarmen*3, Manolo *2                  |Tump, Karen, Tump, Guardaespaldas, Anabella|Pimiento humanoide, Otaku, Profesor, Taoista, Pimiento humanoide|
-|6|Aborígenes, Jonny me lavo, Cazador Furtivo, Sharon, Aborígenes, Sharon         |Manolo, Mariloli, José Luis Maricarmen, Mariloli, Manolo  |Anabella*2, Karen *3, Tump                      |Profesor*2, Taoista, Otaku, Profesor *2|
-|6|Jonny me lavo, Sharon, Cazador Furtivo, Aborígenes, Aborígenes, Cazador Furtivo|Manolo, Mariloli, Maricarmen, Manolo, Mariloli, Maricarmen|Guardaespaldas*2, Tump, Guardaespaldas *2, Karen|Taoísta*3, Otaku, Pimiento humanoide, Otaku|
-|6|Cazador Furtivo, Sharon, Aborígenes, Sharon, Aborígenes, Sharon           |José Luis*2, Maricarmen *2, Mariloli *2                   |Anabella, Tump, Karen, Guardapespaldas, Karen*2 |Otaku*2, Profesor, Taoista, Pimiento humanoide *2|
 
 #### 3.8.1. **Jefes**
 Los jefes son enemigos más importantes de cada país, siendo estos más grandes y con las mejores estadísticas de sus originales pero un poco mejores. En combate, cuando aparece un jefe, siempre estará acompañado de otros 3 enemigos normales. Siendo así que el jugador se enfrentará a 4 enemigos. 
