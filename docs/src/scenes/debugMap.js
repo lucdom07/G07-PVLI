@@ -9,7 +9,7 @@ export default class debugMap extends Phaser.Scene {
         this.ownedAllies = [];
         this.money = 0;
         this.buttons = [];
-        this.tree = new BinTree(3);
+        this.tree = new BinTree(4);
         this.tree.debug();
     }
 
@@ -31,40 +31,55 @@ export default class debugMap extends Phaser.Scene {
     }
 
     createButtons() {
-        let pos_x = this.sys.game.canvas.width;
-        let pos_y = this.sys.game.canvas.height;
-
-        this.buttonsRec(this.tree.root, pos_x, pos_y);
+        let max_nodes = Math.pow(3, this.tree.levels);
+        let div = Math.floor(max_nodes / 2);
+        this.buttonsRec(this.tree.root, max_nodes, div);
     }
-
-    buttonsRec(node, x, y, left = null) {
-        const button = this.add.image(100, 50, 'combatButton').setInteractive();
-
+    
+    buttonsRec(node, maxNodes, it) {
         if(node.empty()) return;
-        if(node === this.tree.root) {
-            x /= 2;
-            y *= 0.8;
-            button.setPosition(x, y);
-        }
-        else {
-            /*
-            left ? x /= 2 : x *= 1.5;
-            y = (node.level / this.tree.levels) * this.sys.game.canvas.height;
-            button.setPosition(x, y);
-            */
-        }
+        const button = this.add.image(100, 50, 'combatButton').setInteractive();
+        button.setScale(0.25);
 
-        button.on('pointerdown', () =>{        
-            this.scene.start('combatSetup',{
-                ownedAllies: this.ownedAllies,
-                money: this.money
+        let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
+        let x = (this.sys.game.canvas.width / maxNodes) * it;
+
+        button.setPosition(x, y);
+
+        if(node.value === 0) {
+            button.on('pointerdown', () =>{        
+                this.scene.start('combatSetup',{
+                    ownedAllies: this.ownedAllies,
+                    money: this.money
+                });
+                console.log("Saliendo del mapa");
             });
-            console.log("Saliendo del mapa");
-        });
+        }
+        else if (node.value === 1) {
+            button.on('pointerdown', () =>{        
+                this.scene.start('debugMarket',{
+                    ownedAllies: this.ownedAllies,
+                    money: this.money
+                });
+                console.log("Saliendo del mapa");
+            });
+        }
         this.buttons.push(button);
 
-        this.buttonsRec(node.left, x, y, true);
-        this.buttonsRec(node.right, x, y, false);
+        this.buttonsRec(node.left, maxNodes, this.nextIt(it, maxNodes, true));
+        this.buttonsRec(node.right, maxNodes, this.nextIt(it, maxNodes, false));
     }
 
+    mirrorLevel(level) {
+        return this.tree.levels - level + 1; 
+    }
+
+    nextIt(it, maxNodes, left) {
+        if(left) {
+            return Math.floor((maxNodes + it) / 2); 
+        }
+        else {
+            return Math.floor((maxNodes - it) / 2);
+        }
+    }
 }

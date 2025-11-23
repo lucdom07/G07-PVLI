@@ -18,7 +18,7 @@ class Node {
     }
 
     empty() {
-        return this.value == null;
+        return this.value === null;
     }
 }
 
@@ -31,23 +31,27 @@ export default class BinTree {
     levels;
 
     constructor(numLevels) {
-        this.root = new Node(-1, 0);
+        let i = 1;
+        this.root = new Node(-1, i);
         this.numNodes = 1;
         this.levels = numLevels;
-        let i = 1;
         this.buildTree(this.root, numLevels, i);
     }
 
     buildTree(father, numLevels, it) {
-        if(it >= numLevels) return;
         it++;
+        if(it > numLevels) {
+            father.left = new Node(null, null);
+            father.right = new Node(null, null);
+            return;
+        }
         
-        let val = 1
+        let val = 0
         
         father.left = new Node(val, it);
         this.buildTree(father.left, numLevels, it);
         
-        val = 0;
+        //val = 0;
 
         father.right = new Node(val, it);
         this.buildTree(father.right, numLevels, it);
