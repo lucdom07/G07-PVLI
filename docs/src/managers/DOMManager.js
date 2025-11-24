@@ -1,5 +1,5 @@
 import GlobalAlly from "../managers/globalAlly.js";
-import GlobalObject from "../../gameObjects/objects.js";
+import GlobalObject from "../managers/globalObjects.js";
 /*
     Esta clase está destinada a controlar el DOM en tiempo de ejecución
 */
@@ -79,9 +79,9 @@ export default class DOMmanager{
         ];//nombre, textura,vida,rango, ataque,nivel, coste, avaible,
         
         this.objects =[
-            new GlobalObject("Viejo calcetín", 'assets/calcetin.png', 0, 3, 5, 0, true),
-            new GlobalObject("Agua", 'assets/agua.png', 2, 2, 5, 0, true),
-            new GlobalObject("Bocata de calamares", 'assets/bocata.png', 6, 0, 8, 0, true)
+            new GlobalObject(this, 0,0,"Viejo calcetín", '', 0, 3, 5, 0),
+            new GlobalObject(this, 0,0,"Agua", '', 2, 2, 5, 0),
+            new GlobalObject(this, 0,0,"Bocata de calamares", '', 6, 0, 8, 0)
         ]
         //Cuando esté la tienda hecha habrá que cambiar esto
 
