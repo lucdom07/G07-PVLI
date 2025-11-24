@@ -4,7 +4,8 @@ import Ally from "../../gameObjects/characters/ally.js";
 export default class debugMarket extends Phaser.Scene{
     constructor(){
         super({key: 'debugMarket'});
-        this.playerData = {}
+        this.playerData = {};
+
     }
 
     //En init le pasamos los aliados que tiene el jugador

@@ -8,10 +8,7 @@ export default class CombatSetup extends Phaser.Scene {
         super({key: 'combatSetup'});
 
         this.DOMmanager = DOMmanager;
-        this.playerData = {}
-        //Array con los aliados obtenidos
-        this.ownedAllies = [];
-        this.money = 0;
+        this.playerData = {};
         //Array con los aliados seleccionados
         this.selectedAllies = [];
         //División del DOM que muestra los aliados desbloqueados (también de clase DomAlly)
