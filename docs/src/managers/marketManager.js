@@ -111,7 +111,7 @@ export default class MarketManager {
 
         marketItem.button.on('pointerdown', () => this.buyItem(marketItem));
     }
-    
+
     showMoney(){
         if(this.moneyText) this.moneyText.destroy();
         this.moneyText = this.scene.add.text(
@@ -175,8 +175,6 @@ export default class MarketManager {
         if(newAlly.warriorUI) 
         newAlly.warriorUI.destroy();
         
-        
-        //this.bag.push(newAlly);
         //Al comprar el aliado, se actualiza el array de aliados disponibles del jugador y el dinero en la escena de market
         this.scene.events.emit('buyingAlly', newAlly, item.cost);
 
@@ -188,17 +186,15 @@ export default class MarketManager {
         if(marketItem.infoText) marketItem.infoText.destroy();
 
         this.showMoney();
-        this.displayPlayerAllies();
         this.showMessage(`¡Has comprado a ${newAlly.name}!`);
     }
 
 
     sellAlly(index, sellPrice){
-        //const ally = this.bag[index];
+        const ally = this.bag[index];
         if(!ally) return;
 
         //ally.available = false;
-        this.bag.splice(index, 1);
         this.money += sellPrice;
 
         this.scene.events.emit('sellingAlly', index, sellPrice);
