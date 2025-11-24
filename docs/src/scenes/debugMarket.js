@@ -34,10 +34,12 @@ export default class debugMarket extends Phaser.Scene{
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
         this.events.on('buyingAlly', (ally, price)=>{
+            this.playerData.ownedAllies.push(ally);
             this.playerData.money -= price;
         });
         this.events.on('sellingAlly', (index, price)=>{
-            this.money += price;
+            this.playerData.ownedAllies.splice(index, 1);
+            this.playerData.money += price;
         });
         
         //añadir el fondo del mercado
