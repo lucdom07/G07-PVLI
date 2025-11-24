@@ -1,8 +1,5 @@
 import MarketManager from "../managers/marketManager.js";
 import Ally from "../../gameObjects/characters/ally.js";
-import objects from "..json/objects.json";
-import GlobalAlly from "../managers/globalAlly.js";
-import GlobalObject from "../managers/globalObjects.js";
 
 export default class debugMarket extends Phaser.Scene{
     constructor(){
@@ -24,7 +21,7 @@ export default class debugMarket extends Phaser.Scene{
         this.ownedAllies = data.ownedAllies;
         this.money = data.money;
         this.ownedObjects = data.ownedObjects;
-        this.level = data.level || 0;
+        this.level = data.level;
     }
     
     preload(){
@@ -76,7 +73,9 @@ export default class debugMarket extends Phaser.Scene{
             new Ally(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1, true, 0)
         ];
         */
-        this.objList = this.loadObjectsByLevel(this.level);
+        this.objList =[
+
+        ];
 
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
         const exitButton = this.add.image(300,100,'exitButton').setInteractive();
@@ -86,37 +85,12 @@ export default class debugMarket extends Phaser.Scene{
         exitButton.on('pointerdown', () =>{        
             this.scene.start('debugMap', {
                 ownedAllies: this.ownedAllies,
-                money: this.money,
-                ownedObjects: this.ownedObjects,
-                level: this.level
+                money: this.money
             });
             console.log("Saliendo del mercado");
         });
 
         this.marketSystem.textureButton = 'buyButton'; 
         this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money);
-    }
-
-    loadObjectsByLevel(level){
-        const levelKey = `object${level}`;
-        const levelObjects = objectsData[levelKey];
-
-        if(!levelObjects){
-            console.log("Error, no hay objetos en este nivel")
-            return[];
-        }
-
-        return levelObjects.map(objects =>
-            new GlobalObject(
-                this,
-                0,
-                0, 
-                objects.name,
-                objects.texture,
-                objects.life,
-                objects.attack,
-                objects.cost,
-            )
-        )
     }
 }

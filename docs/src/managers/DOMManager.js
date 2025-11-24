@@ -1,5 +1,5 @@
 import GlobalAlly from "../managers/globalAlly.js";
-import GlobalObject from "../managers/globalObjects.js";
+// import GlobalObject from "../managers/globalObjects.js";
 /*
     Esta clase está destinada a controlar el DOM en tiempo de ejecución
 */
@@ -13,9 +13,9 @@ export default class DOMmanager{
         //Array que contiene objetos de tipo DomAlly, para trackear los allies que se muestran en el DOM
         this.DOMAlliesArray = [];
 
-        this.DOMObjects = document.getElementById('objectsArray');
-        this.DOMObjectsArray =[];
-        this.objects =[];
+        // this.DOMObjects = document.getElementById('objectsArray');
+        // this.DOMObjectsArray =[];
+        // this.objects =[];
 
         //Esta parte es provisional hasta que se tengan el resto de componentes del juego
         this.inicializa();
@@ -25,9 +25,9 @@ export default class DOMmanager{
         return this.DOMAlliesArray;
     }
 
-    getObjectArray(){
-        return this.DOMObjectsArray;
-    }
+    // getObjectArray(){
+    //     return this.DOMObjectsArray;
+    // }
 
     /*
     Añade un DomAlly a DOMAllies y DOMAlliesArray
@@ -48,24 +48,24 @@ export default class DOMmanager{
         }
     }
 
-    addObj(obj){
-        let elem = this.objects.find(x => obj.getName() === x.getName());
-        if(elem != undefined) {
-            const div = document.createElement('div');
-            const img = document.createElement('img');
+    // addObj(obj){
+    //     let elem = this.objects.find(x => obj.getName() === x.getName());
+    //     if(elem != undefined) {
+    //         const div = document.createElement('div');
+    //         const img = document.createElement('img');
 
-            img.src = elem.getTextureURL();
-            img.alt = `${elem.getName()}`;
-            img.className = 'domObj';
-            img.dataset.objectId = elem.getName(); //para indetificar el objeto
-            img.dataset.life = elem.getLife();
-            img.dataset.attack = elem.getAttack();
+    //         img.src = elem.getTextureURL();
+    //         img.alt = `${elem.getName()}`;
+    //         img.className = 'domObj';
+    //         img.dataset.objectId = elem.getName(); //para indetificar el objeto
+    //         img.dataset.life = elem.getLife();
+    //         img.dataset.attack = elem.getAttack();
 
-            div.appendChild(img);
-            this.DOMObjects.appendChild(div);
-            this.DOMObjectsArray.push(elem);
-        }
-    }
+    //         div.appendChild(img);
+    //         this.DOMObjects.appendChild(div);
+    //         this.DOMObjectsArray.push(elem);
+    //     }
+    // }
 
     //inicializa los allies disponibles para la preparación de las tropas aliadas
     inicializa(){
@@ -78,32 +78,32 @@ export default class DOMmanager{
             new GlobalAlly("warf",'assets/placeholders/warriors/Warf.png',35,0,7,0,0,true)
         ];//nombre, textura,vida,rango, ataque,nivel, coste, avaible,
         
-        this.objects =[
-            new GlobalObject(this, 0,0,"Viejo calcetín", '', 0, 3, 5, 0),
-            new GlobalObject(this, 0,0,"Agua", '', 2, 2, 5, 0)
-        ]
+        // this.objects =[
+        //     new GlobalObject(this, 0,0,"Viejo calcetín", '', 0, 3, 5, 0),
+        //     new GlobalObject(this, 0,0,"Agua", '', 2, 2, 5, 0)
+        // ]
         //Cuando esté la tienda hecha habrá que cambiar esto
 
         this.allies.forEach(x => {
             this.addAlly(x);
         });
 
-        this.objects.forEach(x => {
-            this.addObj(x);
-        });
+        // this.objects.forEach(x => {
+        //     this.addObj(x);
+        // });
     }
 
     //para remover el objeto despues de usarlo
-    removeObject(objectName) {
-        const objectIndex = this.DOMObjectsArray.findIndex(obj => obj.getName() === objectName);
-        if (objectIndex !== -1) {
-            this.DOMObjectsArray.splice(objectIndex, 1);
-        }
+    // removeObject(objectName) {
+    //     const objectIndex = this.DOMObjectsArray.findIndex(obj => obj.getName() === objectName);
+    //     if (objectIndex !== -1) {
+    //         this.DOMObjectsArray.splice(objectIndex, 1);
+    //     }
         
-        // Remover del DOM
-        const objectElement = this.DOMObjects.querySelector(`[data-object-id="${objectName}"]`);
-        if (objectElement && objectElement.parentNode) {
-            objectElement.parentNode.remove();
-        }
-    }
+    //     // Remover del DOM
+    //     const objectElement = this.DOMObjects.querySelector(`[data-object-id="${objectName}"]`);
+    //     if (objectElement && objectElement.parentNode) {
+    //         objectElement.parentNode.remove();
+    //     }
+    // }
 }
