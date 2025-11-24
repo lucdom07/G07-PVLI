@@ -10,6 +10,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.DOMmanager = DOMmanager;
         //Array con los aliados obtenidos
         this.ownedAllies = [];
+        //dinero
         this.money = 0;
         //Array con los aliados seleccionados
         this.selectedAllies = [];

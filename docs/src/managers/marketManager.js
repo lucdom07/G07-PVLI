@@ -20,7 +20,7 @@ export default class MarketManager {
     market(bag, allyList, objList, money){
         this.bag = bag;
         this.marketAllies = this.generateAlly(allyList, 3);
-        this.marketObjects = []; // objetos no implementados aún
+        this.marketObjects = this.generateObject(objList, 2); // objetos no implementados aún
         this.showMarket(money);
     }
 
@@ -37,7 +37,6 @@ export default class MarketManager {
     }
 
     generateAlly(allyList, slots){
-        
         const marketAllies = [];
         const available = allyList.filter(a => !a.available);
 
@@ -66,14 +65,22 @@ export default class MarketManager {
             this.displayMarketItem(marketItem, index);
         });
 
+        this.marketObjects.forEach((marketItem, index) => {
+            this.displayMarketItem(marketItem, index);
+        });
+
         this.displayPlayerAllies();
     }
 
     displayMarketItem(marketItem, index){
-        const x = 150 + index * 150;
+        const x = 0;
+        if(marketItem === Ally){
+            x = 150 + index * 150;
+        }
+        else x = 250 + index * 150;
+
         const y = 200;
         const item = marketItem.item;
-
         
         if (!item.scene) {
         this.scene.add.existing(item);
@@ -89,8 +96,6 @@ export default class MarketManager {
         marketItem.priceText = this.scene.add.text(x, y - 30, `${item.cost}$`, {
             fontSize: '14px', fill: '#fff', backgroundColor: '#000'
         }).setOrigin(0.5);
-
-        
 
         // Mostrar stats al pasar el ratón
         item.on('pointerover', () => {
@@ -255,4 +260,21 @@ export default class MarketManager {
         this.cancelSale();
     }
 
+    generateObject(objectList, slots){
+        const marketObject = [];
+ 
+        for (let i = 0; i < slots; i++) {
+            const index = Phaser.Math.Between(0, objectList.length - 1);
+            const clone = objectList[index].clone();
+     
+            if (clone.scene !== this.scene) {
+                clone.scene = this.scene;
+                this.scene.add.existing(clone);
+            }
+
+            marketObject.push(this.makeStruct(clone));
+        }
+        
+        return marketObject;
+    }
 }

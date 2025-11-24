@@ -8,6 +8,11 @@ export default class debugMarket extends Phaser.Scene{
         this.ownedAllies = [];
         //Dinero del jugador
         this.money = 0;
+
+        //Array de los objetos obtenidos
+        this.ownedObjects = [];
+
+        this.level = null;
     }
 
     //En init le pasamos los aliados que tiene el jugador
@@ -15,6 +20,8 @@ export default class debugMarket extends Phaser.Scene{
         this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'));
         this.ownedAllies = data.ownedAllies;
         this.money = data.money;
+        this.ownedObjects = data.ownedObjects;
+        this.level = data.level;
     }
     
     preload(){
@@ -66,7 +73,11 @@ export default class debugMarket extends Phaser.Scene{
             new Ally(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1, true, 0)
         ];
         */
-        this.objList =[];
+        this.objList =[
+            
+
+        ];
+
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
         const exitButton = this.add.image(300,100,'exitButton').setInteractive();
 
