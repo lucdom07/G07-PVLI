@@ -10,8 +10,12 @@ export default class GlobalObject extends Phaser.GameObjects.Image {
         this.level = level;
 
         this.DISPLAY_SIZE = 80;
-        this.setDisplaySize(this.DISPLAY_SIZE, this. DISPLAY_SIZE);
-        this.setInteractive();
+    
+        if (scene) {
+            this.setDisplaySize(this.DISPLAY_SIZE, this. DISPLAY_SIZE);
+            this.setInteractive();
+            scene.add.existing(this);
+        }
     }
 
     getName() {
@@ -36,6 +40,9 @@ export default class GlobalObject extends Phaser.GameObjects.Image {
 
     clone() {
         return new GlobalObject(
+            this.scene,
+            this.x,
+            this.y,
             this.name,
             this.textureURL,
             this.life,

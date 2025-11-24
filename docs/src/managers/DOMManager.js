@@ -80,8 +80,7 @@ export default class DOMmanager{
         
         this.objects =[
             new GlobalObject(this, 0,0,"Viejo calcetín", '', 0, 3, 5, 0),
-            new GlobalObject(this, 0,0,"Agua", '', 2, 2, 5, 0),
-            new GlobalObject(this, 0,0,"Bocata de calamares", '', 6, 0, 8, 0)
+            new GlobalObject(this, 0,0,"Agua", '', 2, 2, 5, 0)
         ]
         //Cuando esté la tienda hecha habrá que cambiar esto
 

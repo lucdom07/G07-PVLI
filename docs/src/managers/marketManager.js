@@ -25,7 +25,8 @@ export default class MarketManager {
     }
 
     makeStruct(item) {
-        return {
+        if(item===Ally){
+            return {
             item: item, 
             texture: null,
             button: null,
@@ -33,7 +34,18 @@ export default class MarketManager {
             priceText: null,
             levelText: null,
             infoText: null
-        };
+            };
+        }else{
+            return {
+            item: item, 
+            texture: null,
+            button: null,
+            buttonText: null,
+            priceText: null,
+            infoText: null
+            };
+        }
+       
     }
 
     generateAlly(allyList, slots){
@@ -77,7 +89,7 @@ export default class MarketManager {
         if(marketItem === Ally){
             x = 150 + index * 150;
         }
-        else x = 250 + index * 150;
+        else x = 250 + index * 150; //en caso de que fuera un objeto
 
         const y = 200;
         const item = marketItem.item;
@@ -98,7 +110,8 @@ export default class MarketManager {
         }).setOrigin(0.5);
 
         // Mostrar stats al pasar el ratón
-        item.on('pointerover', () => {
+        if(marketItem === Ally){
+            item.on('pointerover', () => {
             marketItem.infoText = this.scene.add.text(x, y - 80,
                 `${item.name}\nHP:${item.life}\nATK:${item.attack},\nLVL:${item.level}`, {
                     fontSize: '12px',
@@ -107,7 +120,19 @@ export default class MarketManager {
                     padding: { x: 5, y: 5 },
                     align: 'center'
                 }).setOrigin(0.5);
+            });
+        }else{ //en caso de que fuera un objeto
+            item.on('pointerover', () => {
+            marketItem.infoText = this.scene.add.text(x, y - 80,
+                `${item.name}\nHP:${item.life}\nATK:${item.attack}}`, {
+                    fontSize: '12px',
+                    fill: '#FFFFFF',
+                    backgroundColor: '#000000',
+                    padding: { x: 5, y: 5 },
+                    align: 'center'
+                }).setOrigin(0.5);
         });
+        }
 
         item.on('pointerout', () => {
             if (marketItem.infoText) {
