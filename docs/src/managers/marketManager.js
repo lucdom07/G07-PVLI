@@ -65,8 +65,6 @@ export default class MarketManager {
         this.marketAllies.forEach((marketItem, index) => {
             this.displayMarketItem(marketItem, index);
         });
-
-        this.displayPlayerAllies();
     }
 
     displayMarketItem(marketItem, index){
@@ -113,24 +111,7 @@ export default class MarketManager {
 
         marketItem.button.on('pointerdown', () => this.buyItem(marketItem));
     }
-
-    displayPlayerAllies(){
-        this.sellButtons.forEach(b => b.destroy());
-        this.sellButtons = [];
-
-        this.bag.forEach((ally, index) => {
-            if(!ally.available) return;
-
-            const x = 150 + index * 150;
-            const y = 350;
-            ally.setPosition(x, y).setScale(0.5);
-            if(!ally.scene) this.scene.add.existing(ally);
-
-            ally.on('pointerdown', () => this.selectForSale(ally, index));
-            this.sellButtons.push(ally);
-        });
-    }
-
+    
     showMoney(){
         if(this.moneyText) this.moneyText.destroy();
         this.moneyText = this.scene.add.text(
