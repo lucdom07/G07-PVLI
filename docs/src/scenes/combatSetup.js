@@ -8,9 +8,7 @@ export default class CombatSetup extends Phaser.Scene {
         super({key: 'combatSetup'});
 
         this.DOMmanager = DOMmanager;
-        //Array con los aliados obtenidos
-        this.ownedAllies = [];
-        this.money = 0;
+        this.playerData = {};
         //Array con los aliados seleccionados
         this.selectedAllies = [];
         //División del DOM que muestra los aliados desbloqueados (también de clase DomAlly)
@@ -22,8 +20,7 @@ export default class CombatSetup extends Phaser.Scene {
     init(data) {
         //Array global con todos los aliados (desbloqueados o no)
         //this.globalAllies = data.allies;
-        this.ownedAllies = data.ownedAllies;
-        this.money = data.money;
+        this.playerData = data;
         //Aún no está bien conectado al resto del juego
     }
 
@@ -60,8 +57,7 @@ export default class CombatSetup extends Phaser.Scene {
         playButton.on('pointerdown',()=>{
             if(this.selectedAllies.length > 0 && this.selectedAllies.length === 3) {
                 this.scene.start('debugCombat',{
-                    ownedAllies: this.ownedAllies,
-                    money: this.money,
+                    playerData: this.playerData,
                     selectedAllies: this.selectedAllies
                 });
             }

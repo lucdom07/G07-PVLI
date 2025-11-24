@@ -4,17 +4,13 @@ import Ally from "../../gameObjects/characters/ally.js";
 export default class debugMarket extends Phaser.Scene{
     constructor(){
         super({key: 'debugMarket'});
-        //Array con los aliados obtenidos
-        this.ownedAllies = [];
-        //Dinero del jugador
-        this.money = 0;
+        this.playerData = {};
     }
 
     //En init le pasamos los aliados que tiene el jugador
     init(data){
         this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'));
-        this.ownedAllies = data.ownedAllies;
-        this.money = data.money;
+        this.playerData = data;
     }
     
     preload(){
@@ -73,10 +69,7 @@ export default class debugMarket extends Phaser.Scene{
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
         exitButton.on('pointerdown', () =>{        
-            this.scene.start('debugMap', {
-                ownedAllies: this.ownedAllies,
-                money: this.money
-            });
+            this.scene.start('debugMap', this.playerData);
             console.log("Saliendo del mercado");
         });
 

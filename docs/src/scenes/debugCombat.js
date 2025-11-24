@@ -5,15 +5,12 @@ import Enemy from "../../gameObjects/characters/enemy.js";
 export default class Animation extends Phaser.Scene{
     constructor(){
         super({key: 'debugCombat'});
-        this.ownedAllies = [];
-        this.money = 0;
-        this.playerTeam = [];
+        this.playerData = {};
     }
 
     init(data){// se crea un CombatManager y se añaden las tropas aliadas pasadas desde combatSetup
         this.combatManager = new CombatManager(this);
-        this.ownedAllies = data.ownedAllies;
-        this.money = data.money;
+        this.playerData = data.playerData;
         this.playerTeam = data.selectedAllies;
     }
 
