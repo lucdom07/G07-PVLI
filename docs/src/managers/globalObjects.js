@@ -1,15 +1,17 @@
-export default class GlobalObject {
-    constructor(name, textureURL, life, attack, cost, level, available) {
+export default class GlobalObject extends Phaser.GameObjects.Image {
+    constructor(scene, x, y, name, textureURL, life, attack, cost, level) {
+        super(scene, x, y, textureURL);
+
         this.name = name;
         this.textureURL = textureURL;
         this.life = life;
         this.attack = attack;
         this.cost = cost;
         this.level = level;
-        this.available = available;
 
         this.DISPLAY_SIZE = 80;
         this.setDisplaySize(this.DISPLAY_SIZE, this. DISPLAY_SIZE);
+        this.setInteractive();
     }
 
     getName() {
@@ -32,14 +34,6 @@ export default class GlobalObject {
         return this.cost;
     }
 
-    isAvailable() {
-        return this.available;
-    }
-
-    setAvailable(available) {
-        this.available = available;
-    }
-
     clone() {
         return new GlobalObject(
             this.name,
@@ -48,7 +42,6 @@ export default class GlobalObject {
             this.attack,
             this.cost,
             this.level,
-            this.available
         );
     }
 }
