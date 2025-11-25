@@ -29,7 +29,7 @@ export default class mainMenu extends Phaser.Scene{
         //marketButton.setPosition(450, 450);
         
         playButton.on('pointerdown',()=>{
-            this.scene.start('debugMarket', this.playerData);
+            this.scene.start('introduction', this.playerData);
         });
     }
 }

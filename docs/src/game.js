@@ -4,6 +4,7 @@ import MainMenu from './scenes/mainMenu.js';
 import debugMarket from './scenes/debugMarket.js';
 import CombatSetup from './scenes/combatSetup.js';
 import DOMmanager from "./managers/DOMManager.js";
+import introductionScene from './scenes/introductionScene.js';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -33,7 +34,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			DebugMap,
 			DebugCombat,
 			debugMarket,
-			new CombatSetup(DOManager)
+			new CombatSetup(DOManager),
+			introductionScene
 		],
 		physics: { 
 			default: 'arcade', 
