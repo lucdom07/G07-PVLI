@@ -7,8 +7,8 @@ export default class DialogueManager {
 
         // Configuración de UI opcional
         this.config = Object.assign({
-            nameStyle: { fontSize: "40px", color: "#ffffff", fontFamily: "Caveat Brush" },
-            dialogStyle: { fontSize: "40px", color: "#000000", fontFamily: "Caveat Brush", padding: 32, windowHeight: 180, dialogSpeed: 3 },
+            nameStyle: { fontSize: "35px", color: "#ffffff", fontFamily: "Caveat Brush" },
+            dialogStyle: { fontSize: "30px", color: "#000000", fontFamily: "Caveat Brush", padding: 32, windowHeight: 100, dialogSpeed: 3 },
             dialogBoxClass: null // Para usar tu DialogText personalizado
         }, config);
 
@@ -31,7 +31,7 @@ export default class DialogueManager {
 
         // Crear UI de nombre si no existe
         if (!this.nameText) {
-            this.nameText = this.scene.add.text(50, 350, "", this.config.nameStyle);
+            this.nameText = this.scene.add.text(30, 450, "", this.config.nameStyle);
         }
 
         // Crear UI de caja de diálogo si no existe

@@ -11,10 +11,10 @@ export default class DialogText{
 		
 		// set properties from opts object or use defaults
 		this.borderThickness = opts.borderThickness || 2;
-		this.borderColor = opts.borderColor || 0x000000;
+		this.borderColor = opts.borderColor || 0xFFFFFF;
 		this.borderAlpha = opts.borderAlpha || 1;
 		this.windowAlpha = opts.windowAlpha || 0.8;
-		this.windowColor = opts.windowColor || 0xFFFFFF;
+		this.windowColor = opts.windowColor || 0x000000;
 		this.windowHeight = opts.windowHeight || 150;
 		this.padding = opts.padding || 32;
 		this.dialogSpeed = opts.dialogSpeed || 3;
