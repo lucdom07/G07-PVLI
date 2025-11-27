@@ -1,72 +1,54 @@
-import DialogText from "../../gameObjects/ui/Dialogue.js";
+import Dialogue from "../../gameObjects/ui/Dialogue.js";
+import Character from "../../gameObjects/ui/character.js";
+import DialogText from "../../gameObjects/ui/dialogPlugin.js";
+import DialogueManager from "../managers/dialogManager.js";
 
-export default class introductionScene extends Phaser.Scene {
-    /**
-     * Escena de texto cargado con archivos TTF locales.
-     * @extends Phaser.Scene
-     */
+export default class IntroductionScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'introduction' });
+        super("introduction");
+        this.playerData = {}
     }
 
-    /**
-     * Cargamos todos los assets que vamos a necesitar
-     */
-    preload(){
-        this.load.image('background', 'assets/background.png');
-       
-
-        this.load.json('intro','jsons/dialogues/intro.json');
+    init(data){
+        this.playerData = data;
     }
-    
+
+    preload() {
+        this.load.json("introDialogues", "./jsons/dialogues/intro.json");
+        this.load.image("background", "assets/placeholders/background.png");
+    }
+
     create() {
-        this.add.image(0, 0, 'background').setOrigin(0, 0);
+        const rawData = this.cache.json.get("introDialogues");
 
-        
+        const dialogues = rawData.map(entry => new Dialogue(
+            new Character(entry.name),
+            entry.line,
+            true
+        ));
 
-        this.dialog = new DialogText(this, {
-            borderThickness: 2,
-            borderColor: 0x2e2926,
-            borderAlpha: 1,
-            windowAlpha: 0.6,
-            windowColor: 0xffffff,
-            windowHeight: 150,
-            padding: 32,
-            closeBtnColor: 'darkgoldenrod',
-            dialogSpeed: 2,
-            fontSize: 24,
-            fontFamily: "GameFont"
+        this.dialogueManager = new DialogueManager(this, dialogues, {
+            dialogBoxClass: DialogText
+        });
+        this.dialogueManager.start();
+
+        // Botón de Skip
+        const width = this.sys.game.config.width;
+        this.skipButton = this.add.text(width - 100, 40, "Skip", {
+            fontSize: "20px",
+            color: "#ff0000",
+            backgroundColor: "#000000",
+            padding: { x: 10, y: 5 }
+        }).setInteractive();
+
+        this.skipButton.on("pointerdown", () => {
+            this.dialogueManager.skip();
+            this.skipButton.destroy();
         });
 
-        this.dialogues = this.cache.json.get('intro');
-
-        this.currentDialogueIndex = 0;
-        this.showDialogue()
-        
-        this.input.on('pointerdown', () => {
-            this.nextDialogue();
-    });
+        // Escuchar fin de diálogos
+        this.events.on("dialogueEnd", () => this.scene.start("debugMap",this.playerData));
     }
+
     
-    showDialogue() {
-    if (!this.dialogues) {
-        console.error("dialogueData está vacío o no se ha cargado correctamente.");
-        return;
-    }
-
-    if (this.currentDialogueIndex >= this.dialogues.length) {
-        this.scene.start('debugMap', this.playerData);
-       
-    }
-
-    let line = this.dialogues[this.currentDialogueIndex];
-   
-    this.dialog.setText(`${line.name}: ${line.line}`);    
-    }
-
-    nextDialogue() {
-        this.currentDialogueIndex++;
-        this.showDialogue();
-    }
 }
-    
