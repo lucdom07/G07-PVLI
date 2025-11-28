@@ -8,10 +8,10 @@ export default class GlobalObject extends Phaser.GameObjects.Image {
         this.attack = attack;
         this.cost = cost;
 
-        this.DISPLAY_SIZE = 80;
+        this.DISPLAY_SIZE = 20;
     
         if (scene) {
-            this.setDisplaySize(this.DISPLAY_SIZE, this. DISPLAY_SIZE);
+            this.setDisplaySize(this.DISPLAY_SIZE, this.DISPLAY_SIZE);
             this.setInteractive();
             scene.add.existing(this);
         }

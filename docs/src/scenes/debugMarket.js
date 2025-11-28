@@ -38,6 +38,11 @@ export default class debugMarket extends Phaser.Scene{
         this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
+
+        this.load.image('comida1','assets/placeholders/objets/comida1.png');
+        this.load.image('comida2','assets/placeholders/objets/comida2.png');
+        this.load.image('comida3','assets/placeholders/objets/comida3.png');
+        this.load.image('comida4','assets/placeholders/objets/comida4.png');
     }
 
     create(){
@@ -69,10 +74,10 @@ export default class debugMarket extends Phaser.Scene{
         ];
 
         this.objList =[
-            new GlobalObject(this, 0,0,"calcetin","", 2,2 ,1),
-            new GlobalObject(this, 0,0,"llave","", 2,2 ,1),
-            new GlobalObject(this, 0,0,"queso","", 2,2 ,1),
-            new GlobalObject(this, 0,0,"tu","", 2,2 ,1)
+            new GlobalObject(this, -150, -150,"comida1","comida1", 5 ,2 ,2),
+            new GlobalObject(this, -150, -150,"comida2","comida2", 2 ,-3 ,1),
+            new GlobalObject(this, -150, -150,"comida3","comida3", 0 ,2 ,19),
+            new GlobalObject(this, -150, -150,"comida4","comida4", 2 ,0 ,3)
         ];
 
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
