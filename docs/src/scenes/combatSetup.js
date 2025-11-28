@@ -22,6 +22,8 @@ export default class CombatSetup extends Phaser.Scene {
 
         this.ownedObjects = []; 
         this.selectedObject = null;
+
+        this.ObjectSize =100;
     }
 
     init(data) {
@@ -163,7 +165,7 @@ export default class CombatSetup extends Phaser.Scene {
         
         // Configura el objeto
         obj.setPosition(x, y + (i * ySpacing))
-           .setScale(0.5)
+           .setDisplaySize(this.ObjectSize, this.ObjectSize)
            .setInteractive()
            .setVisible(true);
 

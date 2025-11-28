@@ -18,6 +18,8 @@ export default class MarketManager {
         this.sellButtons = [];
 
         this.objectBag =[];
+
+        this.ObjectSize = 100;
     }
     
     market(bag, allyList, objList, money, ownedObjectsBag){
@@ -102,7 +104,17 @@ export default class MarketManager {
         if (!item.scene) {
         this.scene.add.existing(item);
         }
-        item.setPosition(x, y).setScale(0.5).setInteractive().setVisible(true);
+        if(marketItem.item instanceof Ally){
+            item.setPosition(x, y)
+            .setScale(0.5)
+            .setInteractive()
+            .setVisible(true);
+        }else{
+           item.setPosition(x, y)
+            .setDisplaySize(this.ObjectSize, this.ObjectSize)
+            .setInteractive()
+            .setVisible(true); 
+        }
 
         console.log(item);
 
@@ -160,7 +172,12 @@ export default class MarketManager {
 
             const x = 150 + index * 150;
             const y = 350;
-            ally.setPosition(x, y).setScale(0.5);
+            if(ally instanceof Ally){
+                ally.setPosition(x, y).setScale(0.5);
+            }
+            else{
+                ally.setPosition(x, y).setDisplaySize(this.ObjectSize, this.ObjectSize)
+            }
             if(!ally.scene) this.scene.add.existing(ally);
 
             ally.on('pointerdown', () => this.selectForSale(ally, index));
