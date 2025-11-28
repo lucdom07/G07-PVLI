@@ -26,8 +26,8 @@ export default class MarketManager {
         this.marketObjects = this.generateObject(objList, 2); // objetos no implementados aún
         this.showMarket(money);
 
-        this.objectBag = ownedObjectsBag;
-    }
+        this.objectBag = ownedObjectsBag || [];    
+}
 
     makeStruct(item) {
         if(item===Ally){
@@ -217,13 +217,13 @@ export default class MarketManager {
 
         if(this.money < item.cost){ this.showMessage("No tienes dinero"); return; }
 
-        if(this.bag.length >= 6 && item === Ally){ this.showMessage("Inventario lleno"); return; }
-        else if(this.objectBag >= 1 && item === globalObjects){ this.showMessage("Inventario de objetos lleno"); return; }
+        if(this.bag.length >= 6 && item instanceof Ally){ this.showMessage("Inventario lleno"); return; }
+        else if(this.objectBag.length >= 1 && !(item instanceof Ally)){ this.showMessage("Inventario de objetos lleno"); return; }
 
         this.money -= item.cost;
 
         // Clonar y agregar a la escena
-        if(item===Ally){
+        if(item instanceof Ally){
         const newAlly = item.clone();
         newAlly.available = true;
 
@@ -238,13 +238,15 @@ export default class MarketManager {
         //this.bag.push(newAlly);
         //Al comprar el aliado, se actualiza el array de aliados disponibles del jugador y el dinero en la escena de market
         this.scene.events.emit('buyingAlly', newAlly, item.cost);
+        this.showMessage(`¡Has comprado a ${newAlly.name}!`);
         }
         else{
             const newObj = item.clone();
-            if(!newObj.scene) this.scene.add.existingnewObj
+            if(!newObj.scene) this.scene.add.existing(newObj);
             newObj.setVisible(false);
 
-            this.objectBag.push(newObj)
+            this.objectBag.push(newObj);
+            this.showMessage(`¡Has comprado ${newObj.name}!`);
         }
         
 
@@ -257,7 +259,6 @@ export default class MarketManager {
 
         this.showMoney();
         this.displayPlayerAllies();
-        this.showMessage(`¡Has comprado a ${newAlly.name}!`);
     }
 
     sellAlly(index, sellPrice){

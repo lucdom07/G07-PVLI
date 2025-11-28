@@ -90,6 +90,6 @@ export default class debugMarket extends Phaser.Scene{
         });
 
         this.marketSystem.textureButton = 'buyButton'; 
-        this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money);
+        this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
     }
 }
