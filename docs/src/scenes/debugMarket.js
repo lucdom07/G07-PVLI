@@ -6,25 +6,12 @@ export default class debugMarket extends Phaser.Scene{
     constructor(){
         super({key: 'debugMarket'});
         this.playerData = {};
-        //Array con los aliados obtenidos
-        this.ownedAllies = [];
-        //Dinero del jugador
-        this.money = 0;
-
-        //Array de los objetos obtenidos
-        this.ownedObjects = [];
-
-        this.level = null;
     }
 
     //En init le pasamos los aliados que tiene el jugador
     init(data){
         this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'));
         this.playerData = data;
-        this.ownedAllies = data.ownedAllies;
-        this.money = data.money;
-        this.ownedObjects = data.ownedObjects || [];
-        this.level = data.level;
     }
     
     preload(){
