@@ -131,7 +131,7 @@ export default class MarketManager {
         }else{ //en caso de que fuera un objeto
             item.on('pointerover', () => {
             marketItem.infoText = this.scene.add.text(x, y - 80,
-                `${item.name}\nHP:${item.life}\nATK:${item.attack}}`, {
+                `${item.name}\nHP:${item.life}\nATK:${item.attack}`, {
                     fontSize: '12px',
                     fill: '#FFFFFF',
                     backgroundColor: '#000000',

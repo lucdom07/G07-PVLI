@@ -69,10 +69,10 @@ export default class debugMarket extends Phaser.Scene{
         ];
 
         this.objList =[
-            new GlobalObject(this, 0,0,"calcetin","", 2,2,1),
-            new GlobalObject(this, 0,0,"llave","", 2,2,1),
-            new GlobalObject(this, 0,0,"queso","", 2,2,1),
-            new GlobalObject(this, 0,0,"tu","", 2,2,1)
+            new GlobalObject(this, 0,0,"calcetin","", 2,2 ,1),
+            new GlobalObject(this, 0,0,"llave","", 2,2 ,1),
+            new GlobalObject(this, 0,0,"queso","", 2,2 ,1),
+            new GlobalObject(this, 0,0,"tu","", 2,2 ,1)
         ];
 
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
