@@ -83,6 +83,10 @@ export default class MarketManager {
         this.marketAllies.forEach((marketItem, index) => {
             this.displayMarketItem(marketItem, index);
         });
+
+        this.marketObjects.forEach((marketItem, index) => {
+        this.displayMarketItem(marketItem, index);
+        });
     }
 
     displayMarketItem(marketItem, index){
@@ -123,7 +127,7 @@ export default class MarketManager {
         }).setOrigin(0.5);
 
         // Mostrar stats al pasar el ratón
-        if(marketItem === Ally){
+        if(marketItem instanceof Ally){
             item.on('pointerover', () => {
             marketItem.infoText = this.scene.add.text(x, y - 80,
                 `${item.name}\nHP:${item.life}\nATK:${item.attack},\nLVL:${item.level}`, {
@@ -245,7 +249,6 @@ export default class MarketManager {
         if(marketItem.infoText) marketItem.infoText.destroy();
 
         this.showMoney();
-        this.showMessage(`¡Has comprado a ${newAlly.name}!`);
     }
 
     sellAlly(index, sellPrice){
@@ -259,7 +262,6 @@ export default class MarketManager {
 
         this.cancelSale();
         this.showMoney();
-        this.displayPlayerAllies();
         this.showMessage(`¡Has vendido a ${ally.name} por ${sellPrice}$!`);
     }
 
