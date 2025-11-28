@@ -57,7 +57,6 @@ export default class CombatSetup extends Phaser.Scene {
             });
         }
 
-        console.log(this.ownedObjects);
         this.showObjects(this.ownedObjects);
 
         const playButton = this.add.image(200 ,50,'combatButton').setInteractive();
@@ -105,10 +104,6 @@ export default class CombatSetup extends Phaser.Scene {
     FALTARIA PONER UN LIMITE AL MAXIMO DE ALIADOS
     */
     addAlly(ally) {
-        //if(this.ownedAllies.find(x => x.getName() === ally.getName()) && 
-            //  !this.selectedAllies.some(x => x.getName() === ally.getName())) {
-
-
         if (this.selectedAllies.length >= 3) {
             return;
         }
@@ -153,9 +148,11 @@ export default class CombatSetup extends Phaser.Scene {
             const originalAttack = originalObj.getAttack();
             
             // Crea un sprite temporal para el objeto
-            const texture = originalObj.texture || 'potion_red';
+            const texture = originalObj.texture || '';
             obj = this.add.image(x, y + (i * ySpacing), texture);
             
+            obj.originalObject = originalObj;
+             
             obj.getName = () => originalName;
             obj.getLife = () => originalLife;
             obj.getAttack = () => originalAttack;
@@ -293,15 +290,17 @@ export default class CombatSetup extends Phaser.Scene {
 
         console.log(`Aplicando ${this.selectedObject.getName()} a ${ally.getName()}`);
         
+        const originalObject = this.selectedObject.originalObject || this.selectedObject;
+
         // Encontrar el aliado en selectedAllies
         const sceneAlly = this.selectedAllies.find(a => a.getName() === ally.getName());
         
         if (sceneAlly) {
             // Aplicar efectos del objeto
-            this.applyObjectEffects(sceneAlly, this.selectedObject);
+            this.applyObjectEffects(sceneAlly, originalObject);
             
             // Remover objeto del DOM y del inventario
-            this.removeUsedObject(this.selectedObject);
+            this.removeUsedObject(originalObject);
             
             // Deseleccionar objeto
             this.deselectObject();
@@ -316,13 +315,24 @@ export default class CombatSetup extends Phaser.Scene {
         const newLife = originalLife + object.getLife();
         const newAttack = originalAttack + object.getAttack();
         
-        // Actualizar stats del aliado
+        // Actualizar stats del aliado (ALLY)
         ally.setLife(Math.max(0, newLife)); // Vida mínima 0
         ally.setAttack(Math.max(0, newAttack)); // Ataque mínimo 0
+    
+        // Actualizar stats del aliado (GLOBAL_ALLY)
+        const globalAlly = this.ownedAllies.find(a => a.getName() === ally.getName());
+        if (globalAlly) {
+            globalAlly.setLife(newLife);
+            globalAlly.setAttack(newAttack);
+        }
+
+        if (ally.updateStatsUI) {
+            ally.updateStatsUI();
+        }
         
         // Mostrar feedback visual
         this.showObjectEffect(ally, object);
-        
+            
         console.log(`Aliado ${ally.getName()} actualizado - Vida: ${ally.getLife()}, Ataque: ${ally.getAttack()}`);
     }
 
@@ -342,18 +352,25 @@ export default class CombatSetup extends Phaser.Scene {
                 effectText.destroy();
             }
         });
+
+        console.log(ally);
     }
 
     removeUsedObject(object) {
-        // Remover del DOM manager
-        this.DOMmanager.removeObject(object.getName());
-        
-        // Remover del array local
-        const objectIndex = this.ownedObjects.findIndex(obj => obj.getName() === object.getName());
+       // Remover del array local
+        const objectIndex = this.ownedObjects.findIndex(obj => {
+        const objToCompare = obj.originalObject || obj;
+        return objToCompare.getName() === object.getName();
+        });
+    
         if (objectIndex !== -1) {
-            this.ownedObjects.splice(objectIndex, 1);
+            const objToRemove = this.ownedObjects[objectIndex];
+            if (objToRemove && objToRemove.destroy) {
+                objToRemove.destroy();
+            }
+        this.ownedObjects.splice(objectIndex, 1);
         }
-        
+    
         console.log(`Objeto ${object.getName()} usado y eliminado`);
     }
 

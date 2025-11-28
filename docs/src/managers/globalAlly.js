@@ -40,6 +40,14 @@ export default class GlobalAlly {
         }
     }
 
+    setAttack(){
+        return this.attack;
+    }
+
+    setLife(apply){
+        this.life = apply;
+    }
+
     /*
     Devuelve un objeto de tipo Ally en base a este objeto (de tipo GlobalAlly) 
 
