@@ -1,3 +1,10 @@
+@font-face {
+    font-family: "Drawn";
+    src: url('../assets/fonts/GameFont.ttf');
+    font-weight: 400;
+    font-weight: normal;
+}
+
 .body{
   /*background-color: #aedfff;*/
   background-image: url(../images/web_background.png);
@@ -132,25 +139,3 @@
   width: 100%; 
 }
 
-.objects-container {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-}
-
-.domObject {
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border-radius: 5px;
-}
-
-.domObject:hover {
-    transform: scale(1.05);
-}
-
-.domObject.selected {
-    border: 3px solid yellow;
-    transform: scale(1.1);
-}

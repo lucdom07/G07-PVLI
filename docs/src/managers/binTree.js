@@ -2,22 +2,28 @@
 
 class Node {
     // Nodo padre
-    father;
+    parent;
     // Valor del nodo
     value;
     // Nivel del nodo
     level;
+    // Indica si se puede pulsar
+    active;
     // Hijo izquierdo 
     left;
     // Hijo derecho
     right;
+    // Botón
+    button;
 
-    constructor(value = null, level = null, father = null) {
+    constructor(value = null, level = null, parent = null, active = false) {
         this.value = value;
         this.level = level;
-        this.father = father;
+        this.parent = parent;
+        this.active = active;
         this.left = null;
         this.right = null;
+        this.button = null;
     }
 
     empty() {
@@ -36,36 +42,32 @@ export default class BinTree {
     constructor(numLevels) {
         let i = 1;
         // La raiz siempre es tienda
-        this.root = new Node(1, i);
+        this.root = new Node(1, i, null, true);
         this.numNodes = 1;
         this.levels = numLevels;
         this.buildTree(this.root, numLevels, i);
     }
 
-    buildTree(father, numLevels, it) {
+    buildTree(parent, numLevels, it) {
         it++;
         if(it > numLevels) {
-            father.left = new Node();
-            father.right = new Node();
+            parent.left = new Node(null, null, parent);
+            parent.right = new Node(null, null, parent);
             return;
         }
         
-        let val = 0
+        //let val = Math.floor(Math.random() * 2);
+        let val = 1;
         
-        father.left = new Node(val, it, father);
-        this.buildTree(father.left, numLevels, it);
+        parent.left = new Node(val, it, parent);
+        this.buildTree(parent.left, numLevels, it);
         
-        //val = 0;
+        //val = Math.floor(Math.random() * 2);
+        val = 1;
 
-        father.right = new Node(val, it, father);
-        this.buildTree(father.right, numLevels, it);
+        parent.right = new Node(val, it, parent);
+        this.buildTree(parent.right, numLevels, it);
 
         this.numNodes += 2;
-    }
-
-    debug() {
-        console.log(this.root.value);
-        console.log(this.root.left.value);
-        console.log(this.root.right.value);
     }
 }

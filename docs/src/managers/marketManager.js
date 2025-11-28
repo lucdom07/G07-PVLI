@@ -83,12 +83,6 @@ export default class MarketManager {
         this.marketAllies.forEach((marketItem, index) => {
             this.displayMarketItem(marketItem, index);
         });
-
-        this.marketObjects.forEach((marketItem, index) => {
-            this.displayMarketItem(marketItem, index);
-        });
-
-        this.displayPlayerAllies();
     }
 
     displayMarketItem(marketItem, index){
@@ -163,28 +157,6 @@ export default class MarketManager {
         marketItem.button.on('pointerdown', () => this.buyItem(marketItem));
     }
 
-    displayPlayerAllies(){
-        this.sellButtons.forEach(b => b.destroy());
-        this.sellButtons = [];
-
-        this.bag.forEach((ally, index) => {
-            if(!ally.available) return;
-
-            const x = 150 + index * 150;
-            const y = 350;
-            if(ally instanceof Ally){
-                ally.setPosition(x, y).setScale(0.5);
-            }
-            else{
-                ally.setPosition(x, y).setDisplaySize(this.ObjectSize, this.ObjectSize)
-            }
-            if(!ally.scene) this.scene.add.existing(ally);
-
-            ally.on('pointerdown', () => this.selectForSale(ally, index));
-            this.sellButtons.push(ally);
-        });
-    }
-
     showMoney(){
         if(this.moneyText) this.moneyText.destroy();
         this.moneyText = this.scene.add.text(
@@ -251,8 +223,6 @@ export default class MarketManager {
         if(newAlly.warriorUI) 
         newAlly.warriorUI.destroy();
         
-        
-        //this.bag.push(newAlly);
         //Al comprar el aliado, se actualiza el array de aliados disponibles del jugador y el dinero en la escena de market
         this.scene.events.emit('buyingAlly', newAlly, item.cost);
         this.showMessage(`¡Has comprado a ${newAlly.name}!`);
@@ -275,15 +245,14 @@ export default class MarketManager {
         if(marketItem.infoText) marketItem.infoText.destroy();
 
         this.showMoney();
-        this.displayPlayerAllies();
+        this.showMessage(`¡Has comprado a ${newAlly.name}!`);
     }
 
     sellAlly(index, sellPrice){
-        //const ally = this.bag[index];
+        const ally = this.bag[index];
         if(!ally) return;
 
         //ally.available = false;
-        this.bag.splice(index, 1);
         this.money += sellPrice;
 
         this.scene.events.emit('sellingAlly', index, sellPrice);

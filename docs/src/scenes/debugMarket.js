@@ -5,6 +5,7 @@ import GlobalObject from "../managers/globalObjects.js";
 export default class debugMarket extends Phaser.Scene{
     constructor(){
         super({key: 'debugMarket'});
+        this.playerData = {};
         //Array con los aliados obtenidos
         this.ownedAllies = [];
         //Dinero del jugador
@@ -19,6 +20,7 @@ export default class debugMarket extends Phaser.Scene{
     //En init le pasamos los aliados que tiene el jugador
     init(data){
         this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'));
+        this.playerData = data;
         this.ownedAllies = data.ownedAllies;
         this.money = data.money;
         this.ownedObjects = data.ownedObjects || [];
@@ -50,12 +52,12 @@ export default class debugMarket extends Phaser.Scene{
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
         this.events.on('buyingAlly', (ally, price)=>{
-            //this.ownedAllies.push(ally);
-            this.money -= price;
+            this.playerData.ownedAllies.push(ally);
+            this.playerData.money -= price;
         });
         this.events.on('sellingAlly', (index, price)=>{
-            //this.ownedAllies.splice(index, 1);
-            this.money += price;
+            this.playerData.ownedAllies.splice(index, 1);
+            this.playerData.money += price;
         });
         
         //añadir el fondo del mercado
@@ -86,15 +88,12 @@ export default class debugMarket extends Phaser.Scene{
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
         exitButton.on('pointerdown', () =>{        
-            this.scene.start('combatSetup', {
-                ownedAllies: this.ownedAllies,
-                money: this.money,
-                ownedObjects:this.ownedObjects
-            });
+            this.scene.start('debugMap', this.playerData);
             console.log("Saliendo del mercado");
         });
 
         this.marketSystem.textureButton = 'buyButton'; 
-        this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
+        this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money);
+        //this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
     }
 }

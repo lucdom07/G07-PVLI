@@ -1,0 +1,359 @@
+[
+    {
+        "name": "Narrador",
+        "line":"Después de un intenso día de clase, sigues la ruta de siempre para volver a casa.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Durante tu largo trayecto, miras las noticias de hoy, pero son todo desgracias.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Guerras, inflación, calentamiento global, recortes en sanidad, educación y derechos humanos… Una patada en el estómago tras otra.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Sin embargo, lo que más rabia te genera es que, a pesar de que todo el mundo sabe lo que está pasando, nadie está haciendo nada al respecto.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Te preguntas “¿acaso a nadie le importa que estas injusticias sigan pasando?”. Justo cuando casi llegas a casa, oyes un llanto en uno de los callejones.", 
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Al acercarte, te encuentras con un individuo con orejas de gato dentro de una caja de cartón.", 
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Te preocupa verlo en ese estado, así que le preguntas:",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"¿Qué te ha pasado? ¿Necesitas ayuda?",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"¿Quién eres?",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Le dices tu nombre y que le habías oído llorar mientras te dirigías a casa. Le aclaras que no quieres hacerle daño y te gustaría saber cómo ha acabado en esta calle.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"Mi dueño me ha echado de casa.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"Me dijo que era un estorbo y que ya no me quería para nada.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"Entonces ahora yo… *snif snif* no tengo ningún hogar y mi único compañero es esta caja de cartón.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"Soy miserable.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"¡Por supuesto que no!",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"El único miserable es el que abandona a sus mascotas.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"No entiendo cómo a alguien se le puede ocurrir ser tan cruel con los animales, debería darles vergüenza.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"¿Lo dices en serio?",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"Claro, ¿por qué pensaría eso de ti?",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"No sé, a no ser que me confieses que has matado a alguien…",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"BUAAAAAAAAAAAAAAAAA nunca me habían dicho algo tan bonito.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"(Bueno, tampoco nos flipemos. Aunque me parece triste que nunca le hayan tratado bien).",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"Oye, ¿y cómo te llamas?",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"Pues… me han llamado de muchas formas: minino miserable, basura con patas, bola de mugre…",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"Pero no, no tengo nombre...",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Te entristece tanto este hecho que te pones a pensar en posibles nombres para este gato hasta que se te ocurre lo siguiente:", 
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"¿Qué te parece Michi-Michi?",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"Michi-Michi… Michi-Michi… Michi-Michi…",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"BUAAAAAAAAAAAAAAA nunca me han puesto un nombre tan adorable, no me lo merezco.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Gato en una caja",
+        "line":"Muchas gracias * snif snif*.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"(Madre mía, está pidiendo a gritos que le manden a un concurso de drama queens).",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Michi-Michi",
+        "line":"Oye, ¿ya que no te parezco un minino miserable puedes hacerme un favor?",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"Yo… Em… Lo siento, mis padres no me dejan tener mascotas en casa, pero puedo buscar si…",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Michi-Michi",
+        "line":"No, no me refiero a que me adoptes, deja que me explique.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Michi-Michi",
+        "line":"La sociedad está llena de humanos crueles que maltratan a los de mi raza.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Michi-Michi",
+        "line":"Creen que pueden contaminar nuestro ecosistema y controlar a los demás solo por ser los más ricos.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Michi-Michi",
+        "line":"¿Pero no te has parado a pensar que no tiene por qué seguir siendo así?",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Por supuesto que sí, más de una vez de hecho.", 
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Llevas tiempo pensando en las desgracias globales y te alegra haber encontrado a alguien que también opina que el mundo necesita un cambio, así que le dejas claro a Michi-Michi que estás de acuerdo con lo que ha dicho.", 
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Michi-Michi",
+        "line":"¡Miautástico! ¡Entonces formemos un ejército para conquistar el planeta y crear una sociedad justa para todos!",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"Eeeeeh no nos vengamos arriba, que todavía no he aceptado todos los términos y condiciones.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Michi-Michi",
+        "line":"Pero… ¿No te gustaría ayudar a los de mi raza a liberarse de las garras de los poderosos?",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"Sí, claro, pero no sé cómo quieres que te ayude a formar un ejército si ni siquiera consigo organizar a mis compañeros de proyecto para que cumplan sus tareas.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Michi-Michi",
+        "line":"No te preocupes, los de mi raza somos muy espabilados, así que yo te enseñaré lo básico y luego tú te encargarás de prepararnos para los combates contra los humanos.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Tú",
+        "line":"Venga, te daré una oportunidad.",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+        {
+        "name": "Tú",
+        "line":"(Espero que este felino no me meta en un marrón, que como salga en las noticias mi madre me va a echar una bronca…).",
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Y así es como conociste a Michi-Michi y te uniste a su plan de crear un ejército para derrotar a los opresores y conquistar el mundo.", 
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Aparte de eso, también has demostrado que eres capaz de apuntarte a cualquier cosa con tal de faltar a clase, incluso si se trata de hacer puenting sin cuerda.", 
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Se lo voy a chivar a tu madre.", 
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"Es broma. :D", 
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    },
+    {
+        "name": "Narrador",
+        "line":"O no... :|", 
+        "sprite": "",
+        "spritePos": "",
+        "background": ""
+    }
+]
