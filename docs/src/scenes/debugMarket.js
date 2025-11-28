@@ -68,12 +68,6 @@ export default class debugMarket extends Phaser.Scene{
             new Ally(this, -150, -150,'warf', 35, 7, 0, 'warf', 0, 1, false, 0)
         ];
 
-        /*
-        this.bag = [
-            new Ally(this, -150, -150,"chupacabra", 21, 10, 0, 'chupacabra', 0, 1, true, 0),
-            new Ally(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1, true, 0)
-        ];
-        */
         this.objList =[
             new GlobalObject(this, 0,0,"calcetin","", 2,2,1),
             new GlobalObject(this, 0,0,"llave","", 2,2,1),
@@ -87,9 +81,10 @@ export default class debugMarket extends Phaser.Scene{
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
         exitButton.on('pointerdown', () =>{        
-            this.scene.start('debugMap', {
+            this.scene.start('combatSetup', {
                 ownedAllies: this.ownedAllies,
-                money: this.money
+                money: this.money,
+                ownedObjects:this.ownedObjects
             });
             console.log("Saliendo del mercado");
         });

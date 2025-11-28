@@ -139,18 +139,64 @@ export default class CombatSetup extends Phaser.Scene {
     }
 
     //se enseñan los objetos en el lado izquierdo de la pantalla del juego
-    showObjects(objectsList){
-        let x = 20;
-        let y = 20;
-        for(let i = 0; i<objectsList.length; i++){
-            if(!objectsList[i].scene){
-                this.scene.add.existing(objectsList[i]);
-            }
-            objectsList[i].setPosition(x, y*(i+1)).setScale(0.5).setInteractive().setVisible(true);
+   showObjects(objectsList){
+    let x = 20;
+    let y = 20;
+    const ySpacing = 80; // Espacio vertical entre objetos
+    
+    for(let i = 0; i < objectsList.length; i++){
+        const obj = objectsList[i];
+        
+        if(!obj.scene){
+            this.scene.add.existing(obj);
+        }
+        
+        // Posicionar con mejor espaciado
+        obj.setPosition(x, y + (i * ySpacing))
+           .setScale(0.5)
+           .setInteractive()
+           .setVisible(true);
 
-            
+        // Agregar tooltip al pasar el ratón
+        obj.on('pointerover', () => {
+            this.showObjectTooltip(obj, x, y + (i * ySpacing));
+        });
+
+        obj.on('pointerout', () => {
+            this.hideObjectTooltip();
+        });
+
+        // Opcional: agregar funcionalidad al hacer click
+        obj.on('pointerdown', () => {
+            this.useObject(obj);
+        });
+    }
+    }
+
+    //para pasar el raton por encima y enseñar información
+    showObjectTooltip(obj, x, y){
+        // Destruir tooltip anterior si existe
+        this.hideObjectTooltip();
+        
+        // Crear tooltip con información del objeto
+        this.currentTooltip = this.scene.add.text(x + 50, y - 30, 
+            `${obj.name}\nHP: ${obj.life || 'N/A'}\nATK: ${obj.attack || 'N/A'}\nTipo: ${obj.type || 'Objeto'}`, {
+                fontSize: '10px',
+                fill: '#FFFFFF',
+                backgroundColor: '#000000',
+                padding: { x: 5, y: 5 },
+                align: 'center'
+            }).setOrigin(0, 0.5);
+    }
+
+    //esconde la información
+    hideObjectTooltip(){
+        if(this.currentTooltip){
+            this.currentTooltip.destroy();
+            this.currentTooltip = null;
         }
     }
+
 
     /*
     Elimina un aliado de selectedAllies.

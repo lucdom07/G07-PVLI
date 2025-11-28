@@ -1,6 +1,5 @@
 import Ally from "../../gameObjects/characters/ally.js";
 import globalObjects from "../managers/globalObjects.js";
-import GlobalAlly from "./globalAlly.js";
 
 export default class MarketManager {
     constructor(scene, buttonTexture){
@@ -17,13 +16,17 @@ export default class MarketManager {
         this.selectedForSale = null;
         this.sellPanel = null;
         this.sellButtons = [];
+
+        this.objectBag =[];
     }
     
-    market(bag, allyList, objList, money){
+    market(bag, allyList, objList, money, ownedObjectsBag){
         this.bag = bag;
         this.marketAllies = this.generateAlly(allyList, 3);
         this.marketObjects = this.generateObject(objList, 2); // objetos no implementados aún
         this.showMarket(money);
+
+        this.objectBag = ownedObjectsBag;
     }
 
     makeStruct(item) {
@@ -213,11 +216,14 @@ export default class MarketManager {
         const item = marketItem.item;
 
         if(this.money < item.cost){ this.showMessage("No tienes dinero"); return; }
-        if(this.bag.length >= 6){ this.showMessage("Inventario lleno"); return; }
+
+        if(this.bag.length >= 6 && item === Ally){ this.showMessage("Inventario lleno"); return; }
+        else if(this.objectBag >= 1 && item === globalObjects){ this.showMessage("Inventario de objetos lleno"); return; }
 
         this.money -= item.cost;
 
         // Clonar y agregar a la escena
+        if(item===Ally){
         const newAlly = item.clone();
         newAlly.available = true;
 
@@ -232,6 +238,15 @@ export default class MarketManager {
         //this.bag.push(newAlly);
         //Al comprar el aliado, se actualiza el array de aliados disponibles del jugador y el dinero en la escena de market
         this.scene.events.emit('buyingAlly', newAlly, item.cost);
+        }
+        else{
+            const newObj = item.clone();
+            if(!newObj.scene) this.scene.add.existingnewObj
+            newObj.setVisible(false);
+
+            this.objectBag.push(newObj)
+        }
+        
 
         // Remover del mercado
         item.setVisible(false).disableInteractive();
