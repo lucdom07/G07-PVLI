@@ -4,6 +4,10 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
         this.DISTANCE_BELOW_WARRIOR = warriorSize/2;
         const startingY = y + this.DISTANCE_BELOW_WARRIOR;
         this.STATS_DISTANCE = 50;
+
+        this.x = x;
+        this.y = startingY;
+
         let livesText = this.scene.add.text(x, startingY, `Vida: ${life}`, {
             fontSize: '20px',
             fill: '#baffa3ff',
@@ -99,6 +103,12 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
                     }
                 }
             });
+    }
+    
+
+    setNewStats(life, attack){
+        this.stats[0].setText(`Vida: ${life}`);
+        this.stats[1].setText(`Ataque: ${attack}`)
     }
     
     /* Por ahora no lo estamos usando, pero lo dejamos aquí para cuando lo necesitemos

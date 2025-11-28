@@ -1,6 +1,7 @@
 import Ally from "../../gameObjects/characters/ally.js";
 import GlobalAlly from "../managers/globalAlly.js";
 import DOMmanager from "../managers/DOMManager.js";
+import WarriorUI from "../../gameObjects/ui/warriorUi.js";
 
 export default class CombatSetup extends Phaser.Scene {
 
@@ -182,7 +183,7 @@ export default class CombatSetup extends Phaser.Scene {
         
         // Crear tooltip con información del objeto
          this.currentTooltip = this.add.text(x-26, y - 30, 
-        `${obj.getName()}\nHP: +${obj.getLife() || 0}\nATK: +${obj.getAttack() || 0}`, {
+        `${obj.getName()}\nHP: ${obj.getLife() || 0}\nATK: ${obj.getAttack() || 0}`, {
             fontSize: '10px',
             fill: '#FFFFFF',
             backgroundColor: '#000000',
@@ -319,6 +320,8 @@ export default class CombatSetup extends Phaser.Scene {
             globalAlly.setLife(newLife);
             globalAlly.setAttack(newAttack);
         }
+
+        ally.warriorUI.setNewStats(ally.getLife(), ally.getAttack());
 
         if (ally.updateStatsUI) {
             ally.updateStatsUI();
