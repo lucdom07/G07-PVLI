@@ -21,7 +21,7 @@ export default class debugMarket extends Phaser.Scene{
         this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'));
         this.ownedAllies = data.ownedAllies;
         this.money = data.money;
-        this.ownedObjects = data.ownedObjects;
+        this.ownedObjects = data.ownedObjects || [];
         this.level = data.level;
     }
     

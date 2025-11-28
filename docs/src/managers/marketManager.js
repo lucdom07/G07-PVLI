@@ -218,7 +218,7 @@ export default class MarketManager {
         if(this.money < item.cost){ this.showMessage("No tienes dinero"); return; }
 
         if(this.bag.length >= 6 && item instanceof Ally){ this.showMessage("Inventario lleno"); return; }
-        else if(this.objectBag.length >= 1 && !(item instanceof Ally)){ this.showMessage("Inventario de objetos lleno"); return; }
+        else if(this.objectBag.length >= 4 && !(item instanceof Ally)){ this.showMessage("Inventario de objetos lleno"); return; }
 
         this.money -= item.cost;
 

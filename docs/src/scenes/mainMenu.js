@@ -5,6 +5,9 @@ export default class mainMenu extends Phaser.Scene{
         this.ownedAllies = [];
         //Dinero del jugador. Empieza con 10
         this.money = 10;
+
+        this.level =0;
+         this.ownedObjects = [];
     }
 
     preload(){
@@ -29,7 +32,10 @@ export default class mainMenu extends Phaser.Scene{
         playButton.on('pointerdown',()=>{
             this.scene.start('debugMarket', {
                 ownedAllies: this.ownedAllies,
-                money: this.money
+                money: this.money,
+                ownedObjects: this.ownedObjects || [],
+                level: this.level
+
             });
         });
     }

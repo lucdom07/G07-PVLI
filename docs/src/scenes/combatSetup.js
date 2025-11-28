@@ -20,7 +20,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.positions = [[0, false], [1, false], [2, false], [3, false], [4, false]];
 
 
-        this.ownedObjects =[];
+        this.ownedObjects = []; 
         this.selectedObject = null;
     }
 
@@ -45,7 +45,6 @@ export default class CombatSetup extends Phaser.Scene {
     }
 
     create() {
-
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
 
         //Subscribir eventos de click a los aliados del DOM
@@ -58,13 +57,8 @@ export default class CombatSetup extends Phaser.Scene {
             });
         }
 
-        //Subscribir eventos de click a los objetos del DOM
-        for(let i = 0; i < this.DOMobjects.length; i++) {
-            let object = this.DOMmanager.getObjectsArray()[i];
-            this.DOMobjects.item(i).addEventListener('click', () => {
-                this.selectObject(object, i);
-            });
-        }
+        console.log(this.ownedObjects);
+        this.showObjects(this.ownedObjects);
 
         const playButton = this.add.image(200 ,50,'combatButton').setInteractive();
 
@@ -138,26 +132,48 @@ export default class CombatSetup extends Phaser.Scene {
         }
     }
 
-    //se enseñan los objetos en el lado izquierdo de la pantalla del juego
+    //se enseñan los objetos en el lado derecho de la pantalla del juego
    showObjects(objectsList){
-    let x = 20;
-    let y = 20;
-    const ySpacing = 80; // Espacio vertical entre objetos
+    console.log('Mostrando objetos:', objectsList);
+    
+    let x = 1000;
+    let y = 100;
+    const ySpacing = 80;
     
     for(let i = 0; i < objectsList.length; i++){
-        const obj = objectsList[i];
+        let obj = objectsList[i];
         
-        if(!obj.scene){
-            this.scene.add.existing(obj);
+        if (!obj || !obj.scene) {
+            console.log('Creando GameObject para objeto:', obj);
+            
+            // Guarda los valores originales antes de modificar el objeto
+            const originalObj = objectsList[i];
+            const originalName = originalObj.getName();
+            const originalLife = originalObj.getLife();
+            const originalAttack = originalObj.getAttack();
+            
+            // Crea un sprite temporal para el objeto
+            const texture = originalObj.texture || 'potion_red';
+            obj = this.add.image(x, y + (i * ySpacing), texture);
+            
+            obj.getName = () => originalName;
+            obj.getLife = () => originalLife;
+            obj.getAttack = () => originalAttack;
+            
+            // Reemplaza en el array
+            this.ownedObjects[i] = obj;
         }
         
-        // Posicionar con mejor espaciado
+        // Configura el objeto
         obj.setPosition(x, y + (i * ySpacing))
            .setScale(0.5)
            .setInteractive()
            .setVisible(true);
 
-        // Agregar tooltip al pasar el ratón
+        obj.on('pointerdown', () => {
+            this.selectObject(obj, i);
+        });
+
         obj.on('pointerover', () => {
             this.showObjectTooltip(obj, x, y + (i * ySpacing));
         });
@@ -165,13 +181,8 @@ export default class CombatSetup extends Phaser.Scene {
         obj.on('pointerout', () => {
             this.hideObjectTooltip();
         });
-
-        // Opcional: agregar funcionalidad al hacer click
-        obj.on('pointerdown', () => {
-            this.useObject(obj);
-        });
     }
-    }
+}
 
     //para pasar el raton por encima y enseñar información
     showObjectTooltip(obj, x, y){
@@ -179,14 +190,14 @@ export default class CombatSetup extends Phaser.Scene {
         this.hideObjectTooltip();
         
         // Crear tooltip con información del objeto
-        this.currentTooltip = this.scene.add.text(x + 50, y - 30, 
-            `${obj.name}\nHP: ${obj.life || 'N/A'}\nATK: ${obj.attack || 'N/A'}\nTipo: ${obj.type || 'Objeto'}`, {
-                fontSize: '10px',
-                fill: '#FFFFFF',
-                backgroundColor: '#000000',
-                padding: { x: 5, y: 5 },
-                align: 'center'
-            }).setOrigin(0, 0.5);
+         this.currentTooltip = this.add.text(x-26, y - 30, 
+        `${obj.getName()}\nHP: +${obj.getLife() || 0}\nATK: +${obj.getAttack() || 0}`, {
+            fontSize: '10px',
+            fill: '#FFFFFF',
+            backgroundColor: '#000000',
+            padding: { x: 5, y: 5 },
+            align: 'center'
+        }).setOrigin(0, 0.5);
     }
 
     //esconde la información
@@ -256,7 +267,7 @@ export default class CombatSetup extends Phaser.Scene {
             
             // Seleccionar nuevo objeto
             this.selectedObject = object;
-            this.highlightObject(index, true);
+            object.setTint(0xffff00);
             
             // Cambiar cursor para indicar que se puede aplicar a un aliado
             this.game.canvas.style.cursor = "crosshair";
@@ -268,28 +279,12 @@ export default class CombatSetup extends Phaser.Scene {
     deselectObject() {
         if (this.selectedObject) {
             // Remover highlight de todos los objetos
-            for(let i = 0; i < this.DOMobjects.length; i++) {
-                this.highlightObject(i, false);
-            }
+            this.ownedObjects.forEach(obj => {
+            obj.clearTint(); // Remover cualquier tint
+            });
             
             this.selectedObject = null;
             this.game.canvas.style.cursor = "default";
-        }
-    }
-
-    highlightObject(index, selected) {
-        const objectElement = this.DOMobjects.item(index);
-        if (objectElement) {
-            const img = objectElement.querySelector('img');
-            if (img) {
-                if (selected) {
-                    img.style.border = "3px solid yellow";
-                    img.style.transform = "scale(1.1)";
-                } else {
-                    img.style.border = "none";
-                    img.style.transform = "scale(1)";
-                }
-            }
         }
     }
 
