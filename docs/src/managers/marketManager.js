@@ -1,4 +1,6 @@
 import Ally from "../../gameObjects/characters/ally.js";
+import globalObjects from "../managers/globalObjects.js";
+import GlobalAlly from "./globalAlly.js";
 
 export default class MarketManager {
     constructor(scene, buttonTexture){
@@ -85,11 +87,11 @@ export default class MarketManager {
     }
 
     displayMarketItem(marketItem, index){
-        const x = 0;
-        if(marketItem === Ally){
+        let x = 0;
+        if(marketItem.item instanceof Ally){
             x = 150 + index * 150;
         }
-        else x = 250 + index * 150; //en caso de que fuera un objeto
+        else x = 750 + index * 150; //en caso de que fuera un objeto
 
         const y = 200;
         const item = marketItem.item;
@@ -98,6 +100,8 @@ export default class MarketManager {
         this.scene.add.existing(item);
         }
         item.setPosition(x, y).setScale(0.5).setInteractive().setVisible(true);
+
+        console.log(item);
 
         // Botón de compra
         marketItem.button = this.scene.add.image(x, y + 60, this.textureButton)
@@ -240,7 +244,6 @@ export default class MarketManager {
         this.displayPlayerAllies();
         this.showMessage(`¡Has comprado a ${newAlly.name}!`);
     }
-
 
     sellAlly(index, sellPrice){
         //const ally = this.bag[index];

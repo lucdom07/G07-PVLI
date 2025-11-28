@@ -22,7 +22,6 @@ export default class CombatSetup extends Phaser.Scene {
 
         this.ownedObjects =[];
         this.selectedObject = null;
-        this.DOMobjects = document.getElementById('objectsArray').children;
     }
 
     init(data) {
