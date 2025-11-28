@@ -16,8 +16,6 @@ export default class CombatSetup extends Phaser.Scene {
         //Posiciones de la fila de selección, con un booleano para saber si estan ocupadas
         this.positions = [[0, false], [1, false], [2, false], [3, false], [4, false]];
 
-
-        this.ownedObjects = []; 
         this.selectedObject = null;
 
         this.ObjectSize =100;
@@ -54,7 +52,7 @@ export default class CombatSetup extends Phaser.Scene {
             });
         }
 
-        this.showObjects(this.ownedObjects);
+        this.showObjects(this.playerData.ownedObjects);
 
         const playButton = this.add.image(200 ,50,'combatButton').setInteractive();
 
@@ -154,7 +152,7 @@ export default class CombatSetup extends Phaser.Scene {
             obj.getAttack = () => originalAttack;
             
             // Reemplaza en el array
-            this.ownedObjects[i] = obj;
+            this.playerData.ownedObjects[i] = obj;
         }
         
         // Configura el objeto
@@ -272,7 +270,7 @@ export default class CombatSetup extends Phaser.Scene {
     deselectObject() {
         if (this.selectedObject) {
             // Remover highlight de todos los objetos
-            this.ownedObjects.forEach(obj => {
+            this.playerData.ownedObjects.forEach(obj => {
             obj.clearTint(); // Remover cualquier tint
             });
             
@@ -354,17 +352,17 @@ export default class CombatSetup extends Phaser.Scene {
 
     removeUsedObject(object) {
        // Remover del array local
-        const objectIndex = this.ownedObjects.findIndex(obj => {
+        const objectIndex = this.playerData.ownedObjects.findIndex(obj => {
         const objToCompare = obj.originalObject || obj;
         return objToCompare.getName() === object.getName();
         });
     
         if (objectIndex !== -1) {
-            const objToRemove = this.ownedObjects[objectIndex];
+            const objToRemove = this.playerData.ownedObjects[objectIndex];
             if (objToRemove && objToRemove.destroy) {
                 objToRemove.destroy();
             }
-        this.ownedObjects.splice(objectIndex, 1);
+        this.playerData.ownedObjects.splice(objectIndex, 1);
         }
     
         console.log(`Objeto ${object.getName()} usado y eliminado`);
