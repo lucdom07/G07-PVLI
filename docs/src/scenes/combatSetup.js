@@ -109,7 +109,6 @@ export default class CombatSetup extends Phaser.Scene {
 
     /*
     Añade un aliado a selectedAllies, siempre que no estuviera ya añadido.
-
     FALTARIA PONER UN LIMITE AL MAXIMO DE ALIADOS
     */
     addAlly(ally) {
@@ -137,6 +136,20 @@ export default class CombatSetup extends Phaser.Scene {
                 }
                 i++;
             }
+        }
+    }
+
+    //se enseñan los objetos en el lado izquierdo de la pantalla del juego
+    showObjects(objectsList){
+        let x = 20;
+        let y = 20;
+        for(let i = 0; i<objectsList.length; i++){
+            if(!objectsList[i].scene){
+                this.scene.add.existing(objectsList[i]);
+            }
+            objectsList[i].setPosition(x, y*(i+1)).setScale(0.5).setInteractive().setVisible(true);
+
+            
         }
     }
 
