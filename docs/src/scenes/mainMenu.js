@@ -12,16 +12,14 @@ export default class mainMenu extends Phaser.Scene{
     preload(){
         this.load.image('startButton','assets/placeholders/buttons/start_button.png')
         //this.load.image('marketButton','assets/button.png')
-        this.load.image('background','assets/placeholders/background.png')
-        this.load.image('cat','assets/placeholders/cat_maintitle.png')
+        this.load.image('mainMenuBackground','assets/backgrounds/mainmenu_background.png')
         this.load.audio('bad_apple', 'assets/placeholders/audio/bad_apple.mp3');
     }
 
     create(){
         this.sound.play('bad_apple');
         //fondo con título
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'cat');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'mainMenuBackground');
    
         //botón de juego
         const playButton = this.add.image(300, 100, 'startButton').setInteractive();

@@ -56,14 +56,14 @@ export default class BinTree {
             return;
         }
         
-        //let val = Math.floor(Math.random() * 2);
-        let val = 1;
+        let val = Math.floor(Math.random() * 2);
+        //let val = 1;
         
         parent.left = new Node(val, it, parent);
         this.buildTree(parent.left, numLevels, it);
         
-        //val = Math.floor(Math.random() * 2);
-        val = 1;
+        val = Math.floor(Math.random() * 2);
+        //val = 1;
 
         parent.right = new Node(val, it, parent);
         this.buildTree(parent.right, numLevels, it);
