@@ -29,9 +29,9 @@ export const AudioFiles = {
 
     [MusicKeys.PRE]: 'assets/sonidos/battle.mp3',
     [MusicKeys.MAPA]:'assets/placeholders/audio/bad_apple.mp3',
-    [MusicKeys.BATALLA]:'assets/sonidos/battle.mp3',
+    [MusicKeys.BATALLA]:'assets/sonidos/batalla.mp3',
     [MusicKeys.TIENDA]:'assets/sonidos/battle.mp3',
     [MusicKeys.PAUSA]: 'assets/sonidos/battle.mp3',
     [MusicKeys.VICTORY]: 'assets/sonidos/battle.mp3',
-    [MusicKeys.GAME_OVER]: 'assets/sonidos/battle.mp3'
+    [MusicKeys.GAME_OVER]: 'assets/sonidos/gameover.mp3'
 };
