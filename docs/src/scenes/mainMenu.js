@@ -1,5 +1,5 @@
-import AudioManager from "../managers/audioManager";
-import { MusicKeys } from "../managers/audioConfig";
+import AudioManager from "../managers/audioManager.js";
+import { MusicKeys } from "../managers/audioConfig.js";
 
 export default class mainMenu extends Phaser.Scene{
     constructor(){
@@ -10,7 +10,7 @@ export default class mainMenu extends Phaser.Scene{
             level: 0,
             ownedObjects: []
         }
-        this.AudioManager = null;
+        this.audioManager = null;
     }
 
     preload(){

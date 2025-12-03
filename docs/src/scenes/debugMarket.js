@@ -9,7 +9,7 @@ export default class debugMarket extends Phaser.Scene{
     constructor(){
         super({key: 'debugMarket'});
         this.playerData = {};
-        this.AudioManager = null;
+        this.audioManager = null;
     }
 
     //En init le pasamos los aliados que tiene el jugador
@@ -40,8 +40,8 @@ export default class debugMarket extends Phaser.Scene{
 
     create(){
         //inicializar audio
-        this.AudioManager = AudioManager.getInstance(this);
-        this.AudioManager.playMusic(MusicKeys.TIENDA);
+        this.audioManager = AudioManager.getInstance(this);
+        this.audioManager.playMusic(MusicKeys.TIENDA);
 
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero

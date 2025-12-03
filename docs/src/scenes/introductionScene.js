@@ -10,7 +10,7 @@ export default class IntroductionScene extends Phaser.Scene {
     constructor() {
         super("introduction");
         this.playerData = {}
-        this.AudioManager = null;
+        this.audioManager = null;
     }
 
     init(data){
@@ -24,8 +24,8 @@ export default class IntroductionScene extends Phaser.Scene {
 
     create() {
         //inicializar audio
-        this.AudioManager = AudioManager.getInstance(this);
-        this.AudioManager.playMusic(MusicKeys.INTRO);
+        this.audioManager = AudioManager.getInstance(this);
+        this.audioManager.playMusic(MusicKeys.INTRO);
 
         const rawData = this.cache.json.get("introDialogues");
 
