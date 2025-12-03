@@ -2,11 +2,15 @@ import Ally from "../../gameObjects/characters/ally.js";
 import Enemy from "../../gameObjects/characters/enemy.js";
 import BinTree from "../managers/binTree.js";
 
+import AudioManager from "../managers/audioManager.js";
+import { MusicKeys } from "../managers/audioConfig.js";
+
 export default class debugMap extends Phaser.Scene {
     constructor() {
         super({key: 'debugMap'});
         this.playerData = {}
         this.tree = new BinTree(4);
+        this.audioManager = null;
     }
 
     //En init le pasamos los aliados y el dinero que tiene el jugador para que cuando entre en una sala se lo pueda pasar a la siguiente escena
@@ -20,6 +24,10 @@ export default class debugMap extends Phaser.Scene {
     }
 
     create() {
+        // Inicializar audio manager
+        this.audioManager = AudioManager.getInstance(this);
+        this.audioManager.playMusic(MusicKeys.MAPA);
+
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
 
         this.createButtons();

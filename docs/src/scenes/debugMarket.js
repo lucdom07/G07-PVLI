@@ -2,10 +2,14 @@ import MarketManager from "../managers/marketManager.js";
 import Ally from "../../gameObjects/characters/ally.js";
 import GlobalObject from "../managers/globalObjects.js";
 
+import AudioManager from "../managers/audioManager.js";
+import { MusicKeys } from "../managers/audioConfig.js";
+
 export default class debugMarket extends Phaser.Scene{
     constructor(){
         super({key: 'debugMarket'});
         this.playerData = {};
+        this.audioManager = null;
     }
 
     //En init le pasamos los aliados que tiene el jugador
@@ -35,6 +39,10 @@ export default class debugMarket extends Phaser.Scene{
     }
 
     create(){
+        //inicializar audio
+        this.audioManager = AudioManager.getInstance(this);
+        this.audioManager.playMusic(MusicKeys.TIENDA);
+
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
