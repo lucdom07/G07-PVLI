@@ -35,10 +35,6 @@ constructor() {
         });
         this.dialogueManager.start();
 
-        console.log(this.dialogueManager.sprite);
-        console.log(dialogues[0]);
-        console.log(dialogues[0].sprite);
-
         // Botón de Skip
         const width = this.sys.game.config.width;
         this.skipButton = this.add.text(width - 100, 40, "Skip", {

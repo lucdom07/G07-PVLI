@@ -12,6 +12,7 @@ export default class debugMap extends Phaser.Scene {
     //En init le pasamos los aliados y el dinero que tiene el jugador para que cuando entre en una sala se lo pueda pasar a la siguiente escena
     init(data) {
         this.playerData = data;
+        this.tree = new BinTree(4);
     }
 
     preload() {
@@ -23,6 +24,21 @@ export default class debugMap extends Phaser.Scene {
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
 
         this.createButtons();
+
+        // Botón de pausa
+        this.pauseButton = this.add.text(100, 40, "Pause", {
+            fontSize: "20px",
+            color: "#ffffff",
+            backgroundColor: "#000000",
+            padding: { x: 10, y: 5 }
+        }).setInteractive();
+
+        
+        this.pauseButton.on("pointerdown", () => {
+            this.scene.launch('pauseMenu');
+            this.scene.pause();
+        });
+
     }
 
     //Función que se llama en create para crear los botones
@@ -66,7 +82,8 @@ export default class debugMap extends Phaser.Scene {
         button.on('pointerdown', () =>{     
             if(node.active) {
                 this.enableButtons(node);
-                this.scene.start(key, this.playerData);
+                this.scene.launch(key, this.playerData);
+                this.scene.pause();
                 console.log("Saliendo del mapa");
             }  
         });

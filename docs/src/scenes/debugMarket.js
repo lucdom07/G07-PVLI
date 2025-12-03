@@ -82,7 +82,8 @@ export default class debugMarket extends Phaser.Scene{
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
         exitButton.on('pointerdown', () =>{        
-            this.scene.start('debugMap', this.playerData); //launch, lanzar la escena 
+            this.scene.resume('debugMap', this.playerData); //launch, lanzar la escena 
+            this.scene.stop();
             console.log("Saliendo del mercado");
         });
 

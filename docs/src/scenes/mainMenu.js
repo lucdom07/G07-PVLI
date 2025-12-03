@@ -2,6 +2,12 @@ export default class mainMenu extends Phaser.Scene{
     constructor(){
         super({key: 'mainMenu'});
         this.playerData = {
+            
+        }
+    }
+
+    init(){
+        this.playerData = {
             ownedAllies: [],
             money: 10,
             level: 0,
