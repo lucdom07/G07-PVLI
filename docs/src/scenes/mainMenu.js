@@ -12,7 +12,8 @@ export default class mainMenu extends Phaser.Scene{
     preload(){
         this.load.image('startButton','assets/placeholders/buttons/start_button.png')
         //this.load.image('marketButton','assets/button.png')
-        this.load.image('mainMenuBackground','assets/backgrounds/mainmenu_background.png')
+        this.load.image('background','assets/placeholders/background.png')
+        this.load.image('cat','assets/placeholders/cat_maintitle.png')
         this.load.audio('bad_apple', 'assets/placeholders/audio/bad_apple.mp3');
     }
 
