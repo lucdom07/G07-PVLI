@@ -32,9 +32,16 @@ export default class debugMarket extends Phaser.Scene{
         this.load.image('comida2','assets/placeholders/objets/comida2.png');
         this.load.image('comida3','assets/placeholders/objets/comida3.png');
         this.load.image('comida4','assets/placeholders/objets/comida4.png');
+
+
     }
 
     create(){
+
+        //diálogo de la tienda
+        this.scene.launch('marketDialogue');
+        this.scene.pause();
+
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
@@ -82,5 +89,7 @@ export default class debugMarket extends Phaser.Scene{
         this.marketSystem.textureButton = 'buyButton'; 
         this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money, this.playerData.ownedObjects);
         //this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
+
     }
+   
 }

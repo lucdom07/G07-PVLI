@@ -3,9 +3,10 @@ import Character from "../../gameObjects/ui/character.js";
 import DialogText from "../../gameObjects/ui/dialogPlugin.js";
 import DialogueManager from "../managers/dialogManager.js";
 
-export default class IntroductionScene extends Phaser.Scene {
-    constructor() {
-        super("introduction");
+export default class marketDialogueScene extends Phaser.Scene{
+
+constructor() {
+        super("marketDialogue");
         this.playerData = {}
     }
 
@@ -14,25 +15,29 @@ export default class IntroductionScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.json("introDialogues", "./jsons/dialogues/intro.json");
-        this.load.image("background", "assets/placeholders/background.png");
+        
+        this.load.json('marketDialogues','./jsons/dialogues/market.json');
+        this.load.image('bird','assets/dialogue_sprites/bird_dialogue.png')
     }
 
     create() {
-        const rawData = this.cache.json.get("introDialogues");
+        const rawData = this.cache.json.get('marketDialogues');
 
         const dialogues = rawData.map(entry => new Dialogue(
             new Character(entry.name),
             entry.line,
             true,
             entry.sprite,
-            entry.spritePos
         ));
 
         this.dialogueManager = new DialogueManager(this, dialogues, {
             dialogBoxClass: DialogText
         });
         this.dialogueManager.start();
+
+        console.log(this.dialogueManager.sprite);
+        console.log(dialogues[0]);
+        console.log(dialogues[0].sprite);
 
         // Botón de Skip
         const width = this.sys.game.config.width;
@@ -49,8 +54,12 @@ export default class IntroductionScene extends Phaser.Scene {
         });
 
         // Escuchar fin de diálogos
-        this.events.on("dialogueEnd", () => this.scene.start("debugMap",this.playerData));
+        this.events.on("dialogueEnd", () => {
+            this.scene.resume('debugMarket');
+            this.scene.stop();
+        });
     }
 
-    
+     
+
 }
