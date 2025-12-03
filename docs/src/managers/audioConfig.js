@@ -22,13 +22,13 @@ export const AudioFiles = {
     [MusicKeys.MENU]: 'assets/placeholders/audio/bad_apple.mp3',
     [MusicKeys.INTRO]: 'assets/sonidos/battle.mp3',
 
-    [MusicKeys.ES]: 'assets/sonidos/battle.mp3',
+    [MusicKeys.ES]: 'assets/placeholders/audio/bad_apple.mp3',
     [MusicKeys.USA]: 'assets/sonidos/battle.mp3',
-    [MusicKeys.CH]: 'assets/sonidos/battle.mp3',
+    [MusicKeys.CH]: 'assets/placeholders/audio/bad_apple.mp3',
     [MusicKeys.AU]: 'assets/sonidos/battle.mp3',
 
     [MusicKeys.PRE]: 'assets/sonidos/battle.mp3',
-    [MusicKeys.MAPA]:'assets/sonidos/battle.mp3',
+    [MusicKeys.MAPA]:'assets/placeholders/audio/bad_apple.mp3',
     [MusicKeys.BATALLA]:'assets/sonidos/battle.mp3',
     [MusicKeys.TIENDA]:'assets/sonidos/battle.mp3',
     [MusicKeys.PAUSA]: 'assets/sonidos/battle.mp3',
