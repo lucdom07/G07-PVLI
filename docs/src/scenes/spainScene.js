@@ -3,10 +3,14 @@ import Character from "../../gameObjects/ui/character.js";
 import DialogText from "../../gameObjects/ui/dialogPlugin.js";
 import DialogueManager from "../managers/dialogManager.js";
 
+import AudioManager from "../managers/audioManager.js";
+import { MusicKeys } from "../managers/audioConfig.js";
+
 export default class AustraliaScene extends Phaser.Scene {
     constructor() {
         super("spainVictory");
         this.playerData = {}
+        this.audioManager = null;
     }
 
     init(data){
@@ -19,6 +23,10 @@ export default class AustraliaScene extends Phaser.Scene {
     }
 
     create() {
+        // Inicializar audio manager para esta escena
+        this.audioManager = AudioManager.getInstance(this);
+        this.audioManager.playMusic(MusicKeys.ES);
+        
         const rawData = this.cache.json.get("spainDialogues");
 
         const dialogues = rawData.map(entry => new Dialogue(
