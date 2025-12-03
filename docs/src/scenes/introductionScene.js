@@ -3,14 +3,10 @@ import Character from "../../gameObjects/ui/character.js";
 import DialogText from "../../gameObjects/ui/dialogPlugin.js";
 import DialogueManager from "../managers/dialogManager.js";
 
-import AudioManager from "../managers/audioManager.js";
-import { MusicKeys } from "../managers/audioConfig.js";
-
 export default class IntroductionScene extends Phaser.Scene {
     constructor() {
         super("introduction");
         this.playerData = {}
-        this.audioManager = null;
     }
 
     init(data){
@@ -23,10 +19,6 @@ export default class IntroductionScene extends Phaser.Scene {
     }
 
     create() {
-        //inicializar audio
-        this.audioManager = AudioManager.getInstance(this);
-        this.audioManager.playMusic(MusicKeys.INTRO);
-
         const rawData = this.cache.json.get("introDialogues");
 
         const dialogues = rawData.map(entry => new Dialogue(
