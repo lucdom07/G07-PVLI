@@ -81,7 +81,7 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
 
     //Crea texto de daño
     createDamageText(x, y, damage, color = '#ff0000'){
-            //console.log(`Creando texto de daño: -${damage} en (${x}, ${y})`); // Debug
+            console.log(`Creando texto de daño: -${damage} en (${x}, ${y})`); // Debug
             const text = this.scene.add.text(x, y - this.TEXT_FEEDBACK_DISTANCE, `-${damage}`, {
                 fontSize: '24px',
                 fill: color,

@@ -9,6 +9,8 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         this.range = range;
         this.level = level;
         this.DISPLAY_SIZE = 190;
+        //tiempo de delay entre llamadas de las funciones de ataque
+        this.ATTACK_DELAY_TIME = 380;
         this.setDisplaySize(this.DISPLAY_SIZE, this.DISPLAY_SIZE); 
         this.scene.add.existing(this);
         this.warriorUI = new WarriorUI(scene, x, y, life, attack, range, this.DISPLAY_SIZE);
@@ -50,7 +52,7 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
             duration: 600,
             ease: 'Power2',
             callback: () =>{
-                this.scene.time.delayedCall(500, () => {
+                this.scene.time.delayedCall(this.ATTACK_DELAY_TIME, () => {
                     target.takeHit(this.attack);
                     // Volver a la posición original
                     this.scene.tweens.add({
@@ -69,8 +71,7 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
     //emite canCallNext para avisar de que se puede ejecutar el siguiente evento
     takeHit(damage){
         this.life -= (damage);
-        this.warriorUI.updateLivesNumber(this.life);
-        //poner tinte rojo al personaje cuando recibe daño
+        this.warriorUI.showDamageFeedback(this.x, this.y, damage, this.life);
         // Efecto visual en el objetivo
         this.scene.tweens.add({
             targets: this,
@@ -79,12 +80,13 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
             duration: 300,
             yoyo: true,
         });
+        //poner tinte rojo al personaje cuando recibe daño
         this.setTint(0xffff0000);
         this.scene.time.addEvent({
-            delay: 500,
+            delay: this.ATTACK_DELAY_TIME,
             callback: ()=>{
                 this.setTint(0xffffffff);
-                this.scene.time.delayedCall(700, () => {
+                this.scene.time.delayedCall(this.ATTACK_DELAY_TIME, () => {
                     this.scene.events.emit('canCallNext');
                 });
             }

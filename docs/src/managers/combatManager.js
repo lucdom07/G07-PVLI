@@ -18,6 +18,8 @@ export default class CombatManager{
         this.WARRIORS_SEPARATION = 120; 
         this.FIRST_ALLY_POS_X = this.scene.sys.game.canvas.width*0.5 - this.TEAM_DIST_FROM_CANVAS_HALF;
         this.FIRST_ENEMY_POS_X = this.scene.sys.game.canvas.width*0.5 + this.TEAM_DIST_FROM_CANVAS_HALF;
+        //tiempo de delay entre llamadas de las funciones deL combat manager (excepto en checkCombatState())
+        this.MANAGER_DELAY_TIME = 380;
     }
 
     //Inicializa el combate
@@ -76,7 +78,7 @@ export default class CombatManager{
         else{
             this.eventsQueue.push(this.allyAttack, this.enemyAttack, ()=>{this.checkCombatState()});
         }
-        this.scene.time.delayedCall(300, () => {
+        this.scene.time.delayedCall(100, () => {
             this.scene.events.emit('canCallNext');
         });
     }
@@ -101,7 +103,7 @@ export default class CombatManager{
         const deadUnitX = deadUnit.x;
         deadUnit.dieAnimation();
         
-        this.scene.time.delayedCall(500, () => {
+        this.scene.time.delayedCall(this.MANAGER_DELAY_TIME, () => {
             deadUnit.destroy();
         });
 
@@ -110,7 +112,7 @@ export default class CombatManager{
             this.moveTeam(team, deadUnitIndex, deadUnitX);
         }
         this.scene.time.addEvent({
-            delay: 500,
+            delay: this.MANAGER_DELAY_TIME,
             callback: ()=>{ 
                 this.scene.events.emit('canCallNext');
              }
@@ -134,7 +136,7 @@ export default class CombatManager{
             unit.getWarriorUI().moveStatsAnimation(targetX);
         }
         this.scene.time.addEvent({
-            delay: 500,
+            delay: this.MANAGER_DELAY_TIME,
             callback: ()=>{ 
                 //actualizar el atributo x de cada guerrero porque el tweens solo lo cambia visualmente
                 for (let i = 0; deadUnitIndex + i < team.length; i++){
