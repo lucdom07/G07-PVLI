@@ -6,6 +6,8 @@ import CombatSetup from './scenes/combatSetup.js';
 import DOMmanager from "./managers/DOMManager.js";
 import IntroductionScene from './scenes/introductionScene.js';
 import AustraliaScene from './scenes/australiaScene.js';
+import PauseMenu from './scenes/pauseMenu.js';
+import marketDialogueScene from './scenes/marketDialogueScene.js';
 import BootScene from './scenes/precargaScene.js';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -38,7 +40,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			debugMarket,
 			new CombatSetup(DOManager),
 			IntroductionScene,
-			AustraliaScene
+			AustraliaScene,
+			PauseMenu,
+			marketDialogueScene
 		],
 		physics: { 
 			default: 'arcade', 

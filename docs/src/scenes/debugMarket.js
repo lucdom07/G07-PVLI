@@ -36,11 +36,18 @@ export default class debugMarket extends Phaser.Scene{
         this.load.image('comida2','assets/placeholders/objets/comida2.png');
         this.load.image('comida3','assets/placeholders/objets/comida3.png');
         this.load.image('comida4','assets/placeholders/objets/comida4.png');
+
+
     }
 
     create(){
+
+        //diálogo de la tienda
+        this.scene.launch('marketDialogue');
+        this.scene.pause();
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.TIENDA);
+        
 
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
@@ -82,12 +89,30 @@ export default class debugMarket extends Phaser.Scene{
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
         exitButton.on('pointerdown', () =>{        
-            this.scene.start('debugMap', this.playerData); //launch, lanzar la escena 
+            this.scene.resume('debugMap', this.playerData); //launch, lanzar la escena 
+            this.scene.stop();
             console.log("Saliendo del mercado");
         });
 
         this.marketSystem.textureButton = 'buyButton'; 
         this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money, this.playerData.ownedObjects);
         //this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
+
+
+        // Botón de pausa
+        this.pauseButton = this.add.text(100, 40, "Pause", {
+            fontSize: "20px",
+            color: "#ffffff",
+            backgroundColor: "#000000",
+            padding: { x: 10, y: 5 }
+        }).setInteractive();
+
+        
+        this.pauseButton.on("pointerdown", () => {
+            this.scene.launch('pauseMenu',{pausedSceneKey : this.sys.settings.key});
+            this.scene.pause();
+        });
+
     }
+   
 }

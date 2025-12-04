@@ -14,6 +14,7 @@ export default class DialogueManager {
 
         this.nameText = null;
         this.dialogBox = null;
+        this.sprite = null;
 
         // Bind para listeners
         this.next = this.next.bind(this);
@@ -46,7 +47,7 @@ export default class DialogueManager {
 
         // Avanzar con click
         this.scene.input.on("pointerdown", this.next);
-
+        
         this.showDialogue();
     }
 
@@ -57,6 +58,8 @@ export default class DialogueManager {
             return;
         }
 
+        this.updateSprite(d);
+
         this.nameText.setText(d.chara?.name ?? d.name ?? "");
         if (this.dialogBox.setText) {
             // Si es DialogText
@@ -65,6 +68,9 @@ export default class DialogueManager {
             // fallback simple
             this.dialogBox.setText(d.text ?? "");
         }
+       
+
+       
     }
 
     next() {
@@ -86,4 +92,28 @@ export default class DialogueManager {
         this.active = false;
         this.scene.events.emit("dialogueEnd");
     }
+
+    updateSprite(d){
+
+        if(!d.sprite){
+            if(this.sprite){
+                this.sprite.destroy();
+                this.sprite = null;
+            }
+            return;
+        }
+        if(!this.sprite){
+            this.sprite = this.scene.add.sprite(600,400,d.sprite);
+        }
+        else if (this.sprite.texture.key!=d.sprite)
+            this.sprite.setTexture(d.sprite);
+
+        
+        else this.sprite.setPosition(600,400);
+
+        this.sprite.setDepth(-1);
+    }
+
+
 }
+
