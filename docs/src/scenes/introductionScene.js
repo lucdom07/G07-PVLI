@@ -31,9 +31,7 @@ export default class IntroductionScene extends Phaser.Scene {
         const dialogues = rawData.map(entry => new Dialogue(
             new Character(entry.name),
             entry.line,
-            true,
-            entry.sprite,
-            entry.spritePos
+            true
         ));
 
         this.dialogueManager = new DialogueManager(this, dialogues, {

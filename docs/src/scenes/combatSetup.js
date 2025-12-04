@@ -1,4 +1,7 @@
+import Ally from "../../gameObjects/characters/ally.js";
 import GlobalAlly from "../managers/globalAlly.js";
+import DOMmanager from "../managers/DOMManager.js";
+import WarriorUI from "../../gameObjects/ui/warriorUi.js";
 
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
@@ -71,9 +74,7 @@ export default class CombatSetup extends Phaser.Scene {
                     playerData: this.playerData,
                     selectedAllies: this.selectedAllies
                 });
-                
             }
-            console.log("yendo al combate");
         });
 
       //Código provisional hasta tener el resto de componentes del juego
@@ -86,22 +87,6 @@ export default class CombatSetup extends Phaser.Scene {
             new GlobalAlly("foca",'foca',36,0,20,0,0,true),
             new GlobalAlly("warf",'warf',35,0,7,0,0,true)
         ];
-
-        
-        // Botón de pausa
-        this.pauseButton = this.add.text(100, 40, "Pause", {
-            fontSize: "20px",
-            color: "#ffffff",
-            backgroundColor: "#000000",
-            padding: { x: 10, y: 5 }
-        }).setInteractive();
-
-        
-        this.pauseButton.on("pointerdown", () => {
-            this.scene.launch('pauseMenu',{pausedSceneKey : this.sys.settings.key});
-            this.scene.pause();
-        });
-
     }
     //Determina si la ally esta en la tropa para removerlo o añadirlo
     toggleAlly(ally) {
