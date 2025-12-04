@@ -2,10 +2,14 @@ import CombatManager from "../managers/combatManager.js";
 import Ally from "../../gameObjects/characters/ally.js";
 import Enemy from "../../gameObjects/characters/enemy.js";
 
+import AudioManager from "../managers/audioManager.js";
+import { MusicKeys } from "../managers/audioConfig.js";
+
 export default class Animation extends Phaser.Scene{
     constructor(){
         super({key: 'debugCombat'});
         this.playerData = {};
+        this.audioManager = null;
     }
 
     init(data){// se crea un CombatManager y se añaden las tropas aliadas pasadas desde combatSetup
@@ -25,6 +29,9 @@ export default class Animation extends Phaser.Scene{
     }
 
     create(){
+        this.audioManager = AudioManager.getInstance(this);
+        this.audioManager.playMusic(MusicKeys.BATALLA);
+
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
 
         //indica al combatManager que ya puede llamar al siguiente evento

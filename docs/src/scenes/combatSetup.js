@@ -3,6 +3,9 @@ import GlobalAlly from "../managers/globalAlly.js";
 import DOMmanager from "../managers/DOMManager.js";
 import WarriorUI from "../../gameObjects/ui/warriorUi.js";
 
+import AudioManager from "../managers/audioManager.js";
+import { MusicKeys } from "../managers/audioConfig.js";
+
 export default class CombatSetup extends Phaser.Scene {
 
     constructor(DOMmanager) {
@@ -20,6 +23,8 @@ export default class CombatSetup extends Phaser.Scene {
         this.selectedObject = null;
 
         this.ObjectSize =100;
+
+        this.audioManager = null;
     }
 
     init(data) {
@@ -41,6 +46,9 @@ export default class CombatSetup extends Phaser.Scene {
     }
 
     create() {
+        this.audioManager = AudioManager.getInstance(this);
+        this.audioManager.playMusic(MusicKeys.AU);
+
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
 
         //Subscribir eventos de click a los aliados del DOM
