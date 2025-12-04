@@ -42,7 +42,7 @@ export default class debugMap extends Phaser.Scene {
 
         
         this.pauseButton.on("pointerdown", () => {
-            this.scene.launch('pauseMenu');
+            this.scene.launch('pauseMenu',{pausedSceneKey : this.sys.settings.key});
             this.scene.pause();
         });
 

@@ -5,12 +5,13 @@ export default class PauseMenu extends Phaser.Scene{
         constructor(){
         super({key: 'pauseMenu'});
         this.playerData = {}
+        this.pausedSceneKey = null;
     }
 
    
 
-    Init(){
-        
+    init(data){
+        this.pausedSceneKey = data.pausedSceneKey || null;
     }
 
     preload(){
@@ -28,22 +29,28 @@ export default class PauseMenu extends Phaser.Scene{
 
         //botón de juego
         const playButton = this.add.image(300, 100, 'startButton').setInteractive();
+        const resumeButton = this.add.image(300,100,'startButton').setInteractive()
 
         playButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
-        //marketButton.setPosition(450, 450);
+        resumeButton.setPosition(this.sys.game.canvas.width*0.5,this.sys.game.canvas.height*0.4);
         
         playButton.on('pointerdown',()=>{
-
-            const pausedScene = this.scene.manager.scenes.find(s => s.scene.isPaused());
-    
-            if (pausedScene) {
-                this.scene.stop(pausedScene.scene.key);
-            }
-
+          
+            this.scene.stop(this.pausedSceneKey);
             this.scene.start('mainMenu');
             this.scene.stop();
         });
+
+        resumeButton.on('pointerdown',()=>{
+          
+            if (this.pausedSceneKey) {
+                const pausedScene = this.scene.get(this.pausedSceneKey)
+
+                this.scene.resume(pausedScene.scene.key);  
+
+                this.scene.stop();
+            }
+                 
+        });
     }
-
-
 }

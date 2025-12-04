@@ -27,7 +27,7 @@ constructor() {
             new Character(entry.name),
             entry.line,
             true,
-            entry.sprite,
+            entry.sprite
         ));
 
         this.dialogueManager = new DialogueManager(this, dialogues, {
