@@ -47,7 +47,7 @@ export default class CombatSetup extends Phaser.Scene {
 
     create() {
         this.audioManager = AudioManager.getInstance(this);
-        this.audioManager.playMusic(MusicKeys.AU);
+        this.audioManager.playMusic(MusicKeys.PRE);
 
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
 
