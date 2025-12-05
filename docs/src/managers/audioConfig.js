@@ -23,7 +23,7 @@ export const AudioFiles = {
     [MusicKeys.INTRO]: 'assets/sonidos/battle.mp3',
 
     [MusicKeys.ES]: 'assets/placeholders/audio/bad_apple.mp3',
-    [MusicKeys.USA]: 'assets/sonidos/battle.mp3',
+    [MusicKeys.USA]: 'assets/sonidos/americanMeowdiot.mp3',
     [MusicKeys.CH]: 'assets/placeholders/audio/bad_apple.mp3',
     [MusicKeys.AU]: 'assets/sonidos/battle.mp3',
 
