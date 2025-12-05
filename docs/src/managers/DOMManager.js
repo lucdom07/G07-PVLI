@@ -20,7 +20,7 @@ export default class DOMmanager {
             const img = document.createElement('img');
 
             div.dataset.name = ally.name;
-            img.src = 'assets/placeholders/warriors/' + ally.name + '.png';
+            img.src = 'assets/placeholders/warriors/' + ally.name + '.png'; //Cambiar por URL de la textura
             img.className = 'domAlly';
 
             div.appendChild(img);
@@ -41,8 +41,14 @@ export default class DOMmanager {
         this.ownedAllies = allies;
         //Cuando esté la tienda hecha habrá que cambiar esto
 
+        this.updateAllies();
+    }
+
+    updateAllies() {
         this.ownedAllies.forEach(x => {
-            this.addDomAlly(x);
+            console.log(x.name);
+            if(![...this.DOMallies.children].some(y => y.dataset.name === x.name))
+                this.addDomAlly(x);
         });
 
     }

@@ -64,16 +64,6 @@ export default class CombatSetup extends Phaser.Scene {
             }
         });
 
-        //Código provisional hasta tener el resto de componentes del juego
-      this.ownedAllies = [
-            new Ally(this, -150, -150,'pimiento', 36, 20, 0, 'pimiento', 0, 1, false, 0),
-            new Ally(this, -150, -150,'tortuga', 20, 5, 0, 'tortuga', 0, 1, false, 0),
-            new Ally(this, -150, -150,'chupacabra', 21, 10, 0, 'chupacabra', 0, 1, false, 0),
-            new Ally(this, -150, -150,'warf', 35, 7, 0, 'warf', 0, 1, false, 0)
-        ];
-
-        this.DOMmanager.inicializa(this.ownedAllies);
-        
         [...this.DOMallies.children].forEach(x => {
             this.makeClickable(x);
         });
@@ -178,6 +168,7 @@ export default class CombatSetup extends Phaser.Scene {
             this.selectedAllies.splice(index, 1);
             ally.x = -150;
             ally.y = -150;
+            ally.warriorUI.setPosition(ally.x, ally.y);
             this.repositionSelectedAllies();   
         }
     }

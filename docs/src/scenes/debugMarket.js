@@ -1,20 +1,21 @@
 import MarketManager from "../managers/marketManager.js";
 import Ally from "../../gameObjects/characters/ally.js";
 import GlobalObject from "../managers/globalObjects.js";
-
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
+import DOMmanager from "../managers/DOMManager.js";
 
 export default class debugMarket extends Phaser.Scene{
-    constructor(){
+    constructor(DOMmanager){
         super({key: 'debugMarket'});
+        this.DOManager = DOMmanager;
         this.playerData = {};
         this.audioManager = null;
     }
 
     //En init le pasamos los aliados que tiene el jugador
     init(data){
-        this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'));
+        this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'), this.DOManager);
         this.playerData = data;
     }
     
@@ -47,6 +48,7 @@ export default class debugMarket extends Phaser.Scene{
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
         this.events.on('buyingAlly', (ally, price)=>{
             this.playerData.ownedAllies.push(ally);
+            this.DomManager.updateAllies();
             this.playerData.money -= price;
         });
         this.events.on('sellingAlly', (index, price)=>{
@@ -61,7 +63,7 @@ export default class debugMarket extends Phaser.Scene{
         //al comprar el personaje se añade al inventario
         //cuando no tengas suficiente dinero no te deja
         this.allyList = [
-            new Ally(this, -150, -150,'Michi-Michi', 36, 20, 0, 'perro', 0, 1, false, 0),
+            new Ally(this, -150, -150,'perro', 36, 20, 0, 'perro', 0, 1, false, 0),
             new Ally(this, -150, -150,'foca', 36, 20, 0, 'foca', 0, 1, false, 0),
             new Ally(this, -150, -150,'pimiento', 36, 20, 0, 'pimiento', 0, 1, false, 0),
             new Ally(this, -150, -150,'tortuga', 20, 5, 0, 'tortuga', 0, 1, false, 0),
@@ -76,7 +78,7 @@ export default class debugMarket extends Phaser.Scene{
             new GlobalObject(this, -150, -150,"comida3","comida3", 0 ,2 ,19),
             new GlobalObject(this, -150, -150,"comida4","comida4", 2 ,0 ,3)
         ];
-        
+
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
         const exitButton = this.add.image(300,100,'exitButton').setInteractive();
 

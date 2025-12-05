@@ -1,9 +1,12 @@
+
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
+import DOMmanager from "../managers/DOMManager.js";
 
 export default class mainMenu extends Phaser.Scene{
-    constructor(){
+    constructor(DOManager){
         super({key: 'mainMenu'});
+        this.DOMmanager = DOManager;
         this.playerData = { 
             ownedAllies: [],
             money: 10,
@@ -38,6 +41,8 @@ export default class mainMenu extends Phaser.Scene{
         playButton.on('pointerdown',()=>{
             this.scene.start('introduction', this.playerData);
         });
+
+        this.DOMmanager.inicializa(this.playerData.ownedAllies);
     }
 }
 

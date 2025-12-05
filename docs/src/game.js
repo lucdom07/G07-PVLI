@@ -32,10 +32,10 @@ window.addEventListener('DOMContentLoaded', () => {
 		},
 		scene: [
 			BootScene,
-			MainMenu,
+			new MainMenu(DOManager),
 			DebugMap,
 			DebugCombat,
-			debugMarket,
+			new debugMarket(DOManager),
 			new CombatSetup(DOManager),
 			IntroductionScene,
 			AustraliaScene

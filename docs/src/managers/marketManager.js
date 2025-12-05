@@ -2,11 +2,13 @@ import Ally from "../../gameObjects/characters/ally.js";
 import globalObjects from "../managers/globalObjects.js";
 
 export default class MarketManager {
-    constructor(scene, buttonTexture){
+    constructor(scene, buttonTexture, DomManager){
         this.scene = scene;
         this.textureButton = buttonTexture;
+        this.DomManager = DomManager;
         
         this.bag = [];
+        this.maxCapacity = 6;
         this.marketAllies = [];
         this.marketObjects = [];
         this.money = 0;
@@ -39,7 +41,6 @@ export default class MarketManager {
             button: null,
             buttonText: null,
             priceText: null,
-            levelText: null,
             infoText: null
             };
         }else{
@@ -158,7 +159,7 @@ export default class MarketManager {
             }
         });
 
-        marketItem.button.on('pointerdown', () => this.buyItem(marketItem));
+        marketItem.button.on('pointerdown', () => this.buy(marketItem));
     }
 
     showMoney(){
@@ -212,7 +213,6 @@ export default class MarketManager {
 
         if(this.bag.length >= 6 && item instanceof Ally){ this.showMessage("Inventario lleno"); return; }
         else if(this.objectBag.length >= 4 && !(item instanceof Ally)){ this.showMessage("Inventario de objetos lleno"); return; }
-
         this.money -= item.cost;
 
         // Clonar y agregar a la escena
@@ -249,6 +249,21 @@ export default class MarketManager {
         if(marketItem.infoText) marketItem.infoText.destroy();
 
         this.showMoney();
+    }
+
+    buyAlly(ally) {
+        const item = ally.item;
+        if(this.money < item.cost){ this.showMessage("No tienes dinero"); return; }
+        if(this.bag.length >= this.maxcapacity){ this.showMessage("Inventario lleno"); return; }
+
+        this.money -= item.cost;
+
+        ally.available = true;
+        this.scene.events.emit('buyingAlly', ally, item.cost);
+        item.setVisible(false).disableInteractive();
+
+        this.showMoney();
+        this.showMessage(`¡Has comprado a ${newAlly.name}!`);
     }
 
     sellAlly(index, sellPrice){
