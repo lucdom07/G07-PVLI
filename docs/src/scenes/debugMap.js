@@ -21,6 +21,7 @@ export default class debugMap extends Phaser.Scene {
     preload() {
         this.load.image('background','assets/placeholders/background.jpg');
         this.load.image('combatButton','assets/placeholders/buttons/combat_button.jpg');
+        this.load.image('marketButton', 'assets/placeholders/buttons/market_button.png');
     }
 
     create() {
@@ -50,7 +51,10 @@ export default class debugMap extends Phaser.Scene {
      */
     buttonsRec(node, divs, level, it) {
         if(node.empty()) return;
-        const button = this.add.image(100, 50, 'combatButton').setInteractive();
+        
+        let button;
+        if(node.value === 0) button = this.add.image(100, 50, 'combatButton').setInteractive();
+        else button = this.add.image(100, 50, 'marketButton').setInteractive();
         button.setScale(0.35);
 
         //let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
