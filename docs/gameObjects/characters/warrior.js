@@ -1,19 +1,20 @@
 import WarriorUI from "../ui/warriorUi.js"
 
 export default class Warrior extends Phaser.GameObjects.Sprite{
-    constructor(scene, x, y, name, life, attack, range, texture, frame, level){
+    constructor(scene, x, y, name, life, attack, range, texture, frame, textureURL){
         super(scene, x, y, texture, frame);
         this.name = name;
         this.life = life;
         this.attack = attack;
         this.range = range;
-        this.level = level;
         this.DISPLAY_SIZE = 190;
         //tiempo de delay entre llamadas de las funciones de ataque
         this.ATTACK_DELAY_TIME = 380;
         this.setDisplaySize(this.DISPLAY_SIZE, this.DISPLAY_SIZE); 
         this.scene.add.existing(this);
         this.warriorUI = new WarriorUI(scene, x, y, life, attack, range, this.DISPLAY_SIZE);
+
+        this.textureURL = textureURL;
     }
     
     preUpdate(t, dt){

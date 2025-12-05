@@ -1,8 +1,8 @@
 import Warrior from "./warrior.js";
 
 export default class Enemy extends Warrior{
-        constructor(scene, x, y, name, life, attack, range, texture, frame, level){
-        super(scene, x, y, name, life, attack, range, texture, frame, level);
+        constructor(scene, x, y, name, life, attack, range, texture, frame, textureURL){
+        super(scene, x, y, name, life, attack, range, texture, frame, textureURL);
     }
     preUpdate(t, dt){
         super.preUpdate(t, dt);
