@@ -4,6 +4,7 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
         this.DISTANCE_BELOW_WARRIOR = warriorSize/2;
         const startingY = y + this.DISTANCE_BELOW_WARRIOR;
         this.STATS_DISTANCE = 50;
+        this.FEEDBACK_TEXT_DISTANCE = warriorSize/2;
 
         this.x = x;
         this.y = startingY;
@@ -81,28 +82,26 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
 
     //Crea texto de daño
     createDamageText(x, y, damage, color = '#ff0000'){
-            //console.log(`Creando texto de daño: -${damage} en (${x}, ${y})`); // Debug
-            const text = this.scene.add.text(x, y - this.TEXT_FEEDBACK_DISTANCE, `-${damage}`, {
-                fontSize: '24px',
-                fill: color,
-                stroke: '#000000',
-                strokeThickness: 4,
-                fontFamily: 'Arial',
-                fontWeight: 'bold'
-            }).setOrigin(0.5);
-            
-            this.scene.tweens.add({
-                targets: text,
-                y: y - 100,
-                alpha: 0,
-                duration: 1500,
-                ease: 'Power2',
-                onComplete: () => {
-                    if (text && text.destroy) {
-                        text.destroy();
-                    }
-                }
-            });
+        const text = this.scene.add.text(x, y - this.FEEDBACK_TEXT_DISTANCE, `-${damage}`, {
+            fontSize: '24px',
+            fill: color,
+            stroke: '#000000',
+            strokeThickness: 4,
+            fontFamily: 'Arial',
+            fontWeight: 'bold'
+        }).setOrigin(0.5);
+        console.log(`Creando texto de daño: -${damage} en (${x}, ${y})`); // Debug
+        
+        this.scene.tweens.add({
+            targets: text,
+            y: y - 150,
+            alpha: 0,
+            duration: 1000,
+            ease: 'Power2',
+            onComplete: () => {
+                text.destroy();
+            }
+        });
     }
     
 

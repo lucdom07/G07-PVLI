@@ -19,11 +19,11 @@ export const MusicKeys = {
 
 // sitios de los archivos de sonido
 export const AudioFiles = {
-    [MusicKeys.MENU]: 'assets/placeholders/audio/bad_apple.mp3',
+    [MusicKeys.MENU]: 'assets/sonidos/sevenNationMeowrmy.mp3',
     [MusicKeys.INTRO]: 'assets/sonidos/battle.mp3',
 
     [MusicKeys.ES]: 'assets/placeholders/audio/bad_apple.mp3',
-    [MusicKeys.USA]: 'assets/sonidos/usa.mp3',
+    [MusicKeys.USA]: 'assets/sonidos/americanMeowdiot.mp3',
     [MusicKeys.CH]: 'assets/placeholders/audio/bad_apple.mp3',
     [MusicKeys.AU]: 'assets/sonidos/australia.mp3',
 
