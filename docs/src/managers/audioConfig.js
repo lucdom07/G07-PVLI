@@ -19,19 +19,19 @@ export const MusicKeys = {
 
 // sitios de los archivos de sonido
 export const AudioFiles = {
-    [MusicKeys.MENU]: 'assets/sonidos/sevenNationMeowrmy.mp3',
+    [MusicKeys.MENU]: 'assets/sonidos/sevenNationMeowrmy.mp3', //no tocar
     [MusicKeys.INTRO]: 'assets/sonidos/battle.mp3',
 
     [MusicKeys.ES]: 'assets/placeholders/audio/bad_apple.mp3',
-    [MusicKeys.USA]: 'assets/sonidos/americanMeowdiot.mp3',
+    [MusicKeys.USA]: 'assets/sonidos/americanMeowdiot.mp3', //no tocar
     [MusicKeys.CH]: 'assets/placeholders/audio/bad_apple.mp3',
-    [MusicKeys.AU]: 'assets/sonidos/australia.mp3',
+    [MusicKeys.AU]: 'assets/sonidos/australia.mp3', //no tocar
 
     [MusicKeys.PRE]: 'assets/sonidos/battle.mp3',
     [MusicKeys.MAPA]:'assets/placeholders/audio/bad_apple.mp3',
-    [MusicKeys.BATALLA]:'assets/sonidos/batalla.mp3',
+    [MusicKeys.BATALLA]:'assets/sonidos/batalla.mp3', //no tocar
     [MusicKeys.TIENDA]:'assets/sonidos/battle.mp3',
     [MusicKeys.PAUSA]: 'assets/sonidos/battle.mp3',
     [MusicKeys.VICTORY]: 'assets/sonidos/battle.mp3',
-    [MusicKeys.GAME_OVER]: 'assets/sonidos/gameover.mp3'
+    [MusicKeys.GAME_OVER]: 'assets/sonidos/gameover.mp3' //no tocar
 };
