@@ -44,5 +44,8 @@ export default class DOMmanager {
         this.ownedAllies.forEach(x => {
             this.addDomAlly(x);
         });
+
     }
+
+
 }

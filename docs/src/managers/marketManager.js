@@ -1,4 +1,5 @@
 import Ally from "../../gameObjects/characters/ally.js";
+import globalObjects from "../managers/globalObjects.js";
 
 export default class MarketManager {
     constructor(scene, buttonTexture){
@@ -15,17 +16,24 @@ export default class MarketManager {
         this.selectedForSale = null;
         this.sellPanel = null;
         this.sellButtons = [];
+
+        this.objectBag =[];
+
+        this.ObjectSize = 100;
     }
     
-    market(bag, allyList, objList, money){
+    market(bag, allyList, objList, money, ownedObjectsBag){
         this.bag = bag;
         this.marketAllies = this.generateAlly(allyList, 3);
-        this.marketObjects = []; // objetos no implementados aún
+        this.marketObjects = this.generateObject(objList, 2); // objetos no implementados aún
         this.showMarket(money);
-    }
+
+        this.objectBag = ownedObjectsBag || [];    
+}
 
     makeStruct(item) {
-        return {
+        if(item===Ally){
+            return {
             item: item, 
             texture: null,
             button: null,
@@ -33,11 +41,21 @@ export default class MarketManager {
             priceText: null,
             levelText: null,
             infoText: null
-        };
+            };
+        }else{
+            return {
+            item: item, 
+            texture: null,
+            button: null,
+            buttonText: null,
+            priceText: null,
+            infoText: null
+            };
+        }
+       
     }
 
     generateAlly(allyList, slots){
-        
         const marketAllies = [];
         const available = allyList.filter(a => !a.available);
 
@@ -65,18 +83,38 @@ export default class MarketManager {
         this.marketAllies.forEach((marketItem, index) => {
             this.displayMarketItem(marketItem, index);
         });
+
+        this.marketObjects.forEach((marketItem, index) => {
+        this.displayMarketItem(marketItem, index);
+        });
     }
 
     displayMarketItem(marketItem, index){
-        const x = 150 + index * 150;
+        let x = 0;
+        if(marketItem.item instanceof Ally){
+            x = 150 + index * 150;
+        }
+        else x = 750 + index * 150; //en caso de que fuera un objeto
+
         const y = 200;
         const item = marketItem.item;
-
         
         if (!item.scene) {
         this.scene.add.existing(item);
         }
-        item.setPosition(x, y).setScale(0.5).setInteractive().setVisible(true);
+        if(marketItem.item instanceof Ally){
+            item.setPosition(x, y)
+            .setScale(0.5)
+            .setInteractive()
+            .setVisible(true);
+        }else{
+           item.setPosition(x, y)
+            .setDisplaySize(this.ObjectSize, this.ObjectSize)
+            .setInteractive()
+            .setVisible(true); 
+        }
+
+        console.log(item);
 
         // Botón de compra
         marketItem.button = this.scene.add.image(x, y + 60, this.textureButton)
@@ -88,10 +126,9 @@ export default class MarketManager {
             fontSize: '14px', fill: '#fff', backgroundColor: '#000'
         }).setOrigin(0.5);
 
-        
-
         // Mostrar stats al pasar el ratón
-        item.on('pointerover', () => {
+        if(marketItem instanceof Ally){
+            item.on('pointerover', () => {
             marketItem.infoText = this.scene.add.text(x, y - 80,
                 `${item.name}\nHP:${item.life}\nATK:${item.attack},\nLVL:${item.level}`, {
                     fontSize: '12px',
@@ -100,7 +137,19 @@ export default class MarketManager {
                     padding: { x: 5, y: 5 },
                     align: 'center'
                 }).setOrigin(0.5);
+            });
+        }else{ //en caso de que fuera un objeto
+            item.on('pointerover', () => {
+            marketItem.infoText = this.scene.add.text(x, y - 80,
+                `${item.name}\nHP:${item.life}\nATK:${item.attack}`, {
+                    fontSize: '12px',
+                    fill: '#FFFFFF',
+                    backgroundColor: '#000000',
+                    padding: { x: 5, y: 5 },
+                    align: 'center'
+                }).setOrigin(0.5);
         });
+        }
 
         item.on('pointerout', () => {
             if (marketItem.infoText) {
@@ -160,11 +209,14 @@ export default class MarketManager {
         const item = marketItem.item;
 
         if(this.money < item.cost){ this.showMessage("No tienes dinero"); return; }
-        if(this.bag.length >= 6){ this.showMessage("Inventario lleno"); return; }
+
+        if(this.bag.length >= 6 && item instanceof Ally){ this.showMessage("Inventario lleno"); return; }
+        else if(this.objectBag.length >= 4 && !(item instanceof Ally)){ this.showMessage("Inventario de objetos lleno"); return; }
 
         this.money -= item.cost;
 
         // Clonar y agregar a la escena
+        if(item instanceof Ally){
         const newAlly = item.clone();
         newAlly.available = true;
 
@@ -177,6 +229,17 @@ export default class MarketManager {
         
         //Al comprar el aliado, se actualiza el array de aliados disponibles del jugador y el dinero en la escena de market
         this.scene.events.emit('buyingAlly', newAlly, item.cost);
+        this.showMessage(`¡Has comprado a ${newAlly.name}!`);
+        }
+        else{
+            const newObj = item.clone();
+            if(!newObj.scene) this.scene.add.existing(newObj);
+            newObj.setVisible(false);
+
+            this.objectBag.push(newObj);
+            this.showMessage(`¡Has comprado ${newObj.name}!`);
+        }
+        
 
         // Remover del mercado
         item.setVisible(false).disableInteractive();
@@ -186,9 +249,7 @@ export default class MarketManager {
         if(marketItem.infoText) marketItem.infoText.destroy();
 
         this.showMoney();
-        this.showMessage(`¡Has comprado a ${newAlly.name}!`);
     }
-
 
     sellAlly(index, sellPrice){
         const ally = this.bag[index];
@@ -201,7 +262,6 @@ export default class MarketManager {
 
         this.cancelSale();
         this.showMoney();
-        this.displayPlayerAllies();
         this.showMessage(`¡Has vendido a ${ally.name} por ${sellPrice}$!`);
     }
 
@@ -232,4 +292,21 @@ export default class MarketManager {
         this.cancelSale();
     }
 
+    generateObject(objectList, slots){
+        const marketObject = [];
+ 
+        for (let i = 0; i < slots; i++) {
+            const index = Phaser.Math.Between(0, objectList.length - 1);
+            const clone = objectList[index].clone();
+     
+            if (clone.scene !== this.scene) {
+                clone.scene = this.scene;
+                this.scene.add.existing(clone);
+            }
+
+            marketObject.push(this.makeStruct(clone));
+        }
+        
+        return marketObject;
+    }
 }

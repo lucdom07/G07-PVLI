@@ -4,7 +4,9 @@ import MainMenu from './scenes/mainMenu.js';
 import debugMarket from './scenes/debugMarket.js';
 import CombatSetup from './scenes/combatSetup.js';
 import DOMmanager from "./managers/DOMManager.js";
-
+import IntroductionScene from './scenes/introductionScene.js';
+import AustraliaScene from './scenes/australiaScene.js';
+import BootScene from './scenes/precargaScene.js';
 
 window.addEventListener('DOMContentLoaded', () => {
 	
@@ -29,11 +31,14 @@ window.addEventListener('DOMContentLoaded', () => {
 			zoom: 1
 		},
 		scene: [
+			BootScene,
 			MainMenu,
 			DebugMap,
 			DebugCombat,
 			debugMarket,
-			new CombatSetup(DOManager)
+			new CombatSetup(DOManager),
+			IntroductionScene,
+			AustraliaScene
 		],
 		physics: { 
 			default: 'arcade', 

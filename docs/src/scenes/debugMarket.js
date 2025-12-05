@@ -1,11 +1,15 @@
 import MarketManager from "../managers/marketManager.js";
 import Ally from "../../gameObjects/characters/ally.js";
+import GlobalObject from "../managers/globalObjects.js";
+
+import AudioManager from "../managers/audioManager.js";
+import { MusicKeys } from "../managers/audioConfig.js";
 
 export default class debugMarket extends Phaser.Scene{
     constructor(){
         super({key: 'debugMarket'});
         this.playerData = {};
-
+        this.audioManager = null;
     }
 
     //En init le pasamos los aliados que tiene el jugador
@@ -27,9 +31,17 @@ export default class debugMarket extends Phaser.Scene{
         this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
+
+        this.load.image('comida1','assets/placeholders/objets/comida1.png');
+        this.load.image('comida2','assets/placeholders/objets/comida2.png');
+        this.load.image('comida3','assets/placeholders/objets/comida3.png');
+        this.load.image('comida4','assets/placeholders/objets/comida4.png');
     }
 
     create(){
+        this.audioManager = AudioManager.getInstance(this);
+        this.audioManager.playMusic(MusicKeys.TIENDA);
+
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
@@ -57,26 +69,26 @@ export default class debugMarket extends Phaser.Scene{
             new Ally(this, -150, -150,'warf', 35, 7, 0, 'warf', 0, 1, false, 0)
         ];
 
-        
-        this.bag = [
-            /*
-            new Ally(this, -150, -150,"chupacabra", 21, 10, 0, 'chupacabra', 0, 1, true, 0),
-            new Ally(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1, true, 0)
-            */
+
+        this.objList =[
+            new GlobalObject(this, -150, -150,"comida1","comida1", 5 ,2 ,2),
+            new GlobalObject(this, -150, -150,"comida2","comida2", 2 ,-3 ,1),
+            new GlobalObject(this, -150, -150,"comida3","comida3", 0 ,2 ,19),
+            new GlobalObject(this, -150, -150,"comida4","comida4", 2 ,0 ,3)
         ];
         
-        this.objList =[];
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
         const exitButton = this.add.image(300,100,'exitButton').setInteractive();
 
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
         exitButton.on('pointerdown', () =>{        
-            this.scene.start('debugMap', this.playerData);
+            this.scene.start('debugMap', this.playerData); //launch, lanzar la escena 
             console.log("Saliendo del mercado");
         });
 
         this.marketSystem.textureButton = 'buyButton'; 
-        this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money);
+        this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money, this.playerData.ownedObjects);
+        //this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
     }
 }

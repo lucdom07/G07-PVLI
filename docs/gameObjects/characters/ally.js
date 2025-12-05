@@ -27,6 +27,22 @@ export default class Ally extends Warrior{
         return previousUnitX - index * WARRIORS_SEPARATION;
     }
 
+    getLife(){
+        return this.life;
+    }
+
+    getAttack(){
+        return this.attack;
+    }
+
+    setLife(apply){
+        this.life = apply;
+    }
+
+    setAttack(apply){
+        this.attack = apply;
+    }
+
     clone(){
         const clone = new Ally(
             this.scene,
