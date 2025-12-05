@@ -1,4 +1,7 @@
 import { AudioFiles } from '../managers/audioConfig.js';
+import GlobalObject from '../managers/globalObjects.js';
+import Ally from '../../gameObjects/characters/ally.js';
+import Enemy from '../../gameObjects/characters/enemy.js';
 
 export default class BootScene extends Phaser.Scene {
     constructor() {
@@ -6,6 +9,27 @@ export default class BootScene extends Phaser.Scene {
 
         this.progressBar = null;
         this.progressText = null;
+
+        this.ally = {
+            ally0:[], //australia
+            ally1:[], //españa
+            ally2:[], //china
+            ally3:[]  //estados unidos
+        }
+
+        this.enemy = {
+            enemy0:[], //au
+            enemy1:[], //es
+            enemy2:[], //ch
+            enemy3:[]  //usa
+        }
+
+        this.objects = {
+            objects0:[], //au
+            objects1:[], //es
+            objects2:[], //ch
+            objects3:[]  //usa
+        }
     }
     
     preload() {
@@ -78,5 +102,22 @@ export default class BootScene extends Phaser.Scene {
         });
 
         // Cargar imágenes básicas (aliados, enemigos, fondos, etc)
+        //Aliados
+
+        this.load.json("allyGroup", "./jsons/allyGroup.json");
+
+        const rawData = this.cache.json.get("allyGroup");
+        
+        const dialogues = rawData.map(entry => new Dialogue(
+            new Character(entry.name),
+            entry.line,
+            true
+        ));
+
+        this.dialogueManager = new DialogueManager(this, dialogues, {
+            dialogBoxClass: DialogText
+        });
+        this.dialogueManager.start();
+
     }
 }

@@ -1,12 +1,12 @@
 {
-    "enemy0":[
+    "ally0":[
         {
             "name": "Michi-Michi",
             "life": 9,
             "attack": 5,
             "range":0,
             "cost":7,
-            "texture": ""
+            "texture": "assets/allys/michi_michi_chibi.png"
         },
         {
             "name": "Gata alien",
@@ -14,7 +14,7 @@
             "attack": 4,
             "range":2,
             "cost":7,
-            "texture": ""
+            "texture": "assets/allys/alien_cat.png"
         },
         {
             "name": "Mapache que lava el algodón de azúcar",
@@ -22,7 +22,7 @@
             "attack": 4,
             "range":1,
             "cost":7,
-            "texture": ""
+            "texture": "assets/allys/raccoon.png"
         },
         {
             "name": "Colibri twitter",
@@ -30,7 +30,7 @@
             "attack": 5,
             "range":4,
             "cost":7,
-            "texture": ""
+            "texture": "assets/allys/bird.png"
         },
         {
             "name": "Gato-Pulpo de Github",
@@ -38,18 +38,18 @@
             "attack": 3,
             "range":3,
             "cost":7,
-            "texture": ""
+            "texture": "assets/allys/octocat.png"
         }
     ],
 
-    "enemy1":[
+    "ally1":[
         {
             "name": "Paloma con 6 ojos",
             "life": 9,
             "attack": 5,
             "range":3,
             "cost":12,
-            "texture": ""
+            "texture": "assets/allys/crow.png"
         },
         {
             "name": "Rana arborícola con cuernos",
@@ -57,7 +57,7 @@
             "attack": 6,
             "range":0,
             "cost":12,
-            "texture": ""
+            "texture": "assets/allys/frog.png"
         },
         {
             "name": "Gatoñete",
@@ -65,7 +65,7 @@
             "attack": 7,
             "range":1,
             "cost":12,
-            "texture": ""
+            "texture": "assets/allys/gatonete.png"
         },
         {
             "name": "Pablotter",
@@ -73,18 +73,18 @@
             "attack": 6,
             "range":2,
             "cost":12,
-            "texture": ""
+            "texture": "assets/allys/pablotter.png"
         }
     ],
 
-    "enemy2":[
+    "ally2":[
         {
             "name": "Nutria con vestido blanco",
             "life": 13,
             "attack": 9,
             "range":2,
             "cost":17,
-            "texture": ""
+            "texture": "assets/allys/otter.png"
         },
         {
             "name": "Oso hormiguero con bastón, sombrero y monóculo",
@@ -92,7 +92,7 @@
             "attack": 7,
             "range":0,
             "cost":17,
-            "texture": ""
+            "texture": "assets/allys/ant_eater.png"
         },
         {
             "name": "Pimiento Gatomórfico",
@@ -100,7 +100,7 @@
             "attack": 9,
             "range":1,
             "cost":17,
-            "texture": ""
+            "texture": "assets/allys/pepper_cat.png"
         },
         {
             "name": "Miku",
@@ -108,18 +108,18 @@
             "attack": 8,
             "range":4,
             "cost":17,
-            "texture": ""
+            "texture": "assets/allys/original_miku.png"
         }
     ],
 
-    "enemy3":[
+    "ally3":[
         {
             "name": "QiLing",
             "life": 14,
             "attack": 10,
             "range":0,
             "cost":22,
-            "texture": ""
+            "texture": "assets/allys/qiling.png"
         },
         {
             "name": "Gato Kunfu",
@@ -127,7 +127,7 @@
             "attack": 9,
             "range":1,
             "cost":22,
-            "texture": ""
+            "texture": "assets/allys/panda.png"
         },
         {
             "name": "Orca Deep Seek",
@@ -135,7 +135,7 @@
             "attack": 11,
             "range":3,
             "cost":22,
-            "texture": ""
+            "texture": "assets/allys/killer_whale.png"
         },
         {
             "name": "Pez chancla",
@@ -143,7 +143,7 @@
             "attack": 10,
             "range": 2,
             "cost":22,
-            "texture": ""
+            "texture": "assets/allys/fish.png"
         }
     ]
 }
