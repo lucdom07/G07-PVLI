@@ -108,16 +108,17 @@ export default class BootScene extends Phaser.Scene {
 
         const rawData = this.cache.json.get("allyGroup");
         
+        /*
         const dialogues = rawData.map(entry => new Dialogue(
             new Character(entry.name),
             entry.line,
             true
         ));
-
         this.dialogueManager = new DialogueManager(this, dialogues, {
             dialogBoxClass: DialogText
         });
         this.dialogueManager.start();
+        */
 
     }
 }
