@@ -1,4 +1,5 @@
 import Ally from "../../gameObjects/characters/ally.js";
+import DOMmanager from "../managers/DOMManager.js";
 import globalObjects from "../managers/globalObjects.js";
 
 export default class MarketManager {
@@ -34,26 +35,14 @@ export default class MarketManager {
 }
 
     makeStruct(item) {
-        if(item===Ally){
-            return {
+        return {
             item: item, 
             texture: null,
             button: null,
             buttonText: null,
             priceText: null,
             infoText: null
-            };
-        }else{
-            return {
-            item: item, 
-            texture: null,
-            button: null,
-            buttonText: null,
-            priceText: null,
-            infoText: null
-            };
-        }
-       
+        };
     }
 
     generateAlly(allyList, slots){
@@ -63,7 +52,13 @@ export default class MarketManager {
         for (let i = 0; i < slots; i++) {
             if (available.length === 0) break;
             const index = Phaser.Math.Between(0, available.length - 1);
+            const ally = available[index];
+            ally.scene = this.scene;
+
+            marketAllies.push(this.makeStruct(ally));
+            /*
             const clone = available[index].clone();
+
      
             if (clone.scene !== this.scene) {
                 clone.scene = this.scene;
@@ -71,6 +66,7 @@ export default class MarketManager {
             }
 
             marketAllies.push(this.makeStruct(clone));
+            */
         }
         
         return marketAllies;
@@ -159,7 +155,7 @@ export default class MarketManager {
             }
         });
 
-        marketItem.button.on('pointerdown', () => this.buy(marketItem));
+        marketItem.button.on('pointerdown', () => this.buyAlly(marketItem));
     }
 
     showMoney(){
@@ -254,12 +250,12 @@ export default class MarketManager {
     buyAlly(ally) {
         const item = ally.item;
         if(this.money < item.cost){ this.showMessage("No tienes dinero"); return; }
-        if(this.bag.length >= this.maxcapacity){ this.showMessage("Inventario lleno"); return; }
+        if(this.bag.length >= 6){ this.showMessage("Inventario lleno"); return; }
 
         this.money -= item.cost;
 
         ally.available = true;
-        this.scene.events.emit('buyingAlly', ally, item.cost);
+        this.scene.events.emit('buyingAlly', item, item.cost);
         item.setVisible(false).disableInteractive();
 
         this.showMoney();

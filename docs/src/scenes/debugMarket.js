@@ -38,11 +38,13 @@ export default class debugMarket extends Phaser.Scene{
         this.load.image('comida3','assets/placeholders/objets/comida3.png');
         this.load.image('comida4','assets/placeholders/objets/comida4.png');
     }
-
-    create(){
+    
+    create() {
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.TIENDA);
-
+        
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
+        
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
@@ -71,17 +73,14 @@ export default class debugMarket extends Phaser.Scene{
             new Ally(this, -150, -150,'warf', 35, 7, 0, 'warf', 0, 1, false, 0)
         ];
 
-
         this.objList =[
             new GlobalObject(this, -150, -150,"comida1","comida1", 5 ,2 ,2),
             new GlobalObject(this, -150, -150,"comida2","comida2", 2 ,-3 ,1),
             new GlobalObject(this, -150, -150,"comida3","comida3", 0 ,2 ,19),
             new GlobalObject(this, -150, -150,"comida4","comida4", 2 ,0 ,3)
         ];
-
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
+        
         const exitButton = this.add.image(300,100,'exitButton').setInteractive();
-
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
         exitButton.on('pointerdown', () =>{        
