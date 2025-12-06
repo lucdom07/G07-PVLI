@@ -39,6 +39,9 @@ export default class Animation extends Phaser.Scene{
             console.log("You can execute the next event");
             this.combatManager.canCallNext = true;
         });
+        this.events.on('allyDamageSound', ()=>{
+            this.audioManager.playSound(MusicKeys.ALLY_DAMAGE);
+        })
 
         this.recreate();
         

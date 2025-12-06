@@ -56,6 +56,11 @@ export class AudioManager { //será un patron de silgueton
             this.currentMusic.resume();
         }
     }
+
+    playSound(key){
+        this.soundEffect = this.scene.sound.add(key);
+        this.soundEffect.play();
+    }
 }
 
 // Exportar la clase, no la instancia

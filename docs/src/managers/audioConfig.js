@@ -14,11 +14,15 @@ export const MusicKeys = {
     TIENDA: 'market',
     PAUSA: 'boss_music',
     VICTORY: 'victory_music',
-    GAME_OVER: 'gameover_music'
+    GAME_OVER: 'gameover_music',
+
+    //Efectos de sonido
+    ALLY_DAMAGE: 'ay_mama'
 };
 
 // sitios de los archivos de sonido
 export const AudioFiles = {
+    //Música
     [MusicKeys.MENU]: 'assets/sonidos/sevenNationMeowrmy.mp3', //no tocar
     [MusicKeys.INTRO]: 'assets/sonidos/battle.mp3',
 
@@ -33,5 +37,8 @@ export const AudioFiles = {
     [MusicKeys.TIENDA]:'assets/sonidos/battle.mp3',
     [MusicKeys.PAUSA]: 'assets/sonidos/battle.mp3',
     [MusicKeys.VICTORY]: 'assets/sonidos/battle.mp3',
-    [MusicKeys.GAME_OVER]: 'assets/sonidos/gameover.mp3' //no tocar
+    [MusicKeys.GAME_OVER]: 'assets/sonidos/gameover.mp3', //no tocar
+
+    //Efectos de sonido
+    [MusicKeys.ALLY_DAMAGE]: 'assets/sonidos/aaayMamaaa.mp3'
 };
