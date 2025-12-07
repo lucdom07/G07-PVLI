@@ -50,7 +50,7 @@ export default class debugMarket extends Phaser.Scene{
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
         this.events.on('buyingAlly', (ally, price)=>{
             this.playerData.ownedAllies.push(ally);
-            this.DomManager.updateAllies();
+            this.DOManager.updateAllies();
             this.playerData.money -= price;
         });
         this.events.on('sellingAlly', (index, price)=>{
