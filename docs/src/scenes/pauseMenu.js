@@ -21,7 +21,8 @@ export default class PauseMenu extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('startButton','assets/placeholders/buttons/start_button.png')
+        this.load.image('startButton','assets/placeholders/buttons/start_button.png');
+        this.load.image('exitButton','assets/placeholders/buttons/exit_button.png');
     }
 
     create(){
@@ -34,13 +35,13 @@ export default class PauseMenu extends Phaser.Scene{
         rt.fill(0x000000, 0.5);
 
         //botón de juego
-        const playButton = this.add.image(300, 100, 'startButton').setInteractive();
+        const exitButton = this.add.image(300, 100, 'exitButton').setInteractive();
         const resumeButton = this.add.image(300,100,'startButton').setInteractive()
 
-        playButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
+        exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
         resumeButton.setPosition(this.sys.game.canvas.width*0.5,this.sys.game.canvas.height*0.4);
         
-        playButton.on('pointerdown',()=>{
+        exitButton.on('pointerdown',()=>{
                    
             this.scene.stop('debugMap');
             this.scene.stop(this.pausedSceneKey);
