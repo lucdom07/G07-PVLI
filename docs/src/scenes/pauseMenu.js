@@ -38,11 +38,13 @@ export default class PauseMenu extends Phaser.Scene{
         
         //función de resetear la partida
         resetButton.on('pointerdown',()=>{
-                   
-            this.scene.stop('debugMap');
-            this.scene.stop(this.pausedSceneKey);
-            this.scene.stop();
-            this.scene.start('mainMenu');
+            this.cameras.main.fadeOut(800, 0, 0, 0); // duración, R, G, B
+            this.cameras.main.once('camerafadeoutcomplete', () => {
+                this.scene.stop('debugMap');
+                this.scene.stop(this.pausedSceneKey);
+                this.scene.stop();
+                this.scene.start('mainMenu',{reset:true});
+            });
             
         });
 

@@ -9,7 +9,7 @@ export default class mainMenu extends Phaser.Scene{
         }
     }
 
-    init(){
+    init(data){
         this.playerData = {
             ownedAllies: [],
             money: 10,
@@ -17,6 +17,7 @@ export default class mainMenu extends Phaser.Scene{
             ownedObjects: []
         }
         this.audioManager = null;
+        this.fromReset = data?.reset === true;
     }
 
     preload(){
@@ -28,6 +29,11 @@ export default class mainMenu extends Phaser.Scene{
     }
 
     create(){
+
+        if (this.fromReset) {
+            this.cameras.main.fadeIn(800, 0, 0, 0);
+        }
+
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.MENU);
 
@@ -56,8 +62,6 @@ export default class mainMenu extends Phaser.Scene{
         loop: -1                
         });
 
-        
-
         //botón de juego
         const playButton = this.add.image(300, 100, 'startButton').setInteractive().setDisplaySize(400,130);
         //const marketButton = this.add.image(600,100,'marketButton').setInteractive();
@@ -67,7 +71,12 @@ export default class mainMenu extends Phaser.Scene{
         
        
         playButton.on('pointerdown',()=>{
-            this.scene.start('introduction', this.playerData);
+            
+            this.cameras.main.fadeOut(800, 0, 0, 0); 
+
+            this.cameras.main.once('camerafadeoutcomplete', () => {
+                this.scene.start('introduction', this.playerData);
+            });
         });
 
         //borde del botón de jugar

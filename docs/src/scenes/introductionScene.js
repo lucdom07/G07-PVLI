@@ -23,6 +23,7 @@ export default class IntroductionScene extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.fadeIn(800, 0, 0, 0);
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.INTRO);
 
@@ -56,7 +57,12 @@ export default class IntroductionScene extends Phaser.Scene {
         });
 
         // Escuchar fin de diálogos
-        this.events.on("dialogueEnd", () => this.scene.start("debugMap",this.playerData));
+        this.events.on("dialogueEnd", () => {
+                this.cameras.main.fadeOut(800, 0, 0, 0); // duración, R, G, B
+                this.cameras.main.once('camerafadeoutcomplete', () => {
+                this.scene.start('debugMap', this.playerData);
+            });
+        });
     }
 
     

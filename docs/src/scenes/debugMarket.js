@@ -41,10 +41,13 @@ export default class debugMarket extends Phaser.Scene{
     }
 
     create(){
-
-        //diálogo de la tienda
-        this.scene.launch('marketDialogue');
-        this.scene.pause();
+        
+        this.cameras.main.fadeIn(800, 0, 0, 0);
+        this.cameras.main.once('camerafadeincomplete', () => {
+            //diálogo de la tienda
+            this.scene.launch('marketDialogue');
+            this.scene.pause();
+        });
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.TIENDA);
         
@@ -88,11 +91,15 @@ export default class debugMarket extends Phaser.Scene{
 
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
-        exitButton.on('pointerdown', () =>{        
-            this.scene.resume('debugMap', this.playerData); //launch, lanzar la escena 
-            this.scene.stop();
-            console.log("Saliendo del mercado");
-            this.audioManager.playMusic(MusicKeys.MAPA);
+        exitButton.on('pointerdown', () =>{       
+            this.cameras.main.fadeOut(800, 0, 0, 0); 
+                this.cameras.main.once('camerafadeoutcomplete', () => {
+                this.scene.stop();
+                this.scene.resume('debugMap', this.playerData); //launch, lanzar la escena 
+                console.log("Saliendo del mercado");
+                this.audioManager.playMusic(MusicKeys.MAPA);
+            });
+            
         });
 
         const border = this.add.graphics();

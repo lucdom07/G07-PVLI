@@ -26,6 +26,14 @@ export default class debugMap extends Phaser.Scene {
     }
 
     create() {
+
+        //transición de escenas, esta utiliza un this.events.on porque la pausamos y reanudamos durante el transcurso del gameplay
+        this.cameras.main.fadeIn(800, 0, 0, 0);
+
+        this.events.on('resume', () => {
+        this.cameras.main.fadeIn(600, 0, 0, 0);
+        });
+
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.MAPA);
 
@@ -92,12 +100,16 @@ export default class debugMap extends Phaser.Scene {
         
         button.on('pointerdown', () =>{     
             if(node.active) {
+                this.cameras.main.fadeOut(800, 0, 0, 0); // duración, R, G, B
+                this.cameras.main.once('camerafadeoutcomplete', () => {
                 this.enableButtons(node);
                 this.scene.launch(key, this.playerData);
                 this.scene.pause();
                 console.log("Saliendo del mapa");
-            }  
-        });
+                
+            }); 
+        }
+    });
         
         level++;
         this.buttonsRec(node.left, divs, level, this.nextIt(it, level, divs)[0]);

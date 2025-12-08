@@ -17,10 +17,11 @@ constructor() {
     preload() {
         
         this.load.json('marketDialogues','./jsons/dialogues/market.json');
-        this.load.image('bird','assets/dialogue_sprites/bird_dialogue.png')
+        this.load.image('bird','assets/dialogue_sprites/bird_dialogue.png');
     }
 
     create() {
+        
         const rawData = this.cache.json.get('marketDialogues');
 
         const dialogues = rawData.map(entry => new Dialogue(

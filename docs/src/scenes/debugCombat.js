@@ -29,6 +29,7 @@ export default class Animation extends Phaser.Scene{
     }
 
     create(){
+        this.cameras.main.fadeIn(800, 0, 0, 0);
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.BATALLA);
 
