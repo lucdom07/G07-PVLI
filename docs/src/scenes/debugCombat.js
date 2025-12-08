@@ -49,6 +49,7 @@ export default class Animation extends Phaser.Scene{
             new Enemy(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1)
         ];
         
+        
         //Inicializa el combate
         this.combatManager.initCombat(this.playerTeam, enemyTeam);
 
@@ -62,7 +63,7 @@ export default class Animation extends Phaser.Scene{
 
         
         this.pauseButton.on("pointerdown", () => {
-            this.scene.launch('pauseMenu',{pausedSceneKey : this.scene.key});
+            this.scene.launch('pauseMenu',{pausedSceneKey : this.sys.settings.key});
             this.scene.pause();
         });
 

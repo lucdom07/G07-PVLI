@@ -16,7 +16,7 @@ export default class PauseMenu extends Phaser.Scene{
         "%c[PAUSE MENU INIT]",
         "color: cyan; font-weight: bold",
         "Received pausedSceneKey:", data.pausedSceneKey
-    );
+        );
         this.pausedSceneKey = data.pausedSceneKey || null;
     }
 
@@ -41,14 +41,12 @@ export default class PauseMenu extends Phaser.Scene{
         resumeButton.setPosition(this.sys.game.canvas.width*0.5,this.sys.game.canvas.height*0.4);
         
         playButton.on('pointerdown',()=>{
-            if(this.pausedSceneKey){
-                this.scene.stop(this.pausedSceneKey);
-                this.scene.stop();
-                this.scene.start('mainMenu');
-            }
+                   
+            this.scene.stop('debugMap');
+            this.scene.stop(this.pausedSceneKey);
+            this.scene.stop();
+            this.scene.start('mainMenu');
             
-            
-       
         });
 
         resumeButton.on('pointerdown',()=>{

@@ -16,6 +16,7 @@ export default class debugMap extends Phaser.Scene {
     //En init le pasamos los aliados y el dinero que tiene el jugador para que cuando entre en una sala se lo pueda pasar a la siguiente escena
     init(data) {
         this.playerData = data;
+        this.tree = new BinTree(4);
     }
 
     preload() {
@@ -41,7 +42,7 @@ export default class debugMap extends Phaser.Scene {
 
         
         this.pauseButton.on("pointerdown", () => {
-            this.scene.launch('pauseMenu',{pausedSceneKey : this.scene.key});
+            this.scene.launch('pauseMenu',{pausedSceneKey : this.sys.settings.key});
             this.scene.pause();
         });
 
@@ -88,7 +89,8 @@ export default class debugMap extends Phaser.Scene {
         button.on('pointerdown', () =>{     
             if(node.active) {
                 this.enableButtons(node);
-                this.scene.start(key, this.playerData);
+                this.scene.launch(key, this.playerData);
+                this.scene.pause();
                 console.log("Saliendo del mapa");
             }  
         });
