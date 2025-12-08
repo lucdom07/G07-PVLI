@@ -92,6 +92,7 @@ export default class debugMarket extends Phaser.Scene{
             this.scene.resume('debugMap', this.playerData); //launch, lanzar la escena 
             this.scene.stop();
             console.log("Saliendo del mercado");
+            this.audioManager.playMusic(MusicKeys.MAPA);
         });
 
         this.marketSystem.textureButton = 'buyButton'; 
