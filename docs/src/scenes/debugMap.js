@@ -1,6 +1,6 @@
 import Ally from "../../gameObjects/characters/ally.js";
 import Enemy from "../../gameObjects/characters/enemy.js";
-import BinTree from "../managers/binTree.js";
+import Tree from "../managers/tree.js";
 
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
@@ -9,7 +9,7 @@ export default class debugMap extends Phaser.Scene {
     constructor() {
         super({key: 'debugMap'});
         this.playerData = {}
-        this.tree = new BinTree(4);
+        this.tree = new Tree(5);
         this.audioManager = null;
     }
 
@@ -47,10 +47,10 @@ export default class debugMap extends Phaser.Scene {
      * @param {int} divs - Divisiones horizontales del canvas (1 botón por división en cada nivel del árbol)
      * @param {int} level - Nivel que está siendo tratado en la iteración actual
      * @param {int} it - Iterador que india en qué subdivisión del canvas hay que colocar el botón de la iteración actual
-     * @returns {null}
      */
     buttonsRec(node, divs, level, it) {
         if(node.empty()) return;
+        console.log("a\n");
         
         let button;
         if(node.value === 0) button = this.add.image(100, 50, 'combatButton').setInteractive();
@@ -82,9 +82,9 @@ export default class debugMap extends Phaser.Scene {
             }  
         });
         
-        level++;
-        this.buttonsRec(node.left, divs, level, this.nextIt(it, level, divs)[0]);
-        this.buttonsRec(node.right, divs, level, this.nextIt(it, level, divs)[1]);
+        for(let i = 0; i < node.children.length; i++) {
+            this.buttonsRec(node.children[i], divs, level + 1, this.nextIt(it, level, divs)[i]);
+        }
     }
     
     /**
