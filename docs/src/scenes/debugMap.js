@@ -30,6 +30,21 @@ export default class debugMap extends Phaser.Scene {
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
 
         this.createButtons();
+
+        // Botón de pausa
+        this.pauseButton = this.add.text(100, 40, "Pause", {
+            fontSize: "20px",
+            color: "#ffffff",
+            backgroundColor: "#000000",
+            padding: { x: 10, y: 5 }
+        }).setInteractive();
+
+        
+        this.pauseButton.on("pointerdown", () => {
+            this.scene.launch('pauseMenu',{pausedSceneKey : this.scene.key});
+            this.scene.pause();
+        });
+
     }
 
     //Función que se llama en create para crear los botones

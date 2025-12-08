@@ -89,5 +89,24 @@ export default class debugMarket extends Phaser.Scene{
         this.marketSystem.textureButton = 'buyButton'; 
         this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money, this.playerData.ownedObjects);
         //this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
+<<<<<<< Updated upstream
+=======
+
+
+        // Botón de pausa
+        this.pauseButton = this.add.text(100, 40, "Pause", {
+            fontSize: "20px",
+            color: "#ffffff",
+            backgroundColor: "#000000",
+            padding: { x: 10, y: 5 }
+        }).setInteractive();
+
+        
+        this.pauseButton.on("pointerdown", () => {
+            this.scene.launch('pauseMenu',{pausedSceneKey : this.scene.key});
+            this.scene.pause();
+        });
+
+>>>>>>> Stashed changes
     }
 }

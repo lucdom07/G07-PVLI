@@ -1,9 +1,3 @@
-@font-face {
-    font-family: "Drawn";
-    src: url('../assets/fonts/GameFont.ttf');
-    font-weight: 400;
-    font-weight: normal;
-}
 
 .body{
   /*background-color: #aedfff;*/
