@@ -31,6 +31,8 @@ export default class Tree {
         this.numNodes = 1;
         //Número total de niveles del árbol
         this.levels = numLevels;
+        //Array con los nodos con hijos compartidos
+        this.redundantNodes = new Set();
         this.buildTree(this.root, i);
     }
 
@@ -41,7 +43,6 @@ export default class Tree {
      * @param {int} level - Nivel actual, en el que se encuentra el nodo actual
      */
     buildTree(actual, level) {
-        console.log("a\n");
         if(level > this.levels) {
             actual.children = [new Node(null, null, actual)];
             return;
@@ -62,11 +63,11 @@ export default class Tree {
             
             const up_parent = actual.parents[0];
 
-            for(let i = 0; i < up_parent.children.length; i++) {
-                const parent_node = up_parent.children[i];
-                parent_node.children.push(node);
-                node.parents.push(parent_node);
-            }
+            up_parent.children.forEach(x => {
+                if(x !== actual) this.redundantNodes.add(x);
+                x.children.push(node);
+                node.parents.push(x);
+            });
 
             this.buildTree(node, level + 1);
             this.numNodes++;

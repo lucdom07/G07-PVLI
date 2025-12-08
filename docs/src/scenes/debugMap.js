@@ -1,5 +1,3 @@
-import Ally from "../../gameObjects/characters/ally.js";
-import Enemy from "../../gameObjects/characters/enemy.js";
 import Tree from "../managers/tree.js";
 
 import AudioManager from "../managers/audioManager.js";
@@ -35,9 +33,9 @@ export default class debugMap extends Phaser.Scene {
 
     //Función que se llama en create para crear los botones
     createButtons() {
-        let divs = Math.pow(3, this.tree.levels);
+        let divs = Math.pow(3, (this.tree.levels / 2));
         let div = Math.trunc(divs / 2);
-        this.buttonsRec(this.tree.root, divs, 1, div);
+        this.buttonsRec(this.tree.root, divs, 1, div, this.tree.redundantNodes);
     }
     
     /**
@@ -47,16 +45,17 @@ export default class debugMap extends Phaser.Scene {
      * @param {int} divs - Divisiones horizontales del canvas (1 botón por división en cada nivel del árbol)
      * @param {int} level - Nivel que está siendo tratado en la iteración actual
      * @param {int} it - Iterador que india en qué subdivisión del canvas hay que colocar el botón de la iteración actual
+     * @param {set} bannedNodes - Set con los nodos cuyos hijos la función no tiene que recorrer, pues ya han sido recorridos con anterioridad
      */
-    buttonsRec(node, divs, level, it) {
+    buttonsRec(node, divs, level, it, bannedNodes) {
         if(node.empty()) return;
-        console.log("a\n");
         
         let button;
         if(node.value === 0) button = this.add.image(100, 50, 'combatButton').setInteractive();
         else button = this.add.image(100, 50, 'marketButton').setInteractive();
         button.setScale(0.35);
 
+        //Para hacerlo vertical
         //let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
         //let x = (this.sys.game.canvas.width / divs) * it;
         let x = (this.sys.game.canvas.width /  this.tree.levels) * node.level * 0.8;
@@ -82,8 +81,10 @@ export default class debugMap extends Phaser.Scene {
             }  
         });
         
-        for(let i = 0; i < node.children.length; i++) {
-            this.buttonsRec(node.children[i], divs, level + 1, this.nextIt(it, level, divs)[i]);
+        if(!bannedNodes.has(node)) {
+            node.children.forEach(x => {
+                this.buttonsRec(x, divs, level + 1, this.nextIt(it, level, divs)[0], bannedNodes);
+            });
         }
     }
     
@@ -97,31 +98,38 @@ export default class debugMap extends Phaser.Scene {
     nextIt(it, level, divs) {
         let nodos = Math.pow(2, level - 1);
         let disp_divs = Math.floor(divs / nodos);
-        let inc = Math.floor(disp_divs / 2);
+        let inc;
+        if(level <= 3) {
+            inc = Math.floor(disp_divs / 2);
+        }
         return [it + inc, it - inc];
     }
     
     /**
      * Función que lleva la lógica arborescente de los botones; es decir, cuales deben ser pulsables y cuales no
-     * @param {Node} node - nodo que contiene el botón que está siendo pulsado
+     * @param {Node} node - Nodo que contiene el botón que está siendo pulsado
      */
     enableButtons(node) {
-        if(!node.right.empty()) node.right.active = true;
-        if(!node.left.empty()) node.left.active = true;
-        
-        if(node.parent !== null) {
-            if(node === node.parent.left) {
-                node.parent.right.active = false;
-            }
-            else if(node === node.parent.right) {
-                node.parent.left.active = false;
-            }
+        const up_parent = node.parents[0];
+
+        node.children.forEach(x => {
+            x.active = true;
+        });
+
+        if(up_parent) {
+            const active = up_parent.children.find(x => x === node);
+            up_parent.children.forEach(x => {
+                if(x !== active) x.active = false;
+            });
         }
+        
         node.active = false;
     }
-    
-    //Solo se usa si queremos poner el árbol en vertical
+   
+    /*
+    Para hacerlo vertical
     mirrorLevel(level) {
         return this.tree.levels - level + 1; 
     }
+    */
 }
