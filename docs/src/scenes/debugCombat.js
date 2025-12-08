@@ -52,8 +52,26 @@ export default class Animation extends Phaser.Scene{
             new Enemy(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1)
         ];
         
+        
         //Inicializa el combate
         this.combatManager.initCombat(this.playerTeam, enemyTeam);
+
+        // Botón de pausa
+        this.pauseButton = this.add.text(100, 40, "Pause", {
+            fontSize: "20px",
+            color: "#ffffff",
+            backgroundColor: "#000000",
+            padding: { x: 10, y: 5 }
+        }).setInteractive();
+
+        
+        this.pauseButton.on("pointerdown", () => {
+            this.scene.launch('pauseMenu',{pausedSceneKey : this.sys.settings.key});
+            this.scene.pause();
+        });
+
+
+
     }
 //recrea los aliados en esta escena con las mismas propiedades
     recreate() { 

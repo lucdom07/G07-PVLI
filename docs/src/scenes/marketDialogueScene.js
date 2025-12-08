@@ -3,14 +3,11 @@ import Character from "../../gameObjects/ui/character.js";
 import DialogText from "../../gameObjects/ui/dialogPlugin.js";
 import DialogueManager from "../managers/dialogManager.js";
 
-import AudioManager from "../managers/audioManager.js";
-import { MusicKeys } from "../managers/audioConfig.js";
+export default class marketDialogueScene extends Phaser.Scene{
 
-export default class IntroductionScene extends Phaser.Scene {
-    constructor() {
-        super("introduction");
+constructor() {
+        super("marketDialogue");
         this.playerData = {}
-        this.audioManager = null;
     }
 
     init(data){
@@ -18,22 +15,19 @@ export default class IntroductionScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.json("introDialogues", "./jsons/dialogues/intro.json");
-        this.load.image("background", "assets/placeholders/background.png");
+        
+        this.load.json('marketDialogues','./jsons/dialogues/market.json');
+        this.load.image('bird','assets/dialogue_sprites/bird_dialogue.png')
     }
 
     create() {
-        this.audioManager = AudioManager.getInstance(this);
-        this.audioManager.playMusic(MusicKeys.INTRO);
-
-        const rawData = this.cache.json.get("introDialogues");
+        const rawData = this.cache.json.get('marketDialogues');
 
         const dialogues = rawData.map(entry => new Dialogue(
             new Character(entry.name),
             entry.line,
             true,
-            entry.sprite,
-            entry.spritePos
+            entry.sprite
         ));
 
         this.dialogueManager = new DialogueManager(this, dialogues, {
@@ -56,8 +50,12 @@ export default class IntroductionScene extends Phaser.Scene {
         });
 
         // Escuchar fin de diálogos
-        this.events.on("dialogueEnd", () => this.scene.start("debugMap",this.playerData));
+        this.events.on("dialogueEnd", () => {
+            this.scene.resume('debugMarket');
+            this.scene.stop();
+        });
     }
 
-    
+     
+
 }
