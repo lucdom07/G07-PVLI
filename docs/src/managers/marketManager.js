@@ -51,26 +51,19 @@ export default class MarketManager {
 
         for (let i = 0; i < slots; i++) {
             if (available.length === 0) break;
+
             const index = Phaser.Math.Between(0, available.length - 1);
-            const ally = available[index];
-            ally.scene = this.scene;
+            const clone = available[index].clone(); 
+            clone.scene = this.scene;
 
-            marketAllies.push(this.makeStruct(ally));
-            /*
-            const clone = available[index].clone();
-
-     
-            if (clone.scene !== this.scene) {
-                clone.scene = this.scene;
-                this.scene.add.existing(clone);
-            }
+            if (!clone.scene) this.scene.add.existing(clone);
 
             marketAllies.push(this.makeStruct(clone));
-            */
         }
         
         return marketAllies;
     }
+
 
     showMarket(money) {
         this.clearMarket();
@@ -91,7 +84,7 @@ export default class MarketManager {
         if(marketItem.item instanceof Ally){
             x = 150 + index * 150;
         }
-        else x = 750 + index * 150; //en caso de que fuera un objeto
+        else x = 750 + index * 150; 
 
         const y = 200;
         const item = marketItem.item;
@@ -155,7 +148,8 @@ export default class MarketManager {
             }
         });
 
-        marketItem.button.on('pointerdown', () => this.buyAlly(marketItem));
+        marketItem.button.on('pointerdown', () => this.buyMarketItem(marketItem));
+
     }
 
     showMoney(){
@@ -202,65 +196,53 @@ export default class MarketManager {
         this.selectedForSale = null;
     }
 
-    buyItem(marketItem){
+    buyMarketItem(marketItem) {
         const item = marketItem.item;
 
-        if(this.money < item.cost){ this.showMessage("No tienes dinero"); return; }
+        
+        if (this.money < item.cost) { this.showMessage("No tienes dinero"); return; }
+        if (item instanceof Ally && this.bag.length >= this.maxCapacity) { this.showMessage("Inventario lleno"); return; }
+        if (!(item instanceof Ally) && this.objectBag.length >= 4) { this.showMessage("Inventario de objetos lleno"); return; }
 
-        if(this.bag.length >= 6 && item instanceof Ally){ this.showMessage("Inventario lleno"); return; }
-        else if(this.objectBag.length >= 4 && !(item instanceof Ally)){ this.showMessage("Inventario de objetos lleno"); return; }
         this.money -= item.cost;
 
-        // Clonar y agregar a la escena
-        if(item instanceof Ally){
-        const newAlly = item.clone();
-        newAlly.available = true;
+        if (item instanceof Ally) {
+            
+            const newAlly = item;
+            newAlly.available = true;
 
-        if(!newAlly.scene) this.scene.add.existing(newAlly);
+            
+            if (newAlly.warriorUI) {
+                newAlly.warriorUI.destroy();
+                newAlly.warriorUI = null;
+            }
+          
+            newAlly.setVisible(false).disableInteractive();
 
-        // Ocultar temporalmente todo
-        newAlly.setVisible(false);
-        if(newAlly.warriorUI) 
-        newAlly.warriorUI.destroy();
-        
-        //Al comprar el aliado, se actualiza el array de aliados disponibles del jugador y el dinero en la escena de market
-        this.scene.events.emit('buyingAlly', newAlly, item.cost);
-        this.showMessage(`¡Has comprado a ${newAlly.name}!`);
-        }
-        else{
+            this.bag.push(newAlly);
+
+            this.scene.events.emit('buyingAlly', newAlly, item.cost);
+
+            this.showMessage(`¡Has comprado a ${newAlly.name}!`);
+        } else {
+            // Para objetos
             const newObj = item.clone();
-            if(!newObj.scene) this.scene.add.existing(newObj);
+            if (!newObj.scene) this.scene.add.existing(newObj);
             newObj.setVisible(false);
 
             this.objectBag.push(newObj);
             this.showMessage(`¡Has comprado ${newObj.name}!`);
         }
-        
 
-        // Remover del mercado
-        item.setVisible(false).disableInteractive();
-        if(marketItem.button) marketItem.button.destroy();
-        if(marketItem.priceText) marketItem.priceText.destroy();
-        if(marketItem.levelText) marketItem.levelText.destroy();
-        if(marketItem.infoText) marketItem.infoText.destroy();
+        if (marketItem.button) { marketItem.button.destroy(); marketItem.button = null; }
+        if (marketItem.priceText) { marketItem.priceText.destroy(); marketItem.priceText = null; }
+        if (marketItem.infoText) { marketItem.infoText.destroy(); marketItem.infoText = null; }
 
         this.showMoney();
     }
 
-    buyAlly(ally) {
-        const item = ally.item;
-        if(this.money < item.cost){ this.showMessage("No tienes dinero"); return; }
-        if(this.bag.length >= 6){ this.showMessage("Inventario lleno"); return; }
 
-        this.money -= item.cost;
 
-        ally.available = true;
-        this.scene.events.emit('buyingAlly', item, item.cost);
-        item.setVisible(false).disableInteractive();
-
-        this.showMoney();
-        this.showMessage(`¡Has comprado a ${newAlly.name}!`);
-    }
 
     sellAlly(index, sellPrice){
         const ally = this.bag[index];
