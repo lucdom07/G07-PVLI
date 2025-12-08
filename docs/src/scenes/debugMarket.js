@@ -20,8 +20,8 @@ export default class debugMarket extends Phaser.Scene{
     
     preload(){
         //se cargan el fondo, las imagenes y la ui
-        this.load.image('buyButton','assets/placeholders/buttons/market_button.png');
-        this.load.image('exitButton','assets/placeholders/buttons/start_button.png');
+        this.load.image('buyButton','assets/buttons/buy.png');
+        this.load.image('exitButton','assets/buttons/quit.png');
         this.load.image('background','assets/placeholders/background.jpg');
 
         //sprites de los personajes
@@ -84,7 +84,7 @@ export default class debugMarket extends Phaser.Scene{
         ];
 
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
-        const exitButton = this.add.image(300,100,'exitButton').setInteractive();
+        const exitButton = this.add.image(300,100,'exitButton').setInteractive().setDisplaySize(400,130);
 
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
@@ -95,6 +95,36 @@ export default class debugMarket extends Phaser.Scene{
             this.audioManager.playMusic(MusicKeys.MAPA);
         });
 
+        const border = this.add.graphics();
+        border.lineStyle(4, 0x000000); 
+        border.strokeRect(
+            exitButton.x - exitButton.displayWidth/2, 
+            exitButton.y - exitButton.displayHeight/2, 
+            exitButton.displayWidth, 
+            exitButton.displayHeight
+        );
+
+        exitButton.on('pointerover', () => {
+            border.clear(); 
+            border.lineStyle(4, 0xffffff, 0.7); 
+            border.strokeRect(
+                 exitButton.x - exitButton.displayWidth/2, 
+                exitButton.y - exitButton.displayHeight/2, 
+                exitButton.displayWidth, 
+                exitButton.displayHeight
+            );
+        });
+
+        exitButton.on('pointerout', () => {
+            border.clear();
+            border.lineStyle(4, 0x000000, 1); 
+            border.strokeRect(
+                 exitButton.x - exitButton.displayWidth/2, 
+                exitButton.y - exitButton.displayHeight/2, 
+                exitButton.displayWidth, 
+                exitButton.displayHeight
+            );
+        });
         this.marketSystem.textureButton = 'buyButton'; 
         this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money, this.playerData.ownedObjects);
         //this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);

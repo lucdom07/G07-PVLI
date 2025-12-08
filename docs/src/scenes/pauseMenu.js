@@ -12,17 +12,12 @@ export default class PauseMenu extends Phaser.Scene{
 
     init(data){
 
-         console.log(
-        "%c[PAUSE MENU INIT]",
-        "color: cyan; font-weight: bold",
-        "Received pausedSceneKey:", data.pausedSceneKey
-        );
         this.pausedSceneKey = data.pausedSceneKey || null;
     }
 
     preload(){
-        this.load.image('startButton','assets/placeholders/buttons/start_button.png');
-        this.load.image('exitButton','assets/placeholders/buttons/exit_button.png');
+        this.load.image('resetButton','assets/buttons/reset.png');
+        this.load.image('resumeButton','assets/buttons/continue.png');
     }
 
     create(){
@@ -35,13 +30,14 @@ export default class PauseMenu extends Phaser.Scene{
         rt.fill(0x000000, 0.5);
 
         //botón de juego
-        const exitButton = this.add.image(300, 100, 'exitButton').setInteractive();
-        const resumeButton = this.add.image(300,100,'startButton').setInteractive()
+        const resetButton = this.add.image(300, 100, 'resetButton').setInteractive().setDisplaySize(400,130);
+        const resumeButton = this.add.image(300,100,'resumeButton').setInteractive().setDisplaySize(400,130);
 
-        exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
-        resumeButton.setPosition(this.sys.game.canvas.width*0.5,this.sys.game.canvas.height*0.4);
+        resumeButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.7);
+        resetButton.setPosition(this.sys.game.canvas.width*0.5,this.sys.game.canvas.height*0.3);
         
-        exitButton.on('pointerdown',()=>{
+        //función de resetear la partida
+        resetButton.on('pointerdown',()=>{
                    
             this.scene.stop('debugMap');
             this.scene.stop(this.pausedSceneKey);
@@ -50,6 +46,7 @@ export default class PauseMenu extends Phaser.Scene{
             
         });
 
+        //función de continuar con el juego
         resumeButton.on('pointerdown',()=>{
           
             if (this.pausedSceneKey) {
@@ -58,6 +55,71 @@ export default class PauseMenu extends Phaser.Scene{
                 this.scene.stop();
             }
                  
+        });
+
+        //aquí añado unos bordes desde phaser para mayor claridad del botón seleccionado
+        
+        const resetBorder = this.add.graphics();
+        resetBorder.lineStyle(4, 0x0000000); 
+        resetBorder.strokeRect(
+            resetButton.x - resetButton.displayWidth/2, 
+            resetButton.y - resetButton.displayHeight/2, 
+            resetButton.displayWidth, 
+            resetButton.displayHeight
+        );
+
+        resetButton.on('pointerover', () => {
+            resetBorder.clear(); 
+            resetBorder.lineStyle(4, 0xfffffff, 1); 
+            resetBorder.strokeRect(
+                resetButton.x - resetButton.displayWidth/2, 
+                resetButton.y - resetButton.displayHeight/2, 
+                resetButton.displayWidth, 
+                resetButton.displayHeight
+            );
+        });
+
+        resetButton.on('pointerout', () => {
+            resetBorder.clear();
+            resetBorder.lineStyle(4, 0x000000, 1); 
+            resetBorder.strokeRect(
+                resetButton.x - resetButton.displayWidth/2, 
+                resetButton.y - resetButton.displayHeight/2, 
+                resetButton.displayWidth, 
+                resetButton.displayHeight
+            );
+        });
+
+        
+        const resumeBorder = this.add.graphics();
+        resumeBorder.lineStyle(4, 0x0000000); 
+        resumeBorder.strokeRect(
+            resumeButton.x - resumeButton.displayWidth/2, 
+            resumeButton.y - resumeButton.displayHeight/2, 
+            resumeButton.displayWidth, 
+            resumeButton.displayHeight
+        );
+
+        resumeButton.on('pointerover', () => {
+            resumeBorder.clear(); 
+            resumeBorder.lineStyle(4, 0xfffffff, 1); 
+            resumeBorder.strokeRect(
+                resumeButton.x - resumeButton.displayWidth/2,
+                resumeButton.y - resumeButton.displayHeight/2,
+                resumeButton.displayWidth,
+                resumeButton.displayHeight
+            );
+        });
+
+        resumeButton.on('pointerout', () => {
+            resumeBorder.clear();
+            resumeBorder.lineStyle(4, 0x000000, 1); 
+            resumeBorder.strokeRect(
+                resumeButton.x - resumeButton.displayWidth/2,
+                resumeButton.y - resumeButton.displayHeight/2,
+                resumeButton.displayWidth,
+                resumeButton.displayHeight
+            );
         });
     }
 }

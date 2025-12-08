@@ -20,7 +20,7 @@ export default class mainMenu extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('startButton','assets/placeholders/buttons/start_button.png')
+        this.load.image('startButton','assets/buttons/start.png')
         //this.load.image('marketButton','assets/button.png')
         this.load.image('bg','assets/backgrounds/mainMenu.png')
         this.load.image('mainMenuCat','assets/main_menu/mainmenu_cat.png')
@@ -59,15 +59,49 @@ export default class mainMenu extends Phaser.Scene{
         
 
         //botón de juego
-        const playButton = this.add.image(300, 100, 'startButton').setInteractive();
+        const playButton = this.add.image(300, 100, 'startButton').setInteractive().setDisplaySize(400,130);
         //const marketButton = this.add.image(600,100,'marketButton').setInteractive();
 
-        playButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
+        playButton.setPosition(this.sys.game.canvas.width*0.7, this.sys.game.canvas.height*0.8);
         //marketButton.setPosition(450, 450);
         
+       
         playButton.on('pointerdown',()=>{
             this.scene.start('introduction', this.playerData);
         });
+
+        //borde del botón de jugar
+        const border = this.add.graphics();
+        border.lineStyle(4, 0x000000); 
+        border.strokeRect(
+            playButton.x - playButton.displayWidth/2, 
+            playButton.y - playButton.displayHeight/2, 
+            playButton.displayWidth, 
+            playButton.displayHeight
+        );
+
+        playButton.on('pointerover', () => {
+            border.clear(); 
+            border.lineStyle(4, 0xffffff, 0.7); 
+            border.strokeRect(
+                playButton.x - playButton.displayWidth/2,
+                playButton.y - playButton.displayHeight/2,
+                playButton.displayWidth,
+                playButton.displayHeight
+            );
+        });
+
+        playButton.on('pointerout', () => {
+            border.clear();
+            border.lineStyle(4, 0x000000, 1); 
+            border.strokeRect(
+                playButton.x - playButton.displayWidth/2,
+                playButton.y - playButton.displayHeight/2,
+                playButton.displayWidth,
+                playButton.displayHeight
+            );
+        });
+        
     }
 }
 
