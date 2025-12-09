@@ -4,6 +4,7 @@ import GlobalObject from "../managers/globalObjects.js";
 
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
+import { DialogueKeys } from "../managers/dialogueConfig.js";
 
 export default class debugMarket extends Phaser.Scene{
     constructor(){
@@ -45,13 +46,12 @@ export default class debugMarket extends Phaser.Scene{
         this.cameras.main.fadeIn(800, 0, 0, 0);
         this.cameras.main.once('camerafadeincomplete', () => {
             //diálogo de la tienda
-            this.scene.launch('marketDialogue');
-            this.scene.pause();
+            this.scene.launch("DialogueScene", {
+            dialogueKey: DialogueKeys.TIENDA,
+            returnScene: this.scene.key
         });
-        this.audioManager = AudioManager.getInstance(this);
-        this.audioManager.playMusic(MusicKeys.TIENDA);
+        this.scene.pause(); });
         
-
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
@@ -149,7 +149,7 @@ export default class debugMarket extends Phaser.Scene{
         
         this.pauseButton.on("pointerdown", () => {
 
-            this.scene.launch('pauseMenu',{pausedSceneKey : this.sys.settings.key});
+            this.scene.launch('pauseMenu',{ returnScene : this.sys.settings.key});
             this.scene.pause();
         });
 

@@ -1,10 +1,11 @@
 import Dialogue from "../../gameObjects/ui/Dialogue.js";
 import Character from "../../gameObjects/ui/character.js";
 import DialogText from "../../gameObjects/ui/dialogPlugin.js";
-import DialogueManager from "../managers/dialogManager.js";
+import DialogueManager from "../managers/dialogueManager.js";
 
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
+import { DialogueKeys } from "../managers/dialogueConfig.js";
 
 export default class IntroductionScene extends Phaser.Scene {
     constructor() {
@@ -24,6 +25,13 @@ export default class IntroductionScene extends Phaser.Scene {
 
     create() {
         this.cameras.main.fadeIn(800, 0, 0, 0);
+                this.cameras.main.once('camerafadeincomplete', () => {
+                    //diálogo de la tienda
+                    this.scene.launch("DialogueScene", {
+                    dialogueKey: DialogueKeys.INTRO,
+                    returnScene: this.scene.key
+                });
+        });
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.INTRO);
 
@@ -37,33 +45,6 @@ export default class IntroductionScene extends Phaser.Scene {
             entry.spritePos
         ));
 
-        this.dialogueManager = new DialogueManager(this, dialogues, {
-            dialogBoxClass: DialogText
-        });
-        this.dialogueManager.start();
-
-        // Botón de Skip
-        const width = this.sys.game.config.width;
-        this.skipButton = this.add.text(width - 100, 40, "Skip", {
-            fontSize: "20px",
-            color: "#ff0000",
-            backgroundColor: "#000000",
-            padding: { x: 10, y: 5 }
-        }).setInteractive();
-
-        this.skipButton.on("pointerdown", () => {
-            this.dialogueManager.skip();
-            this.skipButton.destroy();
-        });
-
-        // Escuchar fin de diálogos
-        this.events.on("dialogueEnd", () => {
-                this.cameras.main.fadeOut(800, 0, 0, 0); // duración, R, G, B
-                this.cameras.main.once('camerafadeoutcomplete', () => {
-                this.scene.start('debugMap', this.playerData);
-            });
-        });
+      
     }
-
-    
 }

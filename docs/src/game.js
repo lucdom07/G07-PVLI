@@ -9,6 +9,7 @@ import AustraliaScene from './scenes/australiaScene.js';
 import PauseMenu from './scenes/pauseMenu.js';
 import marketDialogueScene from './scenes/marketDialogueScene.js';
 import BootScene from './scenes/precargaScene.js';
+import DialogueScene from './scenes/dialogueScene.js';
 
 window.addEventListener('DOMContentLoaded', () => {
 	
@@ -42,7 +43,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			IntroductionScene,
 			AustraliaScene,
 			PauseMenu,
-			marketDialogueScene
+			marketDialogueScene,
+			DialogueScene
 		],
 		physics: { 
 			default: 'arcade', 

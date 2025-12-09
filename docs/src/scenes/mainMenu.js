@@ -1,5 +1,6 @@
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
+import { DialogueKeys } from "../managers/dialogueConfig.js";
 
 export default class mainMenu extends Phaser.Scene{
     constructor(){
@@ -75,7 +76,11 @@ export default class mainMenu extends Phaser.Scene{
             this.cameras.main.fadeOut(800, 0, 0, 0); 
 
             this.cameras.main.once('camerafadeoutcomplete', () => {
-                this.scene.start('introduction', this.playerData);
+                this.scene.start("DialogueScene", {
+                        dialogueKey: DialogueKeys.INTRO},
+                        this.playerData
+                );
+
             });
         });
 

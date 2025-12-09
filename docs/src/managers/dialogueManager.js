@@ -1,3 +1,5 @@
+import dialogBoxClass from "../../gameObjects/ui/dialogPlugin.js";
+
 export default class DialogueManager {
     constructor(scene, dialogues, config = {}) {
         this.scene = scene;
@@ -5,7 +7,6 @@ export default class DialogueManager {
         this.index = 0;
         this.active = false;
 
-        
         this.config = Object.assign({
             nameStyle: { fontSize: "35px", color: "#ffffff", fontFamily: "Caveat Brush" },
             dialogStyle: { fontSize: "30px", color: "#000000", fontFamily: "Caveat Brush", padding: 32, windowHeight: 100, dialogSpeed: 3 },
@@ -18,7 +19,6 @@ export default class DialogueManager {
         this.dialogBox = null;
         this.sprite = null;
 
-        
         this.next = this.next.bind(this);
         this.skip = this.skip.bind(this);
     }
@@ -65,13 +65,14 @@ export default class DialogueManager {
         this.nameText.setText(d.chara?.name ?? d.name ?? "");
         if (this.dialogBox.setText) {
             // Si es DialogText
-            this.dialogBox.setText(d.text, d.animated ?? true);
+            const text = d.line ?? "";
+
+        this.dialogBox.setText(text, d.animated ?? true);
+
         } else {
             // fallback simple
             this.dialogBox.setText(d.text ?? "");
         }
-       
-
        
     }
 
