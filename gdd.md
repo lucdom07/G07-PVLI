@@ -289,7 +289,7 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 || Gatoñete |11|7|1|
 || Pablotter  |10|6|2|
 |Estados Unidos|
-|| Seraphina |13|9|2|
+|| Nutricristo |13|9|2|
 || Señor Anteojo |12|7|0|
 || Pimiento Gatomórfico |10|9|1|
 || Miku |12|8|4|
