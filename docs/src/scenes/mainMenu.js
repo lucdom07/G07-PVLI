@@ -1,5 +1,6 @@
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
+import Ally from "../../gameObjects/characters/ally.js";
 
 export default class mainMenu extends Phaser.Scene{
     constructor(){
@@ -18,6 +19,8 @@ export default class mainMenu extends Phaser.Scene{
         }
         this.audioManager = null;
         this.fromReset = data?.reset === true;
+
+        this.loadMichi();
     }
 
     preload(){
@@ -112,5 +115,48 @@ export default class mainMenu extends Phaser.Scene{
         });
         
     }
+
+
+    loadMichi(){
+        
+        const groupToLoad = this.getAllyGroup(0);
+        groupToLoad.forEach(ally => {
+        this.load.image(ally.name + "Textura", ally.texture);})
+
+        const group = this.getAllyGroup(0);
+
+        const michi = group.map(allyData =>{
+                    return new Ally(
+                        this,
+                        -150,
+                        -150,
+                        allyData.name,
+                        allyData.life,
+                        allyData.attack,
+                        allyData.range,
+                        allyData.name+"Textura",
+                        0,
+                        allyData.cost,
+                        false,
+                        allyData.texture
+                    )
+                })
+
+        this.playerData.ownedAllies.push(michi);
+
+        console.log(this.playerData.ownedAllies);
+    }
+
+
+    getAllyGroup(num){
+        const allyKey = `ally${num}`;
+        const rawData = this.cache.json.get("allyGroup");
+
+        if(rawData && rawData[allyKey]){
+            return rawData[allyKey];
+        }
+        else return null;
+    }
+    
 }
 

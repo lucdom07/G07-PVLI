@@ -55,11 +55,6 @@ export default class BootScene extends Phaser.Scene {
     create() {
         this.progressBar.setVisible(false);
         this.progressText.setVisible(false);
-
-        console.log("Aliados:", this.ally);
-        console.log("Enemigos:", this.enemy);
-        console.log("Objetos:", this.objects);
-
         this.showPlayButton();
     }
 
