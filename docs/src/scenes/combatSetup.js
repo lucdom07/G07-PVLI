@@ -38,7 +38,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
-        this.load.image('setupBackground','assets/backgrounds/australiaSetup.png')
+        this.load.image('setupBackgroun','assets/backgrounds/australiaSetu.png')
         this.load.image('combatButton', 'assets/placeholders/buttons/combat_button.jpg')
     }
 
@@ -49,7 +49,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.PRE);
 
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'setupBackground');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'setupBackgroun');
 
         //Subscribir eventos de click a los aliados del DOM
         for(let i = 0; i < this.DOMallies.length; i++) {
