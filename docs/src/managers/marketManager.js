@@ -119,19 +119,19 @@ export default class MarketManager {
         // Botón de compra
         marketItem.button = this.scene.add.image(x, y + 60, this.textureButton)
             .setInteractive()
-            .setScale(0.3);
+            .setScale(0.1);
       
         // Texto del precio
-        marketItem.priceText = this.scene.add.text(x, y - 30, `${item.cost}$`, {
-            fontSize: '14px', fill: '#fff', backgroundColor: '#000'
+        marketItem.priceText = this.scene.add.text(x, y + 130, `${item.cost}$`, {
+            fontSize: '20px', fill: '#fff', backgroundColor: '#000'
         }).setOrigin(0.5);
 
         // Mostrar stats al pasar el ratón
         if(marketItem instanceof Ally){
             item.on('pointerover', () => {
-            marketItem.infoText = this.scene.add.text(x, y - 80,
+            marketItem.infoText = this.scene.add.text(x, y - 60,
                 `${item.name}\nHP:${item.life}\nATK:${item.attack},\nLVL:${item.level}`, {
-                    fontSize: '12px',
+                    fontSize: '16px',
                     fill: '#FFFFFF',
                     backgroundColor: '#000000',
                     padding: { x: 5, y: 5 },
@@ -159,6 +159,8 @@ export default class MarketManager {
         });
 
         marketItem.button.on('pointerdown', () => this.buyItem(marketItem));
+
+        
     }
 
     showMoney(){

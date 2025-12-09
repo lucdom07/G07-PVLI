@@ -5,17 +5,20 @@ export default class DialogueManager {
         this.index = 0;
         this.active = false;
 
-        // Configuración de UI opcional
+        
         this.config = Object.assign({
             nameStyle: { fontSize: "35px", color: "#ffffff", fontFamily: "Caveat Brush" },
             dialogStyle: { fontSize: "30px", color: "#000000", fontFamily: "Caveat Brush", padding: 32, windowHeight: 100, dialogSpeed: 3 },
-            dialogBoxClass: null // Para usar tu DialogText personalizado
+            dialogBoxClass: null, 
+
+            spriteScale : 0.7
         }, config);
 
         this.nameText = null;
         this.dialogBox = null;
+        this.sprite = null;
 
-        // Bind para listeners
+        
         this.next = this.next.bind(this);
         this.skip = this.skip.bind(this);
     }
@@ -46,7 +49,7 @@ export default class DialogueManager {
 
         // Avanzar con click
         this.scene.input.on("pointerdown", this.next);
-
+        
         this.showDialogue();
     }
 
@@ -57,6 +60,8 @@ export default class DialogueManager {
             return;
         }
 
+        this.updateSprite(d);
+
         this.nameText.setText(d.chara?.name ?? d.name ?? "");
         if (this.dialogBox.setText) {
             // Si es DialogText
@@ -65,6 +70,9 @@ export default class DialogueManager {
             // fallback simple
             this.dialogBox.setText(d.text ?? "");
         }
+       
+
+       
     }
 
     next() {
@@ -86,4 +94,29 @@ export default class DialogueManager {
         this.active = false;
         this.scene.events.emit("dialogueEnd");
     }
+
+    updateSprite(d){
+
+        if(!d.sprite){
+            if(this.sprite){
+                this.sprite.destroy();
+                this.sprite = null;
+            }
+            return;
+        }
+        if(!this.sprite){
+            this.sprite = this.scene.add.sprite(600,320,d.sprite);
+            this.sprite;
+        }
+        else if (this.sprite.texture.key!=d.sprite)
+            this.sprite.setTexture(d.sprite);
+
+        
+        else this.sprite.setPosition(600,320);
+        this.sprite.setScale(this.config.spriteScale);
+        this.sprite.setDepth(-1);
+    }
+
+
 }
+

@@ -13,6 +13,7 @@ export default class Ally extends Warrior{
 
     takeHit(damage, callback){
         super.takeHit(damage, callback);
+        this.scene.events.emit('allyDamageSound');
     }
 
     isAvailable() {
