@@ -25,7 +25,7 @@ export default class Animation extends Phaser.Scene{
         this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
-        this.load.image('combatBackground','assets/backgrounds/australiaaaCombat.png')
+        this.load.image('combatBackground','assets/backgrounds/australiaCombat.png')
     }
 
     create(){
