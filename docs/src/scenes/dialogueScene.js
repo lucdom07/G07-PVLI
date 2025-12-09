@@ -10,16 +10,18 @@ export default class DialogueScene extends Phaser.Scene {
     }
 
     init(data) {
-        // data.dialogueKey = clave que le pasó otra escena
-
+        //key de diálogo (para buscar el json en config)
         this.dialogueKey = data.dialogueKey;
-        this.returnScene = data.returnScene ?? null; // opcional
-        this.nextScene = data.nextScene ?? null; // opcional
-        this.playerData = data.playerData ?? {}; // opcional
-        console.log(data);
+        //escena a la que volver si la escena de diálogo está superpuesta
+        this.returnScene = data.returnScene ?? null; 
+        //escena a la que ir después de los diálogos
+        this.nextScene = data.nextScene ?? null; 
+
+        this.playerData = data.playerData ?? {}; 
     }
 
     preload() {
+        //cargo el JSON de diálogos correspondiente al que me han pasado
         const file = DialogueFiles[this.dialogueKey];
         if (!file) {
             console.error("No existe un JSON de diálogos para esta clave:", this.dialogueKey);
@@ -42,15 +44,17 @@ export default class DialogueScene extends Phaser.Scene {
             return;
         }
 
-        // Cargar el JSON en caliente
+        // cargo y parseo el json de diálogos
         const response = await fetch(file);
         const dialogues = await response.json();
 
-        // Inicializar el DialogueManager
+        // instancio al manager de diálogos
         this.manager = new DialogueManager(this, dialogues, { dialogBoxClass: DialogText });
         this.manager.start();
 
-        // Botón de Skip
+        /*
+        BOTÓN DE SKIP
+        */
         const width = this.sys.game.config.width;
         this.skipButton = this.add.text(width - 100, 40, "Skip", {
             fontSize: "20px",
@@ -68,12 +72,17 @@ export default class DialogueScene extends Phaser.Scene {
             this.skipButton.destroy();
         });
 
+        /*
+        BOTÓN DE SKIP
+        */
+
+        //escucho el evento de fin de diálogos para cambiar de escena o reanudar la anterior
         this.events.once("dialogueEnd", () => {
             if(this.nextScene)
                 this.scene.start(this.nextScene, { playerData: this.playerData });
             else if(this.returnScene){
                 this.scene.stop();
-                this.scene.resume(this.returnScene, this.playerData);
+                this.scene.resume(this.returnScene);
             }
             this.scene.stop();
         });

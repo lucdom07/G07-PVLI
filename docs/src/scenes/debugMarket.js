@@ -14,19 +14,18 @@ export default class debugMarket extends Phaser.Scene{
         this.audioManager = null;
     }
 
-    //En init le pasamos los aliados que tiene el jugador
+    //en init le paso los aliados que tiene el jugador
     init(data){
-        this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'), this.DOManager);
         this.playerData = data;
+        this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'), this.DOManager);
     }
     
     preload(){
-        //se cargan el fondo, las imagenes y la ui
+
         this.load.image('buyButton','assets/buttons/buy.png');
         this.load.image('exitButton','assets/buttons/quit.png');
         this.load.image('background','assets/placeholders/background.jpg');
 
-        //sprites de los personajes
         this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
         this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
         this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
@@ -48,14 +47,13 @@ export default class debugMarket extends Phaser.Scene{
         this.cameras.main.once('camerafadeincomplete', () => {
             //diálogo de la tienda
             this.scene.pause();
-            console.log(this.playerData);
             this.scene.launch("DialogueScene", {
                 dialogueKey: DialogueKeys.TIENDA,
                 returnScene: this.scene.key,
                 nextScene: null,
                 playerData: this.playerData
+            });
         });
-         });
     
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.TIENDA);
@@ -121,6 +119,9 @@ export default class debugMarket extends Phaser.Scene{
             exitButton.displayHeight
         );
 
+        /*
+        BOTÓN DE EXIT
+        */
         exitButton.on('pointerover', () => {
             border.clear(); 
             border.lineStyle(4, 0xffffff, 0.7); 
@@ -142,13 +143,18 @@ export default class debugMarket extends Phaser.Scene{
                 exitButton.displayHeight
             );
         });
+
+        /*
+        BOTÓN DE EXIT
+        */
+
+
         this.marketSystem.textureButton = 'buyButton'; 
         this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money, this.playerData.ownedObjects);
-        //this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
 
-
-
-        // Botón de pausa
+        /*
+        BOTÓN DE PAUSA
+        */
         this.pauseButton = this.add.text(100, 40, "Pause", {
             fontSize: "20px",
             color: "#ffffff",

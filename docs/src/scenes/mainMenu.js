@@ -13,6 +13,7 @@ export default class mainMenu extends Phaser.Scene{
             money: 10,
             level: 0,
             ownedObjects: []
+
         }
         this.audioManager = null;
         this.fromReset = this.playerData?.reset === true;

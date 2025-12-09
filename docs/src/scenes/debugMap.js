@@ -15,7 +15,10 @@ export default class debugMap extends Phaser.Scene {
 
     //En init le pasamos los aliados y el dinero que tiene el jugador para que cuando entre en una sala se lo pueda pasar a la siguiente escena
     init(data) {
-        this.playerData = data;
+        this.playerData = data?.playerData || {};
+        this.playerData.ownedAllies = this.playerData.ownedAllies || [];
+        this.playerData.ownedObjects = this.playerData.ownedObjects || [];
+        this.playerData.money = this.playerData.money ?? 0;;
         this.tree = new BinTree(4);
     }
 
@@ -27,12 +30,7 @@ export default class debugMap extends Phaser.Scene {
 
     create() {
 
-        //transición de escenas, esta utiliza un this.events.on porque la pausamos y reanudamos durante el transcurso del
         this.cameras.main.fadeIn(800, 0, 0, 0);
-
-        this.events.on('resume', () => {
-        this.cameras.main.fadeIn(600, 0, 0, 0);
-        });
 
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.MAPA);

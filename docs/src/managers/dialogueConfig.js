@@ -12,9 +12,8 @@ export const DialogueKeys = {
     GAME_OVER: 'gameover_dialogue',
 };
 
-// sitios de los archivos de sonido
+// sitios de los archivos de diálogo
 export const DialogueFiles = {
-    //Música
     [DialogueKeys.INTRO]: 'jsons/dialogues/intro.json',
 
     [DialogueKeys.ES]: 'jsons/dialogues/spain.json',
