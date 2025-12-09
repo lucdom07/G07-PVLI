@@ -25,7 +25,7 @@ export default class mainMenu extends Phaser.Scene{
         //this.load.image('marketButton','assets/button.png')
         this.load.image('bg','assets/backgrounds/mainMenu.png')
         this.load.image('mainMenuCat','assets/main_menu/mainmenu_cat.png')
-        this.load.image('f','assets/main_menu/furryLogo.png')
+        this.load.image('furry','assets/main_menu/furryLogo.png')
     }
 
     create(){
@@ -40,7 +40,7 @@ export default class mainMenu extends Phaser.Scene{
         //fondo con título
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'bg').setDisplaySize(this.sys.game.canvas.width,this.sys.game.canvas.height);
         const cat = this.add.image(this.sys.game.canvas.width*0.25,this.sys.game.canvas.height*0.6,'mainMenuCat').setDisplaySize(550,710);
-        const meow = this.add.image(this.sys.game.canvas.width*0.7,this.sys.game.canvas.height*0.4,'f').setDisplaySize(600,320);
+        const meow = this.add.image(this.sys.game.canvas.width*0.7,this.sys.game.canvas.height*0.4,'furry').setDisplaySize(600,320);
 
         this.tweens.add({
         targets: cat,           
