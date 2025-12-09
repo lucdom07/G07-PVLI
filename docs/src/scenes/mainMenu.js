@@ -74,11 +74,12 @@ export default class mainMenu extends Phaser.Scene{
         playButton.on('pointerdown',()=>{
             
             this.cameras.main.fadeOut(800, 0, 0, 0); 
-
             this.cameras.main.once('camerafadeoutcomplete', () => {
-                this.scene.start("DialogueScene", {
-                        dialogueKey: DialogueKeys.INTRO},
-                        this.playerData
+                this.scene.start("DialogueScene", 
+                    { dialogueKey: DialogueKeys.INTRO,
+                        nextScene: 'debugMap',
+                        playerData: this.playerData
+                    }, 
                 );
 
             });

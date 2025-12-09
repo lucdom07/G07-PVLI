@@ -4,7 +4,6 @@ import MainMenu from './scenes/mainMenu.js';
 import DebugMarket from './scenes/debugMarket.js';
 import CombatSetup from './scenes/combatSetup.js';
 import DOMmanager from "./managers/DOMManager.js";
-import IntroductionScene from './scenes/introductionScene.js';
 import AustraliaScene from './scenes/australiaScene.js';
 import PauseMenu from './scenes/pauseMenu.js';
 import marketDialogueScene from './scenes/marketDialogueScene.js';
@@ -40,7 +39,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			DebugCombat,
 			DebugMarket,
 			new CombatSetup(DOManager),
-			IntroductionScene,
 			AustraliaScene,
 			PauseMenu,
 			marketDialogueScene,

@@ -6,13 +6,17 @@ import DialogText from "../../gameObjects/ui/dialogPlugin.js";
 export default class DialogueScene extends Phaser.Scene {
     constructor() {
         super("DialogueScene");
+        this.playerData = {};
     }
 
     init(data) {
         // data.dialogueKey = clave que le pasó otra escena
+
         this.dialogueKey = data.dialogueKey;
         this.returnScene = data.returnScene ?? null; // opcional
         this.nextScene = data.nextScene ?? null; // opcional
+        this.playerData = data.playerData ?? {}; // opcional
+        console.log(data);
     }
 
     preload() {
@@ -26,10 +30,25 @@ export default class DialogueScene extends Phaser.Scene {
         this.load.image("bird", "./assets/dialogue_sprites/bird_dialogue.png");
     }
 
-    create() {
-        const dialogues = this.cache.json.get("dialogueData");
+    async create() {
+         if (!this.dialogueKey) {
+            console.error("No se pasó dialogueKey a DialogueScene");
+            return;
+        }
 
-        this.manager = new DialogueManager(this, dialogues, {dialogBoxClass: DialogText});
+        const file = DialogueFiles[this.dialogueKey];
+        if (!file) {
+            console.error("No existe un JSON de diálogos para esta clave:", this.dialogueKey);
+            return;
+        }
+
+        // Cargar el JSON en caliente
+        const response = await fetch(file);
+        const dialogues = await response.json();
+
+        // Inicializar el DialogueManager
+        this.manager = new DialogueManager(this, dialogues, { dialogBoxClass: DialogText });
+        this.manager.start();
 
         // Botón de Skip
         const width = this.sys.game.config.width;
@@ -39,31 +58,24 @@ export default class DialogueScene extends Phaser.Scene {
             backgroundColor: "#000000",
             padding: { x: 10, y: 5 }
         }).setInteractive();
-        
+
         this.skipButton.on("pointerdown", () => {
             if(this.nextScene)
-                this.scene.start(this.nextScene, this.data);
+                this.scene.start(this.nextScene, { playerData: this.playerData });
             else if (this.returnScene)
                 this.scene.resume(this.returnScene);
-                this.scene.stop()
+            this.scene.stop();
             this.skipButton.destroy();
         });
-        
+
         this.events.once("dialogueEnd", () => {
-            this.cameras.main.fadeOut(800, 0, 0, 0);
-
-            this.cameras.main.once("camerafadeoutcomplete", () => {
-
-                if (this.nextScene)
-                    this.scene.start(this.nextScene, this.playerData);
-
-                else if (this.returnScene)
-                    this.scene.resume(this.returnScene);
-
-                else
-                    this.scene.stop(); // fallback
-
-                });
+            if(this.nextScene)
+                this.scene.start(this.nextScene, { playerData: this.playerData });
+            else if(this.returnScene){
+                this.scene.stop();
+                this.scene.resume(this.returnScene, this.playerData);
+            }
+            this.scene.stop();
         });
 
             

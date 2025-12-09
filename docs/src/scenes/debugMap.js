@@ -20,7 +20,7 @@ export default class debugMap extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background','assets/placeholders/background.jpg');
+        this.load.image('background','assets/placeholders/background.png');
         this.load.image('combatButton','assets/placeholders/buttons/combat_button.jpg');
         this.load.image('marketButton', 'assets/placeholders/buttons/market_button.png');
     }

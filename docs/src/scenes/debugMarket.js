@@ -16,7 +16,7 @@ export default class debugMarket extends Phaser.Scene{
     //En init le pasamos los aliados que tiene el jugador
     init(data){
         this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'));
-        this.playerData = data;
+        this.playerData = data || {};
     }
     
     preload(){
@@ -46,16 +46,20 @@ export default class debugMarket extends Phaser.Scene{
         this.cameras.main.fadeIn(800, 0, 0, 0);
         this.cameras.main.once('camerafadeincomplete', () => {
             //diálogo de la tienda
+            this.scene.pause();
+            console.log(this.playerData);
             this.scene.launch("DialogueScene", {
-            dialogueKey: DialogueKeys.TIENDA,
-            returnScene: this.scene.key
+                dialogueKey: DialogueKeys.TIENDA,
+                returnScene: this.scene.key,
+                nextScene: null,
+                playerData: this.playerData
         });
-        this.scene.pause(); });
+         });
         
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
-        this.events.on('buyingAlly', (ally, price)=>{
+        this.events.on('buyingAlly', (ally, price)=>{s
             this.playerData.ownedAllies.push(ally);
             this.playerData.money -= price;
         });
