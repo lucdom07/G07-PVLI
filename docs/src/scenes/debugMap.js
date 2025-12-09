@@ -33,30 +33,30 @@ export default class debugMap extends Phaser.Scene {
 
     //Función que se llama en create para crear los botones
     createButtons() {
-        let divs = Math.pow(3, Math.trunc(this.graph.levels / 2));
-        let div = Math.trunc(divs / 2);
+        let divs = Math.pow(3, this.graph.convergence);
+        let div = Math.floor(divs / 2);
+        this.graph.root.division = div; 
         this.buttonsRec(0, divs);
     }
     
     buttonsRec(level, divs) {
         if(level === this.graph.levels) return;
+        
+        //let x = (this.sys.game.canvas.width / divs) * it;
+        const x = (this.sys.game.canvas.width /  this.graph.levels) * (level + 1) * 0.8;
 
-        this.graph.levelMatrix[level].forEach(x => {
-            const node = x;
-
+        this.graph.levelMatrix[level].forEach(node => {
             let button;
             if(node.value === 0) button = this.add.image(100, 50, 'combatButton').setInteractive();
             else button = this.add.image(100, 50, 'marketButton').setInteractive();
             button.setScale(0.35);
             
-            //Para hacerlo vertical
+            if(node.parents.length > 0) this.getNextDiv(node.parents[0]);
+
             //let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
-            //let x = (this.sys.game.canvas.width / divs) * it;
-            let x = (this.sys.game.canvas.width /  this.tree.levels) * level * 0.8;
-            let y = (this.sys.game.canvas.height / divs) * divAct;
+            const y = (this.sys.game.canvas.height / divs) * node.division;
             
             button.setPosition(x, y);
-            node.button = button;
             
             let key;
             
@@ -76,22 +76,7 @@ export default class debugMap extends Phaser.Scene {
             });
         });
         
-        this.buttonsRec(divs, level + 1, this.nextIt(divAct, level, divs)[0]);
-    }
-    
-    /**
-     * Calcula el siguiente valor de it en la función buttonsRec
-     * @param {int} it - it de buttonsRec
-     * @param {int} level - level de buttonsRec
-     * @param {int} divs - divs de buttonsRec
-     * @returns {[int, int]} - lista con los nuevos valores de it para cada hijo del nodo siendo tratado en buttonsRec 
-     */
-    nextIt(it, level, divs) {
-        let nodos = Math.pow(2, level - 1);
-        let disp_divs = Math.floor(divs / nodos);
-        let inc;
-        inc = Math.floor(disp_divs / 2);
-        return [it + inc, it - inc];
+        this.buttonsRec(level + 1, divs);
     }
     
     /**
@@ -114,6 +99,27 @@ export default class debugMap extends Phaser.Scene {
         
         node.active = false;
     }
+
+    //Dado un nodo padre, devuelve la división que debe ocupar su hijo
+    getNextDiv(parent) {
+        
+    }
+
+    /**
+     * Calcula el siguiente valor de it en la función buttonsRec
+     * @param {int} it - it de buttonsRec
+     * @param {int} level - level de buttonsRec
+     * @param {int} divs - divs de buttonsRec
+     * @returns {[int, int]} - lista con los nuevos valores de it para cada hijo del nodo siendo tratado en buttonsRec 
+     */
+    nextIt(it, level, divs) {
+        let nodos = Math.pow(2, level - 1);
+        let disp_divs = Math.floor(divs / nodos);
+        let inc;
+        inc = Math.floor(disp_divs / 2);
+        return [it + inc, it - inc];
+    }
+    
    
     /*
     Para hacerlo vertical

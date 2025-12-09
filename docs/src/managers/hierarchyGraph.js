@@ -5,6 +5,8 @@ class Node {
         this.value = value;
         //Indica si el botón del nodo está activo
         this.active = active;
+        //División horizontal del canvas en la que esta localizado el botón asociado al nodo
+        this.division = null;
         //Array de hijos
         this.children = [];
         //Padres del nodo
@@ -30,18 +32,19 @@ export default class HierarchyGraph {
         this.numNodes = 1;
         //Array con los nodos con hijos compartidos
         this.redundantNodes = new Set();
-        const convergence = Math.floor(this.levels / 2); 
+        //Nivel en el que los nodos empiezan a converger (Nota: la divergencia y convergencia son cíclcicas)
+        this.convergence = Math.floor(this.levels / 2); 
         const level = 0;
-        this.buildGraph(level, childrenPerNode, convergence, this.getParentPairs(level));
+        this.buildGraph(level, childrenPerNode, this.getParentPairs(level));
         console.log(this.numNodes);
     }
 
-    buildGraph(level, childrenPerNode, convergence, parentPairs) {
-        if(level === this.levels) {
+    buildGraph(level, childrenPerNode, parentPairs) {
+        if(level + 1 === this.levels) {
             return;
         }
         
-        if(level % (convergence * 2) < convergence) {
+        if(level % (this.convergence * 2) < this.convergence) {
             const parents = this.levelMatrix[level];
 
             for(let i = 0; i < parents.length; i++) {
@@ -75,7 +78,7 @@ export default class HierarchyGraph {
             }
         }
         
-        this.buildGraph(level + 1, childrenPerNode, convergence, this.getParentPairs(level + 1));
+        this.buildGraph(level + 1, childrenPerNode, this.getParentPairs(level + 1));
     }
 
     getParentPairs(level) {
