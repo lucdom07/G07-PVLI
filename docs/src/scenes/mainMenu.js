@@ -25,7 +25,7 @@ export default class mainMenu extends Phaser.Scene{
         //this.load.image('marketButton','assets/button.png')
         this.load.image('bg','assets/backgrounds/mainMenu.png')
         this.load.image('mainMenuCat','assets/main_menu/mainmenu_cat.png')
-        this.load.image('furry','assets/main_menu/furrylogo.png')
+        this.load.image('furry','assets/main_menu/furryLogo.png')
     }
 
     create(){
