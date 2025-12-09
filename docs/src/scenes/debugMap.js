@@ -7,7 +7,7 @@ export default class debugMap extends Phaser.Scene {
     constructor() {
         super({key: 'debugMap'});
         this.playerData = {}
-        this.graph = new HierarchyGraph(5, 2, 2);
+        this.graph = new HierarchyGraph(5, 2);
         this.audioManager = null;
     }
 
@@ -35,57 +35,48 @@ export default class debugMap extends Phaser.Scene {
     createButtons() {
         let divs = Math.pow(3, Math.trunc(this.graph.levels / 2));
         let div = Math.trunc(divs / 2);
-        this.buttonsRec(this.graph.root, divs, 1, div);
+        this.buttonsRec(0, divs);
     }
     
-    /**
-     * Esta función es una recursión que se usa en createButtons para recorrer el arbol binario atributo de esta clase, 
-     * y crear un botón por nodo del árbol, que será asignado al nodo correspondiente
-     * @param {Node} node - Se le tiene que pasar la raíz del árbol. Es el nodo que está siendo tratado en la iteración actual
-     * @param {int} divs - Divisiones horizontales del canvas (1 botón por división en cada nivel del árbol)
-     * @param {int} level - Nivel que está siendo tratado en la iteración actual
-     * @param {int} divAct - Contador que india en qué división horizontal del canvas hay que colocar el botón de la iteración actual
-     */
-    buttonsRec(node, divs, level, divAct) {
-        if(node.empty()) return;
-        
-        let button;
-        if(node.value === 0) button = this.add.image(100, 50, 'combatButton').setInteractive();
-        else button = this.add.image(100, 50, 'marketButton').setInteractive();
-        button.setScale(0.35);
+    buttonsRec(level, divs) {
+        if(level === this.graph.levels) return;
 
-        //Para hacerlo vertical
-        //let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
-        //let x = (this.sys.game.canvas.width / divs) * it;
-        let x = (this.sys.game.canvas.width /  this.tree.levels) * node.level * 0.8;
-        let y = (this.sys.game.canvas.height / divs) * divAct;
+        this.graph.levelMatrix[level].forEach(x => {
+            const node = x;
 
-        button.setPosition(x, y);
-        node.button = button;
-        
-        let key;
-        
-        if(node.value === 0) {
-            key = 'combatSetup';
-        }
-        else {
-            key = 'debugMarket';
-        }
-        
-        button.on('pointerdown', () =>{     
-            if(node.active) {
-                this.enableButtons(node);
-                this.scene.start(key, this.playerData);
-                console.log("Saliendo del mapa");
-            }  
+            let button;
+            if(node.value === 0) button = this.add.image(100, 50, 'combatButton').setInteractive();
+            else button = this.add.image(100, 50, 'marketButton').setInteractive();
+            button.setScale(0.35);
+            
+            //Para hacerlo vertical
+            //let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
+            //let x = (this.sys.game.canvas.width / divs) * it;
+            let x = (this.sys.game.canvas.width /  this.tree.levels) * level * 0.8;
+            let y = (this.sys.game.canvas.height / divs) * divAct;
+            
+            button.setPosition(x, y);
+            node.button = button;
+            
+            let key;
+            
+            if(node.value === 0) {
+                key = 'combatSetup';
+            }
+            else {
+                key = 'debugMarket';
+            }
+            
+            button.on('pointerdown', () =>{     
+                if(node.active) {
+                    this.enableButtons(node);
+                    this.scene.start(key, this.playerData);
+                    console.log("Saliendo del mapa");
+                }     
+            });
         });
         
-        if(!this.graph.redundantNodes.has(node)) {
-            node.children.forEach(x => {
-                this.buttonsRec(x, divs, level + 1, this.nextIt(divAct, level, divs)[0]);
-            });
-        }
-        else console.log("no redundante");
+        this.buttonsRec(divs, level + 1, this.nextIt(divAct, level, divs)[0]);
     }
     
     /**

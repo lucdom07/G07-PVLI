@@ -15,7 +15,7 @@ class Node {
 
 export default class HierarchyGraph {
 
-    constructor(numLevels, childrenPerNode, convergence) {
+    constructor(numLevels, childrenPerNode) {
         //Número total de niveles del árbol
         this.levels = numLevels;
         // La raiz siempre es tienda
@@ -30,17 +30,18 @@ export default class HierarchyGraph {
         this.numNodes = 1;
         //Array con los nodos con hijos compartidos
         this.redundantNodes = new Set();
+        const convergence = Math.floor(this.levels / 2); 
         const level = 0;
         this.buildGraph(level, childrenPerNode, convergence, this.getParentPairs(level));
         console.log(this.numNodes);
     }
 
     buildGraph(level, childrenPerNode, convergence, parentPairs) {
-        if(level + 1 < this.levels) {
+        if(level === this.levels) {
             return;
         }
         
-        if(level % (convergence * 2) < convergence) {   //Me creo todos los del nivel, y cuando he acabado un nivel, llamo a la recursión
+        if(level % (convergence * 2) < convergence) {
             const parents = this.levelMatrix[level];
 
             for(let i = 0; i < parents.length; i++) {
@@ -70,7 +71,7 @@ export default class HierarchyGraph {
                     x.children.push(node);
                 });
 
-                node.parents.push(node[1]);
+                node.parents.push(actual[1]);
             }
         }
         
@@ -89,7 +90,7 @@ export default class HierarchyGraph {
                 }
                 else {
                     count++;
-                    res[count] = [];
+                    res[count] = [node];
                 }
             }
         }
