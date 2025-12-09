@@ -25,7 +25,7 @@ export default class Animation extends Phaser.Scene{
         this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
-        this.load.image('background','assets/placeholders/background.png')
+        this.load.image('combatBackground','assets/backgrounds/australiaCombat.png')
     }
 
     create(){
@@ -33,7 +33,7 @@ export default class Animation extends Phaser.Scene{
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.BATALLA);
 
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'background');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'combatBackground');
 
         //indica al combatManager que ya puede llamar al siguiente evento
         this.events.on('canCallNext',()=>{
