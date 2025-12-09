@@ -62,8 +62,9 @@ export default class BinTree {
         parent.left = new Node(val, it, parent);
         this.buildTree(parent.left, numLevels, it);
         
+        //val = Math.floor(Math.random() * 2);
+        //val = 0;
         val = Math.floor(Math.random() * 2);
-        //val = 1;
 
         parent.right = new Node(val, it, parent);
         this.buildTree(parent.right, numLevels, it);

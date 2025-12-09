@@ -21,18 +21,6 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         super.preUpdate(t, dt);
     }
 
-    getName() {
-        return this.name;
-    }
-
-    getImageURL() {
-        return this.texture;
-    }
-    
-    getWarriorUI(){
-        return this.warriorUI;
-    }
-
     //mueve a los guerreros y sus UI a una nueva posición
     setWarriorPosition(newX, newY){
         this.x = newX;

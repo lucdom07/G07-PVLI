@@ -9,6 +9,7 @@ export default class Animation extends Phaser.Scene{
     constructor(){
         super({key: 'debugCombat'});
         this.playerData = {};
+        this.playerTeam = [];
         this.audioManager = null;
     }
 
@@ -26,6 +27,7 @@ export default class Animation extends Phaser.Scene{
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
         this.load.image('combatBackground','assets/backgrounds/australiaCombat.png')
+        this.load.image('exit','assets/placeholders/buttons/exit_button.png');
     }
 
     create(){
@@ -97,6 +99,20 @@ export default class Animation extends Phaser.Scene{
         });
         
         this.playerTeam = recreatedAllies;
+    }
+    showExitButton(){
+        console.log("you can exit combat");
+        const exitButton = this.add.image(200 ,50,'exit').setInteractive();
+
+        exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
+  
+        //pasa los aliados al debugCombat
+        exitButton.on('pointerdown',()=>{
+            this.scene.start('debugMap',{
+                ownedAllies: this.ownedAllies,
+                money: this.money,
+            });
+        });
     }
     update(time, dt){
         this.combatManager.update(time, dt);

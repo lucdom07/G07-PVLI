@@ -34,10 +34,10 @@ window.addEventListener('DOMContentLoaded', () => {
 		},
 		scene: [
 			BootScene,
-			MainMenu,
+			new MainMenu(DOManager),
 			DebugMap,
 			DebugCombat,
-			DebugMarket,
+			new debugMarket(DOManager),
 			new CombatSetup(DOManager),
 			AustraliaScene,
 			PauseMenu,
