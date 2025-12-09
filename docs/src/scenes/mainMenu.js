@@ -15,7 +15,7 @@ export default class mainMenu extends Phaser.Scene{
             ownedObjects: []
         }
         this.audioManager = null;
-        this.fromReset = data?.reset === true;
+        this.fromReset = this.playerData?.reset === true;
     }
 
     preload(){

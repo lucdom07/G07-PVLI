@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			new MainMenu(DOManager),
 			DebugMap,
 			DebugCombat,
-			new debugMarket(DOManager),
+			new DebugMarket(DOManager),
 			new CombatSetup(DOManager),
 			AustraliaScene,
 			PauseMenu,
