@@ -1,6 +1,6 @@
 export default class GlobalObject extends Phaser.GameObjects.Image {
-    constructor(scene, x, y, name, textureURL, life, attack, cost) {
-        super(scene, x, y, textureURL);
+    constructor(scene, x, y, name, textureURL, life, attack, cost, texture, frame) {
+        super(scene, x, y, texture, frame);
 
         this.name = name;
         this.textureURL = textureURL;
@@ -47,6 +47,8 @@ export default class GlobalObject extends Phaser.GameObjects.Image {
             this.life,
             this.attack,
             this.cost,
+            this.texture,
+            this.frame
         );
     }
 }

@@ -1,5 +1,5 @@
 {
-    "object0":[
+    "objects0":[
         {
             "name": "Viejo calcetín",
             "life": 0,
@@ -23,7 +23,7 @@
         }
     ],
 
-    "object1":[
+    "objects1":[
         {
             "name": "Bocata de calamares",
             "life": 6,
@@ -54,7 +54,7 @@
         }
     ],
 
-    "object2":[
+    "objects2":[
         {
             "name": "Pistola",
             "life": -3,
@@ -78,7 +78,7 @@
         }
     ],
 
-    "object3":[
+    "objects3":[
         {
             "name": "Chancla",
             "life": -7,

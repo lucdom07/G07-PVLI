@@ -1,8 +1,8 @@
 import Warrior from "./warrior.js";
 
 export default class Ally extends Warrior{
-    constructor(scene, x, y, name, life, attack, range, texture, frame, cost, available, level){
-        super(scene, x, y, name, life, attack, range, texture, frame, level);
+    constructor(scene, x, y, name, life, attack, range, texture, frame, cost, available, textureURL){
+        super(scene, x, y, name, life, attack, range, texture, frame, textureURL);
         this.cost = cost;
         this.available = available;
     }
@@ -56,7 +56,7 @@ export default class Ally extends Warrior{
             this.frame,
             this.cost,
             this.available,
-            this.level
+            this.textureURL
         );
         return clone;
     }

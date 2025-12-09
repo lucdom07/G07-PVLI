@@ -44,7 +44,7 @@
 
     "ally1":[
         {
-            "name": "Paloma con 6 ojos",
+            "name": "Argos",
             "life": 9,
             "attack": 5,
             "range":3,
@@ -52,7 +52,7 @@
             "texture": "assets/allys/crow.png"
         },
         {
-            "name": "Rana arborícola con cuernos",
+            "name": "Kurma",
             "life": 10,
             "attack": 6,
             "range":0,
@@ -79,7 +79,7 @@
 
     "ally2":[
         {
-            "name": "Nutria con vestido blanco",
+            "name": "Seraphina",
             "life": 13,
             "attack": 9,
             "range":2,
@@ -87,7 +87,7 @@
             "texture": "assets/allys/otter.png"
         },
         {
-            "name": "Oso hormiguero con bastón, sombrero y monóculo",
+            "name": "Señor Anteojo",
             "life": 12,
             "attack": 7,
             "range":0,
@@ -122,7 +122,7 @@
             "texture": "assets/allys/qiling.png"
         },
         {
-            "name": "Gato Kunfu",
+            "name": "Po-ka",
             "life": 12,
             "attack": 9,
             "range":1,
@@ -130,7 +130,7 @@
             "texture": "assets/allys/panda.png"
         },
         {
-            "name": "Orca Deep Seek",
+            "name": "Kairos",
             "life": 13,
             "attack": 11,
             "range":3,
@@ -138,7 +138,7 @@
             "texture": "assets/allys/killer_whale.png"
         },
         {
-            "name": "Pez chancla",
+            "name": "Moflete",
             "life": 12,
             "attack": 10,
             "range": 2,
