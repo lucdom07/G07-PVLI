@@ -1,3 +1,5 @@
+import { MusicKeys } from "./audioConfig.js";
+
 let instance = null;
 
 export class AudioManager { //será un patron de silgueton
@@ -18,6 +20,7 @@ export class AudioManager { //será un patron de silgueton
     
     // Reproducir música de fondo
     playMusic(key) {
+        console.log("playing " + key);
         // Si ya está sonando esta música, no hacer nada
         if (this.currentMusic && this.currentMusic.key === key) {
             return;
@@ -32,6 +35,11 @@ export class AudioManager { //será un patron de silgueton
             volume: 0.5
         });
         this.currentMusic.key = key; // Guardar referencia de la clave
+        //Si es la música del menú principal, el tema de España o el del mapa (el tema general que se escucha antes de implementar los países en el juego) 
+        // le pone volumen a 1
+        if (this.currentMusic.key == MusicKeys.MENU || this.currentMusic.key == MusicKeys.ES || this.currentMusic.key == MusicKeys.MAPA){
+            this.currentMusic.setVolume(1);
+        }
         this.currentMusic.play();
     }
     
@@ -58,8 +66,8 @@ export class AudioManager { //será un patron de silgueton
     }
 
     playSound(key){
-        this.soundEffect = this.scene.sound.add(key);
-        this.soundEffect.play();
+        let soundEffect = this.scene.sound.add(key);
+        soundEffect.play();
     }
 }
 
