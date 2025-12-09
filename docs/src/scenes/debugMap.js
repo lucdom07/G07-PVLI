@@ -1,4 +1,4 @@
-import Tree from "../managers/tree.js";
+import HierarchyGraph from "../managers/hierarchyGraph.js";
 
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
@@ -7,7 +7,7 @@ export default class debugMap extends Phaser.Scene {
     constructor() {
         super({key: 'debugMap'});
         this.playerData = {}
-        this.tree = new Tree(5);
+        this.graph = new HierarchyGraph(5, 2, 2);
         this.audioManager = null;
     }
 
@@ -33,9 +33,9 @@ export default class debugMap extends Phaser.Scene {
 
     //Función que se llama en create para crear los botones
     createButtons() {
-        let divs = Math.pow(3, (this.tree.levels / 2));
+        let divs = Math.pow(3, Math.trunc(this.graph.levels / 2));
         let div = Math.trunc(divs / 2);
-        this.buttonsRec(this.tree.root, divs, 1, div, this.tree.redundantNodes);
+        this.buttonsRec(this.graph.root, divs, 1, div);
     }
     
     /**
@@ -44,10 +44,9 @@ export default class debugMap extends Phaser.Scene {
      * @param {Node} node - Se le tiene que pasar la raíz del árbol. Es el nodo que está siendo tratado en la iteración actual
      * @param {int} divs - Divisiones horizontales del canvas (1 botón por división en cada nivel del árbol)
      * @param {int} level - Nivel que está siendo tratado en la iteración actual
-     * @param {int} it - Iterador que india en qué subdivisión del canvas hay que colocar el botón de la iteración actual
-     * @param {set} bannedNodes - Set con los nodos cuyos hijos la función no tiene que recorrer, pues ya han sido recorridos con anterioridad
+     * @param {int} divAct - Contador que india en qué división horizontal del canvas hay que colocar el botón de la iteración actual
      */
-    buttonsRec(node, divs, level, it, bannedNodes) {
+    buttonsRec(node, divs, level, divAct) {
         if(node.empty()) return;
         
         let button;
@@ -59,7 +58,7 @@ export default class debugMap extends Phaser.Scene {
         //let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
         //let x = (this.sys.game.canvas.width / divs) * it;
         let x = (this.sys.game.canvas.width /  this.tree.levels) * node.level * 0.8;
-        let y = (this.sys.game.canvas.height / divs) * it;
+        let y = (this.sys.game.canvas.height / divs) * divAct;
 
         button.setPosition(x, y);
         node.button = button;
@@ -81,11 +80,12 @@ export default class debugMap extends Phaser.Scene {
             }  
         });
         
-        if(!bannedNodes.has(node)) {
+        if(!this.graph.redundantNodes.has(node)) {
             node.children.forEach(x => {
-                this.buttonsRec(x, divs, level + 1, this.nextIt(it, level, divs)[0], bannedNodes);
+                this.buttonsRec(x, divs, level + 1, this.nextIt(divAct, level, divs)[0]);
             });
         }
+        else console.log("no redundante");
     }
     
     /**
@@ -99,9 +99,7 @@ export default class debugMap extends Phaser.Scene {
         let nodos = Math.pow(2, level - 1);
         let disp_divs = Math.floor(divs / nodos);
         let inc;
-        if(level <= 3) {
-            inc = Math.floor(disp_divs / 2);
-        }
+        inc = Math.floor(disp_divs / 2);
         return [it + inc, it - inc];
     }
     
