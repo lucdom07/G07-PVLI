@@ -35,7 +35,7 @@ export default class debugMarket extends Phaser.Scene{
     }
 
     create(){
-        console.log("money", this.playerData.money);
+        console.log("money: ", this.playerData.money);
         this.cargaGameObject = new cargaGameObject(this, this.playerData.level);
         this.GameObjectOfLevel.allies = this.cargaGameObject.loadAllyGroups();
         this.GameObjectOfLevel.objects = this.cargaGameObject.loadObjectGroups();

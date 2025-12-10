@@ -47,7 +47,8 @@ export default class Animation extends Phaser.Scene{
     }
 
     create(){
-        console.log("level: ", this.playerData.level);
+        //console.log("level: ", this.playerData.level);
+        console.log("initial money: ", this.playerData.money);
         this.cargaManagerEnemigos = new cargaGameObject(this,this.playerData.level);
         this.enemyGroup = this.cargaManagerEnemigos.loadEnemyGroups();
 
@@ -70,27 +71,9 @@ export default class Animation extends Phaser.Scene{
         
         //añadir un if si se trata del combate con el boss o es normal
         this.createEnemyTeam();
-
-        // Enemigos disponibles
-        // const enemyTeam = [
-        //     new Enemy(this, -150, -150,"tortuga", 20, 5, 0, 'tortuga', 0, 1),
-        //     new Enemy(this, -150, -150,"chupacabra", 21, 10, 0, 'chupacabra', 0, 1),
-        //     new Enemy(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1)
-        // ];
-        
         
         //Inicializa el combate
         this.combatManager.initCombat(this.playerTeam, this.enemyToCombat);
-
-
-
-
-
-        //AAAAAAAAAAAAAAAA
-        //this.combatManager.victory = true;
-        //this.showExitButton();
-
-
     }
 //recrea los aliados en esta escena con las mismas propiedades
     recreate() { 
@@ -128,12 +111,14 @@ export default class Animation extends Phaser.Scene{
             if(this.combatManager.victory) {
                 if(!this.bossFlag) {
                     this.playerData.money += 10;
+                    console.log("new money: ", this.playerData.money);
                     this.scene.stop();
                     this.scene.resume('debugMap');
                 }
                 else {
                     this.playerData.level++;
                     this.playerData.money += 10;
+                    console.log("new money: ", this.playerData.money);
                     this.world += 1;
                     this.bossFlag = false;
                     this.scene.start('debugMap',{
