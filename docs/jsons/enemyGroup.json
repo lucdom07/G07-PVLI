@@ -93,7 +93,7 @@
             "life": 9,
             "attack": 8,
             "range":2,
-            "texture": "assets/enemies/manolo.png"
+            "texture": "assets/enemies/karen.png"
         },
         {
             "name": "Karen",
