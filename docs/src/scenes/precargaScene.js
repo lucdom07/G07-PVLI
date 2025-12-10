@@ -129,6 +129,7 @@ export default class BootScene extends Phaser.Scene {
 
             if(group){
                 group.forEach(enemy =>{
+                    const textureKey = enemy.name+"Texture";
                     if (!this.textures.exists(textureKey)) {
                         this.load.image(textureKey, enemy.texture);
                     }
