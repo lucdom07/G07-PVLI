@@ -64,6 +64,10 @@ export default class debugMarket extends Phaser.Scene{
             this.DOManager.updateAllies();
             this.playerData.money -= price;
         });
+        this.events.on('buyingObject', (price)=>{
+            this.playerData.money -= price;
+            console.log("new money:" + this.playerData.money);
+        });
         this.events.on('sellingAlly', (index, price)=>{
             this.playerData.ownedAllies.splice(index, 1);
             this.playerData.money += price;
@@ -96,6 +100,9 @@ export default class debugMarket extends Phaser.Scene{
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
         exitButton.on('pointerdown', () =>{       
+            this.events.off('buyingAlly');
+            this.events.off('buyingObject');
+            this.events.off('sellingAlly');
             this.cameras.main.fadeOut(800, 0, 0, 0); 
                 this.cameras.main.once('camerafadeoutcomplete', () => {
                 this.scene.stop();
