@@ -125,7 +125,8 @@ export default class mainMenu extends Phaser.Scene{
         if (groupToLoad) {
             // Cargar todas las texturas del grupo
             groupToLoad.forEach(ally => {
-                this.load.image(ally.name + "Textura", ally.texture);
+                this.load.image(ally.textureid, ally.texture);
+                //console.log("id: " + ally.name + "Textura" + " urlTexture: " + ally.texture);
             });
             
             // Buscar específicamente a Michi-Michi
@@ -140,13 +141,13 @@ export default class mainMenu extends Phaser.Scene{
                     michiData.life,
                     michiData.attack,
                     michiData.range,
-                    michiData.name + "Textura",
+                    michiData.textureid,
                     0,
                     michiData.cost,
                     false,
                     michiData.texture
                 );
-                
+                console.log("Michi-Michi id: " + michiData.name + "Textura");
                 // Agregar solo Michi-Michi al array
                 this.playerData.ownedAllies.push(michi);
                 console.log("Michi-Michi cargado en ownedAllies:", michi);
