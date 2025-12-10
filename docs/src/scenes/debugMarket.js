@@ -5,6 +5,9 @@ import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
 import { DialogueKeys } from "../managers/dialogueConfig.js";
 import DOMmanager from "../managers/DOMManager.js";
+import DialogueManager from "../managers/dialogueManager.js";
+import DialogText from "../../gameObjects/ui/dialogPlugin.js";
+import cargaGameObject from "../managers/cargaGameObjects.js";
 
 export default class debugMarket extends Phaser.Scene{
     constructor(DOMmanager){
@@ -39,19 +42,21 @@ export default class debugMarket extends Phaser.Scene{
     }
 
     create(){
-        
-        this.cameras.main.fadeIn(800, 0, 0, 0);
-        this.cameras.main.once('camerafadeincomplete', () => {
-            //diálogo de la tienda
-            this.scene.pause();
-            this.scene.launch("DialogueScene", {
-                dialogueKey: DialogueKeys.TIENDA,
-                returnScene: this.scene.key,
-                nextScene: null,
-                playerData: this.playerData
-            });
+        this.cargaGameObject = new cargaGameObject(this, this.playerData.level);
+        this.GameObjectOfLevel.allies = this.cargaGameObject.loadAllyGroups();
+        this.GameObjectOfLevel.objects = this.cargaGameObject.loadObjectGroups();
+
+        console.log(this.GameObjectOfLevel);
+
+        //diálogo de la tienda
+        this.scene.pause();
+        this.scene.launch("DialogueScene", {
+            dialogueKey: DialogueKeys.TIENDA,
+            returnScene: 'debugMarket',
+            nextScene: null,
+            playerData: this.playerData
         });
-        
+            
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.TIENDA);
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'shopBackground');

@@ -18,7 +18,14 @@ export default class DialogueScene extends Phaser.Scene {
         this.nextScene = data.nextScene ?? null; 
 
         this.playerData = data.playerData ?? {}; 
+            
+      
+        if (this.manager) {
+            this.manager.end(); 
+            this.manager = null;
+        }
     }
+    
 
     preload() {
         //cargo el JSON de diálogos correspondiente al que me han pasado
@@ -30,9 +37,11 @@ export default class DialogueScene extends Phaser.Scene {
 
         this.load.json("dialogueData", file);
         this.load.image("bird", "./assets/dialogue_sprites/bird_dialogue.png");
+        this.load.image("prueba", "./assets/backgrounds/chinaSetup.png");
+        this.load.image("shop", "./assets/backgrounds/shopBackground.png");
     }
 
-    async create() {
+    create() {
          if (!this.dialogueKey) {
             console.error("No se pasó dialogueKey a DialogueScene");
             return;
@@ -45,8 +54,7 @@ export default class DialogueScene extends Phaser.Scene {
         }
 
         // cargo y parseo el json de diálogos
-        const response = await fetch(file);
-        const dialogues = await response.json();
+        const dialogues = this.cache.json.get("dialogueData");
 
         // instancio al manager de diálogos
         this.manager = new DialogueManager(this, dialogues, { dialogBoxClass: DialogText });
@@ -66,9 +74,9 @@ export default class DialogueScene extends Phaser.Scene {
         this.skipButton.on("pointerdown", () => {
             if(this.nextScene)
                 this.scene.start(this.nextScene, { playerData: this.playerData });
-            else if (this.returnScene)
-                this.scene.resume(this.returnScene);
-            this.scene.stop();
+            if(this.returnScene)
+                this.scene.resume(this.returnScene, { playerData: this.playerData });
+                this.scene.stop();
             this.skipButton.destroy();
         });
 
@@ -76,11 +84,9 @@ export default class DialogueScene extends Phaser.Scene {
         this.events.once("dialogueEnd", () => {
             if(this.nextScene)
                 this.scene.start(this.nextScene, { playerData: this.playerData });
-            else if(this.returnScene){
+            if(this.returnScene)
+                this.scene.resume(this.returnScene, { playerData: this.playerData });
                 this.scene.stop();
-                this.scene.resume(this.returnScene);
-            }
-            this.scene.stop();
         });   
     }
 }

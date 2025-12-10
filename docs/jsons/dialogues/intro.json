@@ -3,8 +3,7 @@
         "name": "Narrador",
         "line":"Después de un intenso día de clase, sigues la ruta de siempre para volver a casa.",
         "sprite": "",
-        "spritePos": "",
-        "background": ""
+        "background": "prueba"
     },
     {
         "name": "Narrador",

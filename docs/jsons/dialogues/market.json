@@ -3,19 +3,19 @@
         "name": "Pájaro azul",
         "line":"Ey, bienvenide a la tienda.", 
         "sprite": "bird",
-        "background": ""
+        "background": "shop"
     },
     {
         "name": "Pájaro azul",
         "line":"Mi nombre es Tueto, y soy un mercader.", 
         "sprite": "bird",
-        "background": ""
+        "background": "shop"
     },
     {
         "name": "Tueto",
         "line":"Sírvete como quieras.", 
         "sprite": "bird",
-        "background": ""
+        "background": "shop"
     }
 ]
     
