@@ -133,7 +133,7 @@ export default class CombatManager{
                 ease: 'Power2',
             });
             //animación de las stats para que se muevan junto con la unidad
-            unit.getWarriorUI().moveStatsAnimation(targetX);
+            unit.warriorUI.moveStatsAnimation(targetX);
         }
         this.scene.time.addEvent({
             delay: this.MANAGER_DELAY_TIME,

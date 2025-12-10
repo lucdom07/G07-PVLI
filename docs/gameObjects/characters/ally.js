@@ -1,4 +1,5 @@
 import Warrior from "./warrior.js";
+import WarriorUI from "../ui/warriorUi.js";
 
 export default class Ally extends Warrior{
     constructor(scene, x, y, name, life, attack, range, texture, frame, cost, available, textureURL){
@@ -75,10 +76,11 @@ export default class Ally extends Warrior{
             ally.frame,
             ally.cost,
             ally.available,
-            ally.textureURL
+            ally.textureURL,
+            this.warriorUI = new WarriorUI(scene, -150, -150, ally.life, ally.attack, ally.range, this.DISPLAY_SIZE)
         );
         scene.add.existing(clone);
-        //scene.add.existing(this.warriorUI);
+        scene.add.existing(this.warriorUI);
         return clone;
     }
 

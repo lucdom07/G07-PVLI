@@ -67,10 +67,7 @@ export default class Animation extends Phaser.Scene{
             this.audioManager.playSound(MusicKeys.ALLY_DAMAGE);
         })
 
-        for(let i = 0; i < this.playerData.ownedAllies.length; i++) {
-            const ally = this.playerData.ownedAllies[i];
-            this.playerData.ownedAllies[i] = Ally.clone(ally, this);
-        }
+        this.recreate();
         
         this.createEnemyTeam();
 
