@@ -98,14 +98,14 @@
             "life": 0,
             "attack": 7,
             "cost":14,
-            "texture": "assets/objects/sock.png"
+            "texture": "assets/objects/emotional_damage.png"
         },
         {
             "name": "Timo",
             "life": 6,
             "attack": 6,
             "cost":14,
-            "texture": "assets/objects/sock.png"
+            "texture": "assets/objects/timo.png"
         }
     ]
 }
