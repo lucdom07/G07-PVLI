@@ -45,6 +45,7 @@ export default class MarketManager {
         //aliados ya obtenidos
         this.bag = bag;
         //genero aliados y objetos en venta
+        console.log("aaaaaaa");
         this.marketAllies = this.generateAlly(allyList, 3);
         this.marketObjects = this.generateObject(objList, 2); // objetos no implementados aún
         //muestro el mercado
@@ -83,7 +84,8 @@ export default class MarketManager {
             const index = Phaser.Math.Between(0, available.length - 1);
             const clone = available[index].clone(); 
             clone.scene = this.scene;
-
+            console.log("eeeeeeee");
+            console.log("textureid: ", clone.texture);
             //elimina el aliado elegido del array de disponibles
             if (!clone.scene) this.scene.add.existing(clone);
 

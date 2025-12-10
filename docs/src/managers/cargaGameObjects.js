@@ -56,7 +56,7 @@ export default class cargaGameObject{
                 allyData.life,
                 allyData.attack,
                 allyData.range,
-                allyData.name + "Texture",
+                allyData.textureid,
                 0,
                 allyData.cost,
                 false,
@@ -80,7 +80,7 @@ export default class cargaGameObject{
                 enemyData.life,
                 enemyData.attack,
                 enemyData.range,
-                enemyData.name+"Texture",
+                enemyData.textureid,
                 0,
                 enemyData.texture
             );
@@ -103,7 +103,7 @@ export default class cargaGameObject{
                 objectData.life,
                 objectData.attack,
                 objectData.cost,
-                objectData.name+"Texture",
+                objectData.textureid,
             );
         });
     }

@@ -109,11 +109,10 @@ export default class BootScene extends Phaser.Scene {
             const group = allyData?.[groupKey];
 
             if(group){
-                group.forEach(ally =>{
-                    const textureKey = ally.name+"Texture";
-                    
-                    if (!this.textures.exists(textureKey)) {
-                        this.load.image(textureKey, ally.texture);
+                group.forEach(ally =>{           
+                    //console.log("textureid: " + ally.textureid);         
+                    if (!this.textures.exists(ally.textureid)) {
+                        this.load.image(ally.textureid, ally.texture);
                     }
                 });
             }
@@ -129,9 +128,9 @@ export default class BootScene extends Phaser.Scene {
 
             if(group){
                 group.forEach(enemy =>{
-                    const textureKey = enemy.name+"Texture";
-                    if (!this.textures.exists(textureKey)) {
-                        this.load.image(textureKey, enemy.texture);
+                    //console.log("textureid: " + enemy.textureid);         
+                    if (!this.textures.exists(enemy.textureid)) {
+                        this.load.image(enemy.textureid, enemy.texture);
                     }
                 });
             }
@@ -146,9 +145,9 @@ export default class BootScene extends Phaser.Scene {
             const group = objData?.[groupKey];
             if(group){
                 group.forEach(obj =>{
-                    const textureKey = obj.name+"Texture";
-                    if (!this.textures.exists(textureKey)) {
-                        this.load.image(textureKey, obj.texture);
+                    //console.log("textureid: " + obj.textureid);         
+                    if (!this.textures.exists(obj.textureid)) {
+                        this.load.image(obj.textureid, obj.texture);
                     }
                 });
             }
