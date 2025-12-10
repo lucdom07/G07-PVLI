@@ -99,7 +99,7 @@ export default class debugMarket extends Phaser.Scene{
             this.cameras.main.fadeOut(800, 0, 0, 0); 
                 this.cameras.main.once('camerafadeoutcomplete', () => {
                 this.scene.stop();
-                this.scene.resume('debugMap', {playerData: this.playerData}); //launch, lanzar la escena 
+                this.scene.resume('debugMap'); 
                 console.log("Saliendo del mercado");
                 this.audioManager.playMusic(MusicKeys.MAPA);
             });

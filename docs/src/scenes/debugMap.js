@@ -24,6 +24,11 @@ export default class debugMap extends Phaser.Scene {
         //transición de escenas, esta utiliza un this.events.on porque la pausamos y reanudamos durante el transcurso del gameplay
         this.cameras.main.fadeIn(800, 0, 0, 0);
 
+         this.events.on("resume", () => {
+                console.log("entrando de nuevo al mapa");
+                this.cameras.main.fadeIn(800, 0, 0, 0);
+            });
+
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.MAPA);
 
