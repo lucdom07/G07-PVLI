@@ -66,19 +66,6 @@ export default class CombatSetup extends Phaser.Scene {
             console.log("yendo al combate");
         });
   
-        // Botón de pausa
-        this.pauseButton = this.add.text(100, 40, "Pause", {
-            fontSize: "20px",
-            color: "#ffffff",
-            backgroundColor: "#000000",
-            padding: { x: 10, y: 5 }
-        }).setInteractive();
-
-        
-        this.pauseButton.on("pointerdown", () => {
-            this.scene.launch('pauseMenu',{pausedSceneKey : this.sys.settings.key});
-            this.scene.pause();
-        });
 
     }
     //Determina si la ally esta en la tropa para removerlo o añadirlo
