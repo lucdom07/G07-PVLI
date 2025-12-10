@@ -9,12 +9,6 @@ export default class mainMenu extends Phaser.Scene{
     constructor(DOManager){
         super({key: 'mainMenu'});
         this.DOMmanager = DOManager;
-        this.playerData = { 
-            ownedAllies: [],
-            money: 20,
-            level: 0,
-            ownedObjects: []
-        }
         this.audioManager = null;
         this.fromReset = this.playerData?.reset === true;
     }
@@ -27,6 +21,12 @@ export default class mainMenu extends Phaser.Scene{
     }
 
     create(){
+         this.playerData = { 
+            ownedAllies: [],
+            money: 20,
+            level: 0,
+            ownedObjects: []
+        }
         this.loadMichi();
         console.log(this.playerData.ownedAllies.length);
         this.playerData.ownedAllies.forEach(element => { console.log(element.name);});
