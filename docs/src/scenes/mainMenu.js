@@ -73,6 +73,7 @@ export default class mainMenu extends Phaser.Scene{
             
             this.cameras.main.fadeOut(800, 0, 0, 0); 
             this.cameras.main.once('camerafadeoutcomplete', () => {
+                this.audioManager.playMusic(MusicKeys.INTRO);
                 this.scene.start("DialogueScene", 
                     { dialogueKey: DialogueKeys.INTRO,
                         nextScene: 'debugMap',
