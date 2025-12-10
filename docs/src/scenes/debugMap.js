@@ -11,7 +11,7 @@ export default class debugMap extends Phaser.Scene {
     }
 
     init(data) {
-        this.playerData = data;
+        this.playerData = data.playerData;
     }
 
     preload() {
@@ -85,7 +85,7 @@ export default class debugMap extends Phaser.Scene {
                     this.cameras.main.fadeOut(800, 0, 0, 0); // duración, R, G, B
                     this.cameras.main.once('camerafadeoutcomplete', () => {
                         this.enableButtons(node);
-                        this.scene.launch(key, this.playerData);
+                        this.scene.launch(key, {playerData: this.playerData});
                         this.scene.pause();
                         console.log("Saliendo del mapa");
                     });

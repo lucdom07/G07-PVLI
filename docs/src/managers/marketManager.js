@@ -51,7 +51,7 @@ export default class MarketManager {
         this.showMarket(money);
         //objetos ya obtenidos
         this.objectBag = ownedObjectsBag || [];    
-}
+    }
 
     //elemento del mercado
     makeStruct(item) {
@@ -176,7 +176,8 @@ export default class MarketManager {
                     align: 'center'
                 }).setOrigin(0.5);
             });
-        }else{ //en caso de que fuera un objeto
+        }
+        else { //en caso de que fuera un objeto
             item.on('pointerover', () => {
             marketItem.infoText = this.scene.add.text(x, y - 80,
                 `${item.name}\nHP:${item.life}\nATK:${item.attack}`, {
@@ -299,16 +300,28 @@ export default class MarketManager {
             // Para objetos
             const newObj = item.clone();
             if (!newObj.scene) this.scene.add.existing(newObj);
-            newObj.setVisible(false);
+            newObj.setVisible(false).disableInteractive();
 
             this.objectBag.push(newObj);
             this.showMessage(`¡Has comprado ${newObj.name}!`);
         }
 
         //destruyo los elementos del mercado
-        if (marketItem.button) { marketItem.button.destroy(); marketItem.button = null; }
-        if (marketItem.priceText) { marketItem.priceText.destroy(); marketItem.priceText = null; }
-        if (marketItem.infoText) { marketItem.infoText.destroy(); marketItem.infoText = null; }
+        if (marketItem.button) { 
+            marketItem.button.destroy(); 
+            marketItem.button = null; 
+            console.log("boton compra destruido");
+        }
+        if (marketItem.priceText) { 
+            marketItem.priceText.destroy(); 
+            marketItem.priceText = null; 
+            console.log("texto precio destruido");
+        }
+        if (marketItem.infoText) { 
+            marketItem.infoText.destroy(); 
+            marketItem.infoText = null; 
+            console.log("texo info destruido");
+        }
 
         //actualizo el dinero mostrado
         this.showMoney();

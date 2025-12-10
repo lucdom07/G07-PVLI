@@ -72,10 +72,6 @@ export default class DialogueScene extends Phaser.Scene {
             this.skipButton.destroy();
         });
 
-        /*
-        BOTÓN DE SKIP
-        */
-
         //escucho el evento de fin de diálogos para cambiar de escena o reanudar la anterior
         this.events.once("dialogueEnd", () => {
             if(this.nextScene)
@@ -85,8 +81,6 @@ export default class DialogueScene extends Phaser.Scene {
                 this.scene.resume(this.returnScene);
             }
             this.scene.stop();
-        });
-
-            
+        });   
     }
 }

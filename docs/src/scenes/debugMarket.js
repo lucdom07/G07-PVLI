@@ -16,12 +16,11 @@ export default class debugMarket extends Phaser.Scene{
 
     //en init le paso los aliados que tiene el jugador
     init(data){
-        this.playerData = data;
+        this.playerData = data.playerData;
         this.marketSystem = new MarketManager(this, this.load.image('buyButton','assets/placeholders/buttons/market_button.png'), this.DOManager);
     }
     
     preload(){
-
         this.load.image('buyButton','assets/buttons/buy.png');
         this.load.image('exitButton','assets/buttons/quit.png');
         this.load.image('shopBackground','assets/backgrounds/shopBackground.png');
@@ -37,8 +36,6 @@ export default class debugMarket extends Phaser.Scene{
         this.load.image('comida2','assets/placeholders/objets/comida2.png');
         this.load.image('comida3','assets/placeholders/objets/comida3.png');
         this.load.image('comida4','assets/placeholders/objets/comida4.png');
-
-
     }
 
     create(){
@@ -62,7 +59,7 @@ export default class debugMarket extends Phaser.Scene{
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
-        this.events.on('buyingAlly', (ally, price)=>{s
+        this.events.on('buyingAlly', (ally, price)=>{
             this.playerData.ownedAllies.push(ally);
             this.DOManager.updateAllies();
             this.playerData.money -= price;
@@ -102,11 +99,10 @@ export default class debugMarket extends Phaser.Scene{
             this.cameras.main.fadeOut(800, 0, 0, 0); 
                 this.cameras.main.once('camerafadeoutcomplete', () => {
                 this.scene.stop();
-                this.scene.resume('debugMap', this.playerData); //launch, lanzar la escena 
+                this.scene.resume('debugMap', {playerData: this.playerData}); //launch, lanzar la escena 
                 console.log("Saliendo del mercado");
                 this.audioManager.playMusic(MusicKeys.MAPA);
             });
-            
         });
 
         const border = this.add.graphics();
@@ -143,10 +139,6 @@ export default class debugMarket extends Phaser.Scene{
             );
         });
 
-        /*
-        BOTÓN DE EXIT
-        */
-
 
         this.marketSystem.textureButton = 'buyButton'; 
         this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money, this.playerData.ownedObjects);
@@ -168,5 +160,5 @@ export default class debugMarket extends Phaser.Scene{
             this.scene.pause();
         });
 
-        }
+    }
 }

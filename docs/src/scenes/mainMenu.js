@@ -13,7 +13,6 @@ export default class mainMenu extends Phaser.Scene{
             money: 10,
             level: 0,
             ownedObjects: []
-
         }
         this.audioManager = null;
         this.fromReset = this.playerData?.reset === true;
@@ -21,7 +20,6 @@ export default class mainMenu extends Phaser.Scene{
 
     preload(){
         this.load.image('startButton','assets/buttons/start.png')
-        //this.load.image('marketButton','assets/button.png')
         this.load.image('bg','assets/backgrounds/mainMenu.png')
         this.load.image('mainMenuCat','assets/main_menu/mainmenu_cat.png')
         this.load.image('furry','assets/main_menu/furryLogo.png')

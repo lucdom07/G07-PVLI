@@ -26,10 +26,7 @@ export default class CombatSetup extends Phaser.Scene {
     }
 
     init(data) {
-        //Array global con todos los aliados (desbloqueados o no)
-        //this.globalAllies = data.allies;
-        this.playerData = data;
-        //Aún no está bien conectado al resto del juego
+        this.playerData = data.playerData;
     }
 
     preload() {

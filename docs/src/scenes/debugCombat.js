@@ -109,8 +109,7 @@ export default class Animation extends Phaser.Scene{
         //pasa los aliados al debugCombat
         exitButton.on('pointerdown',()=>{
             this.scene.start('debugMap',{
-                ownedAllies: this.ownedAllies,
-                money: this.money,
+                playerData: this.playerData
             });
         });
     }
