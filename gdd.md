@@ -325,10 +325,10 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 || José Luis |9|7|0|
 || Maricarmen |10|7|3|
 |Estados Unidos|
-|| Tump |9|8|2|
+|| Kevin |9|8|2|
 || Karen |12|8|1|
-|| //Anabella |11|9|0|
-|| //Guardaespaldas |10|8|3|
+|| Barry |11|9|0|
+|| Jeff Bezos |10|8|3|
 |China|
 || ?Pimiento humanoide |14|10|0|
 || //Otaku |12|11|3|
