@@ -74,21 +74,30 @@ export default class MarketManager {
         //filtra los aliados disponibles (no comprados)
         const available = allyList.filter(a => !a.available);
 
-        //genera los aliados aleatorios
-        for (let i = 0; i < slots; i++) {
-            //si no hay más aliados disponibles, sale del bucle
-            if (available.length === 0) break;
+        if (available.length === 0) {
+        return marketAllies;
+        }
 
-            //elige un aliado aleatorio del array de disponibles
-            const index = Phaser.Math.Between(0, available.length - 1);
-            const clone = available[index].clone(); 
+        //copia de los que son validos
+        const shuffled = [...available];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+
+        const count = Math.min(slots,shuffled.length);
+
+        //toma el numero de count de los primeros slots mezclados de shuffled
+        for (let i = 0; i < count; i++) {
+
+            const clone = shuffled[i].clone();
             clone.scene = this.scene;
-
-            //elimina el aliado elegido del array de disponibles
-            if (!clone.scene) this.scene.add.existing(clone);
-
-            //lo añade al array de aliados del mercado
-            marketAllies.push(this.makeStruct(clone));
+            
+            if (!clone.scene) {
+            this.scene.add.existing(clone);
+        }
+        
+        marketAllies.push(this.makeStruct(clone));
         }
         
         //devuelvo el array de aliados generados

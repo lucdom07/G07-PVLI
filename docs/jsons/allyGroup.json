@@ -6,7 +6,9 @@
             "attack": 5,
             "range":0,
             "cost":7,
-            "texture": "assets/allys/michi_michi_chibi.png"
+            "texture": "assets/allys/michi_michi_chibi.png",
+            "available":true
+            
         },
         {
             "name": "Astra",
@@ -14,7 +16,8 @@
             "attack": 4,
             "range":2,
             "cost":7,
-            "texture": "assets/allys/alien_cat.png"
+            "texture": "assets/allys/alien_cat.png",
+            "available":false
         },
         {
             "name": "Cotton",
@@ -22,7 +25,8 @@
             "attack": 4,
             "range":1,
             "cost":7,
-            "texture": "assets/allys/raccoon.png"
+            "texture": "assets/allys/raccoon.png",
+            "available":false
         },
         {
             "name": "Tueto",
@@ -30,7 +34,8 @@
             "attack": 5,
             "range":4,
             "cost":7,
-            "texture": "assets/allys/bird.png"
+            "texture": "assets/allys/bird.png",
+            "available":false
         },
         {
             "name": "Gitab",
@@ -38,7 +43,8 @@
             "attack": 3,
             "range":3,
             "cost":7,
-            "texture": "assets/allys/octocat.png"
+            "texture": "assets/allys/octocat.png",
+            "available":false
         }
     ],
 
@@ -49,7 +55,8 @@
             "attack": 5,
             "range":3,
             "cost":12,
-            "texture": "assets/allys/crow.png"
+            "texture": "assets/allys/crow.png",
+            "available":false
         },
         {
             "name": "Kurma",
@@ -57,7 +64,8 @@
             "attack": 6,
             "range":0,
             "cost":12,
-            "texture": "assets/allys/frog.png"
+            "texture": "assets/allys/frog.png",
+            "available":false
         },
         {
             "name": "Gatoñete",
@@ -65,7 +73,8 @@
             "attack": 7,
             "range":1,
             "cost":12,
-            "texture": "assets/allys/gatonete.png"
+            "texture": "assets/allys/gatonete.png",
+            "available":false
         },
         {
             "name": "Pablotter",
@@ -73,7 +82,8 @@
             "attack": 6,
             "range":2,
             "cost":12,
-            "texture": "assets/allys/pablotter.png"
+            "texture": "assets/allys/pablotter.png",
+            "available":false
         }
     ],
 
@@ -84,7 +94,8 @@
             "attack": 9,
             "range":2,
             "cost":17,
-            "texture": "assets/allys/otter.png"
+            "texture": "assets/allys/otter.png",
+            "available":false
         },
         {
             "name": "Señor Anteojo",
@@ -92,7 +103,8 @@
             "attack": 7,
             "range":0,
             "cost":17,
-            "texture": "assets/allys/ant_eater.png"
+            "texture": "assets/allys/ant_eater.png",
+            "available":false
         },
         {
             "name": "Pimiento Gatomórfico",
@@ -100,7 +112,8 @@
             "attack": 9,
             "range":1,
             "cost":17,
-            "texture": "assets/allys/pepper_cat.png"
+            "texture": "assets/allys/pepper_cat.png",
+            "available":false
         },
         {
             "name": "Miku",
@@ -108,7 +121,8 @@
             "attack": 8,
             "range":4,
             "cost":17,
-            "texture": "assets/allys/original_miku.png"
+            "texture": "assets/allys/original_miku.png",
+            "available":false
         }
     ],
 
@@ -119,7 +133,8 @@
             "attack": 10,
             "range":0,
             "cost":22,
-            "texture": "assets/allys/qiling.png"
+            "texture": "assets/allys/qiling.png",
+            "available":false
         },
         {
             "name": "Po-ka",
@@ -127,7 +142,8 @@
             "attack": 9,
             "range":1,
             "cost":22,
-            "texture": "assets/allys/panda.png"
+            "texture": "assets/allys/panda.png",
+            "available":false
         },
         {
             "name": "Kairos",
@@ -135,7 +151,8 @@
             "attack": 11,
             "range":3,
             "cost":22,
-            "texture": "assets/allys/killer_whale.png"
+            "texture": "assets/allys/killer_whale.png",
+            "available":false
         },
         {
             "name": "Moflete",
@@ -143,7 +160,8 @@
             "attack": 10,
             "range": 2,
             "cost":22,
-            "texture": "assets/allys/fish.png"
+            "texture": "assets/allys/fish.png",
+            "available":false
         }
     ]
 }

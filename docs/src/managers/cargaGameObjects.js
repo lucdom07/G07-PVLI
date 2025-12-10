@@ -59,7 +59,7 @@ export default class cargaGameObject{
                 allyData.name + "Texture",
                 0,
                 allyData.cost,
-                false,
+                allyData.available,
                 allyData.texture
             );
         });

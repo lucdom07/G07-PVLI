@@ -11,7 +11,7 @@ export default class mainMenu extends Phaser.Scene{
         this.DOMmanager = DOManager;
         this.playerData = { 
             ownedAllies: [],
-            money: 10,
+            money: 20,
             level: 0,
             ownedObjects: []
         }
@@ -141,7 +141,7 @@ export default class mainMenu extends Phaser.Scene{
                     michiData.name + "Textura",
                     0,
                     michiData.cost,
-                    false,
+                    true,
                     michiData.texture
                 );
                 

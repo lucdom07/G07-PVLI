@@ -40,8 +40,6 @@ export default class Animation extends Phaser.Scene{
         this.cargaManagerEnemigos = new cargaGameObject(this,this.playerData.level);
         this.enemyGroup = this.cargaManagerEnemigos.loadEnemyGroups();
 
-        console.log(this.enemyGroup);
-
         this.cameras.main.fadeIn(800, 0, 0, 0);
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.BATALLA);
@@ -59,6 +57,7 @@ export default class Animation extends Phaser.Scene{
 
         this.recreate();
         
+        //añadir un if si se trata del combate con el boss o es normal
         this.createEnemyTeam();
 
         // Enemigos disponibles
@@ -123,20 +122,20 @@ export default class Animation extends Phaser.Scene{
         
         const playerTeamSize = this.playerTeam.length; //tamaño de la array del aliado
         
-        if (this.enemyGroup.length === 0) {
+        if (this.enemyGroup.length-1 === 0) {
             console.error("No hay enemigos disponibles en enemyGroup");
             return this.enemyToCombat;
         }
         
-        const teamSize = Math.min(playerTeamSize, this.enemyGroup.length);
+        const teamSize = Math.min(playerTeamSize, this.enemyGroup.length-1);
         
         //sin repetición
-        if (teamSize <= this.enemyGroup.length) {
+        if (teamSize <= this.enemyGroup.length-1) {
             const availableEnemies = [...this.enemyGroup];
             
             for (let i = 0; i < teamSize; i++) {
                 //indice aleatorio
-                const randomIndex = Math.floor(Math.random() * availableEnemies.length);
+                const randomIndex = Math.floor(Math.random() * availableEnemies.length-1);
                 
                 const selectedEnemy = availableEnemies.splice(randomIndex, 1)[0];
                 const enemyClone = this.cloneEnemy(selectedEnemy);
@@ -145,7 +144,7 @@ export default class Animation extends Phaser.Scene{
         } else {
             // con repeticiones         
             for (let i = 0; i < teamSize; i++) {
-                const randomIndex = Math.floor(Math.random() * this.enemyGroup.length);
+                const randomIndex = Math.floor(Math.random() * this.enemyGroup.length-1);
                 const selectedEnemy = this.enemyGroup[randomIndex];
                 const enemyClone = this.cloneEnemy(selectedEnemy);
                 this.enemyToCombat.push(enemyClone);
@@ -168,6 +167,37 @@ export default class Animation extends Phaser.Scene{
             originalEnemy.frame || 0,
             originalEnemy.texture
         );
+    }
+
+    //crea el equipo del boss (aun por arreglar)
+    createBossTeam(){
+        this.enemyToCombat = [];
+        
+        if (this.enemyGroup.length === 0) {
+            console.error("No hay enemigos disponibles en enemyGroup");
+            return this.enemyToCombat;
+        }
+        
+        //mete al boss a la array
+        const bossClone = this.cloneEnemy(this.enemyGroup[this.enemyGroup.length - 1]);
+        this.enemyToCombat.push(bossClone);
+
+        //lista de enemigos sin el boss
+        const availableEnemies = this.enemyGroup.slice(0, -1);
+
+        const numberOfMinions = Math.min(3, availableEnemies.length);
+
+        //sin repetición, genera 3 enemigos aleatorios
+        for (let i = 0; i < numberOfMinions; i++) {
+            //indice aleatorio
+            const randomIndex = Math.floor(Math.random() * availableEnemies.length);
+            
+            const selectedEnemy = availableEnemies.splice(randomIndex, 1)[0];
+            const enemyClone = this.cloneEnemy(selectedEnemy);
+            this.enemyToCombat.push(enemyClone);
+        }
+        
+        return this.enemyToCombat;
     }
 
 }

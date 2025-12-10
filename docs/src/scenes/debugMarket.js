@@ -56,6 +56,8 @@ export default class debugMarket extends Phaser.Scene{
 
         console.log(this.GameObjectOfLevel);
 
+        this.quitOwnedAlliesFromArray();
+
 
         this.cameras.main.fadeIn(800, 0, 0, 0);
         this.cameras.main.once('camerafadeincomplete', () => {
@@ -168,5 +170,16 @@ export default class debugMarket extends Phaser.Scene{
         this.marketSystem.market(this.playerData.ownedAllies, this.GameObjectOfLevel.allies, this.GameObjectOfLevel.objects, this.playerData.money, this.playerData.ownedObjects);
         //this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
 
+    }
+
+    quitOwnedAlliesFromArray(){
+        const ownedAllyNames = this.playerData.ownedAllies.map(ally => ally.name);
+    
+        // Filtrar los aliados disponibles, excluyendo aquellos cuyo nombre esté en ownedAllyNames
+        this.GameObjectOfLevel.allies = this.GameObjectOfLevel.allies.filter(ally => {
+            return !ownedAllyNames.includes(ally.name);
+        });
+        
+        console.log("Aliados disponibles después de filtrar:", this.GameObjectOfLevel.allies);
     }
 }
