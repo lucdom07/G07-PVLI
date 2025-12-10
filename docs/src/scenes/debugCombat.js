@@ -82,7 +82,13 @@ export default class Animation extends Phaser.Scene{
         //Inicializa el combate
         this.combatManager.initCombat(this.playerTeam, this.enemyToCombat);
 
-      
+
+
+
+
+        //AAAAAAAAAAAAAAAA
+        //this.combatManager.victory = true;
+        //this.showExitButton();
 
 
     }
@@ -118,15 +124,25 @@ export default class Animation extends Phaser.Scene{
   
         //pasa los aliados al debugCombat
         exitButton.on('pointerdown',()=>{
-            if(!this.bossFlag) {
-                this.scene.resume('debugMap', {
-                    playerData: this.playerData,
-                });
+            console.log("boss" + this.bossFlag);
+            if(this.combatManager.victory) {
+                if(!this.bossFlag) {
+                    this.scene.resume('debugMap');
+                    this.scene.stop();
+                }
+                else {
+                    this.world += 1;
+                    this.bossFlag = false;
+                    this.scene.start('debugMap',{
+                        bossFlag: this.bossFlag,
+                        world: this.world
+                    });
+                    this.scene.stop();
+                }
             }
             else {
-                this.scene.start('debugMap',{
-                    playerData: this.playerData,
-                });
+                this.scene.stop('mainMenu');
+                this.scene.start('mainMenu');
             }
         });
     }

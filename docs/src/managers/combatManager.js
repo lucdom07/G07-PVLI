@@ -13,6 +13,7 @@ export default class CombatManager{
         //guardamos el equipo aliado y enemigo en propiedades de esta clase para usarlos en toda la clase sin estar pasándolos como parámetros
         this.allyTeam = [];
         this.enemyTeam = [];
+        this.victory = false;
         this.TEAM_DIST_FROM_CANVAS_HALF = 95;
         this.WARRIOR_Y = 300;
         this.WARRIORS_SEPARATION = 120; 
@@ -198,6 +199,7 @@ export default class CombatManager{
                 repeat: 2
             });
         });
+        this.victory = true;
     }
 
     derrota() {

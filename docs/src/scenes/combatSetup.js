@@ -28,7 +28,8 @@ export default class CombatSetup extends Phaser.Scene {
 
     init(data) {
         this.playerData = data.playerData,
-        this.world = data.world
+        this.world = data.world,
+        this.bossFlag = data.bossFlag
     }
 
     preload() {
@@ -67,8 +68,10 @@ export default class CombatSetup extends Phaser.Scene {
                 this.scene.start('debugCombat',{
                     playerData: this.playerData,
                     selectedAllies: this.selectedAllies,
-                    world: this.world
+                    world: this.world,
+                    bossFlag: this.bossFlag
                 });
+                this.selectedAllies = [];
             }
             console.log("yendo al combate");
         });
@@ -87,7 +90,8 @@ export default class CombatSetup extends Phaser.Scene {
     toggleAlly(ally) {
         if(this.selectedObject){
             this.applyObjectToAlly(ally);
-        }else{
+        }
+        else{
             if(ally.isOnTeam()) {
             this.removeAlly(ally);
             }

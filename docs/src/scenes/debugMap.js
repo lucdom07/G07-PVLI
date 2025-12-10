@@ -8,10 +8,6 @@ export default class debugMap extends Phaser.Scene {
         this.playerData = {}
         this.audioManager = null;
         this.backgrounds = ['austBackground', 'chinaBackground', 'spainBackground', 'usaBackground'];
-        //índice del nivel (australia = 0, china = 1, ...)
-        this.world = 0;
-        //true cuando la escena sea de boss, tambien indicara que hay que destruir el mapa actual
-        this.bossFlag = false;
         //Niveles del grafo
         this.graphLevels = 5;
         //Numero de hijos de cada nodo del grafo durante una fase de divergencia de este
@@ -20,6 +16,8 @@ export default class debugMap extends Phaser.Scene {
 
     init(data) {
         this.playerData = data.playerData;
+        this.world = data.world || 0;
+        this.bossFlag = data.bossFlag || 0;
     }
 
     preload() {
@@ -33,25 +31,29 @@ export default class debugMap extends Phaser.Scene {
     }
 
     create() {
-        this.graph = new HierarchyGraph(this.graphLevels, this.graphChildrenXNode);
-        //transición de escenas, esta utiliza un this.events.on porque la pausamos y reanudamos durante el transcurso del gameplay
-        this.cameras.main.fadeIn(800, 0, 0, 0);
-
-         this.events.on("resume", () => {
+        if(this.world < this.backgrounds.length) {
+            this.graph = new HierarchyGraph(this.graphLevels, this.graphChildrenXNode);
+            //transición de escenas, esta utiliza un this.events.on porque la pausamos y reanudamos durante el transcurso del gameplay
+            this.cameras.main.fadeIn(800, 0, 0, 0);
+            
+            this.events.on("resume", () => {
                 console.log("entrando de nuevo al mapa");
                 this.cameras.main.fadeIn(800, 0, 0, 0);
             });
 
-        this.audioManager = AudioManager.getInstance(this);
-        this.audioManager.playMusic(MusicKeys.MAPA);
-
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, this.backgrounds[this.world]);
-
-        this.createButtons();
-        //this.createResetButton();
-    
+            this.audioManager = AudioManager.getInstance(this);
+            this.audioManager.playMusic(MusicKeys.MAPA);
+            
+            this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, this.backgrounds[this.world]);
+            
+            this.createButtons();
+            //this.createResetButton();
+        }
+        else {
+            //victoria
+        }
     }
-
+        
     //Función que se llama en create para crear los botones
     createButtons() {
         this.buttonsRec(0);
@@ -93,7 +95,6 @@ export default class debugMap extends Phaser.Scene {
             button.on('pointerdown', () =>{     
                 if(node.active) {
                     if(node.value === 2) {
-                        this.world++;
                         this.bossFlag = true;
                     }
                     /*

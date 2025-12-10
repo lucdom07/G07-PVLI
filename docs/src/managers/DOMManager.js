@@ -53,5 +53,11 @@ export default class DOMmanager {
 
     }
 
+    destroyDomAllies() {
+        [...this.DOMallies.children].forEach(x => {
+            x.remove();
+        });
+    }
+
 
 }
