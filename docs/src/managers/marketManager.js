@@ -291,7 +291,7 @@ export default class MarketManager {
             //lo añado al inventario
             this.bag.push(newAlly);
             //lanzo el evento de compra
-            this.scene.events.emit('buyingAlly', newAlly, newAlly.cost);
+            this.scene.events.emit('buyingAlly', newAlly.cost);
 
             this.showMessage(`¡Has comprado a ${newAlly.name}!`);
         } 

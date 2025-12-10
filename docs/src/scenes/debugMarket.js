@@ -76,8 +76,7 @@ export default class debugMarket extends Phaser.Scene{
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         //Creo que no hace falta pasar ally porque en marketManager se ha copiado el array por referencia, pero tengo que verlo
-        this.events.on('buyingAlly', (ally, price)=>{
-            this.playerData.ownedAllies.push(ally);
+        this.events.on('buyingAlly', (price)=>{
             this.DOManager.updateAllies();
 
             console.log(this.playerData.ownedAllies.length);
@@ -129,6 +128,7 @@ export default class debugMarket extends Phaser.Scene{
                 this.scene.stop();
                 this.scene.resume('debugMap'); 
                 console.log("Saliendo del mercado");
+                console.log("ownedAllies: " + this.playerData.ownedAllies);
                 this.audioManager.playMusic(MusicKeys.MAPA);
             });
         });
