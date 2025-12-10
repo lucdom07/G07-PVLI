@@ -13,7 +13,7 @@ export default class DialogueManager {
         //configuración visual
         this.config = Object.assign({
             nameStyle: { fontSize: "35px", color: "#ffffff", fontFamily: "Caveat Brush" },
-            dialogStyle: { fontSize: "30px", color: "#000000", fontFamily: "Caveat Brush", padding: 32, windowHeight: 100, dialogSpeed: 3 },
+            dialogStyle: { fontSize: "30px", color: "#000000", fontFamily: "Caveat Brush", padding: 32, windowHeight: 100, dialogSpeed: 4 },
             dialogBoxClass: null, 
 
             spriteScale : 0.7
