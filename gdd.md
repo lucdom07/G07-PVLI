@@ -328,7 +328,7 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 || Kevin |9|8|2|
 || Karen |12|8|1|
 || Barry |11|9|0|
-|| //Guardaespaldas |10|8|3|
+|| Kimberly |10|8|3|
 |China|
 || ?Pimiento humanoide |14|10|0|
 || //Otaku |12|11|3|
