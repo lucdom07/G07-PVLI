@@ -17,12 +17,14 @@ export default class Animation extends Phaser.Scene{
         this.cargaManagerEnemigos = null;
         this.enemyGroup =[];
         this.enemyToCombat =[];
+        this.bossFlag;
     }
 
     init(data){// se crea un CombatManager y se añaden las tropas aliadas pasadas desde combatSetup
         this.combatManager = new CombatManager(this);
         this.playerData = data.playerData;
         this.playerTeam = data.selectedAllies;
+        this.bossFlag = data.bossFlag;
     }
 
     preload(){
@@ -111,9 +113,16 @@ export default class Animation extends Phaser.Scene{
   
         //pasa los aliados al debugCombat
         exitButton.on('pointerdown',()=>{
-            this.scene.start('debugMap',{
-                playerData: this.playerData
-            });
+            if(!this.bossFlag) {
+                this.scene.resume('debugMap', {
+                    playerData: this.playerData,
+                });
+            }
+            else {
+                this.scene.start('debugMap',{
+                    playerData: this.playerData,
+                });
+            }
         });
     }
     update(time, dt){

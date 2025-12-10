@@ -6,8 +6,12 @@ export default class debugMap extends Phaser.Scene {
     constructor() {
         super({key: 'debugMap'});
         this.playerData = {}
-        this.graph = new HierarchyGraph(5, 2);
         this.audioManager = null;
+        this.backgrounds = ['austBackground', 'chinaBackground', 'spainBackground', 'usaBackground'];
+        //índice del nivel (australia = 0, china = 1, ...)
+        this.level = 0;
+        //true cuando la escena sea de boss, tambien indicara que hay que destruir el mapa actual
+        this.bossFlag = false;
     }
 
     init(data) {
@@ -16,12 +20,16 @@ export default class debugMap extends Phaser.Scene {
 
     preload() {
         this.load.image('austBackground','assets/backgrounds/australiaaMap.png');
+        this.load.image('chinaBackground','assets/backgrounds/chinaMap.png');
+        this.load.image('spainBackground','assets/backgrounds/spainMap.png');
+        this.load.image('usaBackground','assets/backgrounds/usaMap.png');
         this.load.image('combatButton','assets/placeholders/buttons/combat_button.jpg');
         this.load.image('marketButton', 'assets/placeholders/buttons/market_button.png');
         this.load.image('resetButton','assets/buttons/reset.png');
     }
 
     create() {
+        this.graph = new HierarchyGraph(5, 2);
         //transición de escenas, esta utiliza un this.events.on porque la pausamos y reanudamos durante el transcurso del gameplay
         this.cameras.main.fadeIn(800, 0, 0, 0);
 
@@ -33,7 +41,7 @@ export default class debugMap extends Phaser.Scene {
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.MAPA);
 
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'austBackground');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, this.backgrounds[this.level]);
 
         this.createButtons();
         //this.createResetButton();
@@ -66,22 +74,37 @@ export default class debugMap extends Phaser.Scene {
                 button = this.add.image(100, 50, 'combatButton').setInteractive();
                 key = 'combatSetup';
             }
-            else {
+            else if(node.value === 1) {
                 button = this.add.image(100, 50, 'marketButton').setInteractive();
                 key = 'debugMarket';
+            }
+            else {
+                //Aquí va el botón del boss
+                button = this.add.image(100, 50, 'combatButton').setInteractive();
+                key = 'combatSetup';
             }
             button.setPosition(x, y);
             button.setScale(0.35);
             
             button.on('pointerdown', () =>{     
                 if(node.active) {
+                    if(node.value === 2) {
+                        this.level++;
+                        this.bossFlag = true;
+                    }
+                    /*
+                    */
                     this.cameras.main.fadeOut(800, 0, 0, 0); // duración, R, G, B
                     this.cameras.main.once('camerafadeoutcomplete', () => {
                         this.enableButtons(node);
                         this.scene.pause();
-                        this.scene.launch(key, {playerData: this.playerData});
+                        this.scene.launch(key, {
+                            playerData: this.playerData,
+                            bossFlag: this.bossFlag,
+                        });
                         console.log("Saliendo del mapa");
                     });
+                    this.enableButtons(node);
                 }     
             });
 
