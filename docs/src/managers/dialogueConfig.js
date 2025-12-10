@@ -8,20 +8,20 @@ export const DialogueKeys = {
     AU: 'australia_dialogue',
 
     TIENDA: 'market_dialogue',
-    VICTORY: 'victory_dialogue',
-    GAME_OVER: 'gameover_dialogue',
+
+    ENDING: 'gameover_dialogue',
 };
 
 // sitios de los archivos de diálogo
 export const DialogueFiles = {
     [DialogueKeys.INTRO]: 'jsons/dialogues/intro.json',
 
-    [DialogueKeys.ES]: 'jsons/dialogues/spain.json',
-    [DialogueKeys.USA]: 'jsons/dialogues/usa.json', 
-    [DialogueKeys.CH]: 'jsons/dialogues/china.json',
-    [DialogueKeys.AU]: 'jsons/dialogues/australia.json', 
+    [DialogueKeys.ES]: 'jsons/dialogues/spainVictory.json',
+    [DialogueKeys.USA]: 'jsons/dialogues/usaVictory.json', 
+    [DialogueKeys.CH]: 'jsons/dialogues/chinaVictory.json',
+    [DialogueKeys.AU]: 'jsons/dialogues/australiaVictory.json', 
 
     [DialogueKeys.TIENDA]:'jsons/dialogues/market.json',
-    [DialogueKeys.VICTORY]: 'jsons/dialogues/victory.json',
-    [DialogueKeys.GAME_OVER]: 'jsons/dialogues/gameover.json', 
+
+    [DialogueKeys.ENDING]: 'jsons/dialogues/ending.json', 
 };
