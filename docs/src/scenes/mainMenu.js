@@ -55,7 +55,6 @@ export default class mainMenu extends Phaser.Scene{
         loop: -1                
         });
 
-
         this.tweens.add({
         targets: meow,           
         y: meow.y - 50,          
@@ -116,38 +115,42 @@ export default class mainMenu extends Phaser.Scene{
         
     }
 
-
+    // Crear solo el aliado Michi-Michi
     loadMichi(){
-        
         const groupToLoad = this.getAllyGroup(0);
-        groupToLoad.forEach(ally => {
-        this.load.image(ally.name + "Textura", ally.texture);})
-
-        const group = this.getAllyGroup(0);
-
-        const michi = group.map(allyData =>{
-                    return new Ally(
-                        this,
-                        -150,
-                        -150,
-                        allyData.name,
-                        allyData.life,
-                        allyData.attack,
-                        allyData.range,
-                        allyData.name+"Textura",
-                        0,
-                        allyData.cost,
-                        false,
-                        allyData.texture
-                    )
-                })
-
-        this.playerData.ownedAllies.push(michi);
-
-        console.log(this.playerData.ownedAllies);
+        if (groupToLoad) {
+            // Cargar todas las texturas del grupo
+            groupToLoad.forEach(ally => {
+                this.load.image(ally.name + "Textura", ally.texture);
+            });
+            
+            // Buscar específicamente a Michi-Michi
+            const michiData = groupToLoad.find(ally => ally.name === "Michi-Michi");
+            if (michiData) {
+                
+                const michi = new Ally(
+                    this,
+                    -150,
+                    -150,
+                    michiData.name,
+                    michiData.life,
+                    michiData.attack,
+                    michiData.range,
+                    michiData.name + "Textura",
+                    0,
+                    michiData.cost,
+                    false,
+                    michiData.texture
+                );
+                
+                // Agregar solo Michi-Michi al array
+                this.playerData.ownedAllies.push(michi);
+                console.log("Michi-Michi cargado en ownedAllies:", michi);
+            }
+        }
     }
 
-
+    //obtiene el array especifico dentro de json
     getAllyGroup(num){
         const allyKey = `ally${num}`;
         const rawData = this.cache.json.get("allyGroup");

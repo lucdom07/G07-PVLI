@@ -6,11 +6,21 @@ import DialogueManager from "../managers/dialogManager.js";
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
 
+import cargaGameObject from "../managers/cargaGameObjects.js";
+
 export default class AustraliaScene extends Phaser.Scene {
     constructor() {
         super("spainVictory");
         this.playerData = {}
         this.audioManager = null;
+
+        this.cargaManager = null;
+
+        this.gameObjects ={
+            allies: [],
+            enemies:[],
+            objects:[]
+        }
     }
 
     init(data){
@@ -23,6 +33,12 @@ export default class AustraliaScene extends Phaser.Scene {
     }
 
     create() {
+        this.cargaManager = cargaGameObject(this,this.playerData.level);
+                
+        this.gameObjects.allies = this.cargaManager.loadAllyGroups();
+        this.gameObjects.enemies = this.cargaManager.loadEnemyGroups();
+        this.gameObjects.objects = this.cargaManager.loadObjectGroups();
+
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.ES);
 

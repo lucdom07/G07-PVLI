@@ -5,21 +5,21 @@
             "life": 0,
             "attack": 3,
             "cost":5,
-            "texture": ""
+            "texture": "assets/objects/sock.png"
         },
         {
             "name": "Las llaves perdidas",
             "life": 4,
             "attack": 0,
             "cost":5,
-            "texture": ""
+            "texture": "assets/objects/keys.png"
         },
         {
             "name": "Agua",
             "life": 2,
             "attack": 2,
             "cost":5,
-            "texture": ""
+            "texture": "assets/objects/water.png"
         }
     ],
 
@@ -29,28 +29,28 @@
             "life": 6,
             "attack": 0,
             "cost":8,
-            "texture": ""
+            "texture": "assets/objects/bocatacalamares.png"
         },
         {
             "name": "Vestido flamenca",
             "life": 5,
             "attack": 0,
             "cost":8,
-            "texture": ""
+            "texture": "assets/objects/flamenca.png"
         },
         {
             "name": "Ñ",
             "life": -1,
             "attack": 4,
             "cost":8,
-            "texture": ""
+            "texture": "assets/objects/enie.png"
         },
         {
             "name": "Tortilla de patatas CON CEBOLLA",
             "life": 4,
             "attack": 1,
             "cost":8,
-            "texture": ""
+            "texture": "assets/objects/tortilla.png"
         }
     ],
 
@@ -60,21 +60,21 @@
             "life": -3,
             "attack": 5,
             "cost":11,
-            "texture": ""
+            "texture": "assets/objects/gun.png"
         },
         {
             "name": "Partes de las torres gemelas",
             "life": 2,
             "attack": 4,
             "cost":11,
-            "texture": ""
+            "texture": "assets/objects/twintowers.png"
         },
         {
             "name": "Cheese Burger",
             "life": 5,
             "attack": 0,
             "cost":11,
-            "texture": ""
+            "texture": "assets/objects/cheeseburger.png"
         }
     ],
 
@@ -84,28 +84,28 @@
             "life": -7,
             "attack": 10,
             "cost":14,
-            "texture": ""
+            "texture": "assets/objects/chancla.png"
         },
         {
             "name": "Bambu",
             "life": 8,
             "attack": 0,
             "cost":14,
-            "texture": ""
+            "texture": "assets/objects/bamboo.png"
         },
         {
             "name": "Emocional Damage",
             "life": 0,
             "attack": 7,
             "cost":14,
-            "texture": ""
+            "texture": "assets/objects/sock.png"
         },
         {
             "name": "Timo",
             "life": 6,
             "attack": 6,
             "cost":14,
-            "texture": ""
+            "texture": "assets/objects/sock.png"
         }
     ]
 }

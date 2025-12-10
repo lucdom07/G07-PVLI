@@ -9,27 +9,6 @@ export default class BootScene extends Phaser.Scene {
 
         this.progressBar = null;
         this.progressText = null;
-
-        this.ally = {
-            ally0:[], //australia
-            ally1:[], //españa
-            ally2:[], //china
-            ally3:[]  //estados unidos
-        }
-
-        this.enemy = {
-            enemy0:[], //au
-            enemy1:[], //es
-            enemy2:[], //ch
-            enemy3:[]  //usa
-        }
-
-        this.objects = {
-            objects0:[], //au
-            objects1:[], //es
-            objects2:[], //ch
-            objects3:[]  //usa
-        }
     }
     
     preload() {
@@ -74,9 +53,6 @@ export default class BootScene extends Phaser.Scene {
 
         button.on('pointerdown', () => {
             this.scene.launch("mainMenu");
-            allies:this.ally
-            enemies:this.enemy
-            objects: this.objects
             this.scene.stop();
         })
     }
@@ -114,140 +90,74 @@ export default class BootScene extends Phaser.Scene {
         // Cargar imágenes básicas (aliados, enemigos, fondos, etc)
         //Aliados
 
+        //carga de los json
         this.load.json("allyGroup", "./jsons/allyGroup.json");
         this.load.json("enemyGroup", "./jsons/enemyGroup.json");
         this.load.json("objects", "./jsons/objects.json");
-    }
 
-    //obtiene del json un array específico de aliados
-    getAllyGroup(num){
-        const allyKey = `ally${num}`;
-        const rawData = this.cache.json.get("allyGroup");
-
-        if(rawData && rawData[allyKey]){
-            return rawData[allyKey];
-        }
-        else return null;
-    }
-
-    //obtiene del json un array específico de enemigos
-    getEnemyGroup(num){
-        const allyKey = `enemy${num}`;
-        const rawData = this.cache.json.get("enemyGroup");
-
-        if(rawData && rawData[allyKey]){
-            return rawData[allyKey];
-        }
-        else return null;
-    }
-
-    //obtiene del json un array específico de objetos
-    getObjectGroup(num){
-        const allyKey = `objects${num}`;
-        const rawData = this.cache.json.get("objects");
-
-        if(rawData && rawData[allyKey]){
-            return rawData[allyKey];
-        }
-        else return null;
-    }
-
-    //Carga de grupos de aliados junto con sus texturas
-    loadAllyGroups(){
-        for(let i =0; i<4; i++){
-            const groupToLoad = this.getAllyGroup(i);
-            groupToLoad.forEach(ally => {
-            this.load.image(ally.name + "Textura", ally.texture);
+        this.load.once('filecomplete-json-allyGroup', () => {
+        this.loadAllyTexture();
         });
-        }
+        this.load.once('filecomplete-json-enemyGroup', () => {
+        this.loadEnemyTexture();
+        });
+        this.load.once('filecomplete-json-objects', () => {
+        this.loadObjectTecture();
+        });
 
-        for(let i = 0; i< 4; i++ ){
-            const group = this.getAllyGroup(i);
+    }
+
+    loadAllyTexture(){
+        const allyData = this.cache.json.get("allyGroup");
+
+        for(let i =0; i<4; i++){
+            const groupKey = `ally${i}`;
+            const group = allyData?.[groupKey];
+
             if(group){
-                this.ally[`ally${i}`] = group.map(allyData =>{
-                    return new Ally(
-                        this,
-                        -150,
-                        -150,
-                        allyData.name,
-                        allyData.life,
-                        allyData.attack,
-                        allyData.range,
-                        allyData.name+"Textura",
-                        0,
-                        allyData.cost,
-                        false,
-                        allyData.texture
-                    )
-                })
+                group.forEach(ally =>{
+                    const textureKey = ally.name+"Texture";
+                    if (!this.textures.exists(textureKey)) {
+                        this.load.image(textureKey, ally.texture);
+                    }
+                });
             }
         }
     }
 
-    //Carga de grupos de enemigos junto con sus texturas
-    loadEnemyGroups(){
-        for(let i =0; i<4; i++){
-            const groupToLoad = this.getEnemyGroup(i);
-            groupToLoad.forEach(enemy => {
-            this.load.image(enemy.name + "Textura", enemy.texture);
-        });
-        }
+    loadEnemyTexture(){
+        const enemyData = this.cache.json.get("enemyGroup");
 
-        for(let i = 0; i< 4; i++ ){
-            const group = this.getEnemyGroup(i);
+        for(let i =0; i<4; i++){
+            const groupKey = `enemy${i}`;
+            const group = enemyData?.[groupKey];
+
             if(group){
-                this.enemy[`enemy${i}`] = group.map(enemyData =>{
-                    return new Enemy(
-                        this,
-                        -150,
-                        -150,
-                        enemyData.name,
-                        enemyData.life,
-                        enemyData.attack,
-                        enemyData.range,
-                        enemyData.name+"Textura",
-                        0,
-                        enemyData.texture
-                    )
-                })
+                group.forEach(enemy =>{
+                    const textureKey = enemy.name+"Texture";
+                    if (!this.textures.exists(textureKey)) {
+                        this.load.image(textureKey, enemy.texture);
+                    }
+                });
             }
         }
     }
 
-    //Carga de grupos de objetos junto con sus texturas
-    loadObjectGroups(){
-        for(let i =0; i<4; i++){
-            const groupToLoad = this.getObjectGroup(i);
-            groupToLoad.forEach(objects => {
-            this.load.image(objects.name + "Textura", objects.texture);
-        });
-        }
+    loadObjectTecture(){
+        const objData = this.cache.json.get("objects");
 
-        for(let i = 0; i< 4; i++ ){
-            const group = this.getObjectGroup(i);
+        for(let i =0; i<4; i++){
+            const groupKey = `objects${i}`;
+            const group = objData?.[groupKey];
+
             if(group){
-                this.objects[`objects${i}`] = group.map(objectData =>{
-                    return new GlobalObject(
-                        this,
-                        -150,
-                        -150,
-                        objectData.name,
-                        objectData.texture,
-                        objectData.life,
-                        objectData.attack,
-                        objectData.cost,
-                        objectData.name+"Textura",
-                        0
-                    )
-                })
+                group.forEach(obj =>{
+                    const textureKey = obj.name+"Texture";
+                    if (!this.textures.exists(textureKey)) {
+                        this.load.image(textureKey, obj.texture);
+                    }
+                });
             }
         }
-    }
-
-    //carga todos los gameObjects del juego
-    createGameObjects(){
-        this.loadAllyGroups();
-        this.loadEnemyGroups();
-        this.loadObjectGroups();
     }
 }
