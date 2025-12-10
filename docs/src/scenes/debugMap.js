@@ -33,39 +33,38 @@ export default class debugMap extends Phaser.Scene {
 
     //Función que se llama en create para crear los botones
     createButtons() {
-        let divs = Math.pow(3, this.graph.convergence);
-        let div = Math.floor(divs / 2);
-        this.graph.root.division = div; 
-        this.buttonsRec(0, divs);
+        this.buttonsRec(0);
     }
     
-    buttonsRec(level, divs) {
+    buttonsRec(level) {
         if(level === this.graph.levels) return;
         
+        const nodes = this.graph.levelMatrix[level].length;
+        const divisions = nodes + 1;
+        //const divisions = Math.pow(3, nodes);
         //let x = (this.sys.game.canvas.width / divs) * it;
         const x = (this.sys.game.canvas.width /  this.graph.levels) * (level + 1) * 0.8;
+        const divs = this.getLevelDivs(level, divisions);
 
+        let i = 0;
         this.graph.levelMatrix[level].forEach(node => {
-            let button;
-            if(node.value === 0) button = this.add.image(100, 50, 'combatButton').setInteractive();
-            else button = this.add.image(100, 50, 'marketButton').setInteractive();
-            button.setScale(0.35);
             
-            if(node.parents.length > 0) this.getNextDiv(node.parents[0]);
-
             //let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
-            const y = (this.sys.game.canvas.height / divs) * node.division;
+            const y = (this.sys.game.canvas.height / divisions) * ((i + 1));
+            console.log((i + 1) + " / " + divisions);
             
-            button.setPosition(x, y);
-            
+            let button;
             let key;
-            
             if(node.value === 0) {
+                button = this.add.image(100, 50, 'combatButton').setInteractive();
                 key = 'combatSetup';
             }
             else {
+                button = this.add.image(100, 50, 'marketButton').setInteractive();
                 key = 'debugMarket';
             }
+            button.setPosition(x, y);
+            button.setScale(0.35);
             
             button.on('pointerdown', () =>{     
                 if(node.active) {
@@ -74,9 +73,11 @@ export default class debugMap extends Phaser.Scene {
                     console.log("Saliendo del mapa");
                 }     
             });
+
+            i++;
         });
         
-        this.buttonsRec(level + 1, divs);
+        this.buttonsRec(level + 1);
     }
     
     /**
@@ -100,27 +101,21 @@ export default class debugMap extends Phaser.Scene {
         node.active = false;
     }
 
-    //Dado un nodo padre, devuelve la división que debe ocupar su hijo
-    getNextDiv(parent) {
-        
-    }
+    getLevelDivs(level, divisions) {
+        const nodes = this.graph.levelMatrix[level].length;
+        const res = [nodes];
 
-    /**
-     * Calcula el siguiente valor de it en la función buttonsRec
-     * @param {int} it - it de buttonsRec
-     * @param {int} level - level de buttonsRec
-     * @param {int} divs - divs de buttonsRec
-     * @returns {[int, int]} - lista con los nuevos valores de it para cada hijo del nodo siendo tratado en buttonsRec 
-     */
-    nextIt(it, level, divs) {
-        let nodos = Math.pow(2, level - 1);
-        let disp_divs = Math.floor(divs / nodos);
-        let inc;
-        inc = Math.floor(disp_divs / 2);
-        return [it + inc, it - inc];
+        const free_divs = Math.floor((divisions - nodes) / 2);
+        const offset = Math.floor(free_divs / nodes);
+
+        for(let i = 0; i < nodes; i++) {
+            const div = 1 + i * offset;
+            res[i] = div;
+        }
+
+        return res;
     }
     
-   
     /*
     Para hacerlo vertical
     mirrorLevel(level) {
