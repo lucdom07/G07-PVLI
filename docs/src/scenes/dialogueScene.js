@@ -31,6 +31,7 @@ export default class DialogueScene extends Phaser.Scene {
         this.load.json(this.dialogueKey, file);
         this.load.image("bird", "./assets/dialogue_sprites/bird_dialogue.png");
         this.load.image("prueba", "./assets/backgrounds/chinaSetup.png");
+        this.load.image("kitty", "./assets/dialogue_sprites/cat_dialogue.png");
     }
 
     async create() {

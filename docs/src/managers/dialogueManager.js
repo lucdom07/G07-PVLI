@@ -77,9 +77,8 @@ export default class DialogueManager {
             this.end();
             return;
         }
-
-        
-        if(d.background&&d.background!=""){
+  
+        if(d.background && d.background!=""){
             if(this.background){
                 this.background.destroy();
                 this.background = null;
@@ -137,27 +136,20 @@ export default class DialogueManager {
     método para actualizar sprite del pj  si lo hubiera
     */
     updateSprite(d){
-        //si no hay sprite en el diálogo actual, destruyo el sprite y retorno
-        if(!d.sprite){
+
+
+        if(d.sprite && d.sprite!=""){
             if(this.sprite){
                 this.sprite.destroy();
                 this.sprite = null;
             }
-            return;
+            
+            this.sprite = this.scene.add.image(600,320,d.sprite);
+            this.sprite.setVisible(true);
+            this.sprite.setScale(this.config.spriteScale);
+            this.sprite.setDepth(-1);
         }
-        //si no hay sprite creado, lo creo a raíz del tag del json
-        if(!this.sprite){
-            this.sprite = this.scene.add.sprite(600,320,d.sprite);
-            this.sprite;
-        }
-        //si ya existe el sprite pero es diferente al del diálogo actual, actualizo la textura
-        else if (this.sprite.texture.key!=d.sprite)
-            this.sprite.setTexture(d.sprite);
-        
-        //si hay sprite en el diálogo actual, actualizo su posición y escala
-        else this.sprite.setPosition(600,320);
-        this.sprite.setScale(this.config.spriteScale);
-        this.sprite.setDepth(-1);
+      
     }
 
 
