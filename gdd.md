@@ -317,7 +317,7 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 |Australia|
 || Cazador Furtivo |8|4|0|
 || Jonny me lavo |5|5|1|
-|| //Aborígenes |7|4|2|
+|| Astalowsco Jones |7|4|2|
 || Sharon |5|5|3|
 |España|
 || Manolo |10|7|1|
