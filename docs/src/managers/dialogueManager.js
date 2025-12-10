@@ -1,5 +1,3 @@
-import dialogBoxClass from "../../gameObjects/ui/dialogPlugin.js";
-
 
 export default class DialogueManager {
     constructor(scene, dialogues, config = {}) {
@@ -27,6 +25,8 @@ export default class DialogueManager {
         this.dialogBox = null;
         //sprite del personaje
         this.sprite = null;
+        //fondo
+        this.background = null;
 
         //siguiente diálogo
         this.next = this.next.bind(this);
@@ -43,6 +43,8 @@ export default class DialogueManager {
         //activamos e inicializamos 
         this.active = true;
         this.index = 0;
+
+
 
         //creamos UI del nombre si no existe
         if (!this.nameText) {
@@ -74,6 +76,17 @@ export default class DialogueManager {
         if (!d) {
             this.end();
             return;
+        }
+
+        
+        if(d.background&&d.background!=""){
+            if(this.background){
+                this.background.destroy();
+                this.background = null;
+            }
+            this.background = this.scene.add.image(this.scene.sys.game.canvas.width*0.5,this.scene.sys.game.canvas.height*0.5,d.background);
+            this.background.setDisplaySize(this.scene.sys.game.canvas.width,this.scene.sys.game.canvas.height);
+            this.background.setDepth(-2);
         }
         //método que actualiza el sprite del pj si lo hubiera
         this.updateSprite(d);

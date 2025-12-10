@@ -14,6 +14,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.playerData = {};
         //Array con los aliados seleccionados
         this.selectedAllies = [];
+        this.clickableAllies = new Set();
         //División del DOM que muestra los aliados desbloqueados (también de clase DomAlly)
 
         this.DOMallies = document.getElementById('alliesArray');
@@ -23,20 +24,28 @@ export default class CombatSetup extends Phaser.Scene {
         this.ObjectSize =100;
 
         this.audioManager = null;
+        this.backgrounds = ['austSetup', 'chinaSetup', 'spainSetup', 'usaSetup'];
     }
 
     init(data) {
-        this.playerData = data.playerData;
+        this.playerData = data.playerData,
+        this.world = data.world,
+        this.bossFlag = data.bossFlag
     }
 
     preload() {
+        //Backgrounds
+        this.load.image('austSetup','assets/backgrounds/australiaSetup.png');
+        this.load.image('chinaSetup','assets/backgrounds/chinaSetup.png');
+        this.load.image('spainSetup','assets/backgrounds/spainSetup.png');
+        this.load.image('usaSetup','assets/backgrounds/usaSetup.png');
+
         this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
         this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
         this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
         this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
-        this.load.image('setupBackground','assets/backgrounds/australiaSetup.png')
         this.load.image('combatButton', 'assets/placeholders/buttons/combat_button.jpg')
     }
 
@@ -47,7 +56,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.PRE);
 
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'setupBackground');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,this.backgrounds[this.world]);
 
         this.showObjects(this.playerData.ownedObjects);
 
@@ -56,23 +65,34 @@ export default class CombatSetup extends Phaser.Scene {
   
         //pasa los aliados al debugCombat
         playButton.on('pointerdown',()=>{
-            if(this.selectedAllies.length > 0 && this.selectedAllies.length === 3) {
+            if(this.selectedAllies.length > 0) {
                 this.scene.start('debugCombat',{
                     playerData: this.playerData,
-                    selectedAllies: this.selectedAllies
+                    selectedAllies: this.selectedAllies,
+                    world: this.world,
+                    bossFlag: this.bossFlag
                 });
-                
+                this.selectedAllies = [];
             }
             console.log("yendo al combate");
         });
-  
 
+        //Crear aliados en la escena y hacer los del DOM clickables
+        for(let i = 0; i < this.playerData.ownedAllies.length; i++) {
+            const ally = this.playerData.ownedAllies[i];
+            this.playerData.ownedAllies[i] = Ally.clone(ally, this);
+        }
+  
+        [...this.DOMallies.children].forEach(ally => {
+            this.makeClickable(ally);
+        });
     }
     //Determina si la ally esta en la tropa para removerlo o añadirlo
     toggleAlly(ally) {
         if(this.selectedObject){
             this.applyObjectToAlly(ally);
-        }else{
+        }
+        else{
             if(ally.isOnTeam()) {
             this.removeAlly(ally);
             }
@@ -80,16 +100,13 @@ export default class CombatSetup extends Phaser.Scene {
             this.addAlly(ally);
             }
         }
-        [...this.DOMallies.children].forEach(x => {
-            this.makeClickable(x);
-        });
     }
 
     /*
     Añade un aliado a selectedAllies, siempre que no estuviera ya añadido.
     */
     addAlly(ally) {
-        if (this.selectedAllies.length >= 3 || this.selectedAllies.some(x => x === ally)) {
+        if (this.selectedAllies.length >= 3 || (this.selectedAllies.length > 0 && this.selectedAllies.some(x => x === ally))) {
             return;
         }
         this.selectedAllies.push(ally);
@@ -174,7 +191,6 @@ export default class CombatSetup extends Phaser.Scene {
         }
     }
 
-
     /*
     Elimina un aliado de selectedAllies.
     */
@@ -184,7 +200,7 @@ export default class CombatSetup extends Phaser.Scene {
             this.selectedAllies.splice(index, 1);
             ally.x = -150;
             ally.y = -150;
-            ally.warriorUI.setPosition(ally.x, ally.y);
+            ally.warriorUI.setStatsPosition(ally.x, ally.y);
             this.repositionSelectedAllies();   
         }
     }
@@ -212,7 +228,7 @@ export default class CombatSetup extends Phaser.Scene {
     }
 
     toggleAlly(domAlly) {
-        const ally = this.ownedAllies.find(x => x.name === domAlly.dataset.name);
+        const ally = this.playerData.ownedAllies.find(x => x.name === domAlly.dataset.name);
         if(!ally) return;
 
         if(this.selectedAllies.includes(ally)) {
@@ -225,10 +241,17 @@ export default class CombatSetup extends Phaser.Scene {
 
     // Hace un aliado del DOM clickeable
     makeClickable(domAlly) {
-        domAlly.addEventListener('click', () => {
+        if(!this.clickableAllies.has(domAlly)) {
+            domAlly.addEventListener('click', () => {
             this.toggleAlly(domAlly);
             console.log(domAlly.dataset.name);
-        });
+            });
+            this.clickableAllies.add(domAlly);
+        }
+    }
+
+    removeFromClickable(domAlly) {
+        this.clickableAllies.delete(domAlly);
     }
 
     selectObject(object, index) {

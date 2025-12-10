@@ -28,11 +28,18 @@ export default class DialogueScene extends Phaser.Scene {
             return;
         }
 
-        this.load.json("dialogueData", file);
+        this.load.json(this.dialogueKey, file);
         this.load.image("bird", "./assets/dialogue_sprites/bird_dialogue.png");
+        this.load.image("prueba", "./assets/backgrounds/chinaSetup.png");
     }
 
     async create() {
+
+        const dialogues = this.cache.json.get(this.dialogueKey);
+        // instancio al manager de diálogos
+        this.manager = new DialogueManager(this, dialogues, { dialogBoxClass: DialogText });
+        this.manager.start();
+
          if (!this.dialogueKey) {
             console.error("No se pasó dialogueKey a DialogueScene");
             return;
@@ -43,15 +50,6 @@ export default class DialogueScene extends Phaser.Scene {
             console.error("No existe un JSON de diálogos para esta clave:", this.dialogueKey);
             return;
         }
-
-        // cargo y parseo el json de diálogos
-        const response = await fetch(file);
-        const dialogues = await response.json();
-
-        // instancio al manager de diálogos
-        this.manager = new DialogueManager(this, dialogues, { dialogBoxClass: DialogText });
-        this.manager.start();
-
         /*
         BOTÓN DE SKIP
         */

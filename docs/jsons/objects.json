@@ -2,6 +2,7 @@
     "objects0":[
         {
             "name": "Viejo calcetín",
+            "textureid": "calcetin",
             "life": 0,
             "attack": 3,
             "cost":5,
@@ -9,6 +10,7 @@
         },
         {
             "name": "Las llaves perdidas",
+            "textureid": "llaves",
             "life": 4,
             "attack": 0,
             "cost":5,
@@ -16,6 +18,7 @@
         },
         {
             "name": "Agua",
+            "textureid": "agua",
             "life": 2,
             "attack": 2,
             "cost":5,
@@ -26,6 +29,7 @@
     "objects1":[
         {
             "name": "Bocata de calamares",
+            "textureid": "bocata",
             "life": 6,
             "attack": 0,
             "cost":8,
@@ -33,6 +37,7 @@
         },
         {
             "name": "Vestido flamenca",
+            "textureid": "flamenca",
             "life": 5,
             "attack": 0,
             "cost":8,
@@ -40,6 +45,7 @@
         },
         {
             "name": "Ñ",
+            "textureid": "enye",
             "life": -1,
             "attack": 4,
             "cost":8,
@@ -47,6 +53,7 @@
         },
         {
             "name": "Tortilla de patatas CON CEBOLLA",
+            "textureid": "tortilla",
             "life": 4,
             "attack": 1,
             "cost":8,
@@ -57,6 +64,7 @@
     "objects2":[
         {
             "name": "Pistola",
+            "textureid": "gun",
             "life": -3,
             "attack": 5,
             "cost":11,
@@ -64,6 +72,7 @@
         },
         {
             "name": "Partes de las torres gemelas",
+            "textureid": "torres",
             "life": 2,
             "attack": 4,
             "cost":11,
@@ -71,6 +80,7 @@
         },
         {
             "name": "Cheese Burger",
+            "textureid": "burger",
             "life": 5,
             "attack": 0,
             "cost":11,
@@ -81,6 +91,7 @@
     "objects3":[
         {
             "name": "Chancla",
+            "textureid": "chancla",
             "life": -7,
             "attack": 10,
             "cost":14,
@@ -88,13 +99,15 @@
         },
         {
             "name": "Bambu",
+            "textureid": "bambu",
             "life": 8,
             "attack": 0,
             "cost":14,
             "texture": "assets/objects/bamboo.png"
         },
         {
-            "name": "Emocional Damage",
+            "name": "Emotional Damage",
+            "textureid": "emotional",
             "life": 0,
             "attack": 7,
             "cost":14,
@@ -102,6 +115,7 @@
         },
         {
             "name": "Timo",
+            "textureid": "timo",
             "life": 6,
             "attack": 6,
             "cost":14,

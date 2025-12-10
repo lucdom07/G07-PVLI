@@ -45,6 +45,7 @@ export default class MarketManager {
         //aliados ya obtenidos
         this.bag = bag;
         //genero aliados y objetos en venta
+        console.log("aaaaaaa");
         this.marketAllies = this.generateAlly(allyList, 3);
         this.marketObjects = this.generateObject(objList, 2); // objetos no implementados aún
         //muestro el mercado
@@ -92,11 +93,11 @@ export default class MarketManager {
 
             const clone = shuffled[i].clone();
             clone.scene = this.scene;
-            
+            //elimina el aliado elegido del array de disponibles
             if (!clone.scene) {
             this.scene.add.existing(clone);
         }
-        
+        //lo añade al array de aliados del mercado
         marketAllies.push(this.makeStruct(clone));
         }
         
@@ -300,7 +301,7 @@ export default class MarketManager {
             //lo añado al inventario
             this.bag.push(newAlly);
             //lanzo el evento de compra
-            this.scene.events.emit('buyingAlly', newAlly, newAlly.cost);
+            this.scene.events.emit('buyingAlly', newAlly.cost);
 
             this.showMessage(`¡Has comprado a ${newAlly.name}!`);
         } 

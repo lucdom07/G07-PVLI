@@ -36,7 +36,8 @@ export default class HierarchyGraph {
         this.childrenPerNode = childrenPerNode;
         const level = 0;
         this.buildGraph(level, this.getParentPairs(level));
-        console.log(this.numNodes);
+        const lastNode = this.levelMatrix[this.levels - 1][0];
+        lastNode.value = 2;
     }
 
     buildGraph(level, parentPairs) {

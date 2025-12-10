@@ -2,6 +2,7 @@
     "ally0":[
         {
             "name": "Michi-Michi",
+            "textureid": "michimichi",
             "life": 9,
             "attack": 5,
             "range":0,
@@ -12,6 +13,7 @@
         },
         {
             "name": "Astra",
+            "textureid": "astra",
             "life": 8,
             "attack": 4,
             "range":2,
@@ -21,6 +23,7 @@
         },
         {
             "name": "Cotton",
+            "textureid": "cotton",
             "life": 7,
             "attack": 4,
             "range":1,
@@ -30,6 +33,7 @@
         },
         {
             "name": "Tueto",
+            "textureid": "tueto",
             "life": 9,
             "attack": 5,
             "range":4,
@@ -39,6 +43,7 @@
         },
         {
             "name": "Gitab",
+            "textureid": "gitab",
             "life": 6,
             "attack": 3,
             "range":3,
@@ -51,6 +56,7 @@
     "ally1":[
         {
             "name": "Argos",
+            "textureid": "argos",
             "life": 9,
             "attack": 5,
             "range":3,
@@ -60,6 +66,7 @@
         },
         {
             "name": "Kurma",
+            "textureid": "kurma",
             "life": 10,
             "attack": 6,
             "range":0,
@@ -69,6 +76,7 @@
         },
         {
             "name": "Gatoñete",
+            "textureid": "gatonete",
             "life": 11,
             "attack": 7,
             "range":1,
@@ -78,6 +86,7 @@
         },
         {
             "name": "Pablotter",
+            "textureid": "pablotter",
             "life": 10,
             "attack": 6,
             "range":2,
@@ -89,7 +98,8 @@
 
     "ally2":[
         {
-            "name": "Seraphina",
+            "name": "Nutricristo",
+            "textureid": "nutricristo",
             "life": 13,
             "attack": 9,
             "range":2,
@@ -99,6 +109,7 @@
         },
         {
             "name": "Señor Anteojo",
+            "textureid": "senorAnteojo",
             "life": 12,
             "attack": 7,
             "range":0,
@@ -108,6 +119,7 @@
         },
         {
             "name": "Pimiento Gatomórfico",
+            "textureid": "pimientoGato",
             "life": 10,
             "attack": 9,
             "range":1,
@@ -117,6 +129,7 @@
         },
         {
             "name": "Miku",
+            "textureid": "miku",
             "life": 12,
             "attack": 8,
             "range":4,
@@ -129,6 +142,7 @@
     "ally3":[
         {
             "name": "QiLing",
+            "textureid": "qiling",
             "life": 14,
             "attack": 10,
             "range":0,
@@ -138,6 +152,7 @@
         },
         {
             "name": "Po-ka",
+            "textureid": "poka",  
             "life": 12,
             "attack": 9,
             "range":1,
@@ -147,6 +162,7 @@
         },
         {
             "name": "Kairos",
+            "textureid": "kairos",
             "life": 13,
             "attack": 11,
             "range":3,
@@ -156,6 +172,7 @@
         },
         {
             "name": "Moflete",
+            "textureid": "moflete",
             "life": 12,
             "attack": 10,
             "range": 2,
