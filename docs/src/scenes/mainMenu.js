@@ -17,8 +17,6 @@ export default class mainMenu extends Phaser.Scene{
         }
         this.audioManager = null;
         this.fromReset = this.playerData?.reset === true;
-
-        this.loadMichi();
     }
 
     preload(){
@@ -29,7 +27,7 @@ export default class mainMenu extends Phaser.Scene{
     }
 
     create(){
-
+        this.loadMichi();
         if (this.fromReset) {
             this.cameras.main.fadeIn(800, 0, 0, 0);
         }

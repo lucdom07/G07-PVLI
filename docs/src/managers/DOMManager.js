@@ -20,7 +20,7 @@ export default class DOMmanager {
             const img = document.createElement('img');
 
             div.dataset.name = ally.name;
-            img.src = 'assets/placeholders/warriors/' + ally.name + '.png'; //Cambiar por URL de la textura
+            img.src = ally.textureURL; //Cambiar por URL de la textura
             img.className = 'domAlly';
 
             div.appendChild(img);
