@@ -47,6 +47,7 @@ export default class Animation extends Phaser.Scene{
     }
 
     create(){
+        console.log("level: ", this.playerData.level);
         this.cargaManagerEnemigos = new cargaGameObject(this,this.playerData.level);
         this.enemyGroup = this.cargaManagerEnemigos.loadEnemyGroups();
 
@@ -127,13 +128,15 @@ export default class Animation extends Phaser.Scene{
             console.log("boss" + this.bossFlag);
             if(this.combatManager.victory) {
                 if(!this.bossFlag) {
-                    this.scene.resume('debugMap');
                     this.scene.stop();
+                    this.scene.resume('debugMap');
                 }
                 else {
+                    this.playerData.level++;
                     this.world += 1;
                     this.bossFlag = false;
                     this.scene.start('debugMap',{
+                        playerData: this.playerData,
                         bossFlag: this.bossFlag,
                         world: this.world
                     });
