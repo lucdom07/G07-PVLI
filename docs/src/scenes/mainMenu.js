@@ -1,31 +1,28 @@
+
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
 import Ally from "../../gameObjects/characters/ally.js";
+import { DialogueKeys } from "../managers/dialogueConfig.js";
+import DOMmanager from "../managers/DOMManager.js";
 
 export default class mainMenu extends Phaser.Scene{
-    constructor(){
+    constructor(DOManager){
         super({key: 'mainMenu'});
-        this.playerData = {
-            
-        }
-    }
-
-    init(data){
-        this.playerData = {
+        this.DOMmanager = DOManager;
+        this.playerData = { 
             ownedAllies: [],
             money: 10,
             level: 0,
             ownedObjects: []
         }
         this.audioManager = null;
-        this.fromReset = data?.reset === true;
+        this.fromReset = this.playerData?.reset === true;
 
         this.loadMichi();
     }
 
     preload(){
         this.load.image('startButton','assets/buttons/start.png')
-        //this.load.image('marketButton','assets/button.png')
         this.load.image('bg','assets/backgrounds/mainMenu.png')
         this.load.image('mainMenuCat','assets/main_menu/mainmenu_cat.png')
         this.load.image('furry','assets/main_menu/furryLogo.png')
@@ -75,9 +72,15 @@ export default class mainMenu extends Phaser.Scene{
         playButton.on('pointerdown',()=>{
             
             this.cameras.main.fadeOut(800, 0, 0, 0); 
-
             this.cameras.main.once('camerafadeoutcomplete', () => {
-                this.scene.start('introduction', this.playerData);
+                this.audioManager.playMusic(MusicKeys.INTRO);
+                this.scene.start("DialogueScene", 
+                    { dialogueKey: DialogueKeys.INTRO,
+                        nextScene: 'debugMap',
+                        playerData: this.playerData
+                    }, 
+                );
+
             });
         });
 
@@ -113,6 +116,7 @@ export default class mainMenu extends Phaser.Scene{
             );
         });
         
+        this.DOMmanager.inicializa(this.playerData.ownedAllies);
     }
 
     // Crear solo el aliado Michi-Michi

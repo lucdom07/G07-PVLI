@@ -4,11 +4,10 @@ import MainMenu from './scenes/mainMenu.js';
 import DebugMarket from './scenes/debugMarket.js';
 import CombatSetup from './scenes/combatSetup.js';
 import DOMmanager from "./managers/DOMManager.js";
-import IntroductionScene from './scenes/introductionScene.js';
 import AustraliaScene from './scenes/australiaScene.js';
-import PauseMenu from './scenes/pauseMenu.js';
 import marketDialogueScene from './scenes/marketDialogueScene.js';
 import BootScene from './scenes/precargaScene.js';
+import DialogueScene from './scenes/dialogueScene.js';
 
 window.addEventListener('DOMContentLoaded', () => {
 	
@@ -34,15 +33,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		},
 		scene: [
 			BootScene,
-			MainMenu,
+			new MainMenu(DOManager),
 			DebugMap,
 			DebugCombat,
-			DebugMarket,
+			new DebugMarket(DOManager),
 			new CombatSetup(DOManager),
-			IntroductionScene,
 			AustraliaScene,
-			PauseMenu,
-			marketDialogueScene
+			marketDialogueScene,
+			DialogueScene
 		],
 		physics: { 
 			default: 'arcade', 

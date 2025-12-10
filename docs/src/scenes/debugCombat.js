@@ -11,6 +11,7 @@ export default class Animation extends Phaser.Scene{
     constructor(){
         super({key: 'debugCombat'});
         this.playerData = {};
+        this.playerTeam = [];
         this.audioManager = null;
 
         this.cargaManagerEnemigos = null;
@@ -32,6 +33,7 @@ export default class Animation extends Phaser.Scene{
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
         this.load.image('combatBackground','assets/backgrounds/australiaCombat.png')
+        this.load.image('exit','assets/placeholders/buttons/exit_button.png');
     }
 
     create(){
@@ -70,20 +72,7 @@ export default class Animation extends Phaser.Scene{
         //Inicializa el combate
         this.combatManager.initCombat(this.playerTeam, this.enemyToCombat);
 
-        // Botón de pausa
-        this.pauseButton = this.add.text(100, 40, "Pause", {
-            fontSize: "20px",
-            color: "#ffffff",
-            backgroundColor: "#000000",
-            padding: { x: 10, y: 5 }
-        }).setInteractive();
-
-        
-        this.pauseButton.on("pointerdown", () => {
-            this.scene.launch('pauseMenu',{pausedSceneKey : this.sys.settings.key});
-            this.scene.pause();
-        });
-
+      
 
 
     }
@@ -110,6 +99,19 @@ export default class Animation extends Phaser.Scene{
         });
         
         this.playerTeam = recreatedAllies;
+    }
+    showExitButton(){
+        console.log("you can exit combat");
+        const exitButton = this.add.image(200 ,50,'exit').setInteractive();
+
+        exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
+  
+        //pasa los aliados al debugCombat
+        exitButton.on('pointerdown',()=>{
+            this.scene.start('debugMap',{
+                playerData: this.playerData
+            });
+        });
     }
     update(time, dt){
         this.combatManager.update(time, dt);

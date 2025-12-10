@@ -1,11 +1,18 @@
+import dialogBoxClass from "../../gameObjects/ui/dialogPlugin.js";
+
+
 export default class DialogueManager {
     constructor(scene, dialogues, config = {}) {
+        //escena actual
         this.scene = scene;
+        //array de diálogos
         this.dialogues = dialogues || [];
+        //índice del diálogo actual
         this.index = 0;
+        //estado del gestor
         this.active = false;
 
-        
+        //configuración visual
         this.config = Object.assign({
             nameStyle: { fontSize: "35px", color: "#ffffff", fontFamily: "Caveat Brush" },
             dialogStyle: { fontSize: "30px", color: "#000000", fontFamily: "Caveat Brush", padding: 32, windowHeight: 100, dialogSpeed: 3 },
@@ -14,12 +21,16 @@ export default class DialogueManager {
             spriteScale : 0.7
         }, config);
 
+        //nombre del personaje
         this.nameText = null;
+        //caja de diálogo
         this.dialogBox = null;
+        //sprite del personaje
         this.sprite = null;
 
-        
+        //siguiente diálogo
         this.next = this.next.bind(this);
+        //saltar diálogos
         this.skip = this.skip.bind(this);
     }
 
@@ -29,54 +40,62 @@ export default class DialogueManager {
             return;
         }
 
+        //activamos e inicializamos 
         this.active = true;
         this.index = 0;
 
-        // Crear UI de nombre si no existe
+        //creamos UI del nombre si no existe
         if (!this.nameText) {
             this.nameText = this.scene.add.text(30, 450, "", this.config.nameStyle);
         }
 
-        // Crear UI de caja de diálogo si no existe
+        //creamos UI de la caja de diálogo si no existe
         if (!this.dialogBox) {
             if (this.config.dialogBoxClass) {
                 this.dialogBox = new this.config.dialogBoxClass(this.scene, this.config.dialogStyle);
             } else {
-                // fallback simple
                 this.dialogBox = this.scene.add.text(50, 400, "", this.config.dialogStyle);
             }
         }
 
-        // Avanzar con click
+        //avanzamos al siguiente diálogo con el click
         this.scene.input.on("pointerdown", this.next);
         
+        //método para mostrar el diálogo
         this.showDialogue();
     }
 
+    /*
+    Muestra el diálogo actual
+    */
     showDialogue() {
+        //diálogo actual
         const d = this.dialogues[this.index];
         if (!d) {
             this.end();
             return;
         }
-
+        //método que actualiza el sprite del pj si lo hubiera
         this.updateSprite(d);
 
+        //añade el nombre del pj
         this.nameText.setText(d.chara?.name ?? d.name ?? "");
+        //añade la línea de diálogo
         if (this.dialogBox.setText) {
-            // Si es DialogText
-            this.dialogBox.setText(d.text, d.animated ?? true);
+            const text = d.line ?? "";
+            //animación diálogo
+            this.dialogBox.setText(text, d.animated ?? true);
         } else {
-            // fallback simple
             this.dialogBox.setText(d.text ?? "");
         }
        
-
-       
     }
-
+    /*
+    pasa al siguiente diálogo
+    */
     next() {
         if (!this.active) return;
+        //actualiza el índice de diálogos y muestra el siguiente
         this.index++;
         if (this.index >= this.dialogues.length) {
             this.end();
@@ -85,18 +104,27 @@ export default class DialogueManager {
         this.showDialogue();
     }
 
+    /*
+    salta todos los diálogos actualizando el índice al último disponible
+    */
     skip() {
         this.index = this.dialogues.length;
         this.end();
     }
 
+    /*
+    creo que es bastante descriptivo..... cierra el manager de diálogos
+    */
     end() {
         this.active = false;
         this.scene.events.emit("dialogueEnd");
     }
 
+    /*
+    método para actualizar sprite del pj  si lo hubiera
+    */
     updateSprite(d){
-
+        //si no hay sprite en el diálogo actual, destruyo el sprite y retorno
         if(!d.sprite){
             if(this.sprite){
                 this.sprite.destroy();
@@ -104,14 +132,16 @@ export default class DialogueManager {
             }
             return;
         }
+        //si no hay sprite creado, lo creo a raíz del tag del json
         if(!this.sprite){
             this.sprite = this.scene.add.sprite(600,320,d.sprite);
             this.sprite;
         }
+        //si ya existe el sprite pero es diferente al del diálogo actual, actualizo la textura
         else if (this.sprite.texture.key!=d.sprite)
             this.sprite.setTexture(d.sprite);
-
         
+        //si hay sprite en el diálogo actual, actualizo su posición y escala
         else this.sprite.setPosition(600,320);
         this.sprite.setScale(this.config.spriteScale);
         this.sprite.setDepth(-1);

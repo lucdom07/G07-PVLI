@@ -1,12 +1,10 @@
 import Dialogue from "../../gameObjects/ui/Dialogue.js";
 import Character from "../../gameObjects/ui/character.js";
 import DialogText from "../../gameObjects/ui/dialogPlugin.js";
-import DialogueManager from "../managers/dialogManager.js";
+import DialogueManager from "../managers/dialogueManager.js";
 
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
-
-import cargaGameObject from "../managers/cargaGameObjects.js";
 
 export default class AustraliaScene extends Phaser.Scene {
     constructor() {

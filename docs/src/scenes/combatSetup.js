@@ -1,4 +1,6 @@
-import GlobalAlly from "../managers/globalAlly.js";
+import Ally from "../../gameObjects/characters/ally.js";
+import DOMmanager from "../managers/DOMManager.js";
+import WarriorUI from "../../gameObjects/ui/warriorUi.js";
 
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
@@ -13,9 +15,8 @@ export default class CombatSetup extends Phaser.Scene {
         //Array con los aliados seleccionados
         this.selectedAllies = [];
         //División del DOM que muestra los aliados desbloqueados (también de clase DomAlly)
-        this.DOMallies = document.getElementById('alliesArray').children;
-        //Posiciones de la fila de selección, con un booleano para saber si estan ocupadas
-        this.positions = [[0, false], [1, false], [2, false], [3, false], [4, false]];
+
+        this.DOMallies = document.getElementById('alliesArray');
 
         this.selectedObject = null;
 
@@ -25,10 +26,7 @@ export default class CombatSetup extends Phaser.Scene {
     }
 
     init(data) {
-        //Array global con todos los aliados (desbloqueados o no)
-        //this.globalAllies = data.allies;
-        this.playerData = data;
-        //Aún no está bien conectado al resto del juego
+        this.playerData = data.playerData;
     }
 
     preload() {
@@ -51,20 +49,9 @@ export default class CombatSetup extends Phaser.Scene {
 
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'setupBackground');
 
-        //Subscribir eventos de click a los aliados del DOM
-        for(let i = 0; i < this.DOMallies.length; i++) {
-            let index = i;
-            let ally = this.DOMmanager.getArray()[i];
-            this.DOMallies.item(i).addEventListener('click', () => {
-                this.toggleAlly(ally, index);
-                console.log(ally.getName());
-            });
-        }
-
         this.showObjects(this.playerData.ownedObjects);
 
         const playButton = this.add.image(200 ,50,'combatButton').setInteractive();
-
         playButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
   
         //pasa los aliados al debugCombat
@@ -78,32 +65,7 @@ export default class CombatSetup extends Phaser.Scene {
             }
             console.log("yendo al combate");
         });
-
-      //Código provisional hasta tener el resto de componentes del juego
-
-        this.ownedAllies = [
-            new GlobalAlly("pimiento", 'pimiento',36,0,20,0,0,true),
-            new GlobalAlly("tortuga",'tortuga' ,20,0,5,0,0,true),
-            new GlobalAlly("chupacabra",'chupacabra',21,0,10,0,0,true),
-            new GlobalAlly("perro",'perro',36,0,20,0,0,true),
-            new GlobalAlly("foca",'foca',36,0,20,0,0,true),
-            new GlobalAlly("warf",'warf',35,0,7,0,0,true)
-        ];
-
-        
-        // Botón de pausa
-        this.pauseButton = this.add.text(100, 40, "Pause", {
-            fontSize: "20px",
-            color: "#ffffff",
-            backgroundColor: "#000000",
-            padding: { x: 10, y: 5 }
-        }).setInteractive();
-
-        
-        this.pauseButton.on("pointerdown", () => {
-            this.scene.launch('pauseMenu',{pausedSceneKey : this.sys.settings.key});
-            this.scene.pause();
-        });
+  
 
     }
     //Determina si la ally esta en la tropa para removerlo o añadirlo
@@ -118,34 +80,20 @@ export default class CombatSetup extends Phaser.Scene {
             this.addAlly(ally);
             }
         }
+        [...this.DOMallies.children].forEach(x => {
+            this.makeClickable(x);
+        });
     }
 
     /*
     Añade un aliado a selectedAllies, siempre que no estuviera ya añadido.
-    FALTARIA PONER UN LIMITE AL MAXIMO DE ALIADOS
     */
     addAlly(ally) {
-        if (this.selectedAllies.length >= 3) {
+        if (this.selectedAllies.length >= 3 || this.selectedAllies.some(x => x === ally)) {
             return;
         }
-
-        if(!this.selectedAllies.some(x => x.getName() === ally.getName())) {
-
-            let i = 0;
-            
-            while(i < this.ownedAllies.length) {
-
-                if(ally.getName() === this.ownedAllies[i].getName()) {
-
-                    ally.toggleOnTeam();
-                    let newAlly = ally.AllyFromGlobalAlly(this, 100 + i * 125, 300);
-                    this.selectedAllies.push(newAlly); 
-                    this.repositionSelectedAllies();
-                    break;
-                }
-                i++;
-            }
-        }
+        this.selectedAllies.push(ally);
+        this.repositionSelectedAllies();
     }
 
     //se enseñan los objetos en el lado derecho de la pantalla del juego
@@ -229,27 +177,15 @@ export default class CombatSetup extends Phaser.Scene {
 
     /*
     Elimina un aliado de selectedAllies.
-
-    FALTARIA QUE NO SE PUEDA ABNDONAR LA ESCENA CON 0 ALIADOS
     */
     removeAlly(ally) {
-        let i = 0;
-        let found = false;
-
-        for(; i < this.selectedAllies.length; i++) {
-
-            if(this.selectedAllies[i].getName() === ally.getName()) {
-                found = true;
-                break;
-            }
-        }
-
-        if(found) {
-            ally.toggleOnTeam();
-            const removed = this.selectedAllies[i];
-            if (removed && removed.destroy) removed.destroy();
-            this.selectedAllies.splice(i, 1);
-            this.repositionSelectedAllies();
+        const index = this.selectedAllies.indexOf(ally);
+        if(index != -1) {
+            this.selectedAllies.splice(index, 1);
+            ally.x = -150;
+            ally.y = -150;
+            ally.warriorUI.setPosition(ally.x, ally.y);
+            this.repositionSelectedAllies();   
         }
     }
 
@@ -272,6 +208,26 @@ export default class CombatSetup extends Phaser.Scene {
                 ally.x = startX - index * separation;
                 ally.y = y;
             }
+        });
+    }
+
+    toggleAlly(domAlly) {
+        const ally = this.ownedAllies.find(x => x.name === domAlly.dataset.name);
+        if(!ally) return;
+
+        if(this.selectedAllies.includes(ally)) {
+            this.removeAlly(ally);
+        }
+        else {
+            this.addAlly(ally);
+        }
+    }
+
+    // Hace un aliado del DOM clickeable
+    makeClickable(domAlly) {
+        domAlly.addEventListener('click', () => {
+            this.toggleAlly(domAlly);
+            console.log(domAlly.dataset.name);
         });
     }
 
@@ -396,5 +352,4 @@ export default class CombatSetup extends Phaser.Scene {
     
         console.log(`Objeto ${object.getName()} usado y eliminado`);
     }
-
 }

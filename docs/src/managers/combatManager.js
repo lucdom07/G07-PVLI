@@ -157,6 +157,9 @@ export default class CombatManager{
             console.log("Derrota...");
             this.derrota();
         }
+        this.scene.time.delayedCall(500, () => {
+            this.scene.showExitButton();
+        });
     }
 
     victoria() {
