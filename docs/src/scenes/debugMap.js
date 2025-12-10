@@ -36,7 +36,7 @@ export default class debugMap extends Phaser.Scene {
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'austBackground');
 
         this.createButtons();
-        this.createResetButton();
+        //this.createResetButton();
     
     }
 

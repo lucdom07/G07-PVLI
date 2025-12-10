@@ -27,9 +27,6 @@ export default class CombatSetup extends Phaser.Scene {
 
     init(data) {
         this.playerData = data.playerData;
-        this.DOMmanager.inicializa(this.playerData.ownedAllies);
-        console.log(this.playerData.ownedAllies.length);
-        this.playerData.ownedAllies.array.forEach(element => { console.log(element.name);});
     }
 
     preload() {
@@ -67,8 +64,16 @@ export default class CombatSetup extends Phaser.Scene {
             }
             console.log("yendo al combate");
         });
+
+        //Crear aliados en la escena y hacer los del DOM clickables
+        for(let i = 0; i < this.playerData.ownedAllies.length; i++) {
+            const ally = this.playerData.ownedAllies[i];
+            this.playerData.ownedAllies[i] = Ally.clone(ally, this);
+        }
   
-        
+        [...this.DOMallies.children].forEach(ally => {
+            this.makeClickable(ally);
+        });
     }
     //Determina si la ally esta en la tropa para removerlo o añadirlo
     toggleAlly(ally) {
@@ -82,11 +87,6 @@ export default class CombatSetup extends Phaser.Scene {
             this.addAlly(ally);
             }
         }
-        /*
-        [...this.DOMallies.children].forEach(x => {
-            this.makeClickable(x);
-        });
-        */
     }
 
     /*
@@ -216,7 +216,7 @@ export default class CombatSetup extends Phaser.Scene {
     }
 
     toggleAlly(domAlly) {
-        const ally = this.ownedAllies.find(x => x.name === domAlly.dataset.name);
+        const ally = this.playerData.ownedAllies.find(x => x.name === domAlly.dataset.name);
         if(!ally) return;
 
         if(this.selectedAllies.includes(ally)) {

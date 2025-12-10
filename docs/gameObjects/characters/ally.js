@@ -62,4 +62,24 @@ export default class Ally extends Warrior{
         return clone;
     }
 
+    static clone(ally, scene){
+        const clone = new Ally(
+            this.scene = scene,
+            -150,
+            -150,
+            ally.name,
+            ally.life,
+            ally.attack,
+            ally.range,
+            ally.texture,
+            ally.frame,
+            ally.cost,
+            ally.available,
+            ally.textureURL
+        );
+        scene.add.existing(clone);
+        //scene.add.existing(this.warriorUI);
+        return clone;
+    }
+
 }
