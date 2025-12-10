@@ -114,7 +114,6 @@ export default class BootScene extends Phaser.Scene {
                     
                     if (!this.textures.exists(textureKey)) {
                         this.load.image(textureKey, ally.texture);
-                        console.log(textureKey);
                     }
                 });
             }
@@ -130,7 +129,6 @@ export default class BootScene extends Phaser.Scene {
 
             if(group){
                 group.forEach(enemy =>{
-                    const textureKey = enemy.name+"Texture";
                     if (!this.textures.exists(textureKey)) {
                         this.load.image(textureKey, enemy.texture);
                     }
@@ -148,10 +146,8 @@ export default class BootScene extends Phaser.Scene {
             if(group){
                 group.forEach(obj =>{
                     const textureKey = obj.name+"Texture";
-                    
                     if (!this.textures.exists(textureKey)) {
                         this.load.image(textureKey, obj.texture);
-                        console.log(textureKey);
                     }
                 });
             }

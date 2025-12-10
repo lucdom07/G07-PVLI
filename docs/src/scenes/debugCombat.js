@@ -26,12 +26,12 @@ export default class Animation extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
-        this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
-        this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
-        this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
-        this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
-        this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
+        // this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
+        // this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
+        // this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
+        // this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
+        // this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
+        // this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
         this.load.image('combatBackground','assets/backgrounds/australiaCombat.png')
         this.load.image('exit','assets/placeholders/buttons/exit_button.png');
     }
@@ -62,11 +62,11 @@ export default class Animation extends Phaser.Scene{
         this.createEnemyTeam();
 
         // Enemigos disponibles
-        const enemyTeam = [
-            new Enemy(this, -150, -150,"tortuga", 20, 5, 0, 'tortuga', 0, 1),
-            new Enemy(this, -150, -150,"chupacabra", 21, 10, 0, 'chupacabra', 0, 1),
-            new Enemy(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1)
-        ];
+        // const enemyTeam = [
+        //     new Enemy(this, -150, -150,"tortuga", 20, 5, 0, 'tortuga', 0, 1),
+        //     new Enemy(this, -150, -150,"chupacabra", 21, 10, 0, 'chupacabra', 0, 1),
+        //     new Enemy(this, -150, -150,"warf", 35, 7, 0, 'warf', 0, 1)
+        // ];
         
         
         //Inicializa el combate
@@ -119,13 +119,10 @@ export default class Animation extends Phaser.Scene{
 
     //crea la array de enemigos para el combate
     createEnemyTeam() {
-        // Limpiar el array de enemigos para combate
         this.enemyToCombat = [];
         
-        // Determinar el tamaño del equipo enemigo basado en los aliados del jugador
-        const playerTeamSize = this.playerTeam.length;
+        const playerTeamSize = this.playerTeam.length; //tamaño de la array del aliado
         
-        // Validar que hay suficientes enemigos disponibles
         if (this.enemyGroup.length === 0) {
             console.error("No hay enemigos disponibles en enemyGroup");
             return this.enemyToCombat;
@@ -133,31 +130,23 @@ export default class Animation extends Phaser.Scene{
         
         const teamSize = Math.min(playerTeamSize, this.enemyGroup.length);
         
-        // Array de enemigos sin repetición
+        //sin repetición
         if (teamSize <= this.enemyGroup.length) {
-            // Copia array de enemigos del original
             const availableEnemies = [...this.enemyGroup];
             
-            // Seleccionar enemigos aleatorios sin repetición
             for (let i = 0; i < teamSize; i++) {
-                // Seleccionar un índice aleatorio
+                //indice aleatorio
                 const randomIndex = Math.floor(Math.random() * availableEnemies.length);
                 
-                // Obtener el enemigo y removerlo del array disponible
                 const selectedEnemy = availableEnemies.splice(randomIndex, 1)[0];
-                
-                // Clonar el enemigo para no modificar el original en enemyGroup
-                // y ajustar su posición inicial
                 const enemyClone = this.cloneEnemy(selectedEnemy);
                 this.enemyToCombat.push(enemyClone);
             }
         } else {
-            // repeticiones si no hay unicos            
+            // con repeticiones         
             for (let i = 0; i < teamSize; i++) {
                 const randomIndex = Math.floor(Math.random() * this.enemyGroup.length);
                 const selectedEnemy = this.enemyGroup[randomIndex];
-                
-                // Clonar el enemigo
                 const enemyClone = this.cloneEnemy(selectedEnemy);
                 this.enemyToCombat.push(enemyClone);
             }

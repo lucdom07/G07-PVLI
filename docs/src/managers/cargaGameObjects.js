@@ -48,7 +48,6 @@ export default class cargaGameObject{
         if (!groupToLoad) return [];
         
         return groupToLoad.map(allyData => {
-            console.log("Desde cargaGame: " + allyData.name+"Texture")
             return new Ally(
                 this.scene,
                 -150,
@@ -73,8 +72,6 @@ export default class cargaGameObject{
         if (!groupToLoad) return [];
         
         return groupToLoad.map(enemyData => {
-            console.log("Desde cargaGame: " + enemyData.name + "Texture")
-
             return new Enemy(
                 this.scene,
                 -150,
@@ -97,7 +94,6 @@ export default class cargaGameObject{
         if (!groupToLoad) return [];
 
         return groupToLoad.map(objectData => {
-            console.log("Desde cargaGame: " + objectData.name+"Texture")
             return new GlobalObject(
                 this.scene,
                 -150,
