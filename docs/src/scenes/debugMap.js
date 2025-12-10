@@ -15,7 +15,7 @@ export default class debugMap extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background','assets/placeholders/background.jpg');
+        this.load.image('auBackground','assets/backgrounds/australiaaMap.png');
         this.load.image('combatButton','assets/placeholders/buttons/combat_button.jpg');
         this.load.image('marketButton', 'assets/placeholders/buttons/market_button.png');
     }
@@ -31,7 +31,7 @@ export default class debugMap extends Phaser.Scene {
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.MAPA);
 
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'auBackground');
 
         this.createButtons();
 
