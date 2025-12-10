@@ -22,7 +22,7 @@
             "life": 7,
             "attack": 4,
             "range":2,
-            "texture": "assets/enemies/jonastalowcoJones.png"
+            "texture": "assets/enemies/astalowcoJones.png"
         },
         {
             "name": "Sharon",
