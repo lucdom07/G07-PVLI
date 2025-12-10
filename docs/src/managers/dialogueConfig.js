@@ -8,6 +8,7 @@ export const DialogueKeys = {
     AU: 'australia_dialogue',
 
     TIENDA: 'market_dialogue',
+    GAME_OVER: 'gameover_dialogue',
 
     ENDING: 'gameover_dialogue',
 };
@@ -22,6 +23,7 @@ export const DialogueFiles = {
     [DialogueKeys.AU]: 'jsons/dialogues/australiaVictory.json', 
 
     [DialogueKeys.TIENDA]:'jsons/dialogues/market.json',
+    [DialogueKeys.GAME_OVER]: 'jsons/dialogues/gameover.json',
 
     [DialogueKeys.ENDING]: 'jsons/dialogues/ending.json', 
 };
