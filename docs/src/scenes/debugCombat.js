@@ -217,7 +217,7 @@ export default class Animation extends Phaser.Scene{
         );
     }
 
-    //crea el equipo del boss (aun por arreglar)
+    //crea el equipo del boss
     createBossTeam(){
         this.enemyToCombat = [];
         

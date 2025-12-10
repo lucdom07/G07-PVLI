@@ -6,7 +6,7 @@
             "life": 8,
             "attack": 4,
             "range":0,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/hunter.png"
         },
         {
             "name": "Johnny Melavo",
@@ -14,7 +14,7 @@
             "life": 5,
             "attack": 5,
             "range":1,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/johnnyMelavo.png"
         },
         {
             "name": "Astalowsco Jones",
@@ -22,7 +22,7 @@
             "life": 7,
             "attack": 4,
             "range":2,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/jonastalowcoJones.png"
         },
         {
             "name": "Sharon",
@@ -30,7 +30,7 @@
             "life": 5,
             "attack": 5,
             "range":3,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/sharon.png"
         },
         {
             "name": "Melon Moska montado en su Mierdesta",
@@ -38,7 +38,7 @@
             "life": 10,
             "attack": 6,
             "range":0,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/melon_moska.png"
         }
     ],
 
@@ -49,7 +49,7 @@
             "life": 10,
             "attack": 7,
             "range":1,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/manolo.png"
         },
         {
             "name": "Mariloli",
@@ -57,7 +57,7 @@
             "life": 8,
             "attack": 6,
             "range":4,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/mariloli.png"
         },
         {
             "name": "José Luis",
@@ -65,7 +65,7 @@
             "life": 9,
             "attack": 7,
             "range":0,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/jose_luis.png"
         },
         {
             "name": "Maricarmen",
@@ -73,7 +73,7 @@
             "life": 10,
             "attack": 7,
             "range":3,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/maricarmen.png"
         },
         {
             "name": "Pedry el ornitorrinco",
@@ -81,7 +81,7 @@
             "life": 12,
             "attack": 9,
             "range":0,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/perry.png"
         }
         
     ],
@@ -93,7 +93,7 @@
             "life": 9,
             "attack": 8,
             "range":2,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/kevin.png"
         },
         {
             "name": "Karen",
@@ -101,7 +101,7 @@
             "life": 12,
             "attack": 8,
             "range":1,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/hunter.png"
         },
         {
             "name": "Barry",
@@ -109,7 +109,7 @@
             "life": 11,
             "attack": 9,
             "range":0,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/hunter.png"
         },
         {
             "name": "J. Bezos",
@@ -117,7 +117,7 @@
             "life": 10,
             "attack": 8,
             "range":5,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/hunter.png"
         },
         {
             "name": "Mister Cheeto",
@@ -125,7 +125,7 @@
             "life": 14,
             "attack": 12,
             "range": 0,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/hunter.png"
         }
     ],
 
@@ -136,7 +136,7 @@
             "life": 14,
             "attack": 10,
             "range":0,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/hunter.png"
         },
         {
             "name": "Otaku",
@@ -144,7 +144,7 @@
             "life": 12,
             "attack": 11,
             "range":3,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/hunter.png"
         },
         {
             "name": "Profesores",
@@ -152,7 +152,7 @@
             "life": 13,
             "attack": 10,
             "range":1,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/hunter.png"
         },
         {
             "name": "CEO",
@@ -160,7 +160,7 @@
             "life": 11,
             "attack": 10,
             "range": 4,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/hunter.png"
         },
         {
             "name": "Güini de Pu",
@@ -168,7 +168,7 @@
             "life": 16,
             "attack": 15,
             "range":0,
-            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
+            "texture": "assets/enemies/hunter.png"
         }
     ]
 }
