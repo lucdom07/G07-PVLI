@@ -14,6 +14,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.playerData = {};
         //Array con los aliados seleccionados
         this.selectedAllies = [];
+        this.clickableAllies = new Set();
         //División del DOM que muestra los aliados desbloqueados (también de clase DomAlly)
 
         this.DOMallies = document.getElementById('alliesArray');
@@ -190,7 +191,6 @@ export default class CombatSetup extends Phaser.Scene {
         }
     }
 
-
     /*
     Elimina un aliado de selectedAllies.
     */
@@ -200,7 +200,7 @@ export default class CombatSetup extends Phaser.Scene {
             this.selectedAllies.splice(index, 1);
             ally.x = -150;
             ally.y = -150;
-            ally.warriorUI.setPosition(ally.x, ally.y);
+            ally.warriorUI.setStatsPosition(ally.x, ally.y);
             this.repositionSelectedAllies();   
         }
     }
@@ -241,10 +241,17 @@ export default class CombatSetup extends Phaser.Scene {
 
     // Hace un aliado del DOM clickeable
     makeClickable(domAlly) {
-        domAlly.addEventListener('click', () => {
+        if(!this.clickableAllies.has(domAlly)) {
+            domAlly.addEventListener('click', () => {
             this.toggleAlly(domAlly);
             console.log(domAlly.dataset.name);
-        });
+            });
+            this.clickableAllies.add(domAlly);
+        }
+    }
+
+    removeFromClickable(domAlly) {
+        this.clickableAllies.delete(domAlly);
     }
 
     selectObject(object, index) {
