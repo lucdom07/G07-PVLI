@@ -127,11 +127,13 @@ export default class Animation extends Phaser.Scene{
             console.log("boss" + this.bossFlag);
             if(this.combatManager.victory) {
                 if(!this.bossFlag) {
+                    this.playerData.money += 10;
                     this.scene.stop();
                     this.scene.resume('debugMap');
                 }
                 else {
                     this.playerData.level++;
+                    this.playerData.money += 10;
                     this.world += 1;
                     this.bossFlag = false;
                     this.scene.start('debugMap',{
