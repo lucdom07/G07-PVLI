@@ -59,12 +59,11 @@ export default class CombatSetup extends Phaser.Scene {
   
         //pasa los aliados al debugCombat
         playButton.on('pointerdown',()=>{
-            if(this.selectedAllies.length > 0 && this.selectedAllies.length === 3) {
+            if(this.selectedAllies.length > 0) {
                 this.scene.start('debugCombat',{
                     playerData: this.playerData,
                     selectedAllies: this.selectedAllies
                 });
-                
             }
             console.log("yendo al combate");
         });

@@ -37,7 +37,7 @@ export default class debugMap extends Phaser.Scene {
 
         this.createButtons();
         this.createResetButton();
-        
+    
     }
 
     //Función que se llama en create para crear los botones
@@ -110,70 +110,6 @@ export default class debugMap extends Phaser.Scene {
 
     
 
-    createResetButton() {
-        
-        const resetButton = this.add.image(300, 100, 'resetButton').setInteractive().setDisplaySize(200,65);
-        resetButton.setPosition(this.sys.game.canvas.width*0.1,this.sys.game.canvas.height*0.1);
-        
-        //función de resetear la partida
-        resetButton.on('pointerdown',()=>{
-            this.cameras.main.fadeOut(800, 0, 0, 0); // duración, R, G, B
-            this.cameras.main.once('camerafadeoutcomplete', () => {
-                const sceneManager = this.sys.game.scene;
-
-                // Detener TODAS las escenas excepto MainMenu
-                sceneManager.getScenes(true).forEach(scene => {
-                    if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
-                    
-                });
-
-                sceneManager.getScenes(false).forEach(scene => {
-                    if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
-                });
-
-                // Detener el menú de pausa
-                this.scene.stop();
-                this.scene.stop('debugMap');
-                // Iniciar MainMenu
-                sceneManager.start('mainMenu', { reset: true });
-
-            });
-            
-        });
-
-         const resetBorder = this.add.graphics();
-        resetBorder.lineStyle(4, 0x0000000); 
-        resetBorder.strokeRect(
-            resetButton.x - resetButton.displayWidth/2, 
-            resetButton.y - resetButton.displayHeight/2, 
-            resetButton.displayWidth, 
-            resetButton.displayHeight
-        );
-
-        resetButton.on('pointerover', () => {
-            resetBorder.clear(); 
-            resetBorder.lineStyle(4, 0xfffffff, 1); 
-            resetBorder.strokeRect(
-                resetButton.x - resetButton.displayWidth/2, 
-                resetButton.y - resetButton.displayHeight/2, 
-                resetButton.displayWidth, 
-                resetButton.displayHeight
-            );
-            
-        });
-
-        resetButton.on('pointerout', () => {
-            resetBorder.clear();
-            resetBorder.lineStyle(4, 0x000000, 1); 
-            resetBorder.strokeRect(
-                resetButton.x - resetButton.displayWidth/2, 
-                resetButton.y - resetButton.displayHeight/2, 
-                resetButton.displayWidth, 
-                resetButton.displayHeight
-            );
-        });
-
-    }
 }
 
     
