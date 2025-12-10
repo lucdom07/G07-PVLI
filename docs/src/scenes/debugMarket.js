@@ -24,7 +24,7 @@ export default class debugMarket extends Phaser.Scene{
 
         this.load.image('buyButton','assets/buttons/buy.png');
         this.load.image('exitButton','assets/buttons/quit.png');
-        this.load.image('background','assets/placeholders/background.jpg');
+        this.load.image('shopBackground','assets/backgrounds/shopBackground.png');
 
         this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
         this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
@@ -54,11 +54,10 @@ export default class debugMarket extends Phaser.Scene{
                 playerData: this.playerData
             });
         });
-    
+        
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.TIENDA);
-        
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'shopBackground');
         
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
@@ -170,8 +169,4 @@ export default class debugMarket extends Phaser.Scene{
         });
 
         }
-
-
-    
-   
 }

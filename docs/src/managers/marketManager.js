@@ -33,6 +33,11 @@ export default class MarketManager {
 
         //tamaño de los objetos en venta
         this.ObjectSize = 100;
+        this.FIRST_ALLY_X = 150;
+        this.ALLIES_Y = 200;
+        this.FIRST_OBJECT_X = 850;
+        this.OBJECTS_Y = 250;
+        this.ITEM_DISTANCE = 150;
     }
     
     //función que inicializa el mercado
@@ -118,17 +123,17 @@ export default class MarketManager {
     */
     displayMarketItem(marketItem, index){
         //posición del aliado u objeto
-        let x = 0;
-
+        let x = 0;        
+        let y = 0;
         //calculo la posición en función de si es aliado u objeto
         if(marketItem.item instanceof Ally){
-            x = 150 + index * 150;
+            x = this.FIRST_ALLY_X + index * this.ITEM_DISTANCE;
+            y = this.ALLIES_Y
         }
-        else x = 750 + index * 150; 
-
-        //posición Y fija
-        const y = 200;
-        //objeto a mostrar
+        else {
+            x = this.FIRST_OBJECT_X + index * this.ITEM_DISTANCE; //en caso de que fuera un objeto
+            y = this.OBJECTS_Y
+        }
         const item = marketItem.item;
         
         //añado el sprite del aliado u objeto
@@ -154,8 +159,8 @@ export default class MarketManager {
             .setInteractive()
             .setScale(0.1);
       
-        // texto del precio
-        marketItem.priceText = this.scene.add.text(x, y + 130, `${item.cost}$`, {
+        // Texto del precio
+        marketItem.priceText = this.scene.add.text(x, y + 100, `${item.cost}$`, {
             fontSize: '20px', fill: '#fff', backgroundColor: '#000'
         }).setOrigin(0.5);
 
@@ -194,7 +199,6 @@ export default class MarketManager {
 
         //evento de compra
         marketItem.button.on('pointerdown', () => this.buyMarketItem(marketItem));
-
     }
 
     /* 
