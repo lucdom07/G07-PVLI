@@ -298,8 +298,7 @@ export default class MarketManager {
         } 
         else {
             // Para objetos
-            const newObj = item.clone();
-            if (!newObj.scene) this.scene.add.existing(newObj);
+            const newObj = item;
             newObj.setVisible(false).disableInteractive();
 
             this.objectBag.push(newObj);
