@@ -79,6 +79,10 @@ export default class debugMarket extends Phaser.Scene{
         this.events.on('buyingAlly', (ally, price)=>{
             this.playerData.ownedAllies.push(ally);
             this.DOManager.updateAllies();
+
+            console.log(this.playerData.ownedAllies.length);
+            this.playerData.ownedAllies.forEach(element => { console.log(element.name);});
+            
             this.playerData.money -= price;
         });
         this.events.on('buyingObject', (price)=>{

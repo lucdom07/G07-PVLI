@@ -22,7 +22,6 @@ export default class debugMap extends Phaser.Scene {
     }
 
     create() {
-        console.log(this.gameObjects);
         //transición de escenas, esta utiliza un this.events.on porque la pausamos y reanudamos durante el transcurso del gameplay
         this.cameras.main.fadeIn(800, 0, 0, 0);
 
@@ -38,9 +37,7 @@ export default class debugMap extends Phaser.Scene {
 
         this.createButtons();
         this.createResetButton();
-
-
-
+        
     }
 
     //Función que se llama en create para crear los botones
@@ -81,8 +78,8 @@ export default class debugMap extends Phaser.Scene {
                     this.cameras.main.fadeOut(800, 0, 0, 0); // duración, R, G, B
                     this.cameras.main.once('camerafadeoutcomplete', () => {
                         this.enableButtons(node);
-                        this.scene.launch(key, {playerData: this.playerData});
                         this.scene.pause();
+                        this.scene.launch(key, {playerData: this.playerData});
                         console.log("Saliendo del mapa");
                     });
                 }     

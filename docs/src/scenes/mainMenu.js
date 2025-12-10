@@ -11,7 +11,7 @@ export default class mainMenu extends Phaser.Scene{
         this.DOMmanager = DOManager;
         this.playerData = { 
             ownedAllies: [],
-            money: 10,
+            money: 20,
             level: 0,
             ownedObjects: []
         }
@@ -28,6 +28,8 @@ export default class mainMenu extends Phaser.Scene{
 
     create(){
         this.loadMichi();
+        console.log(this.playerData.ownedAllies.length);
+        this.playerData.ownedAllies.forEach(element => { console.log(element.name);});
         if (this.fromReset) {
             this.cameras.main.fadeIn(800, 0, 0, 0);
         }
