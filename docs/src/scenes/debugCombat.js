@@ -141,8 +141,23 @@ export default class Animation extends Phaser.Scene{
                 }
             }
             else {
-                this.scene.stop('mainMenu');
-                this.scene.start('mainMenu');
+                const sceneManager = this.sys.game.scene;
+
+                // Detener TODAS las escenas excepto MainMenu
+                sceneManager.getScenes(true).forEach(scene => {
+                    if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
+                    
+                });
+
+                sceneManager.getScenes(false).forEach(scene => {
+                    if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
+                });
+
+                // Detener el menú de pausa
+                this.scene.stop();
+                this.scene.stop('debugMap');
+                // Iniciar MainMenu
+                sceneManager.start('mainMenu', { reset: true });
             }
         });
     }
