@@ -13,14 +13,6 @@ export default class AustraliaScene extends Phaser.Scene {
         super("australiaVictory");
         this.playerData = {}
         this.audioManager = null;
-
-        this.cargaManager = null;
-
-        this.gameObjects ={
-            allies: [],
-            enemies:[],
-            objects:[]
-        }
     }
 
     init(data){
@@ -33,13 +25,6 @@ export default class AustraliaScene extends Phaser.Scene {
     }
 
     create() {
-        //Inicializa el contructor de los game objects de este nivel
-        this.cargaManager = cargaGameObject(this,this.playerData.level);
-        
-        this.gameObjects.allies = this.cargaManager.loadAllyGroups();
-        this.gameObjects.enemies = this.cargaManager.loadEnemyGroups();
-        this.gameObjects.objects = this.cargaManager.loadObjectGroups();
-
         // Inicializar audio manager
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.AU);

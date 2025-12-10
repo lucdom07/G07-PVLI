@@ -21,6 +21,7 @@ export default class debugMap extends Phaser.Scene {
     }
 
     create() {
+        console.log(this.gameObjects);
         //transición de escenas, esta utiliza un this.events.on porque la pausamos y reanudamos durante el transcurso del gameplay
         this.cameras.main.fadeIn(800, 0, 0, 0);
 

@@ -5,11 +5,17 @@ import Enemy from "../../gameObjects/characters/enemy.js";
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
 
+import cargaGameObject from "../managers/cargaGameObjects.js";
+
 export default class Animation extends Phaser.Scene{
     constructor(){
         super({key: 'debugCombat'});
         this.playerData = {};
         this.audioManager = null;
+
+        this.cargaManagerEnemigos = null;
+        this.enemyGroup =[];
+        this.enemyToCombat =[];
     }
 
     init(data){// se crea un CombatManager y se añaden las tropas aliadas pasadas desde combatSetup
@@ -29,6 +35,11 @@ export default class Animation extends Phaser.Scene{
     }
 
     create(){
+        this.cargaManagerEnemigos = new cargaGameObject(this,this.playerData.level);
+        this.enemyGroup = this.cargaManagerEnemigos.loadEnemyGroups();
+
+        console.log(this.enemyGroup);
+
         this.cameras.main.fadeIn(800, 0, 0, 0);
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.BATALLA);
@@ -46,6 +57,8 @@ export default class Animation extends Phaser.Scene{
 
         this.recreate();
         
+        this.createEnemyTeam();
+
         // Enemigos disponibles
         const enemyTeam = [
             new Enemy(this, -150, -150,"tortuga", 20, 5, 0, 'tortuga', 0, 1),
@@ -55,7 +68,7 @@ export default class Animation extends Phaser.Scene{
         
         
         //Inicializa el combate
-        this.combatManager.initCombat(this.playerTeam, enemyTeam);
+        this.combatManager.initCombat(this.playerTeam, this.enemyToCombat);
 
         // Botón de pausa
         this.pauseButton = this.add.text(100, 40, "Pause", {
@@ -87,11 +100,11 @@ export default class Animation extends Phaser.Scene{
                 allyData.life,
                 allyData.attack,
                 allyData.range,
-                allyData.texture,
+                allyData.texture+"Texture",
                 allyData.frame,
                 allyData.cost,
                 allyData.available,
-                allyData.level
+                allyData.texture
             );
             recreatedAllies.push(newAlly);
         });
@@ -101,4 +114,69 @@ export default class Animation extends Phaser.Scene{
     update(time, dt){
         this.combatManager.update(time, dt);
     }
+
+    //crea la array de enemigos para el combate
+    createEnemyTeam() {
+        // Limpiar el array de enemigos para combate
+        this.enemyToCombat = [];
+        
+        // Determinar el tamaño del equipo enemigo basado en los aliados del jugador
+        const playerTeamSize = this.playerTeam.length;
+        
+        // Validar que hay suficientes enemigos disponibles
+        if (this.enemyGroup.length === 0) {
+            console.error("No hay enemigos disponibles en enemyGroup");
+            return this.enemyToCombat;
+        }
+        
+        const teamSize = Math.min(playerTeamSize, this.enemyGroup.length);
+        
+        // Array de enemigos sin repetición
+        if (teamSize <= this.enemyGroup.length) {
+            // Copia array de enemigos del original
+            const availableEnemies = [...this.enemyGroup];
+            
+            // Seleccionar enemigos aleatorios sin repetición
+            for (let i = 0; i < teamSize; i++) {
+                // Seleccionar un índice aleatorio
+                const randomIndex = Math.floor(Math.random() * availableEnemies.length);
+                
+                // Obtener el enemigo y removerlo del array disponible
+                const selectedEnemy = availableEnemies.splice(randomIndex, 1)[0];
+                
+                // Clonar el enemigo para no modificar el original en enemyGroup
+                // y ajustar su posición inicial
+                const enemyClone = this.cloneEnemy(selectedEnemy);
+                this.enemyToCombat.push(enemyClone);
+            }
+        } else {
+            // repeticiones si no hay unicos            
+            for (let i = 0; i < teamSize; i++) {
+                const randomIndex = Math.floor(Math.random() * this.enemyGroup.length);
+                const selectedEnemy = this.enemyGroup[randomIndex];
+                
+                // Clonar el enemigo
+                const enemyClone = this.cloneEnemy(selectedEnemy);
+                this.enemyToCombat.push(enemyClone);
+            }
+        }
+        return this.enemyToCombat;
+    }
+
+    //clona el enemigo para el array de enemigos a combatir
+    cloneEnemy(originalEnemy) {
+        return new Enemy(
+            this, 
+            -150,
+            -150,
+            originalEnemy.name,
+            originalEnemy.life,
+            originalEnemy.attack,
+            originalEnemy.range,
+            originalEnemy.texture+"Texture",
+            originalEnemy.frame || 0,
+            originalEnemy.texture
+        );
+    }
+
 }

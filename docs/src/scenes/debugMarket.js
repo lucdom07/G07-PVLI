@@ -5,11 +5,19 @@ import GlobalObject from "../managers/globalObjects.js";
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
 
+import cargaGameObject from "../managers/cargaGameObjects.js";
+
 export default class debugMarket extends Phaser.Scene{
     constructor(){
         super({key: 'debugMarket'});
         this.playerData = {};
         this.audioManager = null;
+
+        this.cargaGameObject = null;
+        this.GameObjectOfLevel ={
+            allies :[],
+            objects:[]
+        }
     }
 
     //En init le pasamos los aliados que tiene el jugador
@@ -25,23 +33,29 @@ export default class debugMarket extends Phaser.Scene{
         this.load.image('shopBackground','assets/backgrounds/shopBackground.png');
 
         //sprites de los personajes
-        this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
-        this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
-        this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
-        this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
-        this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
-        this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
+        // this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
+        // this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
+        // this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
+        // this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
+        // this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
+        // this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
 
-        this.load.image('comida1','assets/placeholders/objets/comida1.png');
-        this.load.image('comida2','assets/placeholders/objets/comida2.png');
-        this.load.image('comida3','assets/placeholders/objets/comida3.png');
-        this.load.image('comida4','assets/placeholders/objets/comida4.png');
+        // this.load.image('comida1','assets/placeholders/objets/comida1.png');
+        // this.load.image('comida2','assets/placeholders/objets/comida2.png');
+        // this.load.image('comida3','assets/placeholders/objets/comida3.png');
+        // this.load.image('comida4','assets/placeholders/objets/comida4.png');
 
 
     }
 
     create(){
-        
+        this.cargaGameObject = new cargaGameObject(this, this.playerData.level);
+        this.GameObjectOfLevel.allies = this.cargaGameObject.loadAllyGroups();
+        this.GameObjectOfLevel.objects = this.cargaGameObject.loadObjectGroups();
+
+        console.log(this.GameObjectOfLevel);
+
+
         this.cameras.main.fadeIn(800, 0, 0, 0);
         this.cameras.main.once('camerafadeincomplete', () => {
             //diálogo de la tienda
@@ -70,21 +84,21 @@ export default class debugMarket extends Phaser.Scene{
         //mostrar el precio de las cosas
         //al comprar el personaje se añade al inventario
         //cuando no tengas suficiente dinero no te deja
-        this.allyList = [
-            new Ally(this, -150, -150,'Michi-Michi', 36, 20, 0, 'perro', 0, 1, false, 0),
-            new Ally(this, -150, -150,'foca', 36, 20, 0, 'foca', 0, 1, false, 0),
-            new Ally(this, -150, -150,'pimiento', 36, 20, 0, 'pimiento', 0, 1, false, 0),
-            new Ally(this, -150, -150,'tortuga', 20, 5, 0, 'tortuga', 0, 1, false, 0),
-            new Ally(this, -150, -150,'chupacabra', 21, 10, 0, 'chupacabra', 0, 1, false, 0),
-            new Ally(this, -150, -150,'warf', 35, 7, 0, 'warf', 0, 1, false, 0)
-        ];
+        // this.allyList = [
+        //     new Ally(this, -150, -150,'Michi-Michi', 36, 20, 0, 'perro', 0, 1, false, 0),
+        //     new Ally(this, -150, -150,'foca', 36, 20, 0, 'foca', 0, 1, false, 0),
+        //     new Ally(this, -150, -150,'pimiento', 36, 20, 0, 'pimiento', 0, 1, false, 0),
+        //     new Ally(this, -150, -150,'tortuga', 20, 5, 0, 'tortuga', 0, 1, false, 0),
+        //     new Ally(this, -150, -150,'chupacabra', 21, 10, 0, 'chupacabra', 0, 1, false, 0),
+        //     new Ally(this, -150, -150,'warf', 35, 7, 0, 'warf', 0, 1, false, 0)
+        // ];
 
-        this.objList =[
-            new GlobalObject(this, -150, -150,"comida1","comida1", 5 ,2 ,2),
-            new GlobalObject(this, -150, -150,"comida2","comida2", 2 ,-3 ,1),
-            new GlobalObject(this, -150, -150,"comida3","comida3", 0 ,2 ,19),
-            new GlobalObject(this, -150, -150,"comida4","comida4", 2 ,0 ,3)
-        ];
+        // this.objList =[
+        //     new GlobalObject(this, -150, -150,"comida1","assets/placeholders/objets/comida1.png", 5 ,2 ,2,"comida1"),
+        //     new GlobalObject(this, -150, -150,"comida2","assets/placeholders/objets/comida2.png", 2 ,-3 ,1,"comida2"),
+        //     new GlobalObject(this, -150, -150,"comida3","assets/placeholders/objets/comida3.png", 0 ,2 ,19,"comida3"),
+        //     new GlobalObject(this, -150, -150,"comida4","assets/placeholders/objets/comida4.png", 2 ,0 ,3,"comida4")
+        // ];
 
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'shopBackground');
         const exitButton = this.add.image(300,100,'exitButton').setInteractive().setDisplaySize(400,130);
@@ -133,7 +147,7 @@ export default class debugMarket extends Phaser.Scene{
             );
         });
         this.marketSystem.textureButton = 'buyButton'; 
-        this.marketSystem.market(this.playerData.ownedAllies, this.allyList, this.objList, this.playerData.money, this.playerData.ownedObjects);
+        this.marketSystem.market(this.playerData.ownedAllies, this.GameObjectOfLevel.allies, this.GameObjectOfLevel.objects, this.playerData.money, this.playerData.ownedObjects);
         //this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
 
 

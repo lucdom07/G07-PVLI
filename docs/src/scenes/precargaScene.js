@@ -15,19 +15,27 @@ export default class BootScene extends Phaser.Scene {
         //pantalla de carga
         this.createLoadingScreen();
 
-        //cargar los recursos
+        //cargar los recursos (json y musica)
         this.loadResources();
+
+        //carga las texturas
+        this.load.on('filecomplete-json-allyGroup', () => {
+            this.loadAllyTexture();
+        });
+        
+        this.load.on('filecomplete-json-objects', () => {
+            this.loadObjectTexture();
+        });
+
+        this.load.on('filecomplete-json-enemyGroup', () => {
+            this.loadEnemyTexture();
+        });
         
         //eventos de carga
          this.load.on('progress', (value) => {
             const percent = Math.floor(value * 100);
             this.progressBar.width = 296 * value;
             this.progressText.setText(`${percent}%`);
-        });
-
-        //crea los gameobjects
-        this.load.on('complete', () => {
-        this.createGameObjects();
         });
     }
     
@@ -56,9 +64,9 @@ export default class BootScene extends Phaser.Scene {
             this.scene.stop();
         })
     }
-
+    // crea la barra de progreso
     createLoadingScreen() {
-        // Barra de progreso
+        
         const barWidth = 300;
         const barHeight = 20;
         const x = this.cameras.main.width / 2;
@@ -82,31 +90,17 @@ export default class BootScene extends Phaser.Scene {
 
     //Cargar todos los recursos
     loadResources(){
-        // Cargar todas las músicas usando la configuración
-        Object.entries(AudioFiles).forEach(([key, path]) => {
-            this.load.audio(key, path);
-        });
-
-        // Cargar imágenes básicas (aliados, enemigos, fondos, etc)
-        //Aliados
-
         //carga de los json
         this.load.json("allyGroup", "./jsons/allyGroup.json");
         this.load.json("enemyGroup", "./jsons/enemyGroup.json");
         this.load.json("objects", "./jsons/objects.json");
 
-        this.load.once('filecomplete-json-allyGroup', () => {
-        this.loadAllyTexture();
+        // Cargar todas las músicas usando la configuración
+        Object.entries(AudioFiles).forEach(([key, path]) => {
+            this.load.audio(key, path);
         });
-        this.load.once('filecomplete-json-enemyGroup', () => {
-        this.loadEnemyTexture();
-        });
-        this.load.once('filecomplete-json-objects', () => {
-        this.loadObjectTecture();
-        });
-
     }
-
+    //carga las texturas de los aliados
     loadAllyTexture(){
         const allyData = this.cache.json.get("allyGroup");
 
@@ -117,14 +111,16 @@ export default class BootScene extends Phaser.Scene {
             if(group){
                 group.forEach(ally =>{
                     const textureKey = ally.name+"Texture";
+                    
                     if (!this.textures.exists(textureKey)) {
                         this.load.image(textureKey, ally.texture);
+                        console.log(textureKey);
                     }
                 });
             }
         }
     }
-
+    //carga las texturas de los enemigos
     loadEnemyTexture(){
         const enemyData = this.cache.json.get("enemyGroup");
 
@@ -142,19 +138,20 @@ export default class BootScene extends Phaser.Scene {
             }
         }
     }
-
-    loadObjectTecture(){
+    //carga las texturas de los objetos
+    loadObjectTexture(){
         const objData = this.cache.json.get("objects");
 
         for(let i =0; i<4; i++){
             const groupKey = `objects${i}`;
             const group = objData?.[groupKey];
-
             if(group){
                 group.forEach(obj =>{
                     const textureKey = obj.name+"Texture";
+                    
                     if (!this.textures.exists(textureKey)) {
                         this.load.image(textureKey, obj.texture);
+                        console.log(textureKey);
                     }
                 });
             }

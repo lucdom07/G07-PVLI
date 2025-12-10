@@ -9,7 +9,7 @@
             "texture": "assets/allys/michi_michi_chibi.png"
         },
         {
-            "name": "Gata alien",
+            "name": "Astra",
             "life": 8,
             "attack": 4,
             "range":2,
@@ -17,7 +17,7 @@
             "texture": "assets/allys/alien_cat.png"
         },
         {
-            "name": "Mapache que lava el algodón de azúcar",
+            "name": "Cotton",
             "life": 7,
             "attack": 4,
             "range":1,
@@ -25,7 +25,7 @@
             "texture": "assets/allys/raccoon.png"
         },
         {
-            "name": "Colibri twitter",
+            "name": "Tueto",
             "life": 9,
             "attack": 5,
             "range":4,
@@ -33,7 +33,7 @@
             "texture": "assets/allys/bird.png"
         },
         {
-            "name": "Gato-Pulpo de Github",
+            "name": "Gitab",
             "life": 6,
             "attack": 3,
             "range":3,

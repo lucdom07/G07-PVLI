@@ -5,7 +5,7 @@
             "life": 0,
             "attack": 3,
             "cost":5,
-            "texture": "assets/objects/sock.png"
+            "texture": "assets/objects/sock.png" 
         },
         {
             "name": "Las llaves perdidas",

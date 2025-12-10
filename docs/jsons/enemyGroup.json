@@ -5,35 +5,35 @@
             "life": 8,
             "attack": 4,
             "range":0,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Jonny me lavo",
             "life": 5,
             "attack": 5,
             "range":1,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Aborígenes",
             "life": 7,
             "attack": 4,
             "range":2,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Sharon",
             "life": 5,
             "attack": 5,
             "range":3,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Melon Moska montado en su Mierdesta",
             "life": 10,
             "attack": 6,
             "range":0,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         }
     ],
 
@@ -43,35 +43,35 @@
             "life": 10,
             "attack": 7,
             "range":1,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Mariloli",
             "life": 8,
             "attack": 6,
             "range":4,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "José Luis",
             "life": 9,
             "attack": 7,
             "range":0,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Maricarmen",
             "life": 10,
             "attack": 7,
             "range":3,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Pedry el ornitorrinco",
             "life": 12,
             "attack": 9,
             "range":0,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         }
         
     ],
@@ -82,35 +82,35 @@
             "life": 9,
             "attack": 8,
             "range":2,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Karen",
             "life": 12,
             "attack": 8,
             "range":1,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Anabella",
             "life": 11,
             "attack": 9,
             "range":0,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Guardaespaldas",
             "life": 10,
             "attack": 8,
             "range":5,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Mister Cheeto",
             "life": 14,
             "attack": 12,
             "range": 0,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         }
     ],
 
@@ -120,35 +120,35 @@
             "life": 14,
             "attack": 10,
             "range":0,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Otaku",
             "life": 12,
             "attack": 11,
             "range":3,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Profesores",
             "life": 13,
             "attack": 10,
             "range":1,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Taoísta",
             "life": 11,
             "attack": 10,
             "range": 4,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         },
         {
             "name": "Güini de Pu",
             "life": 16,
             "attack": 15,
             "range":0,
-            "texture": ""
+            "texture": "assets/placeholders/warriors/enemy_template_placeholder.png"
         }
     ]
 }
