@@ -327,7 +327,7 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 |Estados Unidos|
 || Kevin |9|8|2|
 || Karen |12|8|1|
-|| //Anabella |11|9|0|
+|| Barry |11|9|0|
 || //Guardaespaldas |10|8|3|
 |China|
 || ?Pimiento humanoide |14|10|0|
