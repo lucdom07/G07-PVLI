@@ -23,20 +23,27 @@ export default class CombatSetup extends Phaser.Scene {
         this.ObjectSize =100;
 
         this.audioManager = null;
+        this.backgrounds = ['austSetup', 'chinaSetup', 'spainSetup', 'usaSetup'];
     }
 
     init(data) {
-        this.playerData = data.playerData;
+        this.playerData = data.playerData,
+        this.world = data.world
     }
 
     preload() {
+        //Backgrounds
+        this.load.image('austSetup','assets/backgrounds/australiaSetup.png');
+        this.load.image('chinaSetup','assets/backgrounds/chinaSetup.png');
+        this.load.image('spainSetup','assets/backgrounds/spainSetup.png');
+        this.load.image('usaSetup','assets/backgrounds/usaSetup.png');
+
         this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
         this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
         this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
         this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
-        this.load.image('setupBackground','assets/backgrounds/australiaSetup.png')
         this.load.image('combatButton', 'assets/placeholders/buttons/combat_button.jpg')
     }
 
@@ -47,7 +54,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.PRE);
 
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'setupBackground');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,this.backgrounds[this.world]);
 
         this.showObjects(this.playerData.ownedObjects);
 

@@ -17,17 +17,25 @@ export default class Animation extends Phaser.Scene{
         this.cargaManagerEnemigos = null;
         this.enemyGroup =[];
         this.enemyToCombat =[];
-        this.bossFlag;
+        this.backgrounds = ['austCombat', 'chinaCombat', 'spainCombat', 'usaCombat'];
     }
 
     init(data){// se crea un CombatManager y se añaden las tropas aliadas pasadas desde combatSetup
-        this.combatManager = new CombatManager(this);
-        this.playerData = data.playerData;
-        this.playerTeam = data.selectedAllies;
-        this.bossFlag = data.bossFlag;
+        this.combatManager = new CombatManager(this),
+        this.playerData = data.playerData,
+        this.playerTeam = data.selectedAllies,
+        this.bossFlag = data.bossFlag,
+        this.world = data.world
     }
 
     preload(){
+        //Backgrounds
+        this.load.image('austCombat','assets/backgrounds/australiaCombat.png');
+        this.load.image('chinaCombat','assets/backgrounds/chinaCombat.png');
+        this.load.image('spainCombat','assets/backgrounds/spainCombat.png');
+        this.load.image('usaCombat','assets/backgrounds/usaCombat.png');
+
+
         // this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
         // this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
         // this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
@@ -48,7 +56,7 @@ export default class Animation extends Phaser.Scene{
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.BATALLA);
 
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5,'combatBackground');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, this.backgrounds[this.world]);
 
         //indica al combatManager que ya puede llamar al siguiente evento
         this.events.on('canCallNext',()=>{
