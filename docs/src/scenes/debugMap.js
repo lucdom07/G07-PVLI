@@ -31,6 +31,7 @@ export default class debugMap extends Phaser.Scene {
     }
 
     create() {
+        console.log("level: ", this.playerData.level);
         if(this.world < this.backgrounds.length) {
             this.graph = new HierarchyGraph(this.graphLevels, this.graphChildrenXNode);
             //transición de escenas, esta utiliza un this.events.on porque la pausamos y reanudamos durante el transcurso del gameplay
