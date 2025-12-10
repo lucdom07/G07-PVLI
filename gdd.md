@@ -279,25 +279,25 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 |:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 |Australia|
 || Michi-Michi |9|5|0|
-|| Gata alien | 8 | 4 |2|
-|| Mapache que lava el algodón de azúcar | 7 | 4 |1|
-|| Colibri twitter |9| 5 |4|
-|| Gato-Pulpo de Github | 6 | 3 |3|
+|| Astra | 8 | 4 |2|
+|| Cotton | 7 | 4 |1|
+|| Tueto |9| 5 |4|
+|| Gitab | 6 | 3 |3|
 |España|
-|| Paloma con 6 ojos |9|5|3|
-|| Rana arborícola con cuernos |10|6|0|
+|| Froogit |9|5|3|
+|| Kurma |10|6|0|
 || Gatoñete |11|7|1|
 || Pablotter  |10|6|2|
 |Estados Unidos|
-|| Nutria con vestido blanco |13|9|2|
-|| Oso hormiguero con bastón, sombrero y monóculo |12|7|0|
+|| Nutricristo |13|9|2|
+|| Señor Anteojo |12|7|0|
 || Pimiento Gatomórfico |10|9|1|
 || Miku |12|8|4|
 |China|
 || QiLing |14|10|0|
-|| Gato Kunfu |12|9|1|
-|| Orca Deep Seek |13|11|3|
-|| Pez chancla |12|10|2|
+|| Po-ka |12|9|1|
+|| Kairos |13|11|3|
+|| Moflete |12|10|2|
 
 ***Parámetros*** 
 - Cantidad de vida

@@ -20,6 +20,11 @@ export default class MarketManager {
         this.objectBag =[];
 
         this.ObjectSize = 100;
+        this.FIRST_ALLY_X = 150;
+        this.ALLIES_Y = 200;
+        this.FIRST_OBJECT_X = 850;
+        this.OBJECTS_Y = 250;
+        this.ITEM_DISTANCE = 150;
     }
     
     market(bag, allyList, objList, money, ownedObjectsBag){
@@ -91,12 +96,16 @@ export default class MarketManager {
 
     displayMarketItem(marketItem, index){
         let x = 0;
+        let y = 0;
         if(marketItem.item instanceof Ally){
-            x = 150 + index * 150;
+            x = this.FIRST_ALLY_X + index * this.ITEM_DISTANCE;
+            y = this.ALLIES_Y
         }
-        else x = 750 + index * 150; //en caso de que fuera un objeto
+        else {
+            x = this.FIRST_OBJECT_X + index * this.ITEM_DISTANCE; //en caso de que fuera un objeto
+            y = this.OBJECTS_Y
+        }
 
-        const y = 200;
         const item = marketItem.item;
         
         if (!item.scene) {
@@ -122,7 +131,7 @@ export default class MarketManager {
             .setScale(0.1);
       
         // Texto del precio
-        marketItem.priceText = this.scene.add.text(x, y + 130, `${item.cost}$`, {
+        marketItem.priceText = this.scene.add.text(x, y + 100, `${item.cost}$`, {
             fontSize: '20px', fill: '#fff', backgroundColor: '#000'
         }).setOrigin(0.5);
 
@@ -159,8 +168,6 @@ export default class MarketManager {
         });
 
         marketItem.button.on('pointerdown', () => this.buyItem(marketItem));
-
-        
     }
 
     showMoney(){

@@ -22,7 +22,7 @@ export default class debugMarket extends Phaser.Scene{
         //se cargan el fondo, las imagenes y la ui
         this.load.image('buyButton','assets/buttons/buy.png');
         this.load.image('exitButton','assets/buttons/quit.png');
-        this.load.image('background','assets/placeholders/background.jpg');
+        this.load.image('shopBackground','assets/backgrounds/shopBackground.png');
 
         //sprites de los personajes
         this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
@@ -86,7 +86,7 @@ export default class debugMarket extends Phaser.Scene{
             new GlobalObject(this, -150, -150,"comida4","comida4", 2 ,0 ,3)
         ];
 
-        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'background');
+        this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'shopBackground');
         const exitButton = this.add.image(300,100,'exitButton').setInteractive().setDisplaySize(400,130);
 
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
