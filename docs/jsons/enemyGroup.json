@@ -26,11 +26,11 @@
         },
         {
             "name": "Sharon",
-            "textureid": "sharon",
+            "textureid": "sharonAus",
             "life": 5,
             "attack": 5,
             "range":3,
-            "texture": "assets/enemies/sharon.png"
+            "texture": "assets/enemies/sharonAus.png"
         },
         {
             "name": "Melon Moska montado en su Mierdesta",
@@ -97,11 +97,11 @@
         },
         {
             "name": "Karen",
-            "textureid": "karen",
+            "textureid": "karenUsa",
             "life": 12,
             "attack": 8,
             "range":1,
-            "texture": "assets/enemies/karen.png"
+            "texture": "assets/enemies/karenUsa.png"
         },
         {
             "name": "Barry",
