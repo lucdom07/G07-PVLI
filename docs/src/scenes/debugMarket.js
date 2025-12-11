@@ -14,7 +14,7 @@ export default class debugMarket extends Phaser.Scene{
         this.DOManager = DOMmanager;
         this.playerData = {};
         this.audioManager = null;
-
+        this.mapMusic = [MusicKeys.AU, MusicKeys.ES, MusicKeys.CH, MusicKeys.USA];
         this.cargaGameObject = null;
         this.GameObjectOfLevel ={
             allies :[],
@@ -91,7 +91,7 @@ export default class debugMarket extends Phaser.Scene{
                 this.scene.resume('debugMap'); 
                 console.log("Saliendo del mercado");
                 console.log("ownedAllies: " + this.playerData.ownedAllies);
-                this.audioManager.playMusic(MusicKeys.MAPA);
+                this.audioManager.playMusic(this.mapMusic[this.playerData.level]);
             });
         });
 

@@ -5,7 +5,7 @@ export const MusicKeys = {
     ES: 'españa',
     USA: 'estados_unidos',
     CH: 'china',
-    AU: 'australia',
+    AU: 'australia_map',
     
     PRE: 'prebatalla',
     MAPA: 'mapa',
@@ -13,14 +13,13 @@ export const MusicKeys = {
     TIENDA: 'market',
     PAUSA: 'boss_music',
     VICTORY: 'victory_music',
-    GAME_OVER: 'gameover_music',
+    GAME_OVER: 'gameOver',
     
     //Música diálogos
     INTRO: 'introduction',
     AUSTRALIA_VICTORY: 'australiaVictory',
     SPAIN_VICTORY: 'spainVictory',
     CHINA_VICTORY: 'chinaVictory',
-    USA_VICTORY: 'usaVictory',
     ENDING: 'ending',
 
     //Efectos de sonido
@@ -34,8 +33,8 @@ export const AudioFiles = {
     
     [MusicKeys.ES]: 'assets/sonidos/auroraLaMinera_gameVersion.mp3', //no tocar
     [MusicKeys.USA]: 'assets/sonidos/americanMeowdiot.mp3', //no tocar
-    [MusicKeys.CH]: 'assets/sonidos/china.mp3', //no tocar
-    [MusicKeys.AU]: 'assets/sonidos/australia.mp3', //no tocar
+    [MusicKeys.CH]: 'assets/sonidos/yeHuaXiang.mp3', //no tocar
+    [MusicKeys.AU]: 'assets/sonidos/chandelier.mp3', //no tocar
     
     [MusicKeys.PRE]: 'assets/sonidos/prep.mp3', //no tocar
     [MusicKeys.MAPA]:'assets/sonidos/auroraLaMinera_gameVersion.mp3', //no tocar
@@ -43,14 +42,13 @@ export const AudioFiles = {
     [MusicKeys.TIENDA]:'assets/sonidos/shop.mp3', //no tocar
     [MusicKeys.PAUSA]: 'assets/sonidos/battle.mp3',
     [MusicKeys.VICTORY]: 'assets/sonidos/battle.mp3',
-    [MusicKeys.GAME_OVER]: 'assets/sonidos/gameover.mp3', //no tocar
+    [MusicKeys.GAME_OVER]: 'assets/sonidos/phantom.mp3', //no tocar
     
     //Música diálogos
     [MusicKeys.INTRO]: 'assets/sonidos/creep.mp3', //no tocar
-    [MusicKeys.AUSTRALIA_VICTORY]: 'assets/sonidos/battle.mp3',
+    [MusicKeys.AUSTRALIA_VICTORY]: 'assets/sonidos/tribalWarDidgeridoo.mp3', //no tocar
     [MusicKeys.SPAIN_VICTORY]: 'assets/sonidos/gerudoValley.mp3', //no tocar
     [MusicKeys.CHINA_VICTORY]: 'assets/sonidos/yiJianMei.mp3', //no tocar
-    [MusicKeys.USA_VICTORY]: 'assets/sonidos/cottonEyeJoe.mp3', //no tocar
     [MusicKeys.ENDING]: 'assets/sonidos/lostInThoughtsAllAlone.mp3', //no tocar
 
     //Efectos de sonido

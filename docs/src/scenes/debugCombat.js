@@ -15,6 +15,8 @@ export default class Animation extends Phaser.Scene{
         this.playerTeam = [];
         this.audioManager = null;
 
+        this.mapMusic = [MusicKeys.AU, MusicKeys.ES, MusicKeys.CH, MusicKeys.USA];
+        this.victoryDialoguesMusic = [MusicKeys.AUSTRALIA_VICTORY, MusicKeys.SPAIN_VICTORY, MusicKeys.CHINA_VICTORY, MusicKeys.ENDING];
         this.cargaManagerEnemigos = null;
         this.enemyGroup =[];
         this.enemyToCombat =[];
@@ -92,6 +94,9 @@ export default class Animation extends Phaser.Scene{
         this.playerTeam = recreatedAllies;
     }
     showExitButton(){
+        if (!this.combatManager.victory){
+            this.audioManager.playMusic(MusicKeys.GAME_OVER);
+        }
         console.log("you can exit combat");
         const exitButton = this.add.image(200 ,50,'exit').setInteractive();
 
@@ -105,9 +110,11 @@ export default class Animation extends Phaser.Scene{
                     this.playerData.money += 10;
                     console.log("new money: ", this.playerData.money);
                     this.scene.stop();
+                    this.audioManager.playMusic(this.mapMusic[this.world]);
                     this.scene.resume('debugMap');
                 }
                 else {
+                    this.audioManager.playMusic(this.victoryDialoguesMusic[this.world]);
                     this.playerData.level++;
                     this.playerData.money += 10;
                     console.log("new money: ", this.playerData.money);
@@ -115,7 +122,6 @@ export default class Animation extends Phaser.Scene{
                     this.playerData.world = this.world;
                     this.bossFlag = false;
                     this.startVictoryDialogue();
-               
                 }
             }
             else {

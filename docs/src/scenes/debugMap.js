@@ -8,6 +8,7 @@ export default class debugMap extends Phaser.Scene {
         this.playerData = {}
         this.audioManager = null;
         this.backgrounds = ['austBackground', 'spainBackground', 'chinaBackground', 'usaBackground'];
+        this.music = [MusicKeys.AU, MusicKeys.ES, MusicKeys.CH, MusicKeys.USA];
         //Niveles del grafo
         this.graphLevels = 5;
         //Numero de hijos de cada nodo del grafo durante una fase de divergencia de este
@@ -44,7 +45,7 @@ export default class debugMap extends Phaser.Scene {
             });
 
             this.audioManager = AudioManager.getInstance(this);
-            this.audioManager.playMusic(MusicKeys.MAPA);
+            this.audioManager.playMusic(this.music[this.world]);
             
             this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, this.backgrounds[this.world]);
             
