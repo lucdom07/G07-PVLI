@@ -7,7 +7,7 @@ export default class DialogueScene extends Phaser.Scene {
     constructor() {
         super("DialogueScene");
         this.playerData = {};
-        this.bg = ["introD","austD","spainD","chinaD","usaD", "shop"];
+        this.bg = ["introD","austD","spainD","chinaD","ending", "shop"];
     }
 
     init(data) {
@@ -37,9 +37,9 @@ export default class DialogueScene extends Phaser.Scene {
         this.load.image("austD","./assets/backgrounds/australiaCombat.png");
         this.load.image("chinaD","./assets/backgrounds/chinaCombat.png");
         this.load.image("spainD","./assets/backgrounds/spainCombat.png");
-        this.load.image("usaD","./assets/backgrounds/usaCombat.png");
-        this.load.image("introD","./assets/backgrounds/introBackground.png")
-        this.load.image("shop","./assets/backgrounds/shopBackground.png")
+        this.load.image("introD","./assets/backgrounds/introBackground.png");
+        this.load.image("shop","./assets/backgrounds/shopBackground.png");
+        this.load.image("ending","./assets/backgrounds/endingBackground.png");
     }
 
     create() {
