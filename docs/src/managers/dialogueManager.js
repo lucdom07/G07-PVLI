@@ -46,7 +46,7 @@ export default class DialogueManager {
 
         //creamos UI del nombre si no existe
         if (!this.nameText) {
-            this.nameText = this.scene.add.text(30, 430, "", this.config.nameStyle);
+            this.nameText = this.scene.add.text(30, 420, "", this.config.nameStyle);
         }
 
         //creamos UI de la caja de diálogo si no existe
