@@ -301,9 +301,6 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 Personajes humanoides que se enfrentan con los aliados, cada uno con distintas estadísticas y a medida que va avanzando el jugador en los países, se desbloquearán nuevos enemigos contra los que enfrentarnos. Estos tendrán la misma mecánica que las del aliado (vida, ataque y rango de ataque). 
     En combate, la máxima cantidad de enemigos que puede haber será hasta 6 y mínima 1, excepto cuando está el jefe, en ese caso, habrá 3 enemigos y un jefe.
 
-//a cambiar
-?inseguro
-
 |**País**| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
 |:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 |Australia|
