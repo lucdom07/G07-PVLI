@@ -4,6 +4,7 @@ import Enemy from "../../gameObjects/characters/enemy.js";
 
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
+import { DialogueKeys } from "../managers/dialogueConfig.js";
 
 import cargaGameObject from "../managers/cargaGameObjects.js";
 
@@ -121,12 +122,33 @@ export default class Animation extends Phaser.Scene{
                     console.log("new money: ", this.playerData.money);
                     this.world += 1;
                     this.bossFlag = false;
-                    this.scene.start('debugMap',{
-                        playerData: this.playerData,
-                        bossFlag: this.bossFlag,
-                        world: this.world
-                    });
-                    this.scene.stop();
+                    if (this.world == 4){
+                        const sceneManager = this.sys.game.scene;
+
+                        // Detener TODAS las escenas excepto MainMenu
+                        sceneManager.getScenes(true).forEach(scene => {
+                            if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
+                            
+                        });
+
+                        sceneManager.getScenes(false).forEach(scene => {
+                            if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
+                        });
+
+                        this.scene.start("DialogueScene", {
+                            dialogueKey: DialogueKeys.ENDING,
+                            nextScene: 'mainMenu',
+                            playerData: this.playerData
+                        });
+                    }
+                    else{
+                        this.scene.start('debugMap',{
+                            playerData: this.playerData,
+                            bossFlag: this.bossFlag,
+                            world: this.world
+                        });
+                        this.scene.stop();
+                    }
                 }
             }
             else {
