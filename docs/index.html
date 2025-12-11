@@ -7,6 +7,7 @@
     <title>The Furrytastic Invasion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/game.css"> 
+    <script src="./src/logic.js"></script>
     <!--Fuentes encabezados-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,46 +16,42 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Jersey+10&family=Lacquer&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-  
+  </head>
 
  <body class="body">
-   <header id="furrytastic"> 
+   <header> 
     <div id="titleContainer">
       <img id="title" src="images/web_title.png" alt="The Furrytastic Invasion">
     </div>
     <div id="buttons">
-      <a href="#mainContainer">
-        <button class="linkButton">Juego</button>
-      </a>
-      <a href="#descripcion">
-        <button class="linkButton">Descripcion</button>
-      </a>
-      <a href="#controles">
-        <button class="linkButton">Controles</button>
-      </a>
-      <a href="#creditos">
-        <button class="linkButton">Créditos</button>
-      </a>
-      <a href="#redes">
-        <button class="linkButton">Redes</button>
-      </a>
+      <button class="tablinks" onclick="openTab(event, 'gameContainer')">Juego</button>
+      <button class="tablinks" onclick="openTab(event, 'descripcion')">Descripción</button>
+      <button class="tablinks" onclick="openTab(event, 'controles')">Controles</button>
+      <button class="tablinks" onclick="openTab(event, 'creditos')">Créditos</button>
+      <button class="tablinks" onclick="openTab(event, 'redes')">Redes</button>
     </div>
     </header>
+
     <main>
+
       <div id="mainContainer">
-        <div id="game">
-        </div>
-        <div id = "alliesArray">
+        <div id="gameContainer"class="tabcontent" style="width:  1100px; height: 620px; display:block; margin: auto;">
+          <div id="game">
+          </div>
+          <div id = "alliesArray">
+          </div>
         </div>
       
       <div id="info">
-        <div>
-          <h1 class="header" id="descripcion">DESCRIPCIÓN</h1>
+        <div id="descripcion" class="tabcontent">
+          <h1 class="header" >DESCRIPCIÓN</h1>
           <p class="parrafaco">The Furrytastic Invasion es un roguelite autobattler en el que ayudas a un gato antropomórfico que, cansado de la estupidez y codicia humana, decidió iniciar una guerra contra la humanidad para invadir Australia. Le pide ayuda al jugador para la guerra, rompiendo las fronteras entre la realidad y el juego. Para ello, debe reclutar a otros animales antropomórficos que estén dispuestos a luchar por su causa: crear un mundo justo y pacífico para los animales antropomórficos. A la hora de preparar tu ejército, necesitarás recurrir a tus habilidades de gestión y estrategia, ya que los humanos harán cualquier idiotez para mantener sus tierras.</p>
+          <img src="images/patitas.png" alt="Michi-Michi" style="width:  auto; height: 150px;">
+          <img src="images/michi_michi_chibi.png" alt="Michi-Michi" style="width:  auto; height: 220px;">
         </div>
   
-        <div>
-          <h1 class="header" id="controles">CONTROLES</h1>
+        <div id="controles" class="tabcontent">
+          <h1 class="header" >CONTROLES</h1>
           <p class="parrafaco">¡Utiliza el click izquierdo de tu ratón para interactuar con el entorno!</p>
           <p class="parrafaco">1. Cliquea sobre el botón de combate para comenzar.
           </p>
@@ -63,8 +60,8 @@
           <p class="parrafaco">5. ¡Lucha a muerte contra los humanos!</p>
         </div>
   
-        <div>
-          <h1 class="header" id="creditos">AUTORES Y CRÉDITOS</h1>
+        <div id="creditos" class="tabcontent">
+          <h1 class="header" >AUTORES Y CRÉDITOS</h1>
           <div id="teamCanibalTitle">
             <h2 class="subHeader">EQUIPO DE CANIBALISMO GALLETIL</h2>
             <img id="logo" src="images/logoConFondo.png" alt="Logo Canibalismo Galletil">
@@ -111,8 +108,9 @@
             </div>
           </div>
         </div>
-        <div>
-          <h1 class="header" id="redes">REDES SOCIALES</h1>
+
+        <div id="redes" class="tabcontent">
+          <h1 class="header" >REDES SOCIALES</h1>
           <div id="socialContainer">
             <p>
             <a href="https://x.com/galletaCanibal_" target="_blank">
