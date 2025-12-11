@@ -1,5 +1,4 @@
 # SISTEMA DE JUEGO PRINCIPAL
-
 ```mermaid
 classDiagram
     class Game {
@@ -18,10 +17,39 @@ classDiagram
     Game --> DebugCombat
     Game --> DebugMarket
     Game --> CombatSetup
+
+    class Phaser_Scene {
+        + add : GameObjectFactory
+        + physics : ArcadePhysics
+        + sound : SoundManager
+        + input : InputPlugin
+        + time : Clock
+        + tweens : TweenManager
+        + anims : AnimationManager
+        + cameras : CameraManager
+        + events : EventEmitter
+        + make : TilemapCreator
+        + cache : CacheManager
+        + load : LoaderPlugin
+        + scale : ScaleManager
+        + scene : ScenePlugin
+        + constructor(key)
+        + init(data)
+        + preload()
+        + create(data)
+        + update(time, delta)
+    }
+Phaser_Scene-->BootScene
+Phaser_Scene-->MainMenu
+Phaser_Scene-->DialogueScene
+Phaser_Scene-->DebugMap
+Phaser_Scene-->DebugCombat
+Phaser_Scene-->DebugMarket
+Phaser_Scene-->CombatSetup
+
 ```
 
 # JERARQUÍA DE ESCENAS
-
 ```mermaid
 classDiagram
     class PhaserScene {
@@ -52,8 +80,22 @@ classDiagram
         +showPlayButton()
     }
     
-    BootScene --> cargaGameObject : usa para precargar texturas
-    
+    BootScene --> cargaGameObjects : usa para precargar texturas
+
+    class cargaGameObjects{
+        -level = int;
+        -scene = Scene
+        +getAllyGroup()
+        +getEnemyGroup()
+        +getObjectGroup()
+        +loadAllyGroups()
+        +loadEnemyGroups()
+        +loadObjectGroups()
+    }
+cargaGameObjects-->debugMarket : Objetos y Aliados
+cargaGameObjects-->MainMenu : Michi-Michi
+cargaGameObjects--> debugCombat : Enemigos y Jefes
+
     class MainMenu {
         -DOMmanager: DOMmanager
         -playerData: Object
@@ -103,10 +145,81 @@ classDiagram
     DebugMap --> AudioManager : "1..1"
     DebugMap --> CombatSetup : lanza
     DebugMap --> DebugMarket : lanza
+
+    class CombatSetup {
+        -DOMmanager: DOMmanager
+        -playerData: Object
+        -selectedAllies: Array
+        -clickableAllies: Set
+        -DOMallies: Object
+        -selectedObject: Object
+        -ObjectSize: Number
+        -audioManager: AudioManager
+        -backgrounds: Array
+        -world: Number (0-3)
+        -bossFlag: Boolean
+        +init(data)
+        +preload()
+        +create()
+        +toggleAlly(ally)
+        +addAlly(ally)
+        +removeAlly(ally)
+        +showObjects(objectsList)
+        +showObjectTooltip(obj, x, y)
+        +hideObjectTooltip()
+        +repositionSelectedAllies()
+        +makeClickable(domAlly)
+        +makeInteractives()
+        +removeFromClickable(domAlly)
+        +selectObject(object, index)
+        +deselectObject()
+        +applyObjectToAlly(ally)
+        +applyObjectEffects(ally, object)
+        +showObjectEffect(ally, object)
+        +removeUsedObject(object)
+    }
+
+    Set-->CombatSetup
+
+    class debugMarket {
+        -DOMmanager: DOMmanager
+        -playerData: Object
+        -audioManager: AudioManager
+        -cargaGameObject: cargaGameObjects
+        -GameObjectOfLevel: Object
+        +init(data)
+        +preload()
+        +create()
+        +quitOwnedAlliesFromArray()
+    }
+
+CombatSetup-->debugCombat : lanza
+
+    class debugCombat{
+        -playerData: Object
+        -playerTeam: Array
+        -audioManager: AudioManager
+        -cargaManagerEnemigos: cargaGameObjects
+        -enemyGroup: Array
+        -enemyToCombat: Array
+        -backgrounds: Array
+        -combatManager: CombatManager
+        -bossFlag: Boolean
+        -world = Number (0-3)
+        +init(data)
+        +preload()
+        +create()
+        +recreate()
+        +showExitButton()
+        +update()
+        +createEnemyTeam()
+        +cloneEnemy(originalEnemy)
+        +createBossTeam()
+        +startVictoryDialogue()
+    }
 ```
 
 # SISTEMA DE GESTIÓN
-
 ```mermaid
 classDiagram
     class DOMmanager {
@@ -208,10 +321,26 @@ classDiagram
     MarketManager --> Ally : "0..*"
     MarketManager --> GlobalObject : "0..*"
     MarketManager --> DOMmanager : "1..1"
+
+    class GlobalObject{
+        -name: String
+        -textureURL: String
+        -life: Number
+        -attack: Number
+        -cost: Number
+        -DISPLAY_SIZE: Number
+        +GlobalObject(scene, x, y, name, textureURL, life, attack, cost, texture)
+        +getName()
+        +getTextureURL()
+        +getLife()
+        +getAttack()
+        +getCost()
+        +clone()
+    }
+
 ```
 
 # SISTEMA DE CONFIGURACIÓN DE DATOS
-
 ```mermaid
 classDiagram
     class DialogueConfig {
@@ -304,7 +433,6 @@ classDiagram
 ```
 
 # SISTEMA DE OBJETOS DEL JUEGO
-
 ```mermaid
   classDiagram
     direction LR
@@ -404,7 +532,6 @@ classDiagram
 ```
 
 # SISTEMA DE GRÁFICOS DE JERARQUÍA
-
 ```mermaid
 classDiagram
     class Node {
@@ -433,7 +560,6 @@ classDiagram
     Node --> Node : "0..2" parents
 ```
 # SISTEMA DE DIÁLOGOS
-
 ```mermaid
 classDiagram
     class Character {
@@ -491,7 +617,6 @@ classDiagram
 ```
 
 # SISTEMA DE AUDIO
-
 ```mermaid
 classDiagram
     class AudioConfig {
@@ -541,11 +666,13 @@ classDiagram
     AudioManager --> AudioFiles : referencia
     Ally --> AudioManager : "emite evento allyDamageSound"
     
-    note for Ally "Cuando recibe daño:\n1. reduce vida\n2. this.scene.events.emit('allyDamageSound')\n3. AudioManager.playSound(MusicKeys.ALLY_DAMAGE)"
+note for Ally "Cuando recibe daño:
+reduce vida.
+this.scene.events.emit('allyDamageSound').
+AudioManager.playSound(MusicKeys.ALLY_DAMAGE)"
 ```
 
 # FLUJO DE DAÑO Y ANIMACIONES
-
 ```mermaid
 sequenceDiagram
     participant CM as CombatManager
@@ -566,7 +693,6 @@ sequenceDiagram
 ```
 
 # RELACIONES
-
 ```mermaid
 graph TB
     subgraph "Core Combat System"
@@ -668,7 +794,11 @@ classDiagram
     
     AllyGroup --> AllyData : "4 arrays de aliados"
     
-    note for AllyData "Progresión por nivel:\nNivel 0: vida 6-9, ataque 3-5, costo 7\nNivel 1: vida 9-11, ataque 5-7, costo 12\nNivel 2: vida 10-13, ataque 7-9, costo 17\nNivel 3: vida 12-14, ataque 9-11, costo 22"
+    note for AllyData "Progresión por nivel:
+Nivel 0: vida 6-9, ataque 3-5, costo 7
+Nivel 1: vida 9-11, ataque 5-7, costo 12
+Nivel 2: vida 10-13, ataque 7-9, costo 17
+Nivel 3: vida 12-14, ataque 9-11, costo 22"
 ```
 
 ### enemyGroup.json
@@ -693,7 +823,9 @@ classDiagram
     
     EnemyGroup --> EnemyData : "4 arrays de enemigos"
     
-    note for EnemyData "El último enemigo de cada array es el BOSS\nÍndice 0-3: enemigos normales\nÍndice 4: BOSS del nivel"
+note for EnemyData "El último enemigo de cada array es el BOSS
+Índice 0-3: enemigos normales
+Índice 4: BOSS del nivel"
 ```
 
 ### objects.json
@@ -718,7 +850,9 @@ classDiagram
     
     ObjectGroup --> ObjectData : "4 arrays de objetos"
     
-    note for ObjectData "Valores de vida pueden ser negativos\n(efectos especiales/detrimento)\nCostos: 5, 8, 11, 14 por nivel"
+    note for ObjectData "Valores de vida pueden ser negativos
+(efectos especiales/detrimento)
+Costos: 5, 8, 11, 14 por nivel"
 ```
 
 ### Relación de diálogos
@@ -796,6 +930,7 @@ stateDiagram-v2
         Objetos: Pistola, Partes de las torres gemelas, Cheese Burger
     end note
 ```
+
 
 
 
