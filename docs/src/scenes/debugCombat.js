@@ -17,7 +17,7 @@ export default class Animation extends Phaser.Scene{
         this.cargaManagerEnemigos = null;
         this.enemyGroup =[];
         this.enemyToCombat =[];
-        this.backgrounds = ['austCombat', 'chinaCombat', 'spainCombat', 'usaCombat'];
+        this.backgrounds = ['austCombat', 'spainCombat',  'chinaCombat', 'usaCombat'];
     }
 
     init(data){// se crea un CombatManager y se añaden las tropas aliadas pasadas desde combatSetup

@@ -24,7 +24,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.ObjectSize =100;
 
         this.audioManager = null;
-        this.backgrounds = ['austSetup', 'chinaSetup', 'spainSetup', 'usaSetup'];
+        this.backgrounds = ['austSetup', 'spainSetup', 'chinaSetup', 'usaSetup'];
     }
 
     init(data) {
@@ -86,6 +86,7 @@ export default class CombatSetup extends Phaser.Scene {
         [...this.DOMallies.children].forEach(ally => {
             this.makeClickable(ally);
         });
+        
     }
     //Determina si la ally esta en la tropa para removerlo o añadirlo
     toggleAlly(ally) {
@@ -113,8 +114,22 @@ export default class CombatSetup extends Phaser.Scene {
         this.repositionSelectedAllies();
     }
 
+    /*
+    Elimina un aliado de selectedAllies.
+    */
+    removeAlly(ally) {
+        const index = this.selectedAllies.indexOf(ally);
+        if(index != -1) {
+            this.selectedAllies.splice(index, 1);
+            ally.x = -150;
+            ally.y = -150;
+            ally.warriorUI.setStatsPosition(ally.x, ally.y);
+            this.repositionSelectedAllies();
+        }
+    }
+
     //se enseñan los objetos en el lado derecho de la pantalla del juego
-   showObjects(objectsList){
+    showObjects(objectsList){
     console.log('Mostrando objetos:', objectsList);
     
     let x = 1000;
@@ -191,19 +206,6 @@ export default class CombatSetup extends Phaser.Scene {
         }
     }
 
-    /*
-    Elimina un aliado de selectedAllies.
-    */
-    removeAlly(ally) {
-        const index = this.selectedAllies.indexOf(ally);
-        if(index != -1) {
-            this.selectedAllies.splice(index, 1);
-            ally.x = -150;
-            ally.y = -150;
-            ally.warriorUI.setStatsPosition(ally.x, ally.y);
-            this.repositionSelectedAllies();   
-        }
-    }
 
     repositionSelectedAllies() {
         const startX = 350;
@@ -242,12 +244,27 @@ export default class CombatSetup extends Phaser.Scene {
     // Hace un aliado del DOM clickeable
     makeClickable(domAlly) {
         if(!this.clickableAllies.has(domAlly)) {
+            //EventListener en el DOM
             domAlly.addEventListener('click', () => {
-            this.toggleAlly(domAlly);
-            console.log(domAlly.dataset.name);
+                this.toggleAlly(domAlly);
+                console.log(domAlly.dataset.name);
             });
             this.clickableAllies.add(domAlly);
+            
+            const a = this.playerData.ownedAllies.find(x => x.name === domAlly.dataset.name);
+            this.makeInteractive(a);
         }
+
+    }
+
+    makeInteractive(ally) {
+        ally.setInteractive();
+        ally.on('pointerdown', () => {
+            console.log(ally.name);
+            if(this.selectedObject) {
+                this.applyObjectToAlly(ally);
+            }
+        });
     }
 
     removeFromClickable(domAlly) {
@@ -288,45 +305,34 @@ export default class CombatSetup extends Phaser.Scene {
     applyObjectToAlly(ally) {
         if (!this.selectedObject) return;
 
-        console.log(`Aplicando ${this.selectedObject.getName()} a ${ally.getName()}`);
+        console.log(`Aplicando ${this.selectedObject.getName()} a ${ally.name}`);
         
         const originalObject = this.selectedObject.originalObject || this.selectedObject;
-
-        // Encontrar el aliado en selectedAllies
-        const sceneAlly = this.selectedAllies.find(a => a.getName() === ally.getName());
+    
+        // Aplicar efectos del objeto
+        this.applyObjectEffects(ally, originalObject);
         
-        if (sceneAlly) {
-            // Aplicar efectos del objeto
-            this.applyObjectEffects(sceneAlly, originalObject);
-            
-            // Remover objeto del DOM y del inventario
-            this.removeUsedObject(originalObject);
-            
-            // Deseleccionar objeto
-            this.deselectObject();
-        }
+        // Remover objeto del DOM y del inventario
+        this.removeUsedObject(originalObject);
+        
+        // Deseleccionar objeto
+        this.deselectObject();
     }
 
     applyObjectEffects(ally, object) {
-        const originalLife = ally.getLife();
-        const originalAttack = ally.getAttack();
+        const originalLife = ally.life;
+        const originalAttack = ally.attack;
         
         // Aplicar modificaciones
-        const newLife = originalLife + object.getLife();
-        const newAttack = originalAttack + object.getAttack();
+        const newLife = originalLife + object.life;
+        const newAttack = originalAttack + object.attack;
         
-        // Actualizar stats del aliado (ALLY)
+        // Actualizar stats del aliado
         ally.setLife(Math.max(0, newLife)); // Vida mínima 0
         ally.setAttack(Math.max(0, newAttack)); // Ataque mínimo 0
-    
-        // Actualizar stats del aliado (GLOBAL_ALLY)
-        const globalAlly = this.ownedAllies.find(a => a.getName() === ally.getName());
-        if (globalAlly) {
-            globalAlly.setLife(newLife);
-            globalAlly.setAttack(newAttack);
-        }
 
-        ally.warriorUI.setNewStats(ally.getLife(), ally.getAttack());
+
+        ally.warriorUI.setNewStats(ally.life, ally.attack);
 
         if (ally.updateStatsUI) {
             ally.updateStatsUI();
@@ -335,7 +341,7 @@ export default class CombatSetup extends Phaser.Scene {
         // Mostrar feedback visual
         this.showObjectEffect(ally, object);
             
-        console.log(`Aliado ${ally.getName()} actualizado - Vida: ${ally.getLife()}, Ataque: ${ally.getAttack()}`);
+        console.log(`Aliado ${ally.name} actualizado - Vida: ${ally.life}, Ataque: ${ally.attack}`);
     }
 
     showObjectEffect(ally, object) {

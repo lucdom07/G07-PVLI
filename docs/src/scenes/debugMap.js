@@ -7,7 +7,7 @@ export default class debugMap extends Phaser.Scene {
         super({key: 'debugMap'});
         this.playerData = {}
         this.audioManager = null;
-        this.backgrounds = ['austBackground', 'chinaBackground', 'spainBackground', 'usaBackground'];
+        this.backgrounds = ['austBackground', 'spainBackground', 'chinaBackground', 'usaBackground'];
         //Niveles del grafo
         this.graphLevels = 5;
         //Numero de hijos de cada nodo del grafo durante una fase de divergencia de este
