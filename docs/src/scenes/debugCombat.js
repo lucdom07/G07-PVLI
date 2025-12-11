@@ -257,7 +257,7 @@ export default class Animation extends Phaser.Scene{
             1: DialogueKeys.AU,
             2: DialogueKeys.ES,
             3: DialogueKeys.CH,
-            4: DialogueKeys.US
+            4: DialogueKeys.ENDING
         }
 
         const dialogueKey = worldDialogues[this.world];
