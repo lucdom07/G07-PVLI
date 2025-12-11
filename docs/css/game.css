@@ -8,12 +8,6 @@ html {
   background-position: center;
 }
 
-#furrytastic{
-  position: sticky;
-  top: 0;
-  /*overflow: hidden;*/
-}
-
 #titleContainer{
   /*background-color: #e99e68;*/
   background-image: url(../images/title_texture.png);
