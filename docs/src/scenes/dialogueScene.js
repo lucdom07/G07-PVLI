@@ -69,20 +69,9 @@ export default class DialogueScene extends Phaser.Scene {
             console.error("No existe un JSON de diálogos para esta clave:", this.dialogueKey);
             return;
         }
-        /*
-        BOTÓN DE SKIP
-        */
-        const width = this.sys.game.config.width;
-        this.skipButton = this.add.text(width - 100, 40, "Skip", {
-            fontSize: "20px",
-            color: "#ff0000",
-            backgroundColor: "#000000",
-            padding: { x: 10, y: 5 }
-        }).setInteractive();
+        
+       this.createSkipButton();
 
-        this.skipButton.on("pointerdown", () => {
-            this.events.emit("dialogueEnd");
-        });
 
         //escucho el evento de fin de diálogos para cambiar de escena o reanudar la anterior
         this.events.once("dialogueEnd", () => {
@@ -136,5 +125,27 @@ export default class DialogueScene extends Phaser.Scene {
     );
 
     this.background.setDepth(-10); // siempre detrás de todo
-}
+    }
+
+    createSkipButton(){
+         const width = this.sys.game.config.width;
+        this.skipButton = this.add.text(width - 100, 40, "Skip", {
+            fontSize: "20px",
+            color: "#000000",
+            backgroundColor: "#ABB3D1",
+            padding: { x: 10, y: 5 }
+        }).setInteractive();
+
+        this.skipButton.on("pointerdown", () => {
+            this.events.emit("dialogueEnd");
+        });
+
+        this.skipButton.on("pointerover", () => {
+            this.skipButton.setStyle({backgroundColor: "#CCD3F0"});
+        })
+        this.skipButton.on("pointerout", () => {
+            this.skipButton.setStyle({backgroundColor: "#ABB3D1"});
+        })
+
+    }
 }
