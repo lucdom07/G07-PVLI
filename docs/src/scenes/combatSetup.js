@@ -46,7 +46,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
         this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
         this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
-        this.load.image('combatButton', 'assets/placeholders/buttons/combat_button.jpg')
+        this.load.image('combat', 'assets/buttons/continue.png')
     }
 
     create() {
@@ -60,22 +60,8 @@ export default class CombatSetup extends Phaser.Scene {
 
         this.showObjects(this.playerData.ownedObjects);
 
-        const playButton = this.add.image(200 ,50,'combatButton').setInteractive();
-        playButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
-  
-        //pasa los aliados al debugCombat
-        playButton.on('pointerdown',()=>{
-            if(this.selectedAllies.length > 0) {
-                this.scene.start('debugCombat',{
-                    playerData: this.playerData,
-                    selectedAllies: this.selectedAllies,
-                    world: this.world,
-                    bossFlag: this.bossFlag
-                });
-                this.selectedAllies = [];
-            }
-            console.log("yendo al combate");
-        });
+        this.createContinueButton();
+        
 
         //Crear aliados en la escena y hacer los del DOM clickables
         for(let i = 0; i < this.playerData.ownedAllies.length; i++) {
@@ -378,5 +364,57 @@ export default class CombatSetup extends Phaser.Scene {
         }
     
         console.log(`Objeto ${object.name} usado y eliminado`);
+    }
+
+    createContinueButton(){
+
+        const playButton = this.add.image(200 ,50,'combat').setInteractive().setDisplaySize(400,130);
+        playButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
+  
+        //pasa los aliados al debugCombat
+        playButton.on('pointerdown',()=>{
+            if(this.selectedAllies.length > 0) {
+                this.scene.start('debugCombat',{
+                    playerData: this.playerData,
+                    selectedAllies: this.selectedAllies,
+                    world: this.world,
+                    bossFlag: this.bossFlag
+                });
+                this.selectedAllies = [];
+            }
+            console.log("yendo al combate");
+        });
+
+        //borde del botón de jugar
+        const border = this.add.graphics();
+        border.lineStyle(4, 0x000000); 
+        border.strokeRect(
+            playButton.x - playButton.displayWidth/2, 
+            playButton.y - playButton.displayHeight/2, 
+            playButton.displayWidth, 
+            playButton.displayHeight
+        );
+
+        playButton.on('pointerover', () => {
+            border.clear(); 
+            border.lineStyle(4, 0xffffff, 0.7); 
+            border.strokeRect(
+                playButton.x - playButton.displayWidth/2,
+                playButton.y - playButton.displayHeight/2,
+                playButton.displayWidth,
+                playButton.displayHeight
+            );
+        });
+
+        playButton.on('pointerout', () => {
+            border.clear();
+            border.lineStyle(4, 0x000000, 1); 
+            border.strokeRect(
+                playButton.x - playButton.displayWidth/2,
+                playButton.y - playButton.displayHeight/2,
+                playButton.displayWidth,
+                playButton.displayHeight
+            );
+        });
     }
 }

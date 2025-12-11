@@ -38,7 +38,7 @@ export default class Animation extends Phaser.Scene{
         this.load.image('spainCombat','assets/backgrounds/spainCombat.png');
         this.load.image('usaCombat','assets/backgrounds/usaCombat.png');
         this.load.image('combatBackground','assets/backgrounds/australiaCombat.png')
-        this.load.image('exit','assets/placeholders/buttons/exit_button.png');
+        this.load.image('exit','assets/buttons/quit.png');
     }
 
     create(){
@@ -98,7 +98,7 @@ export default class Animation extends Phaser.Scene{
             this.audioManager.playMusic(MusicKeys.GAME_OVER);
         }
         console.log("you can exit combat");
-        const exitButton = this.add.image(200 ,50,'exit').setInteractive();
+       const exitButton = this.add.image(300,100,'exit').setInteractive().setDisplaySize(400,130);
 
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
   
@@ -144,6 +144,41 @@ export default class Animation extends Phaser.Scene{
                 sceneManager.start('mainMenu', { reset: true });
             }
         });
+
+         const border = this.add.graphics();
+        border.lineStyle(4, 0x000000); 
+        border.strokeRect(
+            exitButton.x - exitButton.displayWidth/2, 
+            exitButton.y - exitButton.displayHeight/2, 
+            exitButton.displayWidth, 
+            exitButton.displayHeight
+        );
+
+        exitButton.on('pointerover', () => {
+            border.clear(); 
+            border.lineStyle(4, 0xffffff, 0.7); 
+            border.strokeRect(
+                 exitButton.x - exitButton.displayWidth/2, 
+                exitButton.y - exitButton.displayHeight/2, 
+                exitButton.displayWidth, 
+                exitButton.displayHeight
+            );
+        });
+
+        exitButton.on('pointerout', () => {
+            border.clear();
+            border.lineStyle(4, 0x000000, 1); 
+            border.strokeRect(
+                 exitButton.x - exitButton.displayWidth/2, 
+                exitButton.y - exitButton.displayHeight/2, 
+                exitButton.displayWidth, 
+                exitButton.displayHeight
+            );
+        });
+
+        
+
+
     }
     update(time, dt){
         this.combatManager.update(time, dt);
