@@ -64,10 +64,7 @@ export default class DialogueScene extends Phaser.Scene {
 
         this.skipButton.on("pointerdown", () => {
             if(this.nextScene)
-                this.scene.start(this.nextScene, { 
-                playerData: this.playerData,
-                world:this.playerData.world
-             });
+                this.scene.start(this.nextScene, { playerData: this.playerData });
             else if (this.returnScene)
                 this.scene.resume(this.returnScene);
             this.scene.stop();
@@ -80,6 +77,7 @@ export default class DialogueScene extends Phaser.Scene {
                 if (this.nextScene == 'mainMenu') {
                     const sceneManager = this.sys.game.scene;
 
+                    // Detener TODAS las escenas excepto MainMenu
                     sceneManager.getScenes(true).forEach(scene => {
                         if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
                         
@@ -90,13 +88,11 @@ export default class DialogueScene extends Phaser.Scene {
                     });
 
                     this.scene.stop();
+                    // Iniciar MainMenu
                     sceneManager.start('mainMenu', { reset: true });
                 }
                 else{
-                    this.scene.start(this.nextScene, { 
-                        playerData: this.playerData,
-                        world:this.playerData.world
-                     });
+                    this.scene.start(this.nextScene, { playerData: this.playerData });
                 }
             }
             else if(this.returnScene){
