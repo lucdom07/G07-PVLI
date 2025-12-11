@@ -88,87 +88,89 @@
 
     "enemy2":[
         {
-            "name": "Kevin",
-            "textureid": "kevin",
-            "life": 9,
+            "name": "Pimiento humanoide",
+            "textureid": "pimientoHumano",
+                        "life": 9,
             "attack": 8,
             "range":2,
+
+            "texture": "assets/enemies/humanoidPepper.png"
+        },
+        {
+            "name": "Otaku",
+            "textureid": "otaku",
+
+                        "life": 12,
+            "attack": 8,
+            "range":1,
+            "texture": "assets/enemies/otaku.png"
+        },
+        {
+            "name": "Profesores",
+            "textureid": "profes",
+            "life": 11,
+            "attack": 9,
+            "range":0,
+            "texture": "assets/enemies/teacher.png"
+        },
+        {
+            "name": "CEO",
+            "textureid": "ceo",
+            "life": 10,
+            "attack": 8,
+            "range":5,
+            "texture": "assets/enemies/ceo.png"
+        },
+        {
+            "name": "Güini de Pu",
+            "textureid": "guini",
+            "life": 14,
+            "attack": 12,
+            "range": 0,
+            "texture": "assets/enemies/winnie.png"
+        }
+    ],
+    
+    "enemy3":[
+        {
+            "name": "Kevin",
+            "textureid": "kevin",
+            "life": 14,
+            "attack": 10,
+            "range":0,
             "texture": "assets/enemies/karen.png"
         },
         {
             "name": "Karen",
             "textureid": "karenUsa",
             "life": 12,
-            "attack": 8,
-            "range":1,
+            "attack": 11,
+            "range":3,
             "texture": "assets/enemies/karenUsa.png"
         },
         {
             "name": "Barry",
             "textureid": "barry",
-            "life": 11,
-            "attack": 9,
-            "range":0,
+            "life": 13,
+            "attack": 10,
+            "range":1,
             "texture": "assets/enemies/barry.png"
         },
         {
             "name": "J. Bezos",
             "textureid": "bezos",
-            "life": 10,
-            "attack": 8,
-            "range":5,
+            "life": 11,
+            "attack": 10,
+            "range": 4,
             "texture": "assets/enemies/bezos.png"
         },
         {
             "name": "Mister Cheeto",
             "textureid": "cheeto",
-            "life": 14,
-            "attack": 12,
-            "range": 0,
-            "texture": "assets/enemies/misterCheeto.png"
-        }
-    ],
-
-    "enemy3":[
-        {
-            "name": "Pimiento humanoide",
-            "textureid": "pimientoHumano",
-            "life": 14,
-            "attack": 10,
-            "range":0,
-            "texture": "assets/enemies/humanoidPepper.png"
-        },
-        {
-            "name": "Otaku",
-            "textureid": "otaku",
-            "life": 12,
-            "attack": 11,
-            "range":3,
-            "texture": "assets/enemies/otaku.png"
-        },
-        {
-            "name": "Profesores",
-            "textureid": "profes",
-            "life": 13,
-            "attack": 10,
-            "range":1,
-            "texture": "assets/enemies/teacher.png"
-        },
-        {
-            "name": "CEO",
-            "textureid": "ceo",
-            "life": 11,
-            "attack": 10,
-            "range": 4,
-            "texture": "assets/enemies/ceo.png"
-        },
-        {
-            "name": "Güini de Pu",
-            "textureid": "guini",
             "life": 16,
             "attack": 15,
             "range":0,
-            "texture": "assets/enemies/winnie.png"
+            "texture": "assets/enemies/misterCheeto.png"
         }
     ]
 }

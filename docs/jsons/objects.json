@@ -63,63 +63,64 @@
 
     "objects2":[
         {
-            "name": "Pistola",
-            "textureid": "gun",
+            "name": "Chancla",
+            "textureid": "chancla",
             "life": -3,
             "attack": 5,
             "cost":11,
-            "texture": "assets/objects/gun.png"
-        },
-        {
-            "name": "Partes de las torres gemelas",
-            "textureid": "torres",
-            "life": 2,
-            "attack": 4,
-            "cost":11,
-            "texture": "assets/objects/twintowers.png"
-        },
-        {
-            "name": "Cheese Burger",
-            "textureid": "burger",
-            "life": 5,
-            "attack": 0,
-            "cost":11,
-            "texture": "assets/objects/cheeseburger.png"
-        }
-    ],
-
-    "objects3":[
-        {
-            "name": "Chancla",
-            "textureid": "chancla",
-            "life": -7,
-            "attack": 10,
-            "cost":14,
             "texture": "assets/objects/chancla.png"
         },
         {
             "name": "Bambu",
             "textureid": "bambu",
-            "life": 8,
-            "attack": 0,
-            "cost":14,
+            "life": 4,
+            "attack": 2,
+            "cost":11,
             "texture": "assets/objects/bamboo.png"
         },
         {
             "name": "Emotional Damage",
             "textureid": "emotional",
             "life": 0,
-            "attack": 7,
-            "cost":14,
+            "attack": 5,
+            "cost":11,
             "texture": "assets/objects/emotional_damage.png"
         },
         {
             "name": "Timo",
             "textureid": "timo",
+            "life": -4,
+            "attack": 7,
+            "cost":14,
+            "texture": "assets/objects/timo.png"
+        }
+    ],
+    
+    "objects3":[
+        {
+            "name": "Pistola",
+            "textureid": "gun",
+            "life": -7,
+            "attack": 10,
+            "cost":14,
+            "texture": "assets/objects/gun.png"
+        },
+        {
+            "name": "Partes de las torres gemelas",
+            "textureid": "torres",
+
+            "life": 8,
+            "attack": 2,
+            "cost":14,
+            "texture": "assets/objects/twintowers.png"
+        },
+        {
+            "name": "Cheese Burger",
+            "textureid": "burger",
             "life": 6,
             "attack": 6,
             "cost":14,
-            "texture": "assets/objects/timo.png"
+            "texture": "assets/objects/cheeseburger.png"
         }
     ]
 }

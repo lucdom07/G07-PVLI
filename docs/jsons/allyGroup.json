@@ -98,55 +98,12 @@
 
     "ally2":[
         {
-            "name": "Nutricristo",
-            "textureid": "nutricristo",
+            "name": "QiLing",
+            "textureid": "qiling",
             "life": 13,
             "attack": 9,
             "range":2,
             "cost":17,
-            "texture": "assets/allys/otter.png",
-            "available":false
-        },
-        {
-            "name": "Señor Anteojo",
-            "textureid": "senorAnteojo",
-            "life": 12,
-            "attack": 7,
-            "range":0,
-            "cost":17,
-            "texture": "assets/allys/ant_eater.png",
-            "available":false
-        },
-        {
-            "name": "Pimiento Gatomórfico",
-            "textureid": "pimientoGato",
-            "life": 10,
-            "attack": 9,
-            "range":1,
-            "cost":17,
-            "texture": "assets/allys/pepper_cat.png",
-            "available":false
-        },
-        {
-            "name": "Miku",
-            "textureid": "miku",
-            "life": 12,
-            "attack": 8,
-            "range":4,
-            "cost":17,
-            "texture": "assets/allys/original_miku.png",
-            "available":false
-        }
-    ],
-
-    "ally3":[
-        {
-            "name": "QiLing",
-            "textureid": "qiling",
-            "life": 14,
-            "attack": 10,
-            "range":0,
-            "cost":22,
             "texture": "assets/allys/qiling.png",
             "available":false
         },
@@ -154,19 +111,19 @@
             "name": "Po-ka",
             "textureid": "poka",  
             "life": 12,
-            "attack": 9,
-            "range":1,
-            "cost":22,
+            "attack": 7,
+            "range":0,
+            "cost":17,
             "texture": "assets/allys/panda.png",
             "available":false
         },
         {
             "name": "Kairos",
             "textureid": "kairos",
-            "life": 13,
-            "attack": 11,
-            "range":3,
-            "cost":22,
+            "life": 10,
+            "attack": 9,
+            "range":1,
+            "cost":17,
             "texture": "assets/allys/killer_whale.png",
             "available":false
         },
@@ -174,10 +131,53 @@
             "name": "Moflete",
             "textureid": "moflete",
             "life": 12,
+            "attack": 8,
+            "range":4,
+            "cost":17,
+            "texture": "assets/allys/fish.png",
+            "available":false
+        }
+    ],
+    
+    "ally3":[
+        {
+            "name": "Nutricristo",
+            "textureid": "nutricristo",
+            "life": 14,
+            "attack": 10,
+            "range":0,
+            "cost":22,
+            "texture": "assets/allys/otter.png",
+            "available":false
+        },
+        {
+            "name": "Señor Anteojo",
+            "textureid": "senorAnteojo",
+            "life": 12,
+            "attack": 9,
+            "range":1,
+            "cost":22,
+            "texture": "assets/allys/ant_eater.png",
+            "available":false
+        },
+        {
+            "name": "Pimiento Gatomórfico",
+            "textureid": "pimientoGato",
+            "life": 13,
+            "attack": 11,
+            "range":3,
+            "cost":22,
+            "texture": "assets/allys/pepper_cat.png",
+            "available":false
+        },
+        {
+            "name": "Miku",
+            "textureid": "miku",
+            "life": 12,
             "attack": 10,
             "range": 2,
             "cost":22,
-            "texture": "assets/allys/fish.png",
+            "texture": "assets/allys/original_miku.png",
             "available":false
         }
     ]
