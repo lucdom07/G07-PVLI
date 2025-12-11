@@ -170,8 +170,8 @@ export default class MarketManager {
             .setScale(0.1);
       
         // Texto del precio
-        marketItem.priceText = this.scene.add.text(x, y + 100, `${item.cost}$`, {
-            fontSize: '20px', fill: '#fff', backgroundColor: '#000'
+        marketItem.priceText = this.scene.add.text(x, y + 120, `${item.cost}$`, {
+            fontSize: '35px', fill: '#000', backgroundColor: '#D4D4D4', fontFamily: "Caveat Brush"
         }).setOrigin(0.5);
 
         // muestro stats al pasar el ratón
@@ -179,9 +179,10 @@ export default class MarketManager {
             item.on('pointerover', () => {
             marketItem.infoText = this.scene.add.text(x, y - 60,
                 `${item.name}\nHP:${item.life}\nATK:${item.attack},\nLVL:${item.level}`, {
-                    fontSize: '16px',
-                    fill: '#FFFFFF',
-                    backgroundColor: '#000000',
+                    fontSize: '25px',
+                    fill: '#000',
+                    backgroundColor: '#D4D4D4',
+                    fontFamily: "Caveat Brush",
                     padding: { x: 5, y: 5 },
                     align: 'center'
                 }).setOrigin(0.5);
@@ -191,9 +192,10 @@ export default class MarketManager {
             item.on('pointerover', () => {
             marketItem.infoText = this.scene.add.text(x, y - 80,
                 `${item.name}\nHP:${item.life}\nATK:${item.attack}`, {
-                    fontSize: '12px',
-                    fill: '#FFFFFF',
-                    backgroundColor: '#000000',
+                    fontSize: '25px',
+                    fill: '#000',
+                    backgroundColor: '#D4D4D4',
+                    fontFamily: "Caveat Brush",
                     padding: { x: 5, y: 5 },
                     align: 'center'
                 }).setOrigin(0.5);
@@ -219,7 +221,7 @@ export default class MarketManager {
         if(this.moneyText) this.moneyText.destroy();
         this.moneyText = this.scene.add.text(
             this.scene.cameras.main.centerX, 50, `Dinero: ${this.money}$`, {
-            fontSize: '24px', fill: '#fff', backgroundColor: '#000'
+            fontSize: '40px', fontFamily: "Caveat Brush", fill: '#fff', backgroundColor: '#000'
         }).setOrigin(0.5);
     }
     /*
