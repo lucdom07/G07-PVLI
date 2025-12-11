@@ -75,7 +75,7 @@ export default class debugMap extends Phaser.Scene {
         const divisions = nodes + 1;
         //const divisions = Math.pow(3, nodes);
         //let x = (this.sys.game.canvas.width / divs) * it;
-        const x = (this.sys.game.canvas.width /  this.graph.levels) * (level + 1) * 0.8;
+        const x = (this.sys.game.canvas.width /  this.graph.levels) * (level + 1) * 0.83;
 
         let i = 0;
         this.graph.levelMatrix[level].forEach(node => {
