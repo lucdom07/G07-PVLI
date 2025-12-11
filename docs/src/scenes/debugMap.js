@@ -101,7 +101,7 @@ export default class debugMap extends Phaser.Scene {
             }
             else if(node.value === 1) {
                 node.textures = ['marketButton', 'marketButtonH'];
-                key = 'debugMarket';
+                key = 'marketScene';
             }
             else {
                 node.textures = ['bossButton', 'bossButtonH'];
