@@ -15,7 +15,6 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         this.warriorUI = new WarriorUI(scene, x, y, life, attack, range, this.DISPLAY_SIZE);
 
         this.textureURL = textureURL;
-        console.log("texture: ", texture);
     }
     
     preUpdate(t, dt){

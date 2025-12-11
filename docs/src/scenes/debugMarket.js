@@ -36,12 +36,9 @@ export default class debugMarket extends Phaser.Scene{
         this.openShopDialogue();
         this.cameras.main.fadeIn(800, 0, 0, 0);
        
-        console.log("money: ", this.playerData.money);
         this.cargaGameObject = new cargaGameObject(this, this.playerData.level);
         this.GameObjectOfLevel.allies = this.cargaGameObject.loadAllyGroups();
         this.GameObjectOfLevel.objects = this.cargaGameObject.loadObjectGroups();
-
-        console.log(this.GameObjectOfLevel);
 
         this.quitOwnedAlliesFromArray();
    
@@ -57,7 +54,6 @@ export default class debugMarket extends Phaser.Scene{
         });
         this.events.on('buyingObject', (price)=>{
             this.playerData.money -= price;
-            console.log("new money:" + this.playerData.money);
         });
         this.events.on('sellingAlly', (index, price)=>{
             this.playerData.ownedAllies.splice(index, 1);
@@ -83,7 +79,7 @@ export default class debugMarket extends Phaser.Scene{
             return !ownedAllyNames.includes(ally.name);
         });
         
-        console.log("Aliados disponibles después de filtrar:", this.GameObjectOfLevel.allies);
+
     }
 
     /**
@@ -119,8 +115,6 @@ export default class debugMarket extends Phaser.Scene{
                 this.cameras.main.once('camerafadeoutcomplete', () => {
                 this.scene.stop();
                 this.scene.resume('debugMap'); 
-                console.log("Saliendo del mercado");
-                console.log("ownedAllies: " + this.playerData.ownedAllies);
                 this.audioManager.playMusic(this.mapMusic[this.playerData.level]);
             });
         });
