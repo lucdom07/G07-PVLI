@@ -14,7 +14,7 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
             fill: '#baffa3ff',
             stroke: '#000000',
             strokeThickness: 3,
-            fontFamily: 'Arial',
+            fontFamily: "Caveat Brush",
             fontWeight: 'bold'
         }).setOrigin(0.5);
         let attackText = this.scene.add.text(x, startingY + this.STATS_DISTANCE, `Ataque: ${attack}`, {
@@ -22,7 +22,7 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
             fill: '#f99d9dff',
             stroke: '#000000',
             strokeThickness: 3,
-            fontFamily: 'Arial',
+            fontFamily: "Caveat Brush",
             fontWeight: 'bold'
         }).setOrigin(0.5);
         let rangeText = this.scene.add.text(x, startingY + this.STATS_DISTANCE * 2, `Rango: ${range + 1}`, {
@@ -30,7 +30,7 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
             fill: '#98f7f7ff',
             stroke: '#000000',
             strokeThickness: 3,
-            fontFamily: 'Arial',
+            fontFamily: "Caveat Brush",
             fontWeight: 'bold'
         }).setOrigin(0.5);
         this.stats = [livesText, attackText, rangeText];
@@ -87,7 +87,7 @@ export default class WarriorUI extends Phaser.GameObjects.Sprite{
             fill: color,
             stroke: '#000000',
             strokeThickness: 4,
-            fontFamily: 'Arial',
+            fontFamily: "Caveat Brush",
             fontWeight: 'bold'
         }).setOrigin(0.5);
         console.log(`Creando texto de daño: -${damage} en (${x}, ${y})`); // Debug

@@ -174,7 +174,7 @@ export default class CombatManager{
                 fill: '#FFD700',
                 stroke: '#000000',
                 strokeThickness: 6,
-                fontFamily: 'Arial',
+                fontFamily: "Caveat Brush",
                 fontWeight: 'bold'
             }
         ).setOrigin(0.5);
@@ -213,7 +213,7 @@ export default class CombatManager{
                 fill: '#FF0000',
                 stroke: '#000000',
                 strokeThickness: 6,
-                fontFamily: 'Arial',
+                fontFamily: "Caveat Brush",
                 fontWeight: 'bold'
             }
         ).setOrigin(0.5);

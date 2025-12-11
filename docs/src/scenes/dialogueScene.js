@@ -133,6 +133,7 @@ export default class DialogueScene extends Phaser.Scene {
             fontSize: "20px",
             color: "#000000",
             backgroundColor: "#ABB3D1",
+            fontFamily: "Caveat Brush",
             padding: { x: 10, y: 5 }
         }).setInteractive();
 

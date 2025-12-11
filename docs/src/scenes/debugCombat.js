@@ -98,7 +98,7 @@ export default class Animation extends Phaser.Scene{
             this.audioManager.playMusic(MusicKeys.GAME_OVER);
         }
         console.log("you can exit combat");
-       const exitButton = this.add.image(300,100,'exit').setInteractive().setDisplaySize(400,130);
+        const exitButton = this.add.image(300,100,'exit').setInteractive().setDisplaySize(400,130);
 
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
   
