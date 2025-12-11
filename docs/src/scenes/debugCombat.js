@@ -110,6 +110,7 @@ export default class Animation extends Phaser.Scene{
         //pasa los aliados al debugCombat
         exitButton.on('pointerdown',()=>{
             console.log("boss" + this.bossFlag);
+            this.playerTeam = [];
             if(this.combatManager.victory) {
                 if(!this.bossFlag) {
                     this.playerData.money += 10;
