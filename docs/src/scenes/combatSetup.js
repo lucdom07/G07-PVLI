@@ -187,7 +187,7 @@ export default class CombatSetup extends Phaser.Scene {
     
     let x = 1000;
     let y = 100;
-    const ySpacing = 80;
+    const ySpacing = 100;
     
     for(let i = 0; i < objectsList.length; i++){
         let obj = objectsList[i];
@@ -238,11 +238,12 @@ export default class CombatSetup extends Phaser.Scene {
     //para pasar el raton por encima y enseñar información
     showObjectTooltip(obj, x, y){
         // Crear tooltip con información del objeto
-         this.currentTooltip = this.add.text(x-26, y - 30, 
+         this.currentTooltip = this.add.text(x-40, y - 30, 
         `${obj.name}\nHP: ${obj.life || 0}\nATK: ${obj.attack || 0}`, {
-            fontSize: '10px',
+            fontSize: '20px',
             fill: '#FFFFFF',
-            backgroundColor: '#000000',
+            fontFamily: "Caveat Brush",
+            backgroundColor: '#4F4637',
             padding: { x: 5, y: 5 },
             align: 'center'
         }).setOrigin(0, 0.5);

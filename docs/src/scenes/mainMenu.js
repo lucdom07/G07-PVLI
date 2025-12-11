@@ -3,7 +3,6 @@ import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
 import Ally from "../../gameObjects/characters/ally.js";
 import { DialogueKeys } from "../managers/dialogueConfig.js";
-import DOMmanager from "../managers/DOMManager.js";
 
 export default class mainMenu extends Phaser.Scene{
     constructor(DOManager){
@@ -34,11 +33,6 @@ export default class mainMenu extends Phaser.Scene{
         
         this.DOMmanager.destroyDomAllies();
         this.loadMichi();
-        console.log(this.playerData.ownedAllies.length);
-        this.playerData.ownedAllies.forEach(element => { console.log(element.name);});
-
-            
-
 
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.MENU);
@@ -132,7 +126,7 @@ export default class mainMenu extends Phaser.Scene{
             // Cargar todas las texturas del grupo
             groupToLoad.forEach(ally => {
                 this.load.image(ally.textureid, ally.texture);
-                //console.log("id: " + ally.name + "Textura" + " urlTexture: " + ally.texture);
+                
             });
             
             // Buscar específicamente a Michi-Michi
@@ -153,10 +147,8 @@ export default class mainMenu extends Phaser.Scene{
                     true,
                     michiData.texture
                 );
-                console.log("Michi-Michi id: " + michiData.name + "Textura");
                 // Agregar solo Michi-Michi al array
                 this.playerData.ownedAllies.push(michi);
-                console.log("Michi-Michi cargado en ownedAllies:", michi);
             }
         }
     }

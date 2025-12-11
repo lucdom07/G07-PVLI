@@ -50,7 +50,6 @@ export default class MarketManager {
         //aliados ya obtenidos
         this.bag = bag;
         //genero aliados y objetos en venta
-        console.log("aaaaaaa");
         this.marketAllies = this.generateAlly(allyList, 3);
         this.marketObjects = this.generateObject(objList, 2); // objetos no implementados aún
         //muestro el mercado
@@ -293,17 +292,14 @@ export default class MarketManager {
         if (marketItem.button) { 
             marketItem.button.destroy(); 
             marketItem.button = null; 
-            console.log("boton compra destruido");
         }
         if (marketItem.priceText) { 
             marketItem.priceText.destroy(); 
             marketItem.priceText = null; 
-            console.log("texto precio destruido");
         }
         if (marketItem.infoText) { 
             marketItem.infoText.destroy(); 
             marketItem.infoText = null; 
-            console.log("texo info destruido");
         }
 
         //actualizo el dinero mostrado
