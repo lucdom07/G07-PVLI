@@ -312,8 +312,8 @@ export default class CombatSetup extends Phaser.Scene {
         const newAttack = originalAttack + object.attack;
         
         // Actualizar stats del aliado
-        ally.setLife(Math.max(0, newLife)); // Vida mínima 0
-        ally.setAttack(Math.max(0, newAttack)); // Ataque mínimo 0
+        ally.setLife(Math.max(1, newLife)); // Vida mínima 1
+        ally.setAttack(Math.max(1, newAttack)); // Ataque mínimo 1
 
 
         ally.warriorUI.setNewStats(ally.life, ally.attack);
