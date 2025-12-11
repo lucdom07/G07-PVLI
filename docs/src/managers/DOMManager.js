@@ -66,7 +66,7 @@ export default class DOMmanager {
      * Asocia por referencia la lista ownedAllies de esta clase con la que se le pase por parámetro, 
      * y actualiza el DOM para que incluya los aliados de la nueva lista.
      * Sirve para incializar el DOMmanager y debe ser llamado por una clase externa (en este caso, el menú)
-     * @param {[Ally]} allies - Array que referencia el array de aliados obtenidos de esta clase
+     * @param {Ally[]} allies - Array que referencia el array de aliados obtenidos de esta clase
      */
     inicializa(allies) {
         this.ownedAllies = allies;

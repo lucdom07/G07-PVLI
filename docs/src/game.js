@@ -1,4 +1,4 @@
-import DebugMap from './scenes/debugMap.js';
+import DebugMap from './scenes/map.js';
 import DebugCombat from './scenes/debugCombat.js';
 import MainMenu from './scenes/mainMenu.js';
 import DebugMarket from './scenes/debugMarket.js';
