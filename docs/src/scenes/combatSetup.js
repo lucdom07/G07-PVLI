@@ -75,21 +75,6 @@ export default class CombatSetup extends Phaser.Scene {
         this.makeInteractives();
     }
 
-    //Determina si la ally esta en la tropa para removerlo o añadirlo
-    toggleAlly(ally) {
-        if(this.selectedObject){
-            this.applyObjectToAlly(ally);
-        }
-        else{
-            if(ally.isOnTeam()) {
-            this.removeAlly(ally);
-            }
-            else {
-            this.addAlly(ally);
-            }
-        }
-    }
-
     /*
     Añade un aliado a selectedAllies, siempre que no estuviera ya añadido.
     */
