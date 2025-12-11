@@ -35,20 +35,11 @@ export default class Animation extends Phaser.Scene{
         this.load.image('chinaCombat','assets/backgrounds/chinaCombat.png');
         this.load.image('spainCombat','assets/backgrounds/spainCombat.png');
         this.load.image('usaCombat','assets/backgrounds/usaCombat.png');
-
-
-        // this.load.image('pimiento', 'assets/placeholders/warriors/pepper_miku_placeholder.png');
-        // this.load.image('tortuga','assets/placeholders/warriors/green_miku_placeholder.png');
-        // this.load.image('chupacabra','assets/placeholders/warriors/dark_blue_miku_placeholder.png');
-        // this.load.image('perro','assets/placeholders/warriors/orange_miku_placeholder.png');
-        // this.load.image('foca','assets/placeholders/warriors/light_blue_miku_placeholder.png');
-        // this.load.image('warf','assets/placeholders/warriors/garnet_miku_placeholder.png');
         this.load.image('combatBackground','assets/backgrounds/australiaCombat.png')
         this.load.image('exit','assets/placeholders/buttons/exit_button.png');
     }
 
     create(){
-        //console.log("level: ", this.playerData.level);
         console.log("initial money: ", this.playerData.money);
         this.cargaManagerEnemigos = new cargaGameObject(this,this.playerData.level);
         this.enemyGroup = this.cargaManagerEnemigos.loadEnemyGroups();
@@ -259,5 +250,37 @@ export default class Animation extends Phaser.Scene{
         
         return this.enemyToCombat;
     }
+    
+    startVictoryDialogue(){
 
+        const worldDialogues = {
+            1: DialogueKeys.AU,
+            2: DialogueKeys.ES,
+            3: DialogueKeys.CH,
+            4: DialogueKeys.US
+        }
+
+        const dialogueKey = worldDialogues[this.world];
+        if(!dialogueKey){ 
+            console.error("no hay dialogue.key: ", this.world);
+            return;
+
+        }
+
+        const nextWorld = this.world + 1;  
+        let nextScene = null;
+
+        if(nextWorld<=3){
+            nextScene = 'debugMap';
+        }
+        else nextScene = 'mainMenu';
+
+        this.scene.start('DialogueScene',{
+            dialogueKey: dialogueKey,
+            returnScene: null,
+            nextScene: nextScene,
+            playerData: this.playerData
+        });
+        this.scene.stop();
+    }
 }
