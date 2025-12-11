@@ -223,15 +223,15 @@ Cada objeto mejora la estadística de vida y/o ataque de los aliados por una can
 ||Vestido flamenca| +5 | - |
 || Ñ | -1 | +4 |
 || Tortilla de patatas CON CEBOLLA | +4 | +1 |
-|Estados Unidos|
-|| Pistola | -3 | +5 |
-|| Partes de las torres gemelas | +2 | +4 |
-|| Cheese Burger | +5 | - |
 |China|
-|| Chancla | -7 | +10 |
-|| Bambu | +8 | - |
-|| Emocional Damage | - | +7 |
-|| Timo | +6 | +6 |
+|| Chancla | -3 | +5 |
+|| Bambu | +4 | +2 |
+|| Emocional Damage | - | +5 |
+|| Timo | -4 | +7 |
+|Estados Unidos|
+|| Pistola | -7 | +10 |
+|| Partes de las torres gemelas | +8 | +2 |
+|| Cheese Burger | +6 | +6 |
 
 ***Parámetros*** 
 - Cantidad de vida que es añadida a la vida del aliado
@@ -288,16 +288,16 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 || Kurma |10|6|0|
 || Gatoñete |11|7|1|
 || Pablotter  |10|6|2|
-|Estados Unidos|
-|| Nutricristo |13|9|2|
-|| Señor Anteojo |12|7|0|
-|| Pimiento Gatomórfico |10|9|1|
-|| Miku |12|8|4|
 |China|
-|| QiLing |14|10|0|
-|| Po-ka |12|9|1|
-|| Kairos |13|11|3|
-|| Moflete |12|10|2|
+|| QiLing |13|9|2|
+|| Po-ka |12|7|0|
+|| Kairos |10|9|1|
+|| Moflete |12|8|4|
+|Estados Unidos|
+|| Nutricristo |14|10|0|
+|| Señor Anteojo |12|9|1|
+|| Pimiento Gatomórfico |13|11|3|
+|| Miku |12|10|2|
 
 ***Parámetros*** 
 - Cantidad de vida
@@ -315,8 +315,8 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 |**País**| **Nombre** | **Vida** | **Ataque** |**Rango de ataque** |
 |:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 |Australia|
-|| Cazador Furtivo |8|4|0|
-|| Jonny me lavo |5|5|1|
+|| Hunter |8|4|0|
+|| Johnny Melavo |5|5|1|
 || Astalowsco Jones |7|4|2|
 || Sharon |5|5|3|
 |España|
@@ -324,16 +324,16 @@ Personajes humanoides que se enfrenta con los aliados, cada uno con distintas es
 || Mariloli |8|6|4|
 || José Luis |9|7|0|
 || Maricarmen |10|7|3|
-|Estados Unidos|
-|| Kevin |9|8|2|
-|| Karen |12|8|1|
-|| Barry |11|9|0|
-|| Jeff Bezos |10|8|3|
 |China|
-|| ?Pimiento humanoide |14|10|0|
-|| //Otaku |12|11|3|
-|| //Profesores |13|10|1|
-|| ?Taoísta |11|10|4|
+|| Pimiento humanoide |9|8|2|
+|| Otaku |12|8|1|
+|| Profesor |11|9|0|
+|| CEO |10|8|3|
+|Estados Unidos|
+|| Kevin |14|10|0|
+|| Karen |12|11|3|
+|| Barry |13|10|1|
+|| J. Bezos |11|10|4|
 
 ***Parámetros*** 
 - Cantidad de vida
@@ -345,16 +345,16 @@ Lista de enemigos por País
 |**Número de enemigos**| **Australia** | **España** | **Esdados Unidos** | **China** |
 |:-:|:-:|:-:|:-:|:-:|
 |1|Uno aleatorio del País|Uno aleatorio del País|Uno aleatorio del País|Uno aleatorio del País|
-|2|Aborígenes, Cazador Furtivo|Manolo, José Luis   |Tump, Guardaespaldas |Pimiento humanoide, Otaku  |
-|2|Jonny me lavo , Sharon          |Mariloli, Maricarmen|Karen, Anabella      |Profesores, Taoísta        |
-|2|Cazador Furtivo, Jonny me lavo  |Maricarmen, Manolo  |Guardaespaldas, Karen|Taoísta, Pimiento humanoide|
-|3|Aborígenes, Cazador Furtivo, Jonny me lavo|José Luis, Mariloli, Manolo    |Anabella, Karen, Guardaespaldas|Otaku*3                           |
-|3|Aborígenes, Jonny me lavo, Sharon         |Manolo, Mariloli, Maricarmen   |Tump, Guardaespaldas, Karen    |Taoísta, Otaku, Pimiento humanoide|
-|3|Jonny me lavo, Cazador Furtivo , Sharon   |Mariloli, Maricarmen, José Luis|Karen, Anabella, Tump          |Pimiento humanoide, Profesor*2    |
+|2|Astalowsco Jones, Hunter|Manolo, José Luis   |Kevin, J. Bezos |Pimiento humanoide, Otaku  |
+|2|Johnny Melavo , Sharon          |Mariloli, Maricarmen|Karen, Barry      |Profesor, CEO        |
+|2|Hunter, Johnny Melavo  |Maricarmen, Manolo  |J. Bezos, Karen|CEO, Pimiento humanoide|
+|3|Astalowsco Jones, Hunter, Jonny me lavo|José Luis, Mariloli, Manolo    |Barry, Karen, J. Bezos|Otaku*3                           |
+|3|Astalowsco Jones, Johnny Melavo, Sharon         |Manolo, Mariloli, Maricarmen   |Kevin, J. Bezos, Karen    |CEO, Otaku, Pimiento humanoide|
+|3|Johnny Melavo, Hunter , Sharon   |Mariloli, Maricarmen, José Luis|Karen, Barry, Kevin          |Pimiento humanoide, Profesor*2    |
 |4|los 4 pero en diferente orden|los 4 pero en diferente orden|los 4 pero en diferente orden|los 4 pero en diferente orden|
-|5|Aborígenes, Jonny me lavo, Cazador Furtivo , Sharon, Aborígenes|José Luis*2, Manolo, Mariloli, Maricarmen|Guardaespaldas*4, Tump                     |Taoísta, Profesor, Otaku, Profesor, Taoísta|
-|5|Cazador Furtivo*5                                         |Manolo, Mariloli, Maricarmen, Mariloli   |Karen*2, Anabella, Guardaespaldas          |Profesor*3, Otaku *2, Pimiento humanoide|
-|5|Sharon, Jonny me lavo, Sharon, Aborígenes, Sharon              |Maricarmen*3, Manolo *2                  |Tump, Karen, Tump, Guardaespaldas, Anabella|Pimiento humanoide, Otaku, Profesor, Taoista, Pimiento humanoide|
+|5|Astalowsco Jones, Johnny Melavo, Hunter, Sharon, Astalowsco Jones|José Luis*2, Manolo, Mariloli, Maricarmen|J. Bezos*4, Kevin                     |CEO, Profesor, Otaku, Profesor, CEO|
+|5|Hunter*5                                         |Manolo, Mariloli, Maricarmen, Mariloli   |Karen*2, Barry, J. Bezos          |Profesor*3, Otaku *2, Pimiento humanoide|
+|5|Sharon, Johnny Melavo, Sharon, Astalowsco Jones, Sharon              |Maricarmen*3, Manolo *2                  |Kevin, Karen, Kevin, J. Bezos, Barry|Pimiento humanoide, Otaku, Profesor, CEO, Pimiento humanoide|
 
 #### 3.8.1. **Jefes**
 Los jefes son enemigos más importantes de cada país, siendo estos más grandes y con las mejores estadísticas de sus originales pero un poco mejores. En combate, cuando aparece un jefe, siempre estará acompañado de otros 3 enemigos normales. Siendo así que el jugador se enfrentará a 4 enemigos. 
@@ -365,15 +365,16 @@ El jefe aparece en cada tercer combate de cada país. Si el jugador gana el comb
 |:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 |Australia| Melon Moska montado en su Mierdesta |10|6|0|
 |España| Pedry el ornitorrinco |12|9|0|
-|Estados Unidos| Mister Cheeto | 14 | 12 |0|
-|China| Güini de Pu |16|15|0|
+|China| Güini de Pu | 14 | 12 |0|
+|Estados Unidos| Mister Cheeto |16|15|0|
+
 
 Lista de combinaciones con Jefe
 |**Australia**|**España**|**Estados Unidos**|**China**|
 |:-----------:|:-----------:|:-----------:|:-----------:|
-|Aborígenes, Sharon, Cazador Furtivo, Melon Moska|Pedry el ornitorrinco, José Luis, Maricarmen, Manolo|Mister Cheeto, Tump, Karen, Guardaespaldas   |Taoista, Otaku, Güini de Pu, Profesor|
-|Sharon, Melon Moska, Jonny me lavo, Aborígenes       |Manolo, Maricarmen, Pedry el ornitorrinco, Mariloli |Tump, Guardaespaldas, Mister Cheeto, Anabelle|Güini de Pu, Otaku, Taoista, Pimiento humanoide|
-|Melon Moska, Aborígenes, Sharon, Jonny me lavo       |José Luis, Manolo, Mariloli, Pedry el ornitorrinco  |Anabelle, Mister Cheeto, Karen, Tump         |Otaku, Profesor, Taoista, Güini de Pu|
+|Astalowsco Jones, Sharon, Hunter, Melon Moska|Pedry el ornitorrinco, José Luis, Maricarmen, Manolo|Mister Cheeto, Kevin, Karen, J. Bezos   |CEO, Otaku, Güini de Pu, Profesor|
+|Sharon, Melon Moska, Johnny Melavo, Astalowsco Jones       |Manolo, Maricarmen, Pedry el ornitorrinco, Mariloli |Kevin, J. Bezos, Mister Cheeto, Barry|Güini de Pu, Otaku, CEO, Pimiento humanoide|
+|Melon Moska, Astalowsco Jones, Sharon, Johnny Melavo      |José Luis, Manolo, Mariloli, Pedry el ornitorrinco  |Barry, Mister Cheeto, Karen, Kevin         |Otaku, Profesor, CEO, Güini de Pu|
 
 ***Parámetros*** 
 - Cantidad de vida
