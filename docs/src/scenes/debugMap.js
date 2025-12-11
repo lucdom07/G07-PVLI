@@ -26,9 +26,16 @@ export default class debugMap extends Phaser.Scene {
         this.load.image('chinaBackground','assets/backgrounds/chinaMap.png');
         this.load.image('spainBackground','assets/backgrounds/spainMap.png');
         this.load.image('usaBackground','assets/backgrounds/usaMap.png');
+
+        //Botones
         this.load.image('combatButton','assets/buttons/battle.png');
         this.load.image('marketButton', 'assets/buttons/market.png');
         this.load.image('bossButton', 'assets/buttons/boss.png');
+
+        //Botones highlight
+        this.load.image('combatButtonH','assets/buttons/battleH.png');
+        this.load.image('marketButtonH', 'assets/buttons/marketH.png');
+        this.load.image('bossButtonH', 'assets/buttons/bossH.png');
     }
 
     create() {
@@ -50,7 +57,6 @@ export default class debugMap extends Phaser.Scene {
             this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, this.backgrounds[this.world]);
             
             this.createButtons();
-            //this.createResetButton();
         }
         else {
             //victoria
@@ -77,23 +83,24 @@ export default class debugMap extends Phaser.Scene {
             //let y = (this.sys.game.canvas.height / this.tree.levels) * this.mirrorLevel(node.level) - 50;
             const y = (this.sys.game.canvas.height / divisions) * (i + 1);
             
-            let button;
             let key;
             if(node.value === 0) {
-                button = this.add.image(100, 50, 'combatButton').setInteractive();
+                node.textures = ['combatButton', 'combatButtonH'];
                 key = 'combatSetup';
             }
             else if(node.value === 1) {
-                button = this.add.image(100, 50, 'marketButton').setInteractive();
+                node.textures = ['marketButton', 'marketButtonH'];
                 key = 'debugMarket';
             }
             else {
-                //Aquí va el botón del boss
-                button = this.add.image(100, 50, 'bossButton').setInteractive();
+                node.textures = ['bossButton', 'bossButtonH'];
                 key = 'combatSetup';
             }
+            const button = this.add.image(100, 50, null).setInteractive();
+            node.button = button;
+            node.setActiveState(node.active);
             button.setPosition(x, y);
-            button.setScale(1.2);
+            button.setScale(0.8);
             
             button.on('pointerdown', () =>{     
                 if(node.active) {
@@ -127,17 +134,19 @@ export default class debugMap extends Phaser.Scene {
         const up_parent = node.parents[0];
 
         node.children.forEach(x => {
-            x.active = true;
+            x.setActiveState(true);
         });
 
         if(up_parent) {
             const active = up_parent.children.find(x => x === node);
             up_parent.children.forEach(x => {
-                if(x !== active) x.active = false;
+                if(x !== active) {
+                    x.setActiveState(false);
+                }
             });
         }
         
-        node.active = false;
+        node.setActiveState(false);
     }
 
     

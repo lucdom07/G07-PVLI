@@ -1,15 +1,28 @@
 class Node {
 
-    constructor(value = null, parent = null, active = false) {
+    constructor(value = null, parent = null, textures, active = false) {
         //Valor del nodo
         this.value = value;
-        //Indica si el botón del nodo está activo
-        this.active = active;
         //Array de hijos
         this.children = [];
         //Padres del nodo
         this.parents = [];
         if(parent) this.parents.push(parent);
+        //Indica si el botón del nodo está activo
+        this.active = active;
+        //
+        this.textures = textures || [2];
+        this.button = null;
+    }
+
+    setActiveState(active) {
+        this.active = active;
+        if(this.active) {
+            this.button.setTexture(this.textures[1]);
+        }
+        else {
+            this.button.setTexture(this.textures[0]);
+        }
     }
 }
 
@@ -19,7 +32,7 @@ export default class HierarchyGraph {
         //Número total de niveles del árbol
         this.levels = numLevels;
         // La raiz siempre es tienda
-        this.root = new Node(1, null, true);
+        this.root = new Node(1, null, ['market', 'marketH'], true);
         //Array bidimensional, que guardará los nodos por niveles (filas)
         this.levelMatrix = new Array(this.levels);
         for(let i = 0; i < this.levels; i++) {
@@ -36,6 +49,7 @@ export default class HierarchyGraph {
         this.childrenPerNode = childrenPerNode;
         const level = 0;
         this.buildGraph(level, this.getParentPairs(level));
+        //El último nodo siempre es el boss
         const lastNode = this.levelMatrix[this.levels - 1][0];
         lastNode.value = 2;
     }
