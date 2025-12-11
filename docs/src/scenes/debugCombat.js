@@ -117,15 +117,16 @@ export default class Animation extends Phaser.Scene{
                     this.scene.resume('debugMap');
                 }
                 else {
+                    
                     this.playerData.level++;
                     this.playerData.money += 10;
                     console.log("new money: ", this.playerData.money);
                     this.world += 1;
                     this.playerData.world = this.world;
                     this.bossFlag = false;
-                    this.startVictoryDialogue();          
+                    this.startVictoryDialogue(); 
                 }
-            }
+            }         
             else {
                 const sceneManager = this.sys.game.scene;
 
@@ -242,6 +243,7 @@ export default class Animation extends Phaser.Scene{
             1: DialogueKeys.AU,
             2: DialogueKeys.ES,
             3: DialogueKeys.CH,
+            4: DialogueKeys.ENDING
         }
 
         const dialogueKey = worldDialogues[this.world];
@@ -254,8 +256,27 @@ export default class Animation extends Phaser.Scene{
         const nextWorld = this.world + 1;  
         let nextScene = null;
 
-        if(nextWorld<=3){
+        if(nextWorld<=4){
             nextScene = 'debugMap';
+        }
+        if (nextWorld ==5){
+            const sceneManager = this.sys.game.scene;
+
+
+            sceneManager.getScenes(true).forEach(scene => {
+                if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
+                            
+                });
+
+            sceneManager.getScenes(false).forEach(scene => {
+                if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
+                });
+
+            this.scene.start("DialogueScene", {
+                dialogueKey: DialogueKeys.ENDING,
+                nextScene: 'mainMenu',
+                playerData: this.playerData
+            });
         }
 
         this.scene.start('DialogueScene',{
