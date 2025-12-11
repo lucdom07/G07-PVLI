@@ -90,7 +90,7 @@
         {
             "name": "Pimiento humanoide",
             "textureid": "pimientoHumano",
-                        "life": 9,
+            "life": 9,
             "attack": 8,
             "range":2,
 
@@ -100,7 +100,7 @@
             "name": "Otaku",
             "textureid": "otaku",
 
-                        "life": 12,
+            "life": 12,
             "attack": 8,
             "range":1,
             "texture": "assets/enemies/otaku.png"

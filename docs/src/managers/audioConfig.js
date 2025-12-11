@@ -37,7 +37,7 @@ export const AudioFiles = {
     [MusicKeys.CH]: 'assets/sonidos/china.mp3', //no tocar
     [MusicKeys.AU]: 'assets/sonidos/australia.mp3', //no tocar
     
-    [MusicKeys.PRE]: 'assets/sonidos/battle.mp3',
+    [MusicKeys.PRE]: 'assets/sonidos/prep.mp3', //no tocar
     [MusicKeys.MAPA]:'assets/sonidos/auroraLaMinera_gameVersion.mp3', //no tocar
     [MusicKeys.BATALLA]:'assets/sonidos/batalla.mp3', //no tocar
     [MusicKeys.TIENDA]:'assets/sonidos/shop.mp3', //no tocar
