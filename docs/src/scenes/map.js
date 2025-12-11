@@ -61,9 +61,6 @@ export default class debugMap extends Phaser.Scene {
             
             this.createButtons();
         }
-        else {
-            //victoria
-        }
     }
         
     /**
@@ -77,7 +74,7 @@ export default class debugMap extends Phaser.Scene {
      * Función recursiva que crea botones y los añade al grafo. también se encarga de definir la distribución de botones 
      * en la escena (sus posiciones), así como definir el tipo de sala (combate, tienda o boss) y la textura de los botones, según el valor
      * de los nodos, y añadirles el evento de click
-     * @param {int} level - Nivel actual de la recursión
+     * @param {number} level - Nivel actual de la recursión
      */
     buttonsRec(level) {
         if(level === this.graph.levels) return;
@@ -165,8 +162,6 @@ export default class debugMap extends Phaser.Scene {
         
         node.setActiveState(false);
     }
-
-    
 
 }
 
