@@ -2,6 +2,9 @@ import HierarchyGraph from "../managers/hierarchyGraph.js";
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
 
+/**
+ * Escena del mapa, donde se elige la sala a la que entrará el jugador (combate, tienda o boss)
+ */
 export default class debugMap extends Phaser.Scene {
     constructor() {
         super({key: 'debugMap'});
@@ -63,11 +66,19 @@ export default class debugMap extends Phaser.Scene {
         }
     }
         
-    //Función que se llama en create para crear los botones
+    /**
+     * Función carcasa para la función recursiva buttonsRec()
+     */
     createButtons() {
         this.buttonsRec(0);
     }
     
+    /**
+     * Función recursiva que crea botones y los añade al grafo. también se encarga de definir la distribución de botones 
+     * en la escena (sus posiciones), así como definir el tipo de sala (combate, tienda o boss) y la textura de los botones, según el valor
+     * de los nodos, y añadirles el evento de click
+     * @param {int} level - Nivel actual de la recursión
+     */
     buttonsRec(level) {
         if(level === this.graph.levels) return;
         
@@ -107,8 +118,6 @@ export default class debugMap extends Phaser.Scene {
                     if(node.value === 2) {
                         this.bossFlag = true;
                     }
-                    /*
-                    */
                     this.cameras.main.fadeOut(800, 0, 0, 0); // duración, R, G, B
                     this.cameras.main.once('camerafadeoutcomplete', () => {
                         this.enableButtons(node);
@@ -130,6 +139,14 @@ export default class debugMap extends Phaser.Scene {
         this.buttonsRec(level + 1);
     }
     
+    /**
+     * Activa o desactiva botones según la jerarquía del grafo.
+     * 
+     * Solo se podrán pulsar los hijos directos del nodo asociado al botón anteriormente pulsado.
+     * 
+     * Se llamacuando se pulsa un botón
+     * @param {Node} node - Nodo asociado al botón pulsado
+     */
     enableButtons(node) {
         const up_parent = node.parents[0];
 

@@ -5,6 +5,9 @@ import WarriorUI from "../../gameObjects/ui/warriorUi.js";
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
 
+/**
+ * Escena de preparación de combate, donde se eligen a los aliados que lucharán, y se usan los objetos
+ */
 export default class CombatSetup extends Phaser.Scene {
 
     constructor(DOMmanager) {
