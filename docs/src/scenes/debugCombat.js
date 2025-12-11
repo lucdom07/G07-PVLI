@@ -94,6 +94,7 @@ export default class Animation extends Phaser.Scene{
         this.playerTeam = recreatedAllies;
     }
     showExitButton(){
+        this.events.off('allyDamageSound');
         if (!this.combatManager.victory){
             this.audioManager.playMusic(MusicKeys.GAME_OVER);
         }
