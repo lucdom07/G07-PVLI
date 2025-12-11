@@ -379,4 +379,39 @@ export default class CombatSetup extends Phaser.Scene {
     
         console.log(`Objeto ${object.name} usado y eliminado`);
     }
+
+
+    startVictoryDialogue(){
+
+        const worldDialogues = {
+            0: DialogueKeys.AU,
+            1: DialogueKeys.ES,
+            2: DialogueKeys.CH,
+            3: DialogueKeys.US
+        }
+
+        const dialogueKey = worldDialogues[this.world];
+        if(!dialogueKey){ 
+            console.error("no hay dialogue.key: ", this.world);
+            return;
+
+        }
+
+        const nextWorld = this.world + 1;  
+        let nextScene = null;
+
+        if(nextWorld<=3){
+            nextScene = 'debugMap';
+        }
+        else nextScene = 'mainMenu';
+
+        this.scene.start('DialogueScene',{
+            dialogueKey: dialogueKey,
+            returnScene: null,
+            nextScene: nextScene,
+            playerData: this.playerData
+        });
+        this.scene.stop();
+    }
 }
+

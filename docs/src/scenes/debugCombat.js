@@ -121,34 +121,9 @@ export default class Animation extends Phaser.Scene{
                     this.playerData.money += 10;
                     console.log("new money: ", this.playerData.money);
                     this.world += 1;
+                    this.playerData.world = this.world;
                     this.bossFlag = false;
-                    if (this.world == 4){
-                        const sceneManager = this.sys.game.scene;
-
-                        // Detener TODAS las escenas excepto MainMenu
-                        sceneManager.getScenes(true).forEach(scene => {
-                            if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
-                            
-                        });
-
-                        sceneManager.getScenes(false).forEach(scene => {
-                            if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
-                        });
-
-                        this.scene.start("DialogueScene", {
-                            dialogueKey: DialogueKeys.ENDING,
-                            nextScene: 'mainMenu',
-                            playerData: this.playerData
-                        });
-                    }
-                    else{
-                        this.scene.start('debugMap',{
-                            playerData: this.playerData,
-                            bossFlag: this.bossFlag,
-                            world: this.world
-                        });
-                        this.scene.stop();
-                    }
+                    this.startVictoryDialogue();          
                 }
             }
             else {
@@ -258,6 +233,40 @@ export default class Animation extends Phaser.Scene{
         }
         
         return this.enemyToCombat;
+    }
+
+    
+    startVictoryDialogue(){
+
+        const worldDialogues = {
+            1: DialogueKeys.AU,
+            2: DialogueKeys.ES,
+            3: DialogueKeys.CH,
+            4: DialogueKeys.US
+        }
+
+        const dialogueKey = worldDialogues[this.world];
+        if(!dialogueKey){ 
+            console.error("no hay dialogue.key: ", this.world);
+            return;
+
+        }
+
+        const nextWorld = this.world + 1;  
+        let nextScene = null;
+
+        if(nextWorld<=3){
+            nextScene = 'debugMap';
+        }
+        else nextScene = 'mainMenu';
+
+        this.scene.start('DialogueScene',{
+            dialogueKey: dialogueKey,
+            returnScene: null,
+            nextScene: nextScene,
+            playerData: this.playerData
+        });
+        this.scene.stop();
     }
 
 }
