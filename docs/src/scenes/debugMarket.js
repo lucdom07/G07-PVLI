@@ -35,6 +35,9 @@ export default class debugMarket extends Phaser.Scene{
     }
 
     create(){
+        this.openShopDialogue();
+        this.cameras.main.fadeIn(800, 0, 0, 0);
+       
         console.log("money: ", this.playerData.money);
         this.cargaGameObject = new cargaGameObject(this, this.playerData.level);
         this.GameObjectOfLevel.allies = this.cargaGameObject.loadAllyGroups();
@@ -45,17 +48,8 @@ export default class debugMarket extends Phaser.Scene{
         this.quitOwnedAlliesFromArray();
 
 
-        this.cameras.main.fadeIn(800, 0, 0, 0);
-        this.cameras.main.once('camerafadeincomplete', () => {
-            //diálogo de la tienda
-            this.scene.pause();
-            this.scene.launch("DialogueScene", {
-                dialogueKey: DialogueKeys.TIENDA,
-                returnScene: this.scene.key,
-                nextScene: null,
-                playerData: this.playerData
-            });
-        });
+        
+     
         
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.TIENDA);
@@ -151,5 +145,19 @@ export default class debugMarket extends Phaser.Scene{
         });
         
         console.log("Aliados disponibles después de filtrar:", this.GameObjectOfLevel.allies);
+    }
+
+    openShopDialogue(){
+           this.cameras.main.once('camerafadeincomplete', () => {
+            //diálogo de la tienda
+            this.scene.pause();
+            this.scene.launch("DialogueScene", {
+                dialogueKey: DialogueKeys.TIENDA,
+                returnScene: this.scene.key,
+                nextScene: null,
+                playerData: this.playerData,
+                backgroundKey: "shop"
+            });
+        });
     }
 }

@@ -4,7 +4,7 @@
         "line":"Con vuestra gran puntería y habilidad para esquivar balas mientras zampáis cheeseburgers a contrarreloj, vencéis a los habitantes de Estados Unidos.", 
         "sprite": "",
         "spritePos": "",
-        "background": ""
+        "background": "usaD"
     },
     {
         "name": "Narrador",
@@ -67,7 +67,7 @@
         "line":"Eres consciente de que has marcado el comienzo de una era y parece que te está costando digerirlo más que todas esas cheeseburgers.", 
         "sprite": "",
         "spritePos": "",
-        "background": "prueba"
+        "background": ""
     },
     {
         "name": "Narrador",
@@ -114,7 +114,7 @@
     {
         "name": "Michi-Michi",
         "line":"No te preocupes, no me importa mucho la apariencia. Eso no va a cambiar todo el tiempo que hemos pasado juntes, ¿sabes?", 
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },

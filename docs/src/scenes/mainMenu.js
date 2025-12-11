@@ -10,7 +10,6 @@ export default class mainMenu extends Phaser.Scene{
         super({key: 'mainMenu'});
         this.DOMmanager = DOManager;
         this.audioManager = null;
-        this.fromReset = this.playerData?.reset === true;
     }
 
     preload(){
@@ -20,20 +19,26 @@ export default class mainMenu extends Phaser.Scene{
         this.load.image('furry','assets/main_menu/furryLogo.png')
     }
 
+    init(data){
+        this.fromReset = data?.reset === true;
+    }
+
     create(){
+        this.cameras.main.fadeIn(800, 0, 0, 0);
          this.playerData = { 
             ownedAllies: [],
             money: 20,
             level: 0,
             ownedObjects: []
         }
+        
         this.DOMmanager.destroyDomAllies();
         this.loadMichi();
         console.log(this.playerData.ownedAllies.length);
         this.playerData.ownedAllies.forEach(element => { console.log(element.name);});
-        if (this.fromReset) {
-            this.cameras.main.fadeIn(800, 0, 0, 0);
-        }
+
+            
+
 
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.MENU);

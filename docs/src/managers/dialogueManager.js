@@ -44,8 +44,6 @@ export default class DialogueManager {
         this.active = true;
         this.index = 0;
 
-
-
         //creamos UI del nombre si no existe
         if (!this.nameText) {
             this.nameText = this.scene.add.text(30, 450, "", this.config.nameStyle);
@@ -77,16 +75,7 @@ export default class DialogueManager {
             this.end();
             return;
         }
-  
-        if(d.background && d.background!=""){
-            if(this.background){
-                this.background.destroy();
-                this.background = null;
-            }
-            this.background = this.scene.add.image(this.scene.sys.game.canvas.width*0.5,this.scene.sys.game.canvas.height*0.5,d.background);
-            this.background.setDisplaySize(this.scene.sys.game.canvas.width,this.scene.sys.game.canvas.height);
-            this.background.setDepth(-2);
-        }
+
         //método que actualiza el sprite del pj si lo hubiera
         this.updateSprite(d);
 
