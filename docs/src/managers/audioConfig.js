@@ -34,11 +34,11 @@ export const AudioFiles = {
     
     [MusicKeys.ES]: 'assets/sonidos/auroraLaMinera_gameVersion.mp3', //no tocar
     [MusicKeys.USA]: 'assets/sonidos/americanMeowdiot.mp3', //no tocar
-    [MusicKeys.CH]: 'assets/sonidos/battle.mp3',
+    [MusicKeys.CH]: 'assets/sonidos/china.mp3', //no tocar
     [MusicKeys.AU]: 'assets/sonidos/australia.mp3', //no tocar
     
     [MusicKeys.PRE]: 'assets/sonidos/battle.mp3',
-    [MusicKeys.MAPA]:'assets/sonidos/auroraLaMinera_gameVersion.mp3',
+    [MusicKeys.MAPA]:'assets/sonidos/auroraLaMinera_gameVersion.mp3', //no tocar
     [MusicKeys.BATALLA]:'assets/sonidos/batalla.mp3', //no tocar
     [MusicKeys.TIENDA]:'assets/sonidos/shop.mp3', //no tocar
     [MusicKeys.PAUSA]: 'assets/sonidos/battle.mp3',
