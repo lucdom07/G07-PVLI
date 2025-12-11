@@ -26,9 +26,9 @@ export default class debugMap extends Phaser.Scene {
         this.load.image('chinaBackground','assets/backgrounds/chinaMap.png');
         this.load.image('spainBackground','assets/backgrounds/spainMap.png');
         this.load.image('usaBackground','assets/backgrounds/usaMap.png');
-        this.load.image('combatButton','assets/placeholders/buttons/combat_button.jpg');
-        this.load.image('marketButton', 'assets/placeholders/buttons/market_button.png');
-        this.load.image('resetButton','assets/buttons/reset.png');
+        this.load.image('combatButton','assets/buttons/battle.png');
+        this.load.image('marketButton', 'assets/buttons/market.png');
+        this.load.image('bossButton', 'assets/buttons/boss.png');
     }
 
     create() {
@@ -89,11 +89,11 @@ export default class debugMap extends Phaser.Scene {
             }
             else {
                 //Aquí va el botón del boss
-                button = this.add.image(100, 50, 'combatButton').setInteractive();
+                button = this.add.image(100, 50, 'bossButton').setInteractive();
                 key = 'combatSetup';
             }
             button.setPosition(x, y);
-            button.setScale(0.35);
+            button.setScale(1.2);
             
             button.on('pointerdown', () =>{     
                 if(node.active) {
