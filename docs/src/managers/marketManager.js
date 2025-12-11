@@ -279,7 +279,7 @@ export default class MarketManager {
 
         //comprobaciones previas
         if (this.money < item.cost) { this.showMessage("No tienes dinero"); return; }
-        if (item instanceof Ally && this.bag.length >= this.maxCapacity) { this.showMessage("Inventario lleno"); return; }
+        //if (item instanceof Ally && this.bag.length >= this.maxCapacity) { this.showMessage("Inventario lleno"); return; }
         if (!(item instanceof Ally) && this.objectBag.length >= 4) { this.showMessage("Inventario de objetos lleno"); return; }
 
         //resto el dinero
