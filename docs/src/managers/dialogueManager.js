@@ -65,9 +65,10 @@ export default class DialogueManager {
         this.showDialogue();
     }
 
-    /*
-    Muestra el diálogo actual
-    */
+    /**
+     * muestra el diálogo actual
+     * @returns 
+     */
     showDialogue() {
         //diálogo actual
         const d = this.dialogues[this.index];
@@ -91,9 +92,11 @@ export default class DialogueManager {
         }
        
     }
-    /*
-    pasa al siguiente diálogo
-    */
+   
+    /**
+     * pasa al siguiente diálogo
+     * @returns 
+     */
     next() {
         if (!this.active) return;
         //actualiza el índice de diálogos y muestra el siguiente
@@ -105,26 +108,27 @@ export default class DialogueManager {
         this.showDialogue();
     }
 
-    /*
-    salta todos los diálogos actualizando el índice al último disponible
-    */
+    /**
+     * salta todos los diálogos
+     */
     skip() {
         this.index = this.dialogues.length;
         this.end();
     }
 
-    /*
-    creo que es bastante descriptivo..... cierra el manager de diálogos
-    */
+    /**
+     * cierra el manager de diálogos
+     */
     end() {
         this.active = false;
         
         this.scene.events.emit("dialogueEnd");
     }
 
-    /*
-    método para actualizar sprite del pj  si lo hubiera
-    */
+    /**
+     * actualiza el sprite
+     * @param {string} d - key de sprite del json
+     */
     updateSprite(d){
 
 

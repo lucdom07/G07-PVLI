@@ -1,6 +1,4 @@
 import Ally from "../../gameObjects/characters/ally.js";
-import DOMmanager from "../managers/DOMManager.js";
-import globalObjects from "../managers/globalObjects.js";
 
 export default class MarketManager {
     constructor(scene, buttonTexture, DomManager){
@@ -40,7 +38,14 @@ export default class MarketManager {
         this.ITEM_DISTANCE = 150;
     }
     
-    //función que inicializa el mercado
+    /**
+     * inicialización del mercado
+     * @param {array} bag - aliados que poseemos actualmente
+     * @param {array} allyList - lista total de aliados
+     * @param {array} objList - lista total de objetos
+     * @param {int} money - dinero actual
+     * @param {array} ownedObjectsBag - objetos qe poseemos actualmente
+     */
     market(bag, allyList, objList, money, ownedObjectsBag){
         //aliados ya obtenidos
         this.bag = bag;
@@ -54,7 +59,11 @@ export default class MarketManager {
         this.objectBag = ownedObjectsBag || [];    
     }
 
-    //elemento del mercado
+    /**
+     * crea un elemento en el mercado
+     * @param {item} item - aliado u objeto del cual se va a crear un nuevo objeto específico para el mercado
+     * @returns - todos los atributos desglosados de dicho elemento
+     */
     makeStruct(item) {
         return {
             item: item, 
@@ -66,9 +75,13 @@ export default class MarketManager {
         };
     }
 
-    /* 
-    genera aliados aleatorios para el mercado 
-    */
+    /**
+     * generación aleatoria de aliados en el mercado a partir de una
+     * sub-lista (para dividir los aliados disponibles por país)
+     * @param {array} allyList - lista de aliados disponibles
+     * @param {int} slots - número de huecos de la tienda
+     * @returns 
+     */
     generateAlly(allyList, slots){
         //array donde se guardan los aliados generados
         const marketAllies = [];
@@ -106,9 +119,10 @@ export default class MarketManager {
     }
 
 
-    /*    
-    muestra el mercado con los aliados y objetos generados   
-    */
+    /**
+     * muestra los elementos escogidos en el mercado
+     * @param {int} money - dinero del jugador
+     */
     showMarket(money) {
         //limpio el mercado anterior
         this.clearMarket();
@@ -128,9 +142,11 @@ export default class MarketManager {
         });
     }
 
-    /* 
-    método para mostrar un aliado u objeto en el mercado
-    */
+    /**
+     * muestra un elemento en el mercado
+     * @param {item} marketItem - elemento en cuestión
+     * @param {int} index - índice de posición
+     */
     displayMarketItem(marketItem, index){
         //posición del aliado u objeto
         let x = 0;        
@@ -214,9 +230,9 @@ export default class MarketManager {
         marketItem.button.on('pointerdown', () => this.buyMarketItem(marketItem));
     }
 
-    /* 
-    muestra el dinero del jugador
-    */
+    /**
+     * muestra el dinero del jugador
+     */
     showMoney(){
         if(this.moneyText) this.moneyText.destroy();
         this.moneyText = this.scene.add.text(
@@ -224,58 +240,12 @@ export default class MarketManager {
             fontSize: '40px', fontFamily: "Caveat Brush", fill: '#fff', backgroundColor: '#000'
         }).setOrigin(0.5);
     }
-    /*
-    vender aliados ya obtenidos 
-    */
-    selectForSale(ally, index){
-        //si ya hay un aliado seleccionado para la venta, cancelo la venta anterior
-        if(this.selectedForSale) this.cancelSale();
 
-        //guardo el aliado seleccionado y su índice
-        this.selectedForSale = {ally, index};
-        //calculo el precio de venta (50% del precio de compra)
-        const sellPrice = Math.floor(ally.cost/2);
-
-        //muestro el panel de venta
-        const panelX = 600, panelY = 350;
-        const saleSprite = this.scene.add.sprite(panelX, panelY, ally.texture).setScale(0.5);
-        const priceText = this.scene.add.text(panelX, panelY+40, `Vender por: ${sellPrice}$`, {fontSize:'14px', fill:'#fff', backgroundColor:'#000'}).setOrigin(0.5);
-        const infoText = this.scene.add.text(panelX, panelY-40, `${ally.name}\nNvl:${ally.level}\nHP:${ally.life}\nATK:${ally.attack}`, {fontSize:'12px', fill:'#fff', backgroundColor:'#000'}).setOrigin(0.5);
-
-        const sellBtn = this.scene.add.image(panelX-40, panelY+80, this.textureButton).setInteractive().setScale(0.4);
-        const cancelBtn = this.scene.add.image(panelX+40, panelY+80, this.textureButton).setInteractive().setScale(0.4);
-
-        //textos de los botones
-        const sellText = this.scene.add.text(panelX-40, panelY+80, 'Vender', {
-            fontSize:'12px', fill:'#000'
-        }).setOrigin(0.5);
-        const cancelText = this.scene.add.text(panelX+40, panelY+80, 'Cancelar', {
-            fontSize:'12px', fill:'#000'
-        }).setOrigin(0.5);
-
-        //eventos de los botones
-        sellBtn.on('pointerdown', () => this.sellAlly(index, sellPrice));
-        cancelBtn.on('pointerdown', () => this.cancelSale());
-
-        //guardo los elementos del panel para poder destruirlos luego
-        this.sellPanel = {saleSprite, priceText, infoText, sellBtn, cancelBtn, sellText, cancelText};
-    }
-
-    /* 
-    destruye el panel de venta y deselecciona el aliado 
-    */
-    cancelSale(){
-        if(!this.sellPanel) return;
-        Object.values(this.sellPanel).forEach(obj => {
-            if (obj && obj.destroy) obj.destroy();
-        });
-        this.sellPanel = null;
-        this.selectedForSale = null;
-    }
-
-    /* 
-    compra un aliado u objeto del mercado 
-    */
+    /**
+     * compra un aliado u objeto
+     * @param {item} marketItem 
+     * @returns 
+     */
     buyMarketItem(marketItem) {
         const item = marketItem.item;
 
@@ -340,31 +310,10 @@ export default class MarketManager {
         this.showMoney();
     }
 
-
-    /*    
-    vende un aliado del inventario    
-    */
-    sellAlly(index, sellPrice){
-        //elimino el aliado del inventario
-        const ally = this.bag[index];
-        if(!ally) return;
-
-        //añado el dinero al jugador
-        this.money += sellPrice;
-
-        //lanzo el evento de venta
-        this.scene.events.emit('sellingAlly', index, sellPrice);
-
-        //cierro el panel de venta
-        this.cancelSale();
-        //actualizo el dinero mostrado
-        this.showMoney();
-        this.showMessage(`¡Has vendido a ${ally.name} por ${sellPrice}$!`);
-    }
-
-    /*    
-    muestra un mensaje temporal en pantalla    
-    */
+    /**
+     * muestra un mensaje en pantalla
+     * @param {string} msg - mensaje a mostrar
+     */
     showMessage(msg){
         if(this.messageText) this.messageText.destroy();
         this.messageText = this.scene.add.text(this.scene.cameras.main.centerX, 100, msg, {
@@ -376,9 +325,9 @@ export default class MarketManager {
         });
     }
 
-    /*
-    limpio el mercado
-    */
+    /**
+     * limpia el mercado
+     */
     clearMarket(){
         //destruyo los elementos de los aliados y objetos en venta
         [...this.marketAllies, ...this.marketObjects].forEach(m=>{
@@ -393,9 +342,14 @@ export default class MarketManager {
         this.sellButtons=[];
         if(this.moneyText) this.moneyText.destroy();
         if(this.messageText) this.messageText.destroy();
-        this.cancelSale();
     }
 
+    /**
+     * genera un nuevo objeto
+     * @param {array} objectList - lista total de objetos
+     * @param {int} slots - número máximo de objetos que puede haber en una misma escena de mercado
+     * @returns 
+     */
     generateObject(objectList, slots){
         const marketObject = [];
  

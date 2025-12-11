@@ -1,10 +1,8 @@
 import MarketManager from "../managers/marketManager.js";
-import Ally from "../../gameObjects/characters/ally.js";
-import GlobalObject from "../managers/globalObjects.js";
 import AudioManager from "../managers/audioManager.js";
 import { MusicKeys } from "../managers/audioConfig.js";
 import { DialogueKeys } from "../managers/dialogueConfig.js";
-import DOMmanager from "../managers/DOMManager.js";
+
 
 import cargaGameObject from "../managers/cargaGameObjects.js";
 
@@ -46,11 +44,7 @@ export default class debugMarket extends Phaser.Scene{
         console.log(this.GameObjectOfLevel);
 
         this.quitOwnedAlliesFromArray();
-
-
-        
-     
-        
+   
         this.audioManager = AudioManager.getInstance(this);
         this.audioManager.playMusic(MusicKeys.TIENDA);
         this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.5, 'shopBackground');
@@ -69,15 +63,51 @@ export default class debugMarket extends Phaser.Scene{
             this.playerData.ownedAllies.splice(index, 1);
             this.playerData.money += price;
         });
-        
-        //añadir el fondo del mercado
-        //crear una generacion aleatoria de los personajes a comprar
-        //añadir la venta de los personajes que tengas y eliminarlas del inventario
-        //mostrar el precio de las cosas
-        //al comprar el personaje se añade al inventario
-        //cuando no tengas suficiente dinero no te deja
 
-        const exitButton = this.add.image(300,100,'exitButton').setInteractive().setDisplaySize(400,130);
+        
+        this.createExitButton();
+        this.marketSystem.textureButton = 'buyButton'; 
+        this.marketSystem.market(this.playerData.ownedAllies, this.GameObjectOfLevel.allies, this.GameObjectOfLevel.objects, this.playerData.money, this.playerData.ownedObjects);
+      
+    }
+
+    /**
+     * quita a los aliados que ya tiene el jugador del array de disponibles
+     * para evitar que salgan los que ya tienes
+     */
+    quitOwnedAlliesFromArray(){
+        const ownedAllyNames = this.playerData.ownedAllies.map(ally => ally.name);
+    
+        // Filtrar los aliados disponibles, excluyendo aquellos cuyo nombre esté en ownedAllyNames
+        this.GameObjectOfLevel.allies = this.GameObjectOfLevel.allies.filter(ally => {
+            return !ownedAllyNames.includes(ally.name);
+        });
+        
+        console.log("Aliados disponibles después de filtrar:", this.GameObjectOfLevel.allies);
+    }
+
+    /**
+     * crea la escena de diálogo de la tienda
+     */
+    openShopDialogue(){
+           this.cameras.main.once('camerafadeincomplete', () => {
+            //diálogo de la tienda
+            this.scene.pause();
+            this.scene.launch("DialogueScene", {
+                dialogueKey: DialogueKeys.TIENDA,
+                returnScene: this.scene.key,
+                nextScene: null,
+                playerData: this.playerData,
+                backgroundKey: "shop"
+            });
+        });
+    }
+
+    /**
+     * crea el botón de vuelta al mapa
+     */
+    createExitButton(){
+    const exitButton = this.add.image(300,100,'exitButton').setInteractive().setDisplaySize(400,130);
 
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
@@ -104,9 +134,6 @@ export default class debugMarket extends Phaser.Scene{
             exitButton.displayHeight
         );
 
-        /*
-        BOTÓN DE EXIT
-        */
         exitButton.on('pointerover', () => {
             border.clear(); 
             border.lineStyle(4, 0xffffff, 0.7); 
@@ -129,35 +156,5 @@ export default class debugMarket extends Phaser.Scene{
             );
         });
 
-
-        this.marketSystem.textureButton = 'buyButton'; 
-        this.marketSystem.market(this.playerData.ownedAllies, this.GameObjectOfLevel.allies, this.GameObjectOfLevel.objects, this.playerData.money, this.playerData.ownedObjects);
-        //this.marketSystem.market(this.ownedAllies, this.allyList, this.objList, this.money, this.ownedObjects);
-
-    }
-
-    quitOwnedAlliesFromArray(){
-        const ownedAllyNames = this.playerData.ownedAllies.map(ally => ally.name);
-    
-        // Filtrar los aliados disponibles, excluyendo aquellos cuyo nombre esté en ownedAllyNames
-        this.GameObjectOfLevel.allies = this.GameObjectOfLevel.allies.filter(ally => {
-            return !ownedAllyNames.includes(ally.name);
-        });
-        
-        console.log("Aliados disponibles después de filtrar:", this.GameObjectOfLevel.allies);
-    }
-
-    openShopDialogue(){
-           this.cameras.main.once('camerafadeincomplete', () => {
-            //diálogo de la tienda
-            this.scene.pause();
-            this.scene.launch("DialogueScene", {
-                dialogueKey: DialogueKeys.TIENDA,
-                returnScene: this.scene.key,
-                nextScene: null,
-                playerData: this.playerData,
-                backgroundKey: "shop"
-            });
-        });
     }
 }

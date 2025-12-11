@@ -110,6 +110,10 @@ export default class DialogueScene extends Phaser.Scene {
         });   
     }
 
+    /**
+     * pone el fondo del diálogo
+     * @param {string} key - key del fondo
+     */
     _addBackground(key) {
     if(this.background) this.background.destroy();
 
@@ -127,9 +131,12 @@ export default class DialogueScene extends Phaser.Scene {
     this.background.setDepth(-10); // siempre detrás de todo
     }
 
+    /**
+     * crea el botón para saltar los diálogos
+     */
     createSkipButton(){
          const width = this.sys.game.config.width;
-        this.skipButton = this.add.text(width - 100, 40, "Skip", {
+        this.skipButton = this.add.text(width - 100, 40, "Saltar", {
             fontSize: "20px",
             color: "#000000",
             backgroundColor: "#ABB3D1",
