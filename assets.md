@@ -8,12 +8,12 @@ Música de preparación de combate: https://youtu.be/lAIGb1lfpBw
 
 Sonidos de daño: Originales del estudio, interpretados por Aurora Marcos Serrano.
 
-## 1.1 _** Australia**_
+## 1.1 _**Australia**_
 
 Música del mapa: https://youtu.be/3pqknH3nkF4
 Música de diálogo final: https://youtu.be/2PKAIvnRU3A
 
-## 1.2_**España**_
+## 1.2 _**España**_
 
 Música del mapa: Cover de _Minero_ (ElRubiosOMG ft Starkin). Mezclada por Lucía Mei Domínguez López e interpretada por Aurora Marcos Serrano.
 Música de diálogo final: https://youtu.be/0hEYvdMoF2g
