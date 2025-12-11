@@ -1,3 +1,33 @@
-El estilo artístico del juego está basado en libros para niños como el cuento de La pequeña oruga glotona. Esta decisión la tomamos para reflejar el tono irónico del juego: bajo una coyuntura política desesperante para las minorías sociales queríamos crear una pieza audiovisual tanto sarcástica como de crítica política, y para ello el arte debe ser simple y gracioso.
+**1. SONIDOS Y MÚSICA**
 
-Actualmente se están utilizando assets de [Super Auto Pets](https://teamwoodgames.com) (2025) como placeholder, pero serán reemplazados en el futuro.
+Combate: https://youtu.be/dsiWLUe1Mb4
+Tienda: https://youtu.be/UopEw5TNOSQ
+Menú de inicio: Cover de _Seven Nation Army_ (The White Stripes) versión maullidos, interpretada por Santiago Salto Molodojen. Mezclada por Lucía Mei Domínguez López.
+Escena final: https://youtu.be/9KjDBDvmw2E
+Música de preparación de combate: https://youtu.be/lAIGb1lfpBw
+
+Sonidos de daño: Originales del estudio, interpretados por Aurora Marcos Serrano.
+
+_**1.1 Australia**_
+
+Música del mapa: https://youtu.be/3pqknH3nkF4
+Música de diálogo final: https://youtu.be/2PKAIvnRU3A
+
+_**1.2 España**_
+
+Música del mapa: Cover de _Minero_ (ElRubiosOMG ft Starkin). Mezclada por Lucía Mei Domínguez López e interpretada por Aurora Marcos Serrano.
+Música de diálogo final: https://youtu.be/0hEYvdMoF2g
+
+_**1.3 China**_
+
+Música del mapa: https://youtu.be/je9RbCZVzR4
+Música de diálogo final: https://youtu.be/0VBBxvQ38l4
+
+_**1.4 EEUU**_
+
+Música del mapa: https://youtu.be/6dkh2jS_YvU
+
+**2. ARTE GRÁFICO**
+
+Todo el arte gráfico tanto del juego como de la página web, y sus diseños, son originales del estudio. 
+Los assets gráficos fueron creados por Isabel Serrano Martín y Lucía Mei Domínguez López, y están sujetos a una licencia [CC-BY-NC](https://creativecommons.org/licenses/by-nc/4.0/).
