@@ -58,7 +58,7 @@
     {
         "name": "Gato en una caja",
         "line":"¿Quién eres?",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
@@ -72,105 +72,105 @@
     {
         "name": "Gato en una caja",
         "line":"Mi dueño me ha echado de casa.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Gato en una caja",
         "line":"Me dijo que era un estorbo y que ya no me quería para nada.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Gato en una caja",
         "line":"Entonces ahora yo… *snif snif* no tengo ningún hogar y mi único compañero es esta caja de cartón.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Gato en una caja",
         "line":"Soy miserable.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"¡Por supuesto que no!",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"El único miserable es el que abandona a sus mascotas.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"No entiendo cómo a alguien se le puede ocurrir ser tan cruel con los animales, debería darles vergüenza.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Gato en una caja",
         "line":"¿Lo dices en serio?",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"Claro, ¿por qué pensaría eso de ti?",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"No sé, a no ser que me confieses que has matado a alguien…",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Gato en una caja",
         "line":"BUAAAAAAAAAAAAAAAAA nunca me habían dicho algo tan bonito.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"(Bueno, tampoco nos flipemos. Aunque me parece triste que nunca le hayan tratado bien).",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"Oye, ¿y cómo te llamas?",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Gato en una caja",
         "line":"Pues… me han llamado de muchas formas: minino miserable, basura con patas, bola de mugre…",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Gato en una caja",
         "line":"Pero no, no tengo nombre...",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
@@ -184,77 +184,77 @@
     {
         "name": "Tú",
         "line":"¿Qué te parece Michi-Michi?",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Gato en una caja",
         "line":"Michi-Michi… Michi-Michi… Michi-Michi…",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Gato en una caja",
         "line":"BUAAAAAAAAAAAAAAA nunca me han puesto un nombre tan adorable, no me lo merezco.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Gato en una caja",
         "line":"Muchas gracias * snif snif*.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"(Madre mía, está pidiendo a gritos que le manden a un concurso de drama queens).",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Michi-Michi",
         "line":"Oye, ¿ya que no te parezco un minino miserable puedes hacerme un favor?",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"Yo… Em… Lo siento, mis padres no me dejan tener mascotas en casa, pero puedo buscar si…",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Michi-Michi",
         "line":"No, no me refiero a que me adoptes, deja que me explique.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Michi-Michi",
         "line":"La sociedad está llena de humanos crueles que maltratan a los de mi raza.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Michi-Michi",
         "line":"Creen que pueden contaminar nuestro ecosistema y controlar a los demás solo por ser los más ricos.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Michi-Michi",
         "line":"¿Pero no te has parado a pensar que no tiene por qué seguir siendo así?",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
@@ -275,49 +275,49 @@
     {
         "name": "Michi-Michi",
         "line":"¡Miautástico! ¡Entonces formemos un ejército para conquistar el planeta y crear una sociedad justa para todos!",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"Eeeeeh no nos vengamos arriba, que todavía no he aceptado todos los términos y condiciones.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Michi-Michi",
         "line":"Pero… ¿No te gustaría ayudar a los de mi raza a liberarse de las garras de los poderosos?",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"Sí, claro, pero no sé cómo quieres que te ayude a formar un ejército si ni siquiera consigo organizar a mis compañeros de proyecto para que cumplan sus tareas.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Michi-Michi",
         "line":"No te preocupes, los de mi raza somos muy espabilados, así que yo te enseñaré lo básico y luego tú te encargarás de prepararnos para los combates contra los humanos.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
     {
         "name": "Tú",
         "line":"Venga, te daré una oportunidad.",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },
         {
         "name": "Tú",
         "line":"(Espero que este felino no me meta en un marrón, que como salga en las noticias mi madre me va a echar una bronca…).",
-        "sprite": "",
+        "sprite": "kitty",
         "spritePos": "",
         "background": ""
     },

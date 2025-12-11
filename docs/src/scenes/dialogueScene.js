@@ -31,6 +31,7 @@ export default class DialogueScene extends Phaser.Scene {
         this.load.json(this.dialogueKey, file);
         this.load.image("bird", "./assets/dialogue_sprites/bird_dialogue.png");
         this.load.image("prueba", "./assets/backgrounds/chinaSetup.png");
+        this.load.image("kitty", "./assets/dialogue_sprites/cat_dialogue.png");
     }
 
     async create() {
@@ -72,8 +73,28 @@ export default class DialogueScene extends Phaser.Scene {
 
         //escucho el evento de fin de diálogos para cambiar de escena o reanudar la anterior
         this.events.once("dialogueEnd", () => {
-            if(this.nextScene)
-                this.scene.start(this.nextScene, { playerData: this.playerData });
+            if(this.nextScene){
+                if (this.nextScene == 'mainMenu') {
+                    const sceneManager = this.sys.game.scene;
+
+                    // Detener TODAS las escenas excepto MainMenu
+                    sceneManager.getScenes(true).forEach(scene => {
+                        if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
+                        
+                    });
+
+                    sceneManager.getScenes(false).forEach(scene => {
+                        if(scene.scene.key !== 'mainMenu') sceneManager.stop(scene.scene.key);
+                    });
+
+                    this.scene.stop();
+                    // Iniciar MainMenu
+                    sceneManager.start('mainMenu', { reset: true });
+                }
+                else{
+                    this.scene.start(this.nextScene, { playerData: this.playerData });
+                }
+            }
             else if(this.returnScene){
                 this.scene.stop();
                 this.scene.resume(this.returnScene);
