@@ -87,15 +87,15 @@ El core loop del juego es el siguiente:
 
 ## 3. **Mecánicas**
 ### 3.1. **Compra**
-En las salas de tienda, un pájaro antropomórfico mercader (Tueto) le dará la opción al jugador de utilizar sus monedas, cuya cantidad se muestra en el dom, al lado izquierdo del canvas, para comprar un animal para su ejército. El jugador podrá elegir entre 3 animales distintos y pasar a la siguiente pantalla, donde elegirá la siguiente sala. También puede salir de la tienda sin comprar.
+En las salas de tienda, un pájaro antropomórfico mercader (Tueto) le dará la opción al jugador de utilizar sus monedas, cuya cantidad se muestra en la zona superior de la sala de tienda, para comprar un animal para su ejército. El jugador podrá elegir entre 3 animales distintos y pasar a la siguiente pantalla, donde elegirá la siguiente sala. También puede salir de la tienda sin comprar.
 
-Cada animal antropomórfico tendrá distintas estadísticas, vida, ataque y rango de ataque. La vida y el ataque se muestran debajo del animal cuando se cliquea al animal. Cuando se pasa el cursor por encima se muestra el precio del guerrero.
-También se va a ofrecer la compra de objetos para la mejora de las estadísticas de los integrantes, sea aumento de vida o de ataque o ambas.
+Cada animal antropomórfico tendrá distintas estadísticas, vida, ataque y rango de ataque. El nombre, la vida y el ataque se muestran sobre del guerrero cuando se pasa al cursor sobre el animal. Su precio se muestra en todo momento bajo ellos.
+También se va a ofrecer la compra de objetos para la mejora de las estadísticas de los integrantes, sea aumento de vida o de ataque o ambas. Se podrá ver el precio, nombre y estadísticas de cada objeto igual que con los guerreros.
 
 El precio de cada animal dependerá del país, en el primer país los costes serán más baratos y a medida que va progresando el jugador, se va desbloqueando nuevos objetos y aliados, pero los precios de estos serán más caros que los del país inicial, por ende no se puede comprar ni desbloquear animales de otros países si el jugador no avanza.
 Por tanto, el nivel del animal debe ser igual o menor al número de sala.
 
-Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un mensaje diciendo: "¡Tienes demasiados guerreros!". Y cuando el jugador intente comprar los elementos de la tienda teniendo insuficientes modenas aparecerá el mensaje de : "¡No tienes dinero suficiente!".
+Cuando el jugador intente comprar los elementos de la tienda teniendo insuficientes monedas aparecerá el mensaje de: "¡No tienes dinero suficiente!".
 
 **Precios**
 
@@ -107,17 +107,14 @@ Cuando el jugador intente comprar aliados con su ejercito lleno aparecerá un me
 |China|22 monedas|14 monedas|
 
 
-![Tienda](./imagenes/tienda.png)
-*Representación simbólica de la tienda con el último animal cliqueado*
-
-Además de la compra de los animales y objetos también se podrá vender sus aliados por el precio de la mitad del que ha comprado, pero no podrás vender cuando solo tengas un aliado en el ejercito.
-Para poder vender, el jugador tendrá que seleccionar al aliado a vender desde el DOM y se mostrará en la pantalla del juego el precio que obtendrá si se vende al aliado y dos botones donde se podrá aceptar la venta ("Vender") o cancelar la venta ("Cancelar"). No se puede vender varios animales a la vez y al vender se elimina el aliado del DOM del jugador.
+![Tienda](./imagenes/market.png)
+*Captura de la tienda en su versión final*
 
 ***Parámetros***
 - Cantidad de animales y/u objetos a comprar.
 - Coste de cada objeto y/o animal.
 - Cantidad de dinero del jugador.
-- Cantidad de objeto y/o animal comprado, será una unidad con cada compra
+- Cantidad de objeto y/o animal comprado.
 
 ![Tienda](./imagenes/animals.png)
 
@@ -137,7 +134,7 @@ El combate será un autobattler visualmente similar al Super Autopets, donde el 
 
 Si un animal (tanto aliado como enemigo) es eliminado, entendiéndose por eliminado que su vida se reduce a cero o menos, el siguiente será el que continúe luchando contra el que queda en pie, y así sucesivamente hasta que uno de los dos bandos se quede sin ejército. Si el jugador se queda sin ejército en combate, perderá automáticamente; pero si se trata del otro bando, el jugador elegirá una sala del mapa para continuar con el juego.
 
-En caso de que el combate termine en empate, no se pierde y ni se ganan monedas, pero se debe de repetir la sala hasta ganar y avanzar a la siguiente.
+En caso de que el combate termine en empate, no se pierde ni se ganan monedas, pero se debe repetir la sala hasta ganar y avanzar a la siguiente.
 
 Al ganar el combate se ganará monedas entre:
 |Australia|España|Estados Unidos|China|
@@ -151,7 +148,6 @@ Al ganar el combate se ganará monedas entre:
 **Ataque**: Daño que puede hacer el personaje.
 
 **Rango de ataque**: Posición que puede alcanzar el aliado para atacar al enemigo, ya sea la primera, segunda o la última posición del ejército enemigo.
-
 
 ***Parámetros***: 
 - Cantidad de guerreros del enemigo.
@@ -172,15 +168,12 @@ La vida de cada aliado se reinicia hasta su máximo cuando se gana el combate o 
 ***Parámetros***
 - Cantidad de vida, números enteros
 
-
-
 #### 3.2.2. **Ataque**
 Daño que causan los aliados y enemigos para restar vida.
 
 Este parámetro se muestra en un icono debajo del animal/enemigo junto con el icono de la cantidad de vida que tiene.
 
 Cuando el ataque es mayor que la vida actual del personaje, el personaje será derrotado y pasará a la siguiente hasta que uno de los ejércitos se queden sin personajes o cuando se empata.
-
 
 ***Parámetros***
 - Cantidad de ataque, números enteros
@@ -242,7 +235,7 @@ Escenario en el que se muestra visualmente la organización del ejército. En é
 
 Se podrá elegir el slot en el que se coloque el aliado por el juagor y cuando se dé a comenzar el combate, los aliados se desplazarán a la derecha cuando haya huecos vacíos.
 
-Si el jugador intenta añadir más aliados a su ejercito lleno, saltrá un mensaje de: "Error".
+Si el jugador intenta añadir más aliados a su ejercito lleno, no se le permitirá.
 
 Cuando los preparativos estén completados, el jugador tendrá que pulsar un botón para iniciar la batalla contra el ejército enemigo.
 
@@ -260,8 +253,6 @@ Se podrá interactuar para seleccionar los animales y añadirlos al ejército o 
 
 ### 3.6. **Gestión del dinero**
 Al comienzo de la partida, el jugador comienza sin dinero, pero se conseguirá al final de cada combate si el jugador la ha superado. La cantidad de dinero obtenida en cada combate aumentará dependiendo de cuantos combates haya superado el jugador. El dinero ganado podrá ser gastado en las tiendas para comprar más aliados y objetos para la mejora de este.
-
-La cantidad de dinero también será afectada por el tipo de sala: si la sala de combate implica una  recompensa de objeto, se obtendrá menos monedas y si es de jefe se obtendrá más monedas.
 
 ***Parámetros*** 
 - Cantidad de monedas.
@@ -307,7 +298,8 @@ Será posible mejorar las estadísticas de los aliados con los objetos, obtenido
 - Nivel de los animales
 
 ### 3.8. **Enemigos**
-Personajes humanoides que se enfrenta con los aliados, cada uno con distintas estadísticas y a medida que va avanzando el jugador en los países, se desbloqueará nuevos enemigos a enfrentar, tendrán la misma mecánica que las del aliado (vida, ataque y rango de ataque). En combate, la máxima cantidad de enemigos que puede haber será hasta 6 y mínima 1, excepto cuando está el jefe, en ese caso, habrá 3 enemigos y un jefe.
+Personajes humanoides que se enfrentan con los aliados, cada uno con distintas estadísticas y a medida que va avanzando el jugador en los países, se desbloquearán nuevos enemigos contra los que enfrentarnos. Estos tendrán la misma mecánica que las del aliado (vida, ataque y rango de ataque). 
+    En combate, la máxima cantidad de enemigos que puede haber será hasta 6 y mínima 1, excepto cuando está el jefe, en ese caso, habrá 3 enemigos y un jefe.
 
 //a cambiar
 ?inseguro
@@ -398,42 +390,18 @@ Se tratará de una cámara estática que se centra en el escenario del juego de 
 ### 4.3. **HUD**
 ![HUB](./imagenes/hud.png)
 
-### 4.4. **Menús**
-
-**Menú de pausa**
-![pausa](./imagenes/menupausa.jpg)
-
 ## 5. **Mundo del juego**
-### 5.1. **Personajes**
-#### 5.1.1. Protagonista
+### 5.1. **Protagonista**
+
 ![Michi-Michi](./imagenes/michimichi.png)
-
-#### 5.1.2. **Aliados**
-Gato-Pulpo de Github
-
-![Gato-Pulpo](./imagenes/gatopulpo.png)
-
-#### 5.1.3. **Enemigos**
-
-![Gato-Pulpo](./imagenes/cheetos.png)
-
-![Gato-Pulpo](./imagenes/thepoo.png)
-
-![Gato-Pulpo](./imagenes/pimiento.png)
-
-![Gato-Pulpo](./imagenes/dog.png)
-
-![Gato-Pulpo](./imagenes/enemigo1.png)
-
-![Gato-Pulpo](./imagenes/enemigo2.png)
-
-
-#### 5.1.4. **NPC’s**
-Mercader
 
 ### 5.2. **Niveles/Salas**
 
 ![Ejemplo-Sala](./imagenes/combate.png)
+*Ejemplo de sala de combate*
+
+![Ejemplo-Mapa](./imagenes/map.png)
+*Ejemplo de mapa del primer nivel*
 
 ## 6. **Estética y contenido**
 El estilo de dibujo para el juego estará inspirado en recortes de papel o dibujos sin gran detalle para darle un toque menos serio.
@@ -442,6 +410,7 @@ El estilo de dibujo para el juego estará inspirado en recortes de papel o dibuj
 - Fondos
 - Sprites
 - Botones
+
 ## 7. **Enlace a GitHub**
 https://github.com/lucdom07/G07-PVLI.git
 ## 8. **Referencias**
@@ -450,6 +419,7 @@ https://github.com/lucdom07/G07-PVLI.git
 -Teamfight Tactics (2019), Riot Games
 
 ## 9. **Cartas**
+
 Australia (A13)
 
 ![australia](./imagenes/australia.png)
@@ -469,3 +439,7 @@ Hades (M07)
 Gato en una caja (P13)
 
 ![Gato](./imagenes/gato.png)
+
+España (A14)
+
+![ole](./imagenes/spain.png)
