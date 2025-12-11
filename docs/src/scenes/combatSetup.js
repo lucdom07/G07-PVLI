@@ -86,8 +86,9 @@ export default class CombatSetup extends Phaser.Scene {
         [...this.DOMallies.children].forEach(ally => {
             this.makeClickable(ally);
         });
-        
+        this.makeInteractives();
     }
+    
     //Determina si la ally esta en la tropa para removerlo o añadirlo
     toggleAlly(ally) {
         if(this.selectedObject){
@@ -250,20 +251,19 @@ export default class CombatSetup extends Phaser.Scene {
                 console.log(domAlly.dataset.name);
             });
             this.clickableAllies.add(domAlly);
-            
-            const a = this.playerData.ownedAllies.find(x => x.name === domAlly.dataset.name);
-            this.makeInteractive(a);
         }
 
     }
 
-    makeInteractive(ally) {
-        ally.setInteractive();
-        ally.on('pointerdown', () => {
-            console.log(ally.name);
-            if(this.selectedObject) {
-                this.applyObjectToAlly(ally);
-            }
+    makeInteractives() {
+        this.playerData.ownedAllies.forEach(ally => {
+            ally.setInteractive();
+            ally.on('pointerdown', () => {
+                console.log(ally.name);
+                if(this.selectedObject) {
+                    this.applyObjectToAlly(ally);
+                }
+            });
         });
     }
 
