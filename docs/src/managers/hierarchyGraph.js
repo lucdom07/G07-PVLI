@@ -82,7 +82,6 @@ export default class HierarchyGraph {
         }
 
         let markets = 0;
-        let combats = 0;
         if(level % (this.convergence * 2) < this.convergence) {
             const parents = this.levelMatrix[level];
 
@@ -91,9 +90,8 @@ export default class HierarchyGraph {
                 
                 for(let j = 0; j < this.childrenPerNode; j++) {
 
-                    const value = this.makeValue(parents.length, j + 1, markets, combats, false);
-                    if(value == 0) combats++;
-                    else if(value == 1) markets++;
+                    const value = this.makeValue(parents.length, j + 1, markets, false);
+                    if(value == 1) markets++;
                     const node = new Node(value, actual);
                     
                     actual.children.push(node);
@@ -106,7 +104,7 @@ export default class HierarchyGraph {
             for(let i = 0; i < parentGroups.length; i++) {
                 const actual = parentGroups[i];
                     
-                const value = this.makeValue(parentGroups.length * this.childrenPerNode, i + 1, markets, combats, true);
+                const value = this.makeValue(parentGroups.length * this.childrenPerNode, i + 1, markets, true);
                 const node = new Node(value);
                 
                 this.levelMatrix[level + 1].push(node);
@@ -152,22 +150,17 @@ export default class HierarchyGraph {
      * @param {number} nodesInLevel - Número de nodos en el nivel del nodo cuyo valor se está calculando
      * @param {number} node - Número en el nivel, del nodo al que se le está dando valor (p.ej. primer nodo, segundo, etc del nivel)
      * @param {number} markets - Número de tiendas creadas hasta ahora en el nivel (nodos con valor 1)
-     * @param {number} combats  - Número de salas de combate creadas hasta ahora en el nivel (nodos con valor 0)
      * @param {boolean} convergence - Indica si el nivel al que pertenece el nodo es uno de comvergencia (true) o divergencia (false)
      * @returns valor "aleatorio" entre 0 y 1
      */
-    makeValue(nodesInLevel, node, markets, combats, convergence) {
+    makeValue(nodesInLevel, node, markets, convergence) {
         if(convergence) {
             nodesInLevel *= this.childrenPerNode;
         }
 
         let value = Math.floor(Math.random() * 2);
-        if(value === 1 && markets > ((nodesInLevel / 2) + 1)) {
-            //Las tiendas tienen que ser mas escasas que los combates, por eso sus condiciones son más restrictivas
+        if(value === 1 && markets > (nodesInLevel / 2)) {
             value = 0;
-        }
-        else if(value == 0 && combats > (nodesInLevel / 2)) {
-            value = 1;
         }
 
         if(node === nodesInLevel && markets === 0) {
