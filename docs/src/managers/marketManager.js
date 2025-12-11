@@ -342,7 +342,6 @@ export default class MarketManager {
         this.sellButtons=[];
         if(this.moneyText) this.moneyText.destroy();
         if(this.messageText) this.messageText.destroy();
-        this.cancelSale();
     }
 
     /**
