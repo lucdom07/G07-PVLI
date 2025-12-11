@@ -1,8 +1,17 @@
+html {
+    scroll-behavior: smooth;
+}
 
 .body{
   /*background-color: #aedfff;*/
   background-image: url(../images/web_background.png);
   background-position: center;
+}
+
+#furrytastic{
+  position: sticky;
+  top: 0;
+  /*overflow: hidden;*/
 }
 
 #titleContainer{
@@ -21,12 +30,40 @@
   margin-bottom: 5px;
 }
 
-#madeBy{
-  height: 30px;
-  width: auto;
-  display: block;
-  margin: auto;
-  margin-bottom: 20px;
+#buttons{
+  background-image: url(../images/linkButtonsBackground.png);
+  display: flex;
+  align-items: center;
+  height: 50px;
+  justify-content: space-around;
+}
+
+.linkButton{
+  /*colores*/
+  background-image: url(../images/linkButtons.png);
+  color: rgb(255, 238, 227);
+  /*dimensiones*/
+  height: 40px;
+  width: 200px;
+  /*fuente*/
+  font-size: 21px;
+  font-family: "Darumadrop One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  /*bordes*/
+  border: 2px solid rgb(255, 238, 227);
+  border-radius: 5px;
+  /*disposición*/
+  text-align: center;
+  display: inline-block;
+  /*márgenes*/
+  /*transición*/
+  transition-duration: 0.2s;  
+}
+
+.linkButton:hover{
+  background-image: url(../images/linkButtonsHover.png);
+  color: rgb(94, 54, 48);
 }
 
 #mainContainer{
