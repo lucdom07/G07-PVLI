@@ -88,7 +88,7 @@ export default class CombatSetup extends Phaser.Scene {
         });
         this.makeInteractives();
     }
-    
+
     //Determina si la ally esta en la tropa para removerlo o añadirlo
     toggleAlly(ally) {
         if(this.selectedObject){
@@ -145,9 +145,9 @@ export default class CombatSetup extends Phaser.Scene {
             
             // Guarda los valores originales antes de modificar el objeto
             const originalObj = objectsList[i];
-            const originalName = originalObj.getName();
-            const originalLife = originalObj.getLife();
-            const originalAttack = originalObj.getAttack();
+            const originalName = originalObj.name;
+            const originalLife = originalObj.life;
+            const originalAttack = originalObj.attack;
             
             // Crea un sprite temporal para el objeto
             const texture = originalObj.texture || '';
@@ -155,9 +155,9 @@ export default class CombatSetup extends Phaser.Scene {
             
             obj.originalObject = originalObj;
              
-            obj.getName = () => originalName;
-            obj.getLife = () => originalLife;
-            obj.getAttack = () => originalAttack;
+            obj.name = originalName;
+            obj.life = originalLife;
+            obj.attack = originalAttack;
             
             // Reemplaza en el array
             this.playerData.ownedObjects[i] = obj;
@@ -185,12 +185,9 @@ export default class CombatSetup extends Phaser.Scene {
 
     //para pasar el raton por encima y enseñar información
     showObjectTooltip(obj, x, y){
-        // Destruir tooltip anterior si existe
-        this.hideObjectTooltip();
-        
         // Crear tooltip con información del objeto
          this.currentTooltip = this.add.text(x-26, y - 30, 
-        `${obj.getName()}\nHP: ${obj.getLife() || 0}\nATK: ${obj.getAttack() || 0}`, {
+        `${obj.name}\nHP: ${obj.life || 0}\nATK: ${obj.attack || 0}`, {
             fontSize: '10px',
             fill: '#FFFFFF',
             backgroundColor: '#000000',
@@ -286,7 +283,7 @@ export default class CombatSetup extends Phaser.Scene {
             // Cambiar cursor para indicar que se puede aplicar a un aliado
             this.game.canvas.style.cursor = "crosshair";
             
-            console.log(`Objeto seleccionado: ${object.getName()}`);
+            console.log(`Objeto seleccionado: ${object.name}`);
         }
     }
 
@@ -305,7 +302,7 @@ export default class CombatSetup extends Phaser.Scene {
     applyObjectToAlly(ally) {
         if (!this.selectedObject) return;
 
-        console.log(`Aplicando ${this.selectedObject.getName()} a ${ally.name}`);
+        console.log(`Aplicando ${this.selectedObject.name} a ${ally.name}`);
         
         const originalObject = this.selectedObject.originalObject || this.selectedObject;
     
@@ -323,6 +320,7 @@ export default class CombatSetup extends Phaser.Scene {
         const originalLife = ally.life;
         const originalAttack = ally.attack;
         
+        console.log(object.life + ", " + object.attack)
         // Aplicar modificaciones
         const newLife = originalLife + object.life;
         const newAttack = originalAttack + object.attack;
@@ -346,7 +344,7 @@ export default class CombatSetup extends Phaser.Scene {
 
     showObjectEffect(ally, object) {
         const effectText = this.add.text(ally.x, ally.y - 50, 
-            `+${object.getLife()}❤ +${object.getAttack()}⚔`, 
+            `+${object.life}❤ +${object.attack}⚔`, 
             { fontSize: '16px', fill: '#00ff00', backgroundColor: '#000' }
         ).setOrigin(0.5);
         
@@ -368,7 +366,7 @@ export default class CombatSetup extends Phaser.Scene {
        // Remover del array local
         const objectIndex = this.playerData.ownedObjects.findIndex(obj => {
         const objToCompare = obj.originalObject || obj;
-        return objToCompare.getName() === object.getName();
+        return objToCompare.name === object.name;
         });
     
         if (objectIndex !== -1) {
@@ -379,6 +377,6 @@ export default class CombatSetup extends Phaser.Scene {
         this.playerData.ownedObjects.splice(objectIndex, 1);
         }
     
-        console.log(`Objeto ${object.getName()} usado y eliminado`);
+        console.log(`Objeto ${object.name} usado y eliminado`);
     }
 }
