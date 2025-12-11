@@ -65,8 +65,8 @@ export default class DialogueManager {
         this.showDialogue();
     }
 
-    /**
-    * Muestra el diálogo actual
+    /*
+    Muestra el diálogo actual
     */
     showDialogue() {
         //diálogo actual
@@ -91,8 +91,8 @@ export default class DialogueManager {
         }
        
     }
-    /**
-    * pasa al siguiente diálogo
+    /*
+    pasa al siguiente diálogo
     */
     next() {
         if (!this.active) return;
@@ -105,8 +105,8 @@ export default class DialogueManager {
         this.showDialogue();
     }
 
-    /**
-    * salta todos los diálogos actualizando el índice al último disponible
+    /*
+    salta todos los diálogos actualizando el índice al último disponible
     */
     skip() {
         this.index = this.dialogues.length;
@@ -122,9 +122,8 @@ export default class DialogueManager {
         this.scene.events.emit("dialogueEnd");
     }
 
-    /** 
-    * método para actualizar sprite del pj  si lo hubiera
-    * @param {image} d - Sprite actual
+    /*
+    método para actualizar sprite del pj  si lo hubiera
     */
     updateSprite(d){
 

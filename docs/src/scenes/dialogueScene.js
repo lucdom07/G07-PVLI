@@ -47,9 +47,8 @@ export default class DialogueScene extends Phaser.Scene {
 
         const dialogues = this.cache.json.get(this.dialogueKey);
 
-        //para meter los fondos
         const world = this.playerData.world ?? 0;
-        if(this.returnScene == 'marketScene'){
+        if(this.returnScene == 'debugMarket'){
             this._addBackground(this.bg[5])
         }
         else
@@ -76,8 +75,6 @@ export default class DialogueScene extends Phaser.Scene {
 
         //escucho el evento de fin de diálogos para cambiar de escena o reanudar la anterior
         this.events.once("dialogueEnd", () => {
-            //si la escena a la que pasamos es el menú de inicio paramos
-            //todas las escenas para reiniciar los datos del jugador
             if (this.nextScene == 'mainMenu') {
 
                 const sceneManager = this.sys.game.scene;
@@ -97,7 +94,6 @@ export default class DialogueScene extends Phaser.Scene {
                 // Iniciar MainMenu
                 sceneManager.start('mainMenu', { reset: true });
             }
-            //si hay una escena a la que pasar, la crea
             if(this.nextScene) {
                 this.scene.stop();
                 this.scene.start(this.nextScene,{
@@ -106,8 +102,6 @@ export default class DialogueScene extends Phaser.Scene {
                 });
                 return;     
             }
-            //si tiene que volver a una escena porque está sobre ella, se borra
-            //la escena de diálogos actual y se reanuda la parada
             else if(this.returnScene){
                 this.scene.stop();
                 this.scene.resume(this.returnScene);
@@ -116,10 +110,6 @@ export default class DialogueScene extends Phaser.Scene {
         });   
     }
 
-    /**
-     * añade un fondo a la escena de diálogos dependiendo del mapa
-     * @param {*} key - key del fondo a añadir (la pasamos del array en la constructora)
-     */
     _addBackground(key) {
     if(this.background) this.background.destroy();
 
@@ -137,9 +127,6 @@ export default class DialogueScene extends Phaser.Scene {
     this.background.setDepth(-10); // siempre detrás de todo
     }
 
-    /**
-     * crea el botón de skip
-     */
     createSkipButton(){
          const width = this.sys.game.config.width;
         this.skipButton = this.add.text(width - 100, 40, "Skip", {
