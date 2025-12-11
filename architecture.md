@@ -757,11 +757,11 @@ stateDiagram-v2
     Nivel1_España --> Victoria1: Derrotar boss
     Victoria1 --> DiálogoEspaña: spainVictory.json
     
-    DiálogoChina --> Nivel2_China
+    DiálogoEspaña --> Nivel2_China
     Nivel2_China --> Victoria2: Derrotar boss
     Victoria2 --> DiálogoChina: chinaVictory.json
     
-    DiálogoEspaña --> Nivel3_USA
+    DiálogoChina --> Nivel3_USA
     Nivel3_USA --> Victoria3: Derrotar boss
     Victoria3 --> DiálogoUSA: usaVictory.json
     
