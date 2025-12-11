@@ -75,9 +75,10 @@ export default class CombatSetup extends Phaser.Scene {
         this.makeInteractives();
     }
 
-    /*
-    Añade un aliado a selectedAllies, siempre que no estuviera ya añadido.
-    */
+    /**
+     * Añade un aliado al array de aliados seleccionados .selectedAllies, siempre que se supere el límite
+     * @param {Ally} ally - Aliado que se añade al array
+     */
     addAlly(ally) {
         if (this.selectedAllies.length >= 3 || (this.selectedAllies.length > 0 && this.selectedAllies.some(x => x === ally))) {
             return;
@@ -86,9 +87,10 @@ export default class CombatSetup extends Phaser.Scene {
         this.repositionSelectedAllies();
     }
 
-    /*
-    Elimina un aliado de selectedAllies.
-    */
+    /**
+     * Elimina a un aliado de .selectedAllies y lo oculta en la escena
+     * @param {Ally} ally 
+     */
     removeAlly(ally) {
         const index = this.selectedAllies.indexOf(ally);
         if(index != -1) {
@@ -98,6 +100,70 @@ export default class CombatSetup extends Phaser.Scene {
             ally.warriorUI.setStatsPosition(ally.x, ally.y);
             this.repositionSelectedAllies();
         }
+    }
+    
+    /**
+     * Si un aliado ya estaba seleccionado (en .selectedAllies), lo elimina; si no, lo añade
+     * @param {HTMLDivElement} domAlly - División del DOM que representa al aliado a tratar por la función
+     */
+    toggleAlly(domAlly) {
+        const ally = this.playerData.ownedAllies.find(x => x.name === domAlly.dataset.name);
+        if(!ally) return;
+    
+        if(this.selectedAllies.includes(ally)) {
+            this.removeAlly(ally);
+        }
+        else {
+            this.addAlly(ally);
+        }
+    }
+    
+    /**
+     * Añade un event listener a una división del DOM que represente a un aliado.
+     * Este evento, le indica que se llame a toggleAlly, de esta clase, al clickar en la división
+     * 
+     * También añade esta división a un set que contiene todas las divisiones que tienen este event listener,
+     * el set .clickableAllies
+     * @param {HTMLDivElement} domAlly - División del DOM a la que se le va a añadir el evento
+     */
+    makeClickable(domAlly) {
+        if(!this.clickableAllies.has(domAlly)) {
+            //EventListener en el DOM
+            domAlly.addEventListener('click', () => {
+                this.toggleAlly(domAlly);
+                console.log(domAlly.dataset.name);
+            });
+            this.clickableAllies.add(domAlly);
+        }
+    
+    }
+    
+    /**
+     * Hace que los aliados obtenidos por el jugador (el array .ownedAllies) sean interactuables en la ventana del juego,
+     * y les añade un evento pointerdown que les aplica el efecto de un objeto previamente seleccionado, cuando se les hace click
+     */
+    makeInteractives() {
+        this.playerData.ownedAllies.forEach(ally => {
+            ally.setInteractive();
+            ally.on('pointerdown', () => {
+                console.log(ally.name);
+                if(this.selectedObject) {
+                    this.applyObjectToAlly(ally);
+                }
+            });
+        });
+    }
+    
+    /**
+     * Elimina una división del DOM del set .clickableAllies, que indica qué divisiones del DOM tienen el evento de click
+     * para seleccionarlos o deseleccionarlos
+     * 
+     * Se debe llamar en el caso de que se quiera eliminar un aliado del DOM (en el juego nunca se le llama, porque solo se eliminan aliados
+     * del DOM al reiniciar el juego, en cuyo caso, todas las escenas son paradas, y por lo tanto este set queda vacío)
+     * @param {HTMLDivElement} domAlly - División del DOM que representa un aliado, a la que se le va a sacar del set
+     */
+    removeFromClickable(domAlly) {
+        this.clickableAllies.delete(domAlly);
     }
 
     //se enseñan los objetos en el lado derecho de la pantalla del juego
@@ -198,46 +264,6 @@ export default class CombatSetup extends Phaser.Scene {
         });
     }
 
-    toggleAlly(domAlly) {
-        const ally = this.playerData.ownedAllies.find(x => x.name === domAlly.dataset.name);
-        if(!ally) return;
-
-        if(this.selectedAllies.includes(ally)) {
-            this.removeAlly(ally);
-        }
-        else {
-            this.addAlly(ally);
-        }
-    }
-
-    // Hace un aliado del DOM clickeable
-    makeClickable(domAlly) {
-        if(!this.clickableAllies.has(domAlly)) {
-            //EventListener en el DOM
-            domAlly.addEventListener('click', () => {
-                this.toggleAlly(domAlly);
-                console.log(domAlly.dataset.name);
-            });
-            this.clickableAllies.add(domAlly);
-        }
-
-    }
-
-    makeInteractives() {
-        this.playerData.ownedAllies.forEach(ally => {
-            ally.setInteractive();
-            ally.on('pointerdown', () => {
-                console.log(ally.name);
-                if(this.selectedObject) {
-                    this.applyObjectToAlly(ally);
-                }
-            });
-        });
-    }
-
-    removeFromClickable(domAlly) {
-        this.clickableAllies.delete(domAlly);
-    }
 
     selectObject(object, index) {
         if (this.selectedObject === object) {

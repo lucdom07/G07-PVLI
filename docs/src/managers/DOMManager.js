@@ -11,16 +11,18 @@ export default class DOMmanager {
         this.ownedAllies = [];
     }
 
-    /*
-    Añade un DomAlly a DOMAllies
-    */
+    /**
+     * Función que añade un aliado al DOM, creando una div, con un atributo del dataset que guarda el nombre del aliado
+     * y una imagen con la textura de este
+     * @param {Ally} ally - Aliado que se quiere añadir al DOM
+     */
     addDomAlly(ally) {
         if(![...this.DOMallies.children].some(x => ally.name === x.dataset.name)) {
             const div = document.createElement('div');
             const img = document.createElement('img');
 
             div.dataset.name = ally.name;
-            img.src = ally.textureURL; //Cambiar por URL de la textura
+            img.src = ally.textureURL;
             img.className = 'domAlly';
 
             div.appendChild(img);
@@ -28,7 +30,10 @@ export default class DOMmanager {
         }
     }
 
-    //Elimina un aliado del DOM
+    /**
+     * Elimina un aliado del DOM (la div creada con this.addDomAlly)
+     * @param {Ally} ally - Aliado que se quiere quitar del DOM
+     */
     removeDomAlly(ally) {
         let elem = [...this.DOMallies.children].find(x => ally.name === x.dataset.name);
         if(elem) {
@@ -36,14 +41,9 @@ export default class DOMmanager {
         }
     }
 
-    //inicializa los allies disponibles para la preparación de las tropas aliadas
-    inicializa(allies) {
-        this.ownedAllies = allies;
-        //Cuando esté la tienda hecha habrá que cambiar esto
-
-        this.updateAllies();
-    }
-
+    /**
+     * Añade al DOM todos los aliados del array de ownedAllies de esta clase, que no hubieran sido añadidos antes
+     */
     updateAllies() {
         this.ownedAllies.forEach(x => {
             console.log(x.name);
@@ -53,11 +53,26 @@ export default class DOMmanager {
 
     }
 
+    /**
+     * Elimina todas las divs de aliados del DOM
+     */
     destroyDomAllies() {
         this.ownedAllies.forEach(ally => {
             this.removeDomAlly(ally);
         });
     }
 
+    /**
+     * Asocia por referencia la lista ownedAllies de esta clase con la que se le pase por parámetro, 
+     * y actualiza el DOM para que incluya los aliados de la nueva lista.
+     * Sirve para incializar el DOMmanager y debe ser llamado por una clase externa (en este caso, el menú)
+     * @param {[Ally]} allies - Array que referencia el array de aliados obtenidos de esta clase
+     */
+    inicializa(allies) {
+        this.ownedAllies = allies;
+        //Cuando esté la tienda hecha habrá que cambiar esto
+
+        this.updateAllies();
+    }
 
 }
