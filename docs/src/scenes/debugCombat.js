@@ -96,6 +96,7 @@ export default class Animation extends Phaser.Scene{
         
         this.playerTeam = recreatedAllies;
     }
+//enseña el boton de salir
     showExitButton(){
         this.events.off('allyDamageSound');
         if (!this.combatManager.victory){
@@ -273,7 +274,7 @@ export default class Animation extends Phaser.Scene{
         
         return this.enemyToCombat;
     }
-    
+    //Empieza el dialogo de victoria cuando derrota al boss de ese nivel
     startVictoryDialogue(){
 
         const worldDialogues = {
