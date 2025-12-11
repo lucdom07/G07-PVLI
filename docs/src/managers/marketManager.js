@@ -368,7 +368,7 @@ export default class MarketManager {
     showMessage(msg){
         if(this.messageText) this.messageText.destroy();
         this.messageText = this.scene.add.text(this.scene.cameras.main.centerX, 100, msg, {
-            fontSize: '18px', fill: '#f00', backgroundColor: '#000'
+            fontSize: '25px', fill: '#fff', backgroundColor: '#495169', fontFamily: "Caveat Brush"
         }).setOrigin(0.5);
         this.scene.time.delayedCall(2000, () => { 
             if(this.messageText) this.messageText.destroy(); 
