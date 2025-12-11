@@ -38,7 +38,7 @@ html {
   justify-content: space-around;
 }
 
-.linkButton{
+.tablinks{
   /*colores*/
   background-image: url(../images/linkButtons.png);
   color: rgb(255, 238, 227);
@@ -56,14 +56,17 @@ html {
   /*disposición*/
   text-align: center;
   display: inline-block;
-  /*márgenes*/
   /*transición*/
   transition-duration: 0.2s;  
 }
 
-.linkButton:hover{
+.tablinks:hover{
   background-image: url(../images/linkButtonsHover.png);
   color: rgb(94, 54, 48);
+}
+
+.tabcontent{
+  display: none;
 }
 
 #mainContainer{
@@ -71,7 +74,7 @@ html {
   background-image: url(../images/info_texture.png);
   background-size: cover;
   width: 1200px;
-  height: auto;
+  height: 100vh;
   margin: auto;
   padding-top: 30px;
   padding-bottom: 30px;
