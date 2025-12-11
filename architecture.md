@@ -52,7 +52,7 @@ classDiagram
         +showPlayButton()
     }
     
-    BootScene --> cargaGameObject : usa para precargar
+    BootScene --> cargaGameObject : usa para precargar texturas
     
     class MainMenu {
         -DOMmanager: DOMmanager
@@ -796,6 +796,7 @@ stateDiagram-v2
         Objetos: Pistola, Partes de las torres gemelas, Cheese Burger
     end note
 ```
+
 
 
 
