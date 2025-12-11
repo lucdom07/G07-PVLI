@@ -64,7 +64,10 @@ export default class Animation extends Phaser.Scene{
         this.recreate();
         
         //añadir un if si se trata del combate con el boss o es normal
-        this.createEnemyTeam();
+        if(this.bossFlag){
+            this.createBossTeam();
+        }
+        else this.createEnemyTeam();
         
         //Inicializa el combate
         this.combatManager.initCombat(this.playerTeam, this.enemyToCombat);
@@ -191,30 +194,32 @@ export default class Animation extends Phaser.Scene{
         
         const playerTeamSize = this.playerTeam.length; //tamaño de la array del aliado
         
-        if (this.enemyGroup.length-1 === 0) {
+        if (this.enemyGroup.length <= 1) {
             console.error("No hay enemigos disponibles en enemyGroup");
             return this.enemyToCombat;
         }
         
-        const teamSize = Math.min(playerTeamSize, this.enemyGroup.length-1);
+        const availableEnemiesForSelection = this.enemyGroup.slice(0, -1); //excluye el boss
+        const teamSize = Math.min(playerTeamSize, availableEnemiesForSelection.length);
         
         //sin repetición
-        if (teamSize <= this.enemyGroup.length-1) {
-            const availableEnemies = [...this.enemyGroup];
+        // Sin repetición
+        if (teamSize <= availableEnemiesForSelection.length) {
+            const availableEnemies = [...availableEnemiesForSelection];
             
             for (let i = 0; i < teamSize; i++) {
-                //indice aleatorio
-                const randomIndex = Math.floor(Math.random() * availableEnemies.length-1);
+                // Corregido: los paréntesis estaban mal en la operación
+                const randomIndex = Math.floor(Math.random() * availableEnemies.length);
                 
                 const selectedEnemy = availableEnemies.splice(randomIndex, 1)[0];
                 const enemyClone = this.cloneEnemy(selectedEnemy);
                 this.enemyToCombat.push(enemyClone);
             }
         } else {
-            // con repeticiones         
+            // Con repeticiones (pero aún excluyendo al boss)        
             for (let i = 0; i < teamSize; i++) {
-                const randomIndex = Math.floor(Math.random() * this.enemyGroup.length-1);
-                const selectedEnemy = this.enemyGroup[randomIndex];
+                const randomIndex = Math.floor(Math.random() * availableEnemiesForSelection.length);
+                const selectedEnemy = availableEnemiesForSelection[randomIndex];
                 const enemyClone = this.cloneEnemy(selectedEnemy);
                 this.enemyToCombat.push(enemyClone);
             }

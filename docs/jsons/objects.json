@@ -91,7 +91,7 @@
             "textureid": "timo",
             "life": -4,
             "attack": 7,
-            "cost":14,
+            "cost":11,
             "texture": "assets/objects/timo.png"
         }
     ],
