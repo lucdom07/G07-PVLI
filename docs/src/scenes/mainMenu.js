@@ -27,6 +27,7 @@ export default class mainMenu extends Phaser.Scene{
             level: 0,
             ownedObjects: []
         }
+        this.DOMmanager.destroyDomAllies();
         this.loadMichi();
         console.log(this.playerData.ownedAllies.length);
         this.playerData.ownedAllies.forEach(element => { console.log(element.name);});

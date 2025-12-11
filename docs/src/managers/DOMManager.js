@@ -15,7 +15,7 @@ export default class DOMmanager {
     Añade un DomAlly a DOMAllies
     */
     addDomAlly(ally) {
-        if(![this.DOMallies].some(x => ally.name === x.dataset.name)) {
+        if(![...this.DOMallies.children].some(x => ally.name === x.dataset.name)) {
             const div = document.createElement('div');
             const img = document.createElement('img');
 
@@ -30,7 +30,7 @@ export default class DOMmanager {
 
     //Elimina un aliado del DOM
     removeDomAlly(ally) {
-        let elem = [this.DOMallies].find(x => ally.name === x.dataset.name);
+        let elem = [...this.DOMallies.children].find(x => ally.name === x.dataset.name);
         if(elem) {
             this.DOMallies.removeChild(elem);
         }
@@ -54,8 +54,8 @@ export default class DOMmanager {
     }
 
     destroyDomAllies() {
-        [...this.DOMallies.children].forEach(x => {
-            x.remove();
+        this.ownedAllies.forEach(ally => {
+            this.removeDomAlly(ally);
         });
     }
 
