@@ -1,5 +1,7 @@
 **ESTE PROYECTO ES UN TRABAJO UNIVERSITARIO PARA LA ASIGNATURA DE PROGRAMACIÓN DE VIDEOJUEGOS EN LENGUAJES INTERPRETADOS DEL SEGUNDO CURSO DEL GRADO DE DESARROLLO DE VIDEOJUEGOS DE LA UNIVERSIDAD COMPLUTENSE DE MADRID**
 
+**REDES SOCIALES DEL PROYECTO**
+
 Twitter del grupo de desarrollo: https://x.com/galletaCanibal_
 Enlace a la página web: https://lucdom07.github.io/G07-PVLI/ (v0.1)
 
@@ -10,5 +12,11 @@ En sus planes, nosotros, como jugador y ayudante, nos encargaremos de reclutar, 
 
 **CAPTURAS DEL JUEGO**
 ![mainMenu](./imagenes/menuPrincipal.png "menu principal")
-![combat](./imagenes/juegoCombate.png "combate")
-![combatEnd](./imagenes/combateFin.png "combate fin")
+![combat](./imagenes/combat.png "combate")
+![combatLost](./imagenes/combatLost.png "combate perdido")
+![combatWon](./imagenes/combatVictory.png "combate ganado")
+![setup](./imagenes/setup.png "preparación de combate")
+![map](./imagenes/map.png "mapa")
+![market](./imagenes/market.png "tienda")
+![dialogue](./imagenes/dialogue.png "diálogos")
+
