@@ -13,7 +13,7 @@ export default class DialogueManager {
         //configuración visual
         this.config = Object.assign({
             nameStyle: { fontSize: "35px", color: "#ffffff", fontFamily: "Caveat Brush" },
-            dialogStyle: { fontSize: "30px", color: "#000000", fontFamily: "Caveat Brush", padding: 32, windowHeight: 100, dialogSpeed: 4 },
+            dialogStyle: { fontSize: "30px", color: "#000000", fontFamily: "Caveat Brush", padding: 32, windowHeight: 150, dialogSpeed: 4 },
             dialogBoxClass: null, 
 
             spriteScale : 0.7
@@ -46,7 +46,7 @@ export default class DialogueManager {
 
         //creamos UI del nombre si no existe
         if (!this.nameText) {
-            this.nameText = this.scene.add.text(30, 450, "", this.config.nameStyle);
+            this.nameText = this.scene.add.text(30, 400, "", this.config.nameStyle);
         }
 
         //creamos UI de la caja de diálogo si no existe
@@ -118,6 +118,7 @@ export default class DialogueManager {
     */
     end() {
         this.active = false;
+        
         this.scene.events.emit("dialogueEnd");
     }
 

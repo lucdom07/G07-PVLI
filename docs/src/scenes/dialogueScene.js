@@ -40,6 +40,7 @@ export default class DialogueScene extends Phaser.Scene {
         this.load.image("introD","./assets/backgrounds/introBackground.png");
         this.load.image("shop","./assets/backgrounds/shopBackground.png");
         this.load.image("ending","./assets/backgrounds/endingBackground.png");
+        this.load.image("miauuu","./assets/dialogue_sprites/cat_dialogue2.png");
     }
 
     create() {
