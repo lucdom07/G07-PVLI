@@ -277,6 +277,7 @@ export default class CombatSetup extends Phaser.Scene {
  * @param {Object} object -Objeto seleccionado
  */
     selectObject(object) {
+        this.audioManager.playSound(MusicKeys.CHOSEN_FOOD);
         if (this.selectedObject === object) {
             // Deseleccionar si ya está seleccionado
             this.deselectObject();
@@ -317,7 +318,7 @@ export default class CombatSetup extends Phaser.Scene {
      */
     applyObjectToAlly(ally) {
         if (!this.selectedObject) return;
-
+        this.audioManager.playSound(MusicKeys.ALLY_EATING);
         console.log(`Aplicando ${this.selectedObject.name} a ${ally.name}`);
         
         const originalObject = this.selectedObject.originalObject || this.selectedObject;

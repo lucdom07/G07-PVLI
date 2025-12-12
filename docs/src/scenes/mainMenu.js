@@ -70,7 +70,7 @@ export default class mainMenu extends Phaser.Scene{
         
        
         playButton.on('pointerdown',()=>{
-            
+            this.audioManager.playSound(MusicKeys.ALLY_DAMAGE);
             this.cameras.main.fadeOut(800, 0, 0, 0); 
             this.cameras.main.once('camerafadeoutcomplete', () => {
                 this.audioManager.playMusic(MusicKeys.INTRO);
