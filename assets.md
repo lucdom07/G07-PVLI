@@ -17,6 +17,8 @@
 
 **Sonido de muerte de enemigos:** https://youtu.be/PP7WJL2JtLs?si=VVbBLqt2gDXnMZCY
 
+**Sonido de compra en la tienda:** https://youtu.be/vNhs9CSI0Vc?si=Z63C52jnfB6-Jk0T
+
 ## 1.1 _**Australia**_
 
 **Música del mapa:** https://youtu.be/3pqknH3nkF4
