@@ -9,6 +9,8 @@
 
 **Música de preparación de combate:** https://youtu.be/lAIGb1lfpBw
 
+**Sonido genérico de botones:** https://youtu.be/iCKspI_zyrQ?si=216r9zt49gpwRrxf
+
 **Sonido de daño de aliados:** https://youtu.be/SWkMYO9V_-k?si=d1kmQ2peqGGRA3qb
 
 **Sonido de daño de enemigos:** https://youtu.be/pBUs2R9JV5M?si=CoRHRsqez75NxNm4
