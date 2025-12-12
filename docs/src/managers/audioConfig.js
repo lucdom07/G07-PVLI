@@ -28,6 +28,9 @@ export const MusicKeys = {
     ADDING_ALLY: 'addAlly',
     REMOVING_ALLY: 'removeAlly',
 
+    CHOSEN_FOOD: 'chosenFood',
+    ALLY_EATING: 'eating',
+
     ALLY_DAMAGE: 'meowScream',
     ENEMY_DAMAGE: 'crying',
     ALLY_DYING: 'ay_mama',
@@ -66,6 +69,10 @@ export const AudioFiles = {
 
     [MusicKeys.ADDING_ALLY]: 'assets/sonidos/addAlly.mp3', //no tocar
     [MusicKeys.REMOVING_ALLY]: 'assets/sonidos/removeAlly.mp3', //no tocar
+
+    [MusicKeys.CHOSEN_FOOD]: 'assets/sonidos/clickObject.mp3', //no tocar
+    [MusicKeys.ALLY_EATING]: 'assets/sonidos/eating.mp3', //no tocar
+
 
     [MusicKeys.ALLY_DAMAGE]: 'assets/sonidos/meowScream.mp3', //no tocar
     [MusicKeys.ENEMY_DAMAGE]: 'assets/sonidos/cryingCat.mp3', //no tocar
