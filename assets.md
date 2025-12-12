@@ -14,7 +14,11 @@
 
 **Sonido de los botones de aliados del DOM:** https://youtu.be/QvghQOO3K-I?si=vtLEevpcW2bK0zBU
 
-**Sonido de daño de aliados:** https://youtu.be/SWkMYO9V_-k?si=d1kmQ2peqGGRA3qb
+**Sonido de seleccionar y desseleccionar objeto:** https://youtu.be/owjlg0yOr4s?si=mYfjOn8PGYbSFys6
+
+**Sonido de aplicar objetos:** https://youtu.be/owjlg0yOr4s?si=ge0XbfxreMOQ-OE4
+
+**Sonido de daño de aliados y del botón del menú principal:** https://youtu.be/SWkMYO9V_-k?si=d1kmQ2peqGGRA3qb
 
 **Sonido de daño de enemigos:** https://youtu.be/pBUs2R9JV5M?si=CoRHRsqez75NxNm4
 
