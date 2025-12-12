@@ -15,8 +15,6 @@ export default class CombatSetup extends Phaser.Scene {
 
         this.DOMmanager = DOMmanager;
         this.playerData = {};
-        //Array con los aliados seleccionados
-        this.selectedAllies = [];
         this.clickableAllies = new Set();
         //División del DOM que muestra los aliados desbloqueados (también de clase DomAlly)
 
@@ -77,6 +75,7 @@ export default class CombatSetup extends Phaser.Scene {
             this.makeClickable(ally);
         });
         this.makeInteractives();
+        this.selectedAllies = [];
     }
 
     /**
@@ -84,9 +83,8 @@ export default class CombatSetup extends Phaser.Scene {
      * @param {Ally} ally - Aliado que se añade al array
      */
     addAlly(ally) {
-        if(this.selectedAllies.length > 0 && this.selectedAllies.some(x => x === ally)) return;
-        if (this.selectedAllies.length >= 3 ) {
-            this.selectedAllies.splice(0, 1);
+        if((this.selectedAllies.length >= 3) || (this.selectedAllies.length > 0 && this.selectedAllies.some(x => x === ally))) {
+            return;
         }
         this.selectedAllies.push(ally);
         this.repositionSelectedAllies();
