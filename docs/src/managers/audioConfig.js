@@ -25,6 +25,9 @@ export const MusicKeys = {
     //Efectos de sonido
     GENERIC_BUTTON: 'genericButton',
 
+    ADDING_ALLY: 'addAlly',
+    REMOVING_ALLY: 'removeAlly',
+
     ALLY_DAMAGE: 'meowScream',
     ENEMY_DAMAGE: 'crying',
     ALLY_DYING: 'ay_mama',
@@ -60,6 +63,9 @@ export const AudioFiles = {
 
     //Efectos de sonido
     [MusicKeys.GENERIC_BUTTON]: 'assets/sonidos/genericButton.mp3', //no tocar
+
+    [MusicKeys.ADDING_ALLY]: 'assets/sonidos/addAlly.mp3', //no tocar
+    [MusicKeys.REMOVING_ALLY]: 'assets/sonidos/removeAlly.mp3', //no tocar
 
     [MusicKeys.ALLY_DAMAGE]: 'assets/sonidos/meowScream.mp3', //no tocar
     [MusicKeys.ENEMY_DAMAGE]: 'assets/sonidos/cryingCat.mp3', //no tocar

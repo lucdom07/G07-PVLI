@@ -86,6 +86,7 @@ export default class CombatSetup extends Phaser.Scene {
         if((this.selectedAllies.length >= 3) || (this.selectedAllies.length > 0 && this.selectedAllies.some(x => x === ally))) {
             return;
         }
+        this.audioManager.playSound(MusicKeys.ADDING_ALLY);
         this.selectedAllies.push(ally);
         this.repositionSelectedAllies();
     }
@@ -97,6 +98,7 @@ export default class CombatSetup extends Phaser.Scene {
     removeAlly(ally) {
         const index = this.selectedAllies.indexOf(ally);
         if(index != -1) {
+            this.audioManager.playSound(MusicKeys.REMOVING_ALLY);
             this.selectedAllies.splice(index, 1);
             ally.x = -150;
             ally.y = -150;
