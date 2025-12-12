@@ -11,6 +11,14 @@ export default class Enemy extends Warrior{
     takeHit(damage, callback){
         super.takeHit(damage, callback);
     }
+    
+    damageSound(){
+        this.scene.events.emit('enemyDamageSound');
+    }
+
+    dyingSound(){
+        this.scene.events.emit('enemyDyingSound');
+    }
 
     calculateAttackPos(targetX){
         return targetX * 1.1;

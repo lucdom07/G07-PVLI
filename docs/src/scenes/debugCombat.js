@@ -60,7 +60,15 @@ export default class Animation extends Phaser.Scene{
         this.events.on('allyDamageSound', ()=>{
             this.audioManager.playSound(MusicKeys.ALLY_DAMAGE);
         })
-
+        this.events.on('enemyDamageSound', ()=>{
+            this.audioManager.playSound(MusicKeys.ENEMY_DAMAGE);
+        })
+        this.events.on('allyDyingSound', ()=>{
+            this.audioManager.playSound(MusicKeys.ALLY_DYING);
+        })
+        this.events.on('enemyDyingSound', ()=>{
+            this.audioManager.playSound(MusicKeys.ENEMY_DYING);
+        })
         this.recreate();
         
         //añadir un if si se trata del combate con el boss o es normal
@@ -97,8 +105,13 @@ export default class Animation extends Phaser.Scene{
         this.playerTeam = recreatedAllies;
     }
 //enseña el boton de salir
-    showExitButton(){
+    showExitButton(){+
+        //desuscribo la escena de los eventos de sonido
         this.events.off('allyDamageSound');
+        this.events.off('enemyDamageSound');
+        this.events.off('allyDyingSound');
+        this.events.off('enemyDyingSound');
+
         if (!this.combatManager.victory){
             this.audioManager.playMusic(MusicKeys.GAME_OVER);
         }

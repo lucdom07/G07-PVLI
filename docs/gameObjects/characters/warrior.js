@@ -71,6 +71,12 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
         });
         //poner tinte rojo al personaje cuando recibe daño
         this.setTint(0xffff0000);
+        if(this.life <= 0){
+            this.dyingSound();
+        }
+        else{
+            this.damageSound();
+        }
         this.scene.time.addEvent({
             delay: this.ATTACK_DELAY_TIME,
             callback: ()=>{
@@ -80,6 +86,15 @@ export default class Warrior extends Phaser.GameObjects.Sprite{
                 });
             }
         });
+    }
+    //NO BORRAR. Los aliados y enemigos heredan de esta función para que cada uno reproduzca su sonido de daño
+    damageSound(){
+        
+    }
+
+    //NO BORRAR. Los aliados y enemigos heredan de esta función para que cada uno reproduzca su sonido de muerte
+    dyingSound(){
+        
     }
 
     //NO BORRAR. Los aliados y enemigos heredan de esta función para que cada uno se calcule la posición a la que debe avanzar en la animación de ataque
