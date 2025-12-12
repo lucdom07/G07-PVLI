@@ -84,8 +84,9 @@ export default class CombatSetup extends Phaser.Scene {
      * @param {Ally} ally - Aliado que se añade al array
      */
     addAlly(ally) {
-        if (this.selectedAllies.length >= 3 || (this.selectedAllies.length > 0 && this.selectedAllies.some(x => x === ally))) {
-            return;
+        if(this.selectedAllies.length > 0 && this.selectedAllies.some(x => x === ally)) return;
+        if (this.selectedAllies.length >= 3 ) {
+            this.selectedAllies.splice(0, 1);
         }
         this.selectedAllies.push(ally);
         this.repositionSelectedAllies();
