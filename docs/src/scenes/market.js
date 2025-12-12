@@ -49,12 +49,15 @@ export default class debugMarket extends Phaser.Scene{
         //Eventos personalizados
         //En ambos eventos se actualizan los aliados disponibles y el dinero
         this.events.on('buyingAlly', (price)=>{
+            this.audioManager.playSound(MusicKeys.BUYING);
             this.DOManager.updateAllies();
             this.playerData.money -= price;
         });
         this.events.on('buyingObject', (price)=>{
+            this.audioManager.playSound(MusicKeys.BUYING);
             this.playerData.money -= price;
         });
+        //La venta no está implementada en el juego, así que este evento no se ejecuta en ningún momento
         this.events.on('sellingAlly', (index, price)=>{
             this.playerData.ownedAllies.splice(index, 1);
             this.playerData.money += price;
@@ -107,7 +110,8 @@ export default class debugMarket extends Phaser.Scene{
 
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
-        exitButton.on('pointerdown', () =>{       
+        exitButton.on('pointerdown', () =>{     
+            //desuscribe a la tienda de los eventos de compra  
             this.events.off('buyingAlly');
             this.events.off('buyingObject');
             this.events.off('sellingAlly');

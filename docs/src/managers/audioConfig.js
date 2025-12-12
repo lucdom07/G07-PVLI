@@ -26,7 +26,9 @@ export const MusicKeys = {
     ALLY_DAMAGE: 'meowScream',
     ENEMY_DAMAGE: 'crying',
     ALLY_DYING: 'ay_mama',
-    ENEMY_DYING: 'enemyScream'
+    ENEMY_DYING: 'enemyScream',
+    
+    BUYING: 'buy'
 };
 
 // sitios de los archivos de sonido
@@ -58,5 +60,7 @@ export const AudioFiles = {
     [MusicKeys.ALLY_DAMAGE]: 'assets/sonidos/meowScream.mp3', //no tocar
     [MusicKeys.ENEMY_DAMAGE]: 'assets/sonidos/cryingCat.mp3', //no tocar
     [MusicKeys.ALLY_DYING]: 'assets/sonidos/aaayMamaaa.mp3', //no tocar
-    [MusicKeys.ENEMY_DYING]: 'assets/sonidos/wilhelmScream.mp3' //no tocar
+    [MusicKeys.ENEMY_DYING]: 'assets/sonidos/wilhelmScream.mp3', //no tocar
+
+    [MusicKeys.BUYING]: 'assets/sonidos/buyingSound.mp3' //no tocar
 };
