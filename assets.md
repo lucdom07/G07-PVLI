@@ -3,6 +3,7 @@
 **Combate:** https://youtu.be/dsiWLUe1Mb4
 
 **Tienda:** https://youtu.be/UopEw5TNOSQ
+
 **Menú de inicio:** Cover de _Seven Nation Army_ (The White Stripes) versión maullidos, interpretada por Santiago Salto Molodojen. Mezclada por Lucía Mei Domínguez López.
 
 **Escena final:** https://youtu.be/9KjDBDvmw2E
@@ -10,6 +11,8 @@
 **Música de preparación de combate:** https://youtu.be/lAIGb1lfpBw
 
 **Sonido genérico de botones:** https://youtu.be/iCKspI_zyrQ?si=216r9zt49gpwRrxf
+
+**Sonido de los botones de aliados del DOM:** https://youtu.be/QvghQOO3K-I?si=vtLEevpcW2bK0zBU
 
 **Sonido de daño de aliados:** https://youtu.be/SWkMYO9V_-k?si=d1kmQ2peqGGRA3qb
 
