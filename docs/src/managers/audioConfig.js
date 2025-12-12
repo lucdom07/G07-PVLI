@@ -23,6 +23,8 @@ export const MusicKeys = {
     ENDING: 'ending',
 
     //Efectos de sonido
+    GENERIC_BUTTON: 'genericButton',
+
     ALLY_DAMAGE: 'meowScream',
     ENEMY_DAMAGE: 'crying',
     ALLY_DYING: 'ay_mama',
@@ -57,6 +59,8 @@ export const AudioFiles = {
     [MusicKeys.ENDING]: 'assets/sonidos/lostInThoughtsAllAlone.mp3', //no tocar
 
     //Efectos de sonido
+    [MusicKeys.GENERIC_BUTTON]: 'assets/sonidos/genericButton.mp3', //no tocar
+
     [MusicKeys.ALLY_DAMAGE]: 'assets/sonidos/meowScream.mp3', //no tocar
     [MusicKeys.ENEMY_DAMAGE]: 'assets/sonidos/cryingCat.mp3', //no tocar
     [MusicKeys.ALLY_DYING]: 'assets/sonidos/aaayMamaaa.mp3', //no tocar

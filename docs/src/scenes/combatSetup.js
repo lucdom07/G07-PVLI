@@ -389,6 +389,7 @@ export default class CombatSetup extends Phaser.Scene {
         //pasa los aliados al debugCombat
         playButton.on('pointerdown',()=>{
             if(this.selectedAllies.length > 0) {
+                this.audioManager.playSound(MusicKeys.GENERIC_BUTTON);   
                 this.scene.start('debugCombat',{
                     playerData: this.playerData,
                     selectedAllies: this.selectedAllies,

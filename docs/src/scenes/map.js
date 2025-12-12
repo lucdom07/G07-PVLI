@@ -112,6 +112,7 @@ export default class debugMap extends Phaser.Scene {
             
             button.on('pointerdown', () =>{     
                 if(node.active) {
+                    this.audioManager.playSound(MusicKeys.GENERIC_BUTTON);   
                     if(node.value === 2) {
                         this.bossFlag = true;
                     }

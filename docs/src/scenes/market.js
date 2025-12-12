@@ -110,7 +110,8 @@ export default class debugMarket extends Phaser.Scene{
 
         exitButton.setPosition(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height*0.8);
 
-        exitButton.on('pointerdown', () =>{     
+        exitButton.on('pointerdown', () =>{  
+            this.audioManager.playSound(MusicKeys.GENERIC_BUTTON);   
             //desuscribe a la tienda de los eventos de compra  
             this.events.off('buyingAlly');
             this.events.off('buyingObject');

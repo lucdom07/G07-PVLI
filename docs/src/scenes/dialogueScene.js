@@ -1,6 +1,8 @@
 
 import DialogueManager from "../managers/dialogueManager.js";
 import { DialogueFiles } from "../managers/dialogueConfig.js";
+import AudioManager from "../managers/audioManager.js";
+import { MusicKeys } from "../managers/audioConfig.js";
 import DialogText from "../../gameObjects/ui/dialogPlugin.js";
 
 export default class DialogueScene extends Phaser.Scene {
@@ -8,6 +10,7 @@ export default class DialogueScene extends Phaser.Scene {
         super("DialogueScene");
         this.playerData = {};
         this.bg = ["introD","austD","spainD","chinaD","ending", "shop"];
+        this.audioManager = null;
     }
 
     init(data) {
@@ -44,6 +47,7 @@ export default class DialogueScene extends Phaser.Scene {
     }
 
     create() {
+        this.audioManager = AudioManager.getInstance(this);
 
         const dialogues = this.cache.json.get(this.dialogueKey);
 
@@ -145,6 +149,7 @@ export default class DialogueScene extends Phaser.Scene {
         }).setInteractive();
 
         this.skipButton.on("pointerdown", () => {
+            this.audioManager.playSound(MusicKeys.GENERIC_BUTTON);   
             this.events.emit("dialogueEnd");
         });
 
