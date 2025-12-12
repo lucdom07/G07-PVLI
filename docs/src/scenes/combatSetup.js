@@ -34,7 +34,7 @@ export default class CombatSetup extends Phaser.Scene {
         this.playerData = data.playerData,
         this.world = data.world,
         this.bossFlag = data.bossFlag
-        this.clearAllies();
+        this.selectedAllies = [];
     }
 
     preload() {
@@ -103,17 +103,6 @@ export default class CombatSetup extends Phaser.Scene {
             ally.y = -150;
             ally.warriorUI.setStatsPosition(ally.x, ally.y);
             this.repositionSelectedAllies();
-        }
-    }
-
-    /**
-     * Vacía el array de aliados selccionados
-     */
-    clearAllies() {
-        if(this.selectedAllies.length > 0){
-            this.selectedAllies.forEach(x => {
-                this.removeAlly(x);
-            });
         }
     }
     
