@@ -119,7 +119,7 @@ export default class mainMenu extends Phaser.Scene{
         this.DOMmanager.inicializa(this.playerData.ownedAllies);
     }
 
-    // Crear solo el aliado Michi-Michi
+    // Crear solo el aliado Michi-Michi y es agregado al inventario del usuario
     loadMichi(){
         const groupToLoad = this.getAllyGroup(0);
         if (groupToLoad) {

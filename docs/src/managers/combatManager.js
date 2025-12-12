@@ -163,6 +163,7 @@ export default class CombatManager{
         });
     }
 
+    //Animacion del texto de victoria
     victoria() {
         // Texto de VICTORIA
         const victoryText = this.scene.add.text(
@@ -202,6 +203,7 @@ export default class CombatManager{
         this.victory = true;
     }
 
+    //Animacion del texto de derrota
     derrota() {
         // Texto de DERROTA
         const defeatText = this.scene.add.text(

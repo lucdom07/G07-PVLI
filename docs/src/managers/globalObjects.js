@@ -17,26 +17,27 @@ export default class GlobalObject extends Phaser.GameObjects.Image {
         }
     }
 
+    //Retorna el nombre del objeto
     getName() {
         return this.name;
     }
-
+    //Retorna la dirección del al textura del objeto
     getTextureURL() {
         return this.textureURL;
     }
-
+    //Retorna el número de vida del objeto
     getLife() {
         return this.life;
     }
-
+    //Retorna el número de ataque del objeto
     getAttack() {
         return this.attack;
     }
-
+    //Retorna el coste del objeto
     getCost() {
         return this.cost;
     }
-
+    //Retorna una duplica del objeto
     clone() {
         return new GlobalObject(
             this.scene,

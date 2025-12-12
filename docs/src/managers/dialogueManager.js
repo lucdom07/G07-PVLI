@@ -34,6 +34,7 @@ export default class DialogueManager {
         this.skip = this.skip.bind(this);
     }
 
+    //Empieza los diálogos
     start() {
         if (!this.dialogues.length) {
             console.warn("No hay diálogos para mostrar");

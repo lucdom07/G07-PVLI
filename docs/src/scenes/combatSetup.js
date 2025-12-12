@@ -212,7 +212,7 @@ export default class CombatSetup extends Phaser.Scene {
            .setVisible(true);
 
         obj.on('pointerdown', () => {
-            this.selectObject(obj, i);
+            this.selectObject(obj);
         });
 
         obj.on('pointerover', () => {
@@ -247,7 +247,9 @@ export default class CombatSetup extends Phaser.Scene {
         }
     }
 
-
+    /**
+     * Reposiciona los aliados cuando son elegidos a la escena
+     */
     repositionSelectedAllies() {
         const startX = 350;
         const y = 300;
@@ -270,8 +272,11 @@ export default class CombatSetup extends Phaser.Scene {
         });
     }
 
-
-    selectObject(object, index) {
+/**
+ * Al seleccionar el objeto le cambia de color y si ya hubo uno seleccionado o cuando es el mismo objeto lo delecciona de this.selectedObject 
+ * @param {Object} object -Objeto seleccionado
+ */
+    selectObject(object) {
         if (this.selectedObject === object) {
             // Deseleccionar si ya está seleccionado
             this.deselectObject();
@@ -290,6 +295,9 @@ export default class CombatSetup extends Phaser.Scene {
         }
     }
 
+    /**
+     * Remueve el color tintado del objecto
+     */
     deselectObject() {
         if (this.selectedObject) {
             // Remover highlight de todos los objetos
@@ -302,6 +310,11 @@ export default class CombatSetup extends Phaser.Scene {
         }
     }
 
+    /**
+     * Aplicación de los effectos del objeto al ally
+     * @param {Object} ally -Aliado a aplicar el efecto
+     * @returns 
+     */
     applyObjectToAlly(ally) {
         if (!this.selectedObject) return;
 
@@ -319,6 +332,11 @@ export default class CombatSetup extends Phaser.Scene {
         this.deselectObject();
     }
 
+    /**
+     * Aplica los cambios de las estadísticas del aliado (ally) usando el objeto
+     * @param {Object} ally -Aliado a aplicar el efecto
+     * @param {Object} object -Objeto al que se utiliza
+     */
     applyObjectEffects(ally, object) {
         const originalLife = ally.life;
         const originalAttack = ally.attack;
@@ -345,6 +363,11 @@ export default class CombatSetup extends Phaser.Scene {
         console.log(`Aliado ${ally.name} actualizado - Vida: ${ally.life}, Ataque: ${ally.attack}`);
     }
 
+    /**
+     * Animación de texto que enseña los cambios del objeto aplicados al aliado
+     * @param {Object} ally -Aliado objetivo
+     * @param {Object} object -Objeto que se le aplica
+     */
     showObjectEffect(ally, object) {
         const effectText = this.add.text(ally.x, ally.y - 50, 
             `+${object.life}❤ +${object.attack}⚔`, 
@@ -364,7 +387,10 @@ export default class CombatSetup extends Phaser.Scene {
 
         console.log(ally);
     }
-
+/**
+ * Remueve el objeto usado del inventario del usuario
+ * @param {Object} object -Objeto usado a remover
+ */
     removeUsedObject(object) {
        // Remover del array local
         const objectIndex = this.playerData.ownedObjects.findIndex(obj => {
@@ -383,6 +409,9 @@ export default class CombatSetup extends Phaser.Scene {
         console.log(`Objeto ${object.name} usado y eliminado`);
     }
 
+    /**
+     * Crea un boton para lanzar la escena de combate
+     */
     createContinueButton(){
 
         const playButton = this.add.image(200 ,50,'combat').setInteractive().setDisplaySize(400,130);

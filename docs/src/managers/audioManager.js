@@ -65,6 +65,7 @@ export class AudioManager { //será un patron de silgueton
         }
     }
 
+    //Reproduce el sonido
     playSound(key){
         let soundEffect = this.scene.sound.add(key);
         soundEffect.play();
