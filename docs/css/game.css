@@ -123,7 +123,7 @@ html {
 .dev{
   display: inline-block;
   text-align: center;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 
 .devProfIcon{
@@ -133,7 +133,7 @@ html {
 
 .devName{
   color: #7d3d24;
-  font-size: 25px;
+  font-size: 22px;
   font-family: "Caveat Brush", cursive;
   font-weight: 400;
   font-style: normal;
@@ -164,7 +164,7 @@ html {
 
 .colabName{
   color: #7d3d24;
-  font-size: 25px;
+  font-size: 22px;
   font-family: "Caveat Brush", cursive;
   font-weight: 400;
   font-style: normal;
@@ -172,7 +172,7 @@ html {
 
 .colabDescription{
   color: #7d3d24;
-  font-size: 23px;
+  font-size: 20px;
   font-family: "Caveat Brush", cursive;
   font-weight: 400;
   font-style: normal;
